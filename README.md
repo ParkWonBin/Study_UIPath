@@ -61,3 +61,8 @@ Value : (integer.Parse(row(0).ToString)+integer.Parse(row(1).ToString)).ToString
 ### 문자열
 message box
 - "\n"이 먹히지 않아 vbCrLf 나 Environment.NewLine 을 써야한다.
+
+## UIPath 개발 시 참고
+Microsoft workflow에서 GUI 툴 그대로 가져와서 사용함.
+미국에는 데스크탑 앱 개발 시 시각/청각 장애우도 사용 가능한 접근성 기능이 요구된다. 그 접근성 앱 개발을 위한 도구가 발전해서 RPA 프로그램이 된 것. 따라서 UIPath 개발 시 MS의 WorkFlow 문서를 참고하는 것이 좋다. 여담으로 MS office는 [서버-side 개발을 권장하지 않는다.](https://support.microsoft.com/en-us/help/257757/considerations-for-server-side-automation-of-office?wa=wsignin1.0%3Fwa%3Dwsignin1.0) -by 이석원 프로님
+
