@@ -1,8 +1,9 @@
-### 단축키 
+## 단축키 
+### 인라인
  - 변수 추가 : Ctrl + K
  - 자동 완성 : Ctrl + space
   
-### 액티비티 관련 단축키
+### 액티비티 관련
  - 이름 변경 : F2
  - 설명 추가 : Shift + F2 (activity 설명)
  - 액티비티 삭제 : Ctrl + E
@@ -10,8 +11,8 @@
  - 액티비티 시도 : Ctrl + T (Try Catch)
  - 액티비티 추가 : Ctrl + Shift + T 
 
-### exsel activity
-#### exsel application scope 사용 안함
+## exsel activity
+### exsel application scope 사용 안함
 Read Range : 시스템.파일.통합문서.Read Range
  - 간단하게 DataTable 만들 때 사용.
 
@@ -20,7 +21,7 @@ Write Range : 시스템.파일.통합문서.Write Range
 
 데이터 조작이 필요한 작업을 할 때는 어플스코프 사용 권장함.
 
-#### exsel application scope 사용
+### exsel application scope 사용
 - 엑셀 파일을 열어서 작업을 진행함.
 
 Read Range : 앱통합.Excel.테이블.Read Range
@@ -30,7 +31,7 @@ Read Range : 앱통합.Excel.테이블.Read Range
 Write Range : 앱통합.Excel.테이블.Write Range
 - 수식 자동완성 됨. "=SUM(A1:B1)"입력시 상대위치를 통해 수식이 적용됨.
 
-### 데이터 테이블
+## 데이터 테이블
 AddDataColumn : 새로운 열을 추가할 때는 반드시 열추가를 먼저 한다. 
 
 For Each Row : 프로그래밍.데이터 테이블.For Each Row
@@ -46,3 +47,17 @@ Activity : UIPath.Excel.Activities.ExcelWrite Cell
 Range : "C"+(DT2.Rows.IndexOf(row)+1).ToString
 Value : (integer.Parse(row(0).ToString)+integer.Parse(row(1).ToString)).ToString
 ```
+
+## UI 상호작용
+### Input Dialog 
+- UI 상으로 사용자가 입력한 값을 받는다.
+  
+### TypeInto
+- 텍스트 내용 입력
+- 콘트롤, 엔터 등 hotkey는 [k(enter)] 이런 식으로 이루어진다. 
+- 그 외 window나 broswer에 키입력은 Sendkey 액티비티를 사용하여 전달한다.
+
+## 기타
+### 문자열
+message box
+- "\n"이 먹히지 않아 vbCrLf 나 Environment.NewLine 을 써야한다.
