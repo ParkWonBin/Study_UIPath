@@ -5,3 +5,11 @@ VB_test/.tmh
 VB_test/config.json
 VB_test/project.json
 VB_test/.screenshots
+
+RoboticEnterpriseFramework/.entities
+RoboticEnterpriseFramework/.local
+RoboticEnterpriseFramework/.settings
+RoboticEnterpriseFramework/.tmh
+RoboticEnterpriseFramework/config.json
+RoboticEnterpriseFramework/project.json
+RoboticEnterpriseFramework/.screenshots
