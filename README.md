@@ -66,3 +66,5 @@ message box
 Microsoft workflow에서 GUI 툴 그대로 가져와서 사용함.
 미국에는 데스크탑 앱 개발 시 소프트웨어 접근성(시각/청각 장애우도 사용 가능한 기능)이 요구된다. 그 접근성 앱 개발을 위한 도구가 발전해서 RPA 프로그램이 된 것이다. [UIPath를 사용하지 않고 MS workflow로 트레킹하는 영상](https://ehpub.co.kr/category/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EA%B8%B0%EC%88%A0/sw%EC%A0%91%EA%B7%BC%EC%84%B1-%EA%B8%B0%EC%88%A0-ui-%EC%9E%90%EB%8F%99%ED%99%94/) 따라서 UIPath 개발 시 MS의 WorkFlow 문서를 참고하는 것이 좋다. 여담으로 [MS office는 서버-side 개발을 권장하지 않는다.](https://support.microsoft.com/en-us/help/257757/considerations-for-server-side-automation-of-office?wa=wsignin1.0%3Fwa%3Dwsignin1.0) -by 이석원 프로님
 
+### 테스트 케이스
+[테스트 케이스 자동화](https://academy.uipath.com/learningpath-viewer/2234/1/155237/16)
