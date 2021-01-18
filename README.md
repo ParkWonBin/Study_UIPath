@@ -57,6 +57,16 @@ Value : (integer.Parse(row(0).ToString)+integer.Parse(row(1).ToString)).ToString
 - 콘트롤, 엔터 등 hotkey는 [k(enter)] 이런 식으로 이루어진다. 
 - 그 외 window나 broswer에 키입력은 Sendkey 액티비티를 사용하여 전달한다.
 
+## 변경된 오케 연결법
+1. [오케 접속](https://cloud.uipath.com/koreabegmifx/DefaultTenant/)
+2. MY FOLDERS - default - Robots - Standard Robot 생성 (=> 머신 생성 됨)
+3. Tanent - Machines - Machine key 등 data 복사
+4. Asistant - Preferance - Orchestrator Setting
+   - Machine Key : 설정
+   - Machine Name : 복붙
+   - URL : https://cloud.uipath.com/koreabegmifx/DefaultTenant/
+   - Machine Key : 복붙
+
 ## 기타
 ### 문자열
 message box
