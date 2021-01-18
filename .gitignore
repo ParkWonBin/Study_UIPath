@@ -1,15 +1,8 @@
-VB_test/.entities
-VB_test/.local
-VB_test/.settings
-VB_test/.tmh
-VB_test/config.json
-VB_test/project.json
-VB_test/.screenshots
-
-RoboticEnterpriseFramework/.entities
-RoboticEnterpriseFramework/.local
-RoboticEnterpriseFramework/.settings
-RoboticEnterpriseFramework/.tmh
-RoboticEnterpriseFramework/config.json
-RoboticEnterpriseFramework/project.json
-RoboticEnterpriseFramework/.screenshots
+# UIPath 자동 생성 파일 무시
+*/.entities
+*/.local
+*/.settings
+*/.tmh
+*/config.json
+*/project.json
+*/.screenshots
