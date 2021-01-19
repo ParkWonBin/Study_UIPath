@@ -2,7 +2,10 @@
 ### 인라인
  - 변수 추가 : Ctrl + K
  - 자동 완성 : Ctrl + space
-  
+
+## 형변환
+cint(), cdbl(), .Tostring
+
 ### 액티비티 관련
  - 이름 변경 : F2
  - 설명 추가 : Shift + F2 (activity 설명)

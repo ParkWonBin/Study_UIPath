@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="RPA_20210118" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="835.2,819.2" sap2010:WorkflowViewState.IdRef="RPA_20210118_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="RPA_20210118" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="792.8,956" sap2010:WorkflowViewState.IdRef="RPA_20210118_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="38">
       <x:String>System.Activities</x:String>
@@ -378,7 +378,7 @@
           <av:Size x:Key="ShapeSize">200,112.8</av:Size>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Flowchart sap2010:Annotation.AnnotationText="Input Dialog 사용&#xA;유효성 검사 TryParse 써봄&#xD;&#xA;3의 배수이면 출력" DisplayName="05_입력 (GUI)" sap:VirtualizedContainerService.HintSize="200,112.8" sap2010:WorkflowViewState.IdRef="Flowchart_6">
+      <Flowchart sap2010:Annotation.AnnotationText="Input Dialog 사용&#xA;유효성 검사 TryParse 써봄&#xA;3의 배수이면 출력" DisplayName="05_입력 (GUI)" sap:VirtualizedContainerService.HintSize="200,112.8" sap2010:WorkflowViewState.IdRef="Flowchart_6">
         <Flowchart.Variables>
           <Variable x:TypeArguments="x:String" Default="1" Name="str_input" />
           <Variable x:TypeArguments="x:Int32" Name="int_input" />
@@ -929,7 +929,7 @@
           <av:Size x:Key="ShapeSize">200,128.8</av:Size>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence sap2010:Annotation.AnnotationText="ACME 로그인 후&#xD;&#xA;Navigate to naver.com&#xD;&#xA;증권 데이터 출력" DisplayName="11_실습_로그인 후 이동" sap:VirtualizedContainerService.HintSize="200,128.8" sap2010:WorkflowViewState.IdRef="Sequence_32">
+      <Sequence sap2010:Annotation.AnnotationText="ACME 로그인 후&#xA;Navigate to naver.com&#xA;증권 데이터 출력" DisplayName="11_실습_로그인 후 이동" sap:VirtualizedContainerService.HintSize="200,128.8" sap2010:WorkflowViewState.IdRef="Sequence_32">
         <Sequence.Variables>
           <Variable x:TypeArguments="ui:GenericValue" Name="Td" />
           <Variable x:TypeArguments="x:String" Name="str_ID" />
@@ -1164,7 +1164,7 @@
           <av:Size x:Key="ShapeSize">333.6,75.2</av:Size>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:Comment sap:VirtualizedContainerService.HintSize="333.6,75.2" sap2010:WorkflowViewState.IdRef="Comment_1" Text="Sequence는 내부 요소 열고 닫기 가능     .&#xD;&#xA;Start node : 우클릭 + A  " />
+      <ui:Comment sap:VirtualizedContainerService.HintSize="333.6,75.2" sap2010:WorkflowViewState.IdRef="Comment_1" Text="Sequence는 내부 요소 열고 닫기 가능     .&#xA;Start node : 우클릭 + A  " />
     </FlowStep>
     <FlowStep>
       <sap:WorkflowViewStateService.ViewState>
@@ -1173,7 +1173,7 @@
           <av:Size x:Key="ShapeSize">200,128.8</av:Size>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence sap2010:Annotation.AnnotationText="열린재정 들어가기&#xD;&#xA;엑셀 다운로드&#xD;&#xA;다른 이름으로 저장" DisplayName="12_실습_열린제정" sap:VirtualizedContainerService.HintSize="200,128.8" sap2010:WorkflowViewState.IdRef="Sequence_46">
+      <Sequence sap2010:Annotation.AnnotationText="열린재정 들어가기&#xA;엑셀 다운로드&#xA;다른 이름으로 저장" DisplayName="12_실습_열린제정" sap:VirtualizedContainerService.HintSize="200,128.8" sap2010:WorkflowViewState.IdRef="Sequence_46">
         <Sequence.Variables>
           <Variable x:TypeArguments="x:String" Name="str_URL1" />
           <Variable x:TypeArguments="x:String" Name="str_FileName" />
@@ -1287,7 +1287,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:OpenBrowser>
-          <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" sap2010:Annotation.AnnotationText="로드된 창에서 &#xD;&#xA;엑셀 다운로드 클릭" BrowserType="IE" DisplayName="Attach Browser '100      Page'" sap:VirtualizedContainerService.HintSize="466.4,96.8" sap2010:WorkflowViewState.IdRef="BrowserScope_6" InformativeScreenshot="7a72e1e790c87baa6079ab9560af74f3" Selector="&lt;html title='100대 통계지표' /&gt;">
+          <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" sap2010:Annotation.AnnotationText="로드된 창에서 &#xA;엑셀 다운로드 클릭" BrowserType="IE" DisplayName="Attach Browser '100      Page'" sap:VirtualizedContainerService.HintSize="466.4,96.8" sap2010:WorkflowViewState.IdRef="BrowserScope_6" InformativeScreenshot="7a72e1e790c87baa6079ab9560af74f3" Selector="&lt;html title='100대 통계지표' /&gt;">
             <ui:BrowserScope.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
@@ -1487,7 +1487,7 @@
           <av:Size x:Key="ShapeSize">200,128.8</av:Size>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence sap2010:Annotation.AnnotationText="ACME 로그인&#xD;&#xA;WorkItem 하나씩 출력&#xD;&#xA;사전에 reset WorkItem 필수" DisplayName="13_실습_ACME_work Item" sap:VirtualizedContainerService.HintSize="508,1611.2" sap2010:WorkflowViewState.IdRef="Sequence_49">
+      <Sequence sap2010:Annotation.AnnotationText="ACME 로그인&#xA;WorkItem 하나씩 출력&#xA;사전에 reset WorkItem 필수" DisplayName="13_실습_ACME_work Item" sap:VirtualizedContainerService.HintSize="200,128.8" sap2010:WorkflowViewState.IdRef="Sequence_49">
         <Sequence.Variables>
           <Variable x:TypeArguments="x:String" Name="str_URL" />
           <Variable x:TypeArguments="x:String" Name="str_ID" />
@@ -1623,7 +1623,7 @@
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:BrowserScope>
                 </Sequence>
-                <Sequence sap2010:Annotation.AnnotationText="2. Work Item 이동&#xD;&#xA;3. Get Data" DisplayName="2. WorkItem으로 이동" sap:VirtualizedContainerService.HintSize="200,112.8" sap2010:WorkflowViewState.IdRef="Sequence_61">
+                <Sequence sap2010:Annotation.AnnotationText="2. Work Item 이동&#xA;3. Get Data" DisplayName="2. WorkItem으로 이동" sap:VirtualizedContainerService.HintSize="200,112.8" sap2010:WorkflowViewState.IdRef="Sequence_61">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -1772,7 +1772,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:BrowserScope>
-                  <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" sap2010:Annotation.AnnotationText="다른 이름으로 저장 클릭&#xD;&#xA;" DisplayName="Attach Window 'InternetE Dialog'" sap:VirtualizedContainerService.HintSize="200,96.8" sap2010:WorkflowViewState.IdRef="WindowScope_6" Selector="&lt;wnd app='iexplore.exe' cls='#32770' title='Internet Explorer' /&gt;">
+                  <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" sap2010:Annotation.AnnotationText="다른 이름으로 저장 클릭&#xA;" DisplayName="Attach Window 'InternetE Dialog'" sap:VirtualizedContainerService.HintSize="200,96.8" sap2010:WorkflowViewState.IdRef="WindowScope_6" Selector="&lt;wnd app='iexplore.exe' cls='#32770' title='Internet Explorer' /&gt;">
                     <ui:WindowScope.Body>
                       <ActivityAction x:TypeArguments="x:Object">
                         <ActivityAction.Argument>
