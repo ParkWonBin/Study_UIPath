@@ -1,14 +1,15 @@
+## 형변환
+cint(), cdbl(), .Tostring
+
 ## 단축키 
 ### 인라인
  - 변수 추가 : Ctrl + K
  - 자동 완성 : Ctrl + space
 
-## 형변환
-cint(), cdbl(), .Tostring
-
 ### 액티비티 관련
  - 이름 변경 : F2
  - 설명 추가 : Shift + F2 (activity 설명)
+ - 액티비티 찾기 : Ctrl + F (xaml 안에서 위치 찾아줌)
  - 액티비티 삭제 : Ctrl + E
  - 액티비티 주석 : Ctrl + D 
  - 액티비티 시도 : Ctrl + T (Try Catch)
