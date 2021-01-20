@@ -112,7 +112,7 @@
             <Literal x:TypeArguments="x:Boolean" Value="True" />
           </Transition.Condition>
           <Transition.To>
-            <State x:Name="__ReferenceID1" sap2010:Annotation.AnnotationText="엑셀에서 세팅값 불러오기 // Dictionary 형식으로 Config 받아온다.&#xD;&#xA;1. ReadRange // 초기화 Config = New Dictionary(Of String, Object) &#xD;&#xA;2. ForEachRow // Config(row(&quot;Name&quot;).Tostring) = row(&quot;Value&quot;)&#xD;&#xA;3. MessageBox // Config(&quot;test1&quot;) // test1은 해당 엑셀파일에 있던 이름" DisplayName="Excel로 세팅 불러오기" sap:VirtualizedContainerService.HintSize="537.6,137.6" sap2010:WorkflowViewState.IdRef="State_3">
+            <State x:Name="__ReferenceID1" sap2010:Annotation.AnnotationText="엑셀에서 세팅값 불러오기 // Dictionary 형식으로 Config 받아온다.&#xD;&#xA;1. ReadRange // 초기화 Config = New Dictionary(Of String, Object) &#xD;&#xA;2. ForEachRow // Config(row(&quot;Name&quot;).Tostring) = row(&quot;Value&quot;)&#xD;&#xA;3. MessageBox // Config(&quot;test1&quot;) // test1은 해당 엑셀파일 Name열에 있던 이름" DisplayName="Excel로 Config 불러오기" sap:VirtualizedContainerService.HintSize="537.6,137.6" sap2010:WorkflowViewState.IdRef="State_3">
               <State.Entry>
                 <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="333.6,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="setting.xaml">
                   <ui:InvokeWorkflowFile.Arguments>
