@@ -1,6 +1,7 @@
-## 형변환
+## 필수 함수
 cint(), cdbl(), .Tostring
-
+TypeName() # 문서 부록 주의사항 참고
+  
 ## 단축키 
 ### 인라인
  - 변수 추가 : Ctrl + K
@@ -82,3 +83,53 @@ Microsoft workflow에서 GUI 툴 그대로 가져와서 사용함.
 
 ### 테스트 케이스
 [테스트 케이스 자동화](https://academy.uipath.com/learningpath-viewer/2234/1/155237/16)
+
+
+
+# 부록
+``` 
+TypeName() # 주의사항
+UIPath에서 ForEach등 지역변수 설정 기본은 Object다.
+별도의 설정을 하지 않으면 ForEach Array<String>의 item은 Object로 변환되어 사용된다.
+TypeName(item)은 가장 구체적인 데이터 형을 표시하기 때문에 Object안에서 "String"을 반환한다.
+WriteLine등 String 입력을 강제하는 속성에 item을 사용하면 Object->String 연산을 진행한다.
+String에서 케스팅된 Object라도 암시적으로 String으로 변환하지 못하기 때문에 오류가 발생한다.
+
+* ForEach에서 지역변수의 형태를 모호하게 설정하면 호출 부분에서 오류가 발생하니 주의한다.
+```
+
+## 인수 사용하는법
+인수 추가 단축키 : Ctrl + M
+
+Invoke Workflow 에서 설정 방법
+import Argument : 
+ - Name/Direction/Type은 자동설정 됨, 이하는 Value값에 들어가는 내용 설명
+ - in  : [value] 해당 워크플로우 시작 전에 넘겨줄 값을 입력한다.
+ - out : [varible] 현제 워크플로우에서 받아올 값을 저장할 변수를 입력한다.
+ - i/o : [varible] 이 변수의 값으로 해당 인수를 초기화하고 WF 종료 후 해당 인수값을 다시 이 변수에 넣는다.
+
+
+## 비즈니즈 관점
+원버튼 : 마우스, 키보드 조차 모른다고 생각하고 접근
+ - 컴퓨터 전원을 켜면 자동으로 실행되는 실행파일 만들기 (UIPath 방법은 아님)
+ - 전원이 켜진 상태라면 unattended 로봇으로 작성한 스캐줄대로 움직이거나
+ - 사람이 Robot으로 실행버튼 정도는 누르는 식으로 하는 것 (이 번거로움을 문제로 상정할 수 있다.)
+
+## 프로젝트 정리 팁
+### 구조짜기
+프레임웤 : Main.xaml 은 state muchine으로 지정
+프로젝트 : 간단한 프로젝트는 Main을 flowchart으로 지정
+ - Main 워크플로는 [Invoke Workflow] 만으로 구성 (사용할 것만 연결; 우클릭+A)
+ - Invoke에 연결된 워크플로는 모두 flowchart로 구성 
+ - 해당 flowchart는 오직 sequence와 flowDecision으로만 구성
+ - 모둔 구현은 각각의 sequence 안에서 관리.
+
+프로젝트 : [Main - InvokeWorkFlow(플로우차트 호출)] 
+수행과제 : [FloswChart - Sequence(과제별 정리)]
+구현내용 : [Sequence - step by step]
+
+### Config 만들기
+엑셀에서 세팅값 불러오기 // Dictionary 형식으로 Config 받아온다.
+1. ReadRange // 초기화 Config = New Dictionary(Of String, Object) 
+2. ForEachRow // Config(row("Name").Tostring) = row("Value")
+3. MessageBox // Config("test1") // test1은 해당 엑셀파일 Name열에 있던 이름
