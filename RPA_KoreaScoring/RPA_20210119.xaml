@@ -1246,10 +1246,10 @@
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <av:Point x:Key="ShapeLocation">350,315.6</av:Point>
-          <av:Size x:Key="ShapeSize">200,100</av:Size>
+          <av:Size x:Key="ShapeSize">200,112.8</av:Size>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence sap2010:Annotation.AnnotationText="문자열 제어!!" DisplayName="6_문자열 제어_1" sap:VirtualizedContainerService.HintSize="200,100" sap2010:WorkflowViewState.IdRef="Sequence_60">
+      <Sequence sap2010:Annotation.AnnotationText="문자열 제어!!&#xD;&#xA;Split(str,cep)" DisplayName="6_문자열 제어_1" sap:VirtualizedContainerService.HintSize="200,112.8" sap2010:WorkflowViewState.IdRef="Sequence_60">
         <Sequence.Variables>
           <Variable x:TypeArguments="x:String" Name="t1" />
           <Variable x:TypeArguments="x:String" Name="t2" />
