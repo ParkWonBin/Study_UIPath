@@ -1,7 +1,11 @@
 ## 필수 함수
 cint(), cdbl(), .Tostring
-TypeName() # 문서 부록 주의사항 참고
-  
+join(row.ItemArray," | ") // as string
+Split(txt , ": ") // as string array
+TypeName() // object로 케스팅된 string은 string으로 뜸
+new list(of string)
+new dictionary(of string,int32)
+
 ## 단축키 
 ### 인라인
  - 변수 추가 : Ctrl + K
@@ -15,6 +19,25 @@ TypeName() # 문서 부록 주의사항 참고
  - 액티비티 주석 : Ctrl + D 
  - 액티비티 시도 : Ctrl + T (Try Catch)
  - 액티비티 추가 : Ctrl + Shift + T 
+
+## sellector 변수처리
+{{item}} : 이렇게 중괄호 2개로 덮히면 셀럭터 변수처리가 가능하다.
+xml이기 때문에 주소 참조(변수호출)는 가능하지만 연산( {{ (cint(item)+2).Tostring }} )은 불가하다.
+계산할 게 있다면 최종 결과물을 넣은 변수를 sellector xml에 넣어줘야한다. Tostring 미리 작업 해야만한다.
+assign : temp = (cint(item)+2).Tostring , sellector edit : {{temp}} 호출
+물론 와일드카드랑 같이 쓰면서 적당히 sellector를 조작하는 게 편하다.
+셀렉터에 idx값이 필요한 순간도 있기는 한데, 일반적인 상황에서 웬만하면 idx값이 필요없게 짜는 걸 권장한다. 
+
+## simulate 옵션
+simulate click: 
+ - True : 클릭 이벤트 호출 (실제 마우스 커스 안움직임) 
+ - 장점 : 백그라운드에서 작업하기 때문에 마우스 사용 가능
+ - 단점 : 가끔 element에 포커스가 안잡히는 문제가 생길 수 있다.
+ - 권장 : 안정적인 작업을 위해서는 Flase 로 유지하는게 좋다. 
+simulate type : 
+ - True : 백그라운드에서 타이핑 이벤트 처리
+ - 단점 : [key(enter)] 등 simulate key event 사용 불가
+
 
 ## Exsel Activity
 ### Exsel 설치x 컴퓨터
@@ -77,13 +100,17 @@ Value : (integer.Parse(row(0).ToString)+integer.Parse(row(1).ToString)).ToString
 message box
 - "\n"이 먹히지 않아 vbCrLf 나 Environment.NewLine 을 써야한다.
 
+for each row 에서 table 모두 출력 
+WriteLine :
+   join(row.ItemArray," | ") //row 가 string인 경우
+   Join({row(0).ToString,row(1).ToString,row(2).ToString}," | " )
+
 ### UIPath 개발 시 참고
 Microsoft workflow에서 GUI 툴 그대로 가져와서 사용함.
 미국에는 데스크탑 앱 개발 시 소프트웨어 접근성(시각/청각 장애우도 사용 가능한 기능)이 요구된다. 그 접근성 앱 개발을 위한 도구가 발전해서 RPA 프로그램이 된 것이다. [UIPath를 사용하지 않고 MS workflow로 트레킹하는 영상](https://ehpub.co.kr/category/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EA%B8%B0%EC%88%A0/sw%EC%A0%91%EA%B7%BC%EC%84%B1-%EA%B8%B0%EC%88%A0-ui-%EC%9E%90%EB%8F%99%ED%99%94/) 따라서 UIPath 개발 시 MS의 WorkFlow 문서를 참고하는 것이 좋다. 여담으로 [MS office는 서버-side 개발을 권장하지 않는다.](https://support.microsoft.com/en-us/help/257757/considerations-for-server-side-automation-of-office?wa=wsignin1.0%3Fwa%3Dwsignin1.0) -by 이석원 프로님
 
 ### 테스트 케이스
 [테스트 케이스 자동화](https://academy.uipath.com/learningpath-viewer/2234/1/155237/16)
-
 
 
 # 부록
@@ -133,3 +160,20 @@ import Argument :
 1. ReadRange // 초기화 Config = New Dictionary(Of String, Object) 
 2. ForEachRow // Config(row("Name").Tostring) = row("Value")
 3. MessageBox // Config("test1") // test1은 해당 엑셀파일 Name열에 있던 이름
+
+# UIPath Advance 팁
+- [1번 문제_해쉬코드](https://wooaoe.tistory.com/61)
+- [2번 문제_연레포트](https://wooaoe.tistory.com/62)
+
+
+# 윈도우 자격증명 쓰는법
+1. 시작메뉴 - 자격 증명 검색 - 자격증명 관리자
+2. windows 자격증명 - [일반 자격증명]에 추가
+3. 인터넷 또는 네트워크 주소 : 해당 정보 관리할 이름으로 설정 ex : ACME-login
+4. uipath 패키지 다운로드 (Uipath.Credentials.Activites 다운)
+   - Get Secure Credential (windows 자격증명에 있는 값 가져옴)
+   - CredenrialType : Generic
+   - PersistanceType : Enterprise
+   - Target : [일반 자격증명]에 있는 '인터넷 또는 네트워크 주소'값
+비고 : 비밀번호 일반 텍스트로 출력하는 법 (sequre string -> string)
+ String plainStr = new System.Net.NetworkCredential(string.Empty, secureStr).Password
