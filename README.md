@@ -1,7 +1,11 @@
+InvoiceNumber	Item	Amount	Tax	Total	Currency	Date
+
+
 ## 필수 함수
 cint(), cdbl(), .Tostring
-join(row.ItemArray," | ") // as string
 Split(txt , ": ") // as string array
+join(row.ItemArray," | ") // as string
+{"A","B","C"}.contains("A") // isin, has 함수 VB버전
 TypeName() // object로 케스팅된 string은 string으로 뜸
 new list(of string)
 new dictionary(of string,int32)
@@ -177,3 +181,6 @@ import Argument :
    - Target : [일반 자격증명]에 있는 '인터넷 또는 네트워크 주소'값
 비고 : 비밀번호 일반 텍스트로 출력하는 법 (sequre string -> string)
  String plainStr = new System.Net.NetworkCredential(string.Empty, secureStr).Password
+
+
+{"January","February","March","April","May","June","July","August","September","October","November","December"}
