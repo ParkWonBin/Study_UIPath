@@ -183,4 +183,9 @@ import Argument :
  String plainStr = new System.Net.NetworkCredential(string.Empty, secureStr).Password
 
 
+## 팁
+split(str, Environment.NewLine) 안먹힐 때
+app 스크래핑 중 \r\n과 \n이 혼합되는 경우 full test나 get text로는 split 처리가 안됨. 
+visual 스크래핑을 해야 정상적으로 문자열을 자를 수 있다.
+
 {"January","February","March","April","May","June","July","August","September","October","November","December"}
