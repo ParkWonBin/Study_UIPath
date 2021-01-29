@@ -1,8 +1,11 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="scrab_data" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="Client_info" Type="OutArgument(s:String[])" />
+    <x:Property Name="app_name" Type="OutArgument(x:String)" />
+    <x:Property Name="app_address" Type="OutArgument(x:String)" />
+    <x:Property Name="app_city" Type="OutArgument(x:String)" />
+    <x:Property Name="app_Country" Type="OutArgument(x:String)" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>752,1464.8</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>741.6,893.6</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="28">
@@ -70,14 +73,10 @@
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Basic" sap:VirtualizedContainerService.HintSize="375.2,657.6" sap2010:WorkflowViewState.IdRef="Sequence_26">
+  <Sequence DisplayName="Basic" sap:VirtualizedContainerService.HintSize="375.2,586.4" sap2010:WorkflowViewState.IdRef="Sequence_26">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="data_app_client" />
       <Variable x:TypeArguments="s:String[]" Name="app_lines" />
-      <Variable x:TypeArguments="x:String" Name="app_name" />
-      <Variable x:TypeArguments="x:String" Name="app_address" />
-      <Variable x:TypeArguments="x:String" Name="app_city" />
-      <Variable x:TypeArguments="x:String" Name="app_Country" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -85,7 +84,8 @@
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:GetVisibleText WordsInfo="{x:Null}" sap2010:Annotation.AnnotationText="\r\n과 \n이 혼합돼서&#xD;&#xA;full test나 get text로는 &#xD;&#xA;split 처리가 안됨. " DisplayName="Get Visible Text 'WindowsForms10.STATIC.a...'" FormattedText="False" sap:VirtualizedContainerService.HintSize="333.6,167.2" sap2010:WorkflowViewState.IdRef="GetVisibleText_1">
+    <Delay Duration="00:00:02" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Delay_1" />
+    <ui:GetVisibleText WordsInfo="{x:Null}" sap2010:Annotation.AnnotationText="\r\n과 \n이 혼합돼서&#xA;full test나 get text로는 &#xA;split 처리가 안됨. " DisplayName="Get Visible Text 'WindowsForms10.STATIC.a...'" FormattedText="False" sap:VirtualizedContainerService.HintSize="333.6,167.2" sap2010:WorkflowViewState.IdRef="GetVisibleText_1">
       <ui:GetVisibleText.Target>
         <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="46c15118-7c09-4e75-95c8-88deb816f9df" InformativeScreenshot="fb96983a88d8118d75419622db9bd989" Selector="&lt;wnd app='acme-system3.exe' ctrlname='ClientAccounts' /&gt;&lt;wnd ctrlname='groupBox2' /&gt;&lt;wnd ctrlname='label5' /&gt;">
           <ui:Target.TimeoutMS>
@@ -105,7 +105,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:GetVisibleText>
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="333.6,255.2" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="333.6,224" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_22">
@@ -148,17 +148,8 @@
               <InArgument x:TypeArguments="x:String">[Split(app_lines(3),": ")(1)]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
-          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_29">
-            <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="s:String[]">[Client_info]</OutArgument>
-            </ui:AssignOperation.To>
-            <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="s:String[]">[{app_name, app_address, app_City, app_Country}]</InArgument>
-            </ui:AssignOperation.Value>
-          </ui:AssignOperation>
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="333.6,62.4" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="[join(Client_info,&quot; | &quot;)]" />
   </Sequence>
 </Activity>
