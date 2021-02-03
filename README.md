@@ -1,7 +1,4 @@
-InvoiceNumber	Item	Amount	Tax	Total	Currency	Date
-
-
-## 필수 함수
+## 자주쓰는 명령어
 cint(), cdbl(), .Tostring
 Split(txt , ": ") // as string array
 join(row.ItemArray," | ") // as string
@@ -13,6 +10,7 @@ new dictionary(of string,int32)
 ## 단축키 
 ### 인라인
  - 변수 추가 : Ctrl + K
+ - 인수 추가 : Ctrl + M
  - 자동 완성 : Ctrl + space
 
 ### 액티비티 관련
@@ -42,8 +40,10 @@ simulate type :
  - True : 백그라운드에서 타이핑 이벤트 처리
  - 단점 : [key(enter)] 등 simulate key event 사용 불가
 
-
 ## Exsel Activity
+엑셀에서 alt+enter로 생성된 문자열은 chr(10)이다.
+셀 안에 있는 줄바꿈으로 문자열을 나누려면 chr(10)으로 split하라.
+
 ### Exsel 설치x 컴퓨터
 .xlsx 파일만 작업이 가능하다.
 **읽기** : 시스템.파일.통합문서.Read Range
@@ -89,33 +89,8 @@ Value : (integer.Parse(row(0).ToString)+integer.Parse(row(1).ToString)).ToString
 - 콘트롤, 엔터 등 hotkey는 [k(enter)] 이런 식으로 이루어진다. 
 - 그 외 window나 broswer에 키입력은 Sendkey 액티비티를 사용하여 전달한다.
 
-## 변경된 오케 연결법
-1. [오케 접속](https://cloud.uipath.com/koreabegmifx/DefaultTenant/)
-2. MY FOLDERS - default - Robots - Standard Robot 생성 (=> 머신 생성 됨)
-3. Tanent - Machines - Machine key 등 data 복사
-4. Asistant - Preferance - Orchestrator Setting
-   - Machine Key : 설정
-   - Machine Name : 복붙
-   - URL : https://cloud.uipath.com/koreabegmifx/DefaultTenant/
-   - Machine Key : 복붙
 
 ## 기타
-### 문자열
-message box
-- "\n"이 먹히지 않아 vbCrLf 나 Environment.NewLine 을 써야한다.
-
-for each row 에서 table 모두 출력 
-WriteLine :
-   join(row.ItemArray," | ") //row 가 string인 경우
-   Join({row(0).ToString,row(1).ToString,row(2).ToString}," | " )
-
-### UIPath 개발 시 참고
-Microsoft workflow에서 GUI 툴 그대로 가져와서 사용함.
-미국에는 데스크탑 앱 개발 시 소프트웨어 접근성(시각/청각 장애우도 사용 가능한 기능)이 요구된다. 그 접근성 앱 개발을 위한 도구가 발전해서 RPA 프로그램이 된 것이다. [UIPath를 사용하지 않고 MS workflow로 트레킹하는 영상](https://ehpub.co.kr/category/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EA%B8%B0%EC%88%A0/sw%EC%A0%91%EA%B7%BC%EC%84%B1-%EA%B8%B0%EC%88%A0-ui-%EC%9E%90%EB%8F%99%ED%99%94/) 따라서 UIPath 개발 시 MS의 WorkFlow 문서를 참고하는 것이 좋다. 여담으로 [MS office는 서버-side 개발을 권장하지 않는다.](https://support.microsoft.com/en-us/help/257757/considerations-for-server-side-automation-of-office?wa=wsignin1.0%3Fwa%3Dwsignin1.0) -by 이석원 프로님
-
-### 테스트 케이스
-[테스트 케이스 자동화](https://academy.uipath.com/learningpath-viewer/2234/1/155237/16)
-
 
 # 부록
 ``` 
@@ -130,6 +105,9 @@ String에서 케스팅된 Object라도 암시적으로 String으로 변환하지
 ```
 
 ## 인수 사용하는법
+Extract WorkFlow하기 전에 변수 scope 설정만 잘 만져도 설정 편함.
+지역변수는 variable로, 상위 scope와 연결된 변수는 인수로 자동설정됨.
+invoke할 때 인수의 이름이 같으면 자동으로 설정해줌
 인수 추가 단축키 : Ctrl + M
 
 Invoke Workflow 에서 설정 방법
@@ -165,6 +143,21 @@ import Argument :
 2. ForEachRow // Config(row("Name").Tostring) = row("Value")
 3. MessageBox // Config("test1") // test1은 해당 엑셀파일 Name열에 있던 이름
 
+팁 : config로 테이블 만들기
+config("header") = "열1,열2,열3"
+config("열1") = "값1,값2"
+config("열2") = "값1,값2,값3"
+config("열3") = "값1,값2,값3,값4"
+ForEach : row, Split(config("header"),",")
+   WriteLine : Join(Split(row,",")," | ")
+
+### UIPath 개발 시 참고
+Microsoft workflow에서 GUI 툴 그대로 가져와서 사용함.
+미국에는 데스크탑 앱 개발 시 소프트웨어 접근성(시각/청각 장애우도 사용 가능한 기능)이 요구된다. 그 접근성 앱 개발을 위한 도구가 발전해서 RPA 프로그램이 된 것이다. [UIPath를 사용하지 않고 MS workflow로 트레킹하는 영상](https://ehpub.co.kr/category/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EA%B8%B0%EC%88%A0/sw%EC%A0%91%EA%B7%BC%EC%84%B1-%EA%B8%B0%EC%88%A0-ui-%EC%9E%90%EB%8F%99%ED%99%94/) 따라서 UIPath 개발 시 MS의 WorkFlow 문서를 참고하는 것이 좋다. 여담으로 [MS office는 서버-side 개발을 권장하지 않는다.](https://support.microsoft.com/en-us/help/257757/considerations-for-server-side-automation-of-office?wa=wsignin1.0%3Fwa%3Dwsignin1.0) -by 이석원 프로님
+
+### 테스트 케이스
+[테스트 케이스 자동화](https://academy.uipath.com/learningpath-viewer/2234/1/155237/16)
+
 # UIPath Advance 팁
 - [1번 문제_해쉬코드](https://wooaoe.tistory.com/61)
 - [2번 문제_연레포트](https://wooaoe.tistory.com/62)
@@ -183,7 +176,15 @@ import Argument :
  String plainStr = new System.Net.NetworkCredential(string.Empty, secureStr).Password
 
 
-## 팁 split 관련
+# 문자열
+message box
+- "\n"이 먹히지 않아 vbCrLf 나 Environment.NewLine 을 써야한다.
+
+for each row 에서 table 모두 출력 
+WriteLine :
+   join(row.ItemArray," | ") //row 가 string인 경우
+   Join({row(0).ToString,row(1).ToString,row(2).ToString}," | " )
+
 ### split(str, Environment.NewLine) 안먹힐 때
 app 스크래핑 중 \r\n과 \n이 혼합되는 경우 full test나 get text로는 split 처리가 안됨. 
 visual 스크래핑을 해야 정상적으로 문자열을 자를 수 있다.
@@ -193,3 +194,44 @@ ForEach : row in Split(str_DataTable,Environment.NewLine)
 WriteLine : join(Split(row,Chr(9)), " | ") 
 
 {"January","February","March","April","May","June","July","August","September","October","November","December"}
+
+
+
+# 오케 사용법
+
+## 로봇 연결하기
+conect robot to orchestrator
+1. [오케 접속](https://cloud.uipath.com/koreabegmifx/DefaultTenant/)
+2. MY FOLDERS - default - Robots - Standard Robot 생성 (=> 머신 생성 됨)
+3. Tanent - Machines - Machine key 등 data 복사
+4. Asistant - Preferance - Orchestrator Setting
+   - Machine Key : 설정
+   - Machine Name : 복붙
+   - URL : https://cloud.uipath.com/koreabegmifx/DefaultTenant/
+   - Machine Key : 복붙
+
+## 설명
+태넌트 : 계정에 포함된 서버
+   - 감사 : 사용자의 모든 액션이 로그로 남는다.
+   - 사용자 : 다른 사람을 추가할 수 있다. (커뮤니티 무료 버전을 불가)
+
+
+Default폴더 : 
+   - 로봇 관리 : standard (Developer=studio 사용하겠다. , Unattened = orche로 원격으로 쓰겠다. 스케줄링)
+   - 환경 관리 : 로봇을 구룹지어놓은 것, 사람 인사관리할 때 부서 나누는 것처럼 로봇 그룹핑한 것이 환경
+   - 자동화 : 프로세스 생성 및 스케줄링 가능. 로봇-편집-형식에서 로봇을 unattend로 돌린 후 사용해보자.
+     - 프로세스 만들기 : 패키지(orche에 등록해놓은 것)연결, 우선순위(동시에 일 여러개 받을 때 처리순서)
+     - 프로세스 실행 : 로봇 선택; 틍정로봇=(unattended로봇 선택 ), 동적할당=(환경 내 쉬고있는 로봇에게 일시킴)
+     - 트리거 : 시간 or 큐 중 선택 가능
+       - 시간 : 고급설정에 cron 표현식 있음. google에서 cron표현식 만들어주는 사이트 들어가서 세부설정 가능
+       - 휴무일 : [테넌트-설정-휴무일] 에서 설정 가능. 저장해놓은 휴무일이 있으면 트리거 설정할 때 해당 휴무일에 쉴지 선택가능
+       - 스케줄 : 특정 시간마다 반복되는 트리거, 설정 들어가서 꺼놓으면 해당 스케줄을 지우지 않고도 사용안함 가능
+
+# 큐, 트렌젝션
+큐는 Default 폴더에서 관리함.
+   - studio에서 add하면 New상태의 큐item이 생성됨.
+   - Get Transaction 하면 New 상태인 item 하나 가져옴. (item 상태 : In Process로 변경됨)
+   - Get Queue 하면 특정 상태인 큐item을 가져올 수 있다. (어떤 상태든 가능하다.)
+   - Set Transaction 하면 해당 큐item을 [성공 or 실패]로 설정할 수 있다.
+   - 사용이 끝난 큐item은 [성공 or 실패]상태로 남겨둘지 Delete 큐item으로 완전 제거할지 결정하면 된다.
+Transaction은 큐에서 가장 먼저 들어온 New 상태의 item을 의미한다고 생각하면 될 것 같다.
