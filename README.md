@@ -104,6 +104,11 @@ String에서 케스팅된 Object라도 암시적으로 String으로 변환하지
 * ForEach에서 지역변수의 형태를 모호하게 설정하면 호출 부분에서 오류가 발생하니 주의한다.
 ```
 
+## Datatable 
+[row reverse 하는법](https://excelcult.com/how-to-reverse-a-datatable-in-uipath/)
+```DT_tmp = DT_tmp.AsEnumerable.Reverse().CopyToDataTable```
+
+
 ## 인수 사용하는법
 Extract WorkFlow하기 전에 변수 scope 설정만 잘 만져도 설정 편함.
 지역변수는 variable로, 상위 scope와 연결된 변수는 인수로 자동설정됨.
