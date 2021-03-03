@@ -40,7 +40,7 @@ simulate type :
  - True : 백그라운드에서 타이핑 이벤트 처리
  - 단점 : [key(enter)] 등 simulate key event 사용 불가
 
-## Exsel Activity
+## Excel Activity
 엑셀에서 alt+enter로 생성된 문자열은 chr(10)이다.
 셀 안에 있는 줄바꿈으로 문자열을 나누려면 chr(10)으로 split하라.
 Environment.NewLine.ToArray 으로 나눌 수도 있다.
@@ -49,7 +49,7 @@ str_test.split(chr(10)) 'is equivalent to
 str_test.split(Environment.NewLine.ToArray)
 ```
 
-### Exsel 설치x 컴퓨터
+### Excel 설치x 컴퓨터
 .xlsx 파일만 작업이 가능하다.
 **읽기** : 시스템.파일.통합문서.Read Range
 **쓰기** : 시스템.파일.통합문서.Write Range
@@ -57,8 +57,8 @@ str_test.split(Environment.NewLine.ToArray)
 
 엑셀이 설치된 컴퓨터에서는 어플스코프 사용 권장함. 어플 스코프 사용시 범위 임력으로 수식 자동 체우기도 지원됨.
 
-### Exsel 설치된 컴퓨터 
-#### Exsel application scope 사용
+### Excel 설치된 컴퓨터 
+#### Excel application scope 사용
 엑셀 어플리케이션으로 파일을 직접 열어서 작업이 진행됨. 스코프 안에서는 현제 작업 중인 파일을 기준으로 제어됨.
 
 **입력** : 앱통합.Excel.테이블.Read Range
