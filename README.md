@@ -43,6 +43,11 @@ simulate type :
 ## Exsel Activity
 엑셀에서 alt+enter로 생성된 문자열은 chr(10)이다.
 셀 안에 있는 줄바꿈으로 문자열을 나누려면 chr(10)으로 split하라.
+Environment.NewLine.ToArray 으로 나눌 수도 있다.
+```vb
+str_test.split(chr(10)) 'is equivalent to
+str_test.split(Environment.NewLine.ToArray)
+```
 
 ### Exsel 설치x 컴퓨터
 .xlsx 파일만 작업이 가능하다.
@@ -107,7 +112,8 @@ String에서 케스팅된 Object라도 암시적으로 String으로 변환하지
 ## Datatable 
 [row reverse 하는법](https://excelcult.com/how-to-reverse-a-datatable-in-uipath/)
 ```DT_tmp = DT_tmp.AsEnumerable.Reverse().CopyToDataTable```
-
+데이터 필터링(abc열에서 값이 bcd인 행 찾기)
+```DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").TosTing = "bdc").ToArray ```
 
 ## 인수 사용하는법
 Extract WorkFlow하기 전에 변수 scope 설정만 잘 만져도 설정 편함.
