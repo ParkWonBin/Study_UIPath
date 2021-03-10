@@ -21,7 +21,8 @@ new dictionary(of string,int32)
  - 액티비티 주석 : Ctrl + D 
  - 액티비티 시도 : Ctrl + T (Try Catch)
  - 액티비티 추가 : Ctrl + Shift + T 
-
+ - FlowChart set start node : 우클릭 + A
+ 
 ## sellector 변수처리
 {{item}} : 이렇게 중괄호 2개로 덮히면 셀럭터 변수처리가 가능하다.
 xml이기 때문에 주소 참조(변수호출)는 가능하지만 연산( {{ (cint(item)+2).Tostring }} )은 불가하다.
