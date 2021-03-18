@@ -1,11 +1,11 @@
 ## 자주쓰는 명령어
-cint(), cdbl(), .Tostring
-Split(txt , ": ") // as string array
-join(row.ItemArray," | ") // as string
-{"A","B","C"}.contains("A") // isin, has 함수 VB버전
-TypeName() // object로 케스팅된 string은 string으로 뜸
-new list(of string)
-new dictionary(of string,int32)
+cint(), cdbl(), .Tostring  
+Split(txt , ": ") // as string array  
+join(row.ItemArray," | ") // as string  
+{"A","B","C"}.contains("A") // isin, has 함수 VB버전  
+TypeName() // object로 케스팅된 string은 string으로 뜸  
+new list(of string)  
+new dictionary(of string, int32)  
 
 ## 단축키 
 ### 인라인
