@@ -110,23 +110,6 @@ String에서 케스팅된 Object라도 암시적으로 String으로 변환하지
 * ForEach에서 지역변수의 형태를 모호하게 설정하면 호출 부분에서 오류가 발생하니 주의한다.
 ```
 
-## Datatable 
-[row reverse 하는법](https://excelcult.com/how-to-reverse-a-datatable-in-uipath/)
-```DT_tmp = DT_tmp.AsEnumerable.Reverse().CopyToDataTable```
-데이터 필터링(abc열에서 값이 bcd인 행 찾기)
-```DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").TosTing = "bdc").ToArray ```
-
-Convert Column in Data Table to Array
-```DT_tmp.AsEnumerable().Select(Function (a) a.Field(of string)("columnname").ToString).ToArray()```
-
-DT header to Array
-```vb
-list_header = new list(of String)
-ForEach : item in DT_tmp
-   Add To Collectoin <String> : item.ColumnName
-arr_header = list_header.ToArray
-```
-
 ## 인수 사용하는법
 Extract WorkFlow하기 전에 변수 scope 설정만 잘 만져도 설정 편함.
 지역변수는 variable로, 상위 scope와 연결된 변수는 인수로 자동설정됨.
@@ -258,3 +241,83 @@ Default폴더 :
    - Set Transaction 하면 해당 큐item을 [성공 or 실패]로 설정할 수 있다.
    - 사용이 끝난 큐item은 [성공 or 실패]상태로 남겨둘지 Delete 큐item으로 완전 제거할지 결정하면 된다.
 Transaction은 큐에서 가장 먼저 들어온 New 상태의 item을 의미한다고 생각하면 될 것 같다.
+
+
+## Datatable 
+[row reverse 하는법](https://excelcult.com/how-to-reverse-a-datatable-in-uipath/)
+```DT_tmp = DT_tmp.AsEnumerable.Reverse().CopyToDataTable```
+데이터 필터링(abc열에서 값이 bcd인 행 찾기)
+```DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").TosTing = "bdc").ToArray ```
+
+Convert Column in Data Table to Array
+```DT_tmp.AsEnumerable().Select(Function (a) a.Field(of string)("columnname").ToString).ToArray()```
+
+DT header to Array
+```vb
+list_header = new list(of String)
+ForEach : item in DT_tmp
+   Add To Collectoin <String> : item.ColumnName
+arr_header = list_header.ToArray
+```
+
+### AddDataColumn : 열 추가
+ForEachRow : DataTable의 행을 지역변수 Row에 담아 반복
+- 형변환이 복잡해서 row는 GenericValue로 받는 걸 권장.
+- 정수형 항목 꺼내기 : 
+```
+integer.Parse(row(IndexNum).ToString)
+' row는 바로 형변환이 불가하여 문자열 변환을 거쳐 변환함
+```
+
+### DT 할당
+보통 Build DataTable Activity를 사용하여 초기화한다.
+Build DataTable로 재작한 더미 테이블(row,col = 0,0) 인스턴스는 Notiong이 아니다.
+```
+' Copy는 열 이름에 상관 없이 값을 복사 붙여넣기 한다.
+DT_test = DT_tmp.Copy()
+
+' Clone은 데이터는 복사하지 않고 Columns만 복사해서 넣는다.
+DT_test = DT_tmp.Clone()
+```
+
+### DT 열 추가
+보통 열 추가 후  ForEachRow로 초기화 한다.. 
+```
+Add DataTable Columns(dt_tmp, "new_col") 
+ForEachRow(dt_temp) :
+    Assgin : row.item("new_col") = "초기화 값"
+```
+
+### DT 행 추가 
+dt_tmp1에 dt_tmp2의 데이터 추가
+```
+Merge DataTable :  (Activity) 
+	Destination = dt_tmp1 
+	Source = dt_tmp2
+```
+
+### Merge 열 이름 다를 때 
+```
+'| col1 | col 2 | 
+'| tmp1 |       | 
+'|      |  tmp2 | 
+'이런 식으로 행이 이상하게 붙는다.
+```
+
+### Join 키 값으로 합치기
+```
+Join DataTable 액티비티 사용 
+```
+
+
+### Row Reverse 
+```
+DT_tmp = DT_tmp.AsEnumerable.Reverse().CopyToDataTable
+```
+
+### Filtering
+abc열에서 값이 bcd인 행 모두 찾기
+```
+DT_tmp = DT_tmp.AsEnumerable.where(
+    Function(x) x("abc").TosTing = "bdc").ToArray
+```
