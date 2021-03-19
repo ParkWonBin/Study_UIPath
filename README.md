@@ -116,6 +116,17 @@ String에서 케스팅된 Object라도 암시적으로 String으로 변환하지
 데이터 필터링(abc열에서 값이 bcd인 행 찾기)
 ```DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").TosTing = "bdc").ToArray ```
 
+Convert Column in Data Table to Array
+```DT_tmp.AsEnumerable().Select(Function (a) a.Field(of string)("columnname").ToString).ToArray()```
+
+DT header to Array
+```vb
+list_header = new list(of String)
+ForEach : item in DT_tmp
+   Add To Collectoin <String> : item.ColumnName
+arr_header = list_header.ToArray
+```
+
 ## 인수 사용하는법
 Extract WorkFlow하기 전에 변수 scope 설정만 잘 만져도 설정 편함.
 지역변수는 variable로, 상위 scope와 연결된 변수는 인수로 자동설정됨.
