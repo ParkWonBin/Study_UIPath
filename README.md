@@ -321,3 +321,7 @@ abc열에서 값이 bcd인 행 모두 찾기
 DT_tmp = DT_tmp.AsEnumerable.where(
     Function(x) x("abc").TosTing = "bdc").ToArray
 ```
+
+### DT 값 호출
+1행 1열 Table의 값 호출
+dt_dumy(0)("dumy").ToString
