@@ -1,13 +1,14 @@
 ## 자주쓰는 명령어
 cint(), cdbl(), .Tostring  
 Split(txt , ": ") // as string array  
-join(row.ItemArray," | ") // as string  
-{"A","B","C"}.contains("A") // isin, has 함수 VB버전  
-dic_tmp.ContainsKey("213") // dict에서 key 있는지 확인 
-file.Exists(str_FilePath) // 경로에 파일 있는지 확인
+join(row.ItemArray," | ") // as string   
+{"A","B","C"}.contains("A") // isin, has 함수 VB버전    
+dic_tmp.ContainsKey("213") // dict에서 key 있는지 확인   
+file.Exists(str_FilePath) // 경로에 파일 있는지 확인  
 TypeName() // object로 케스팅된 string은 string으로 뜸  
 new list(of string)  
 new dictionary(of string, int32)  
+New Dictionary(Of String, string()) # 문자열 배열  
 
 ## 단축키 
 ### 인라인
