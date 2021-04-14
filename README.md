@@ -15,9 +15,11 @@ System.Drawing.Color.Gray  # 엑셀 셀 책 체우기 할 떄 사용
 TimeSpan.FromMilliseconds(int_delayTime) # 딜레이 시간 넣을 떄 사용   
  
  #### 셀렉터로 크롬창 팝업 잡기
- 팝업창 내용 스크랩용
+ 팝업창 선택할 떄 페이지 로드가 멈추는 곳이 있다.   
+ target > WaitForReady > None 넣어놓기   
+ 팝업창 내용 스크랩용  
  ```xml
-<html app='chrome.exe' title='' />
+<html app='chrome.exe' title='*' />
 <ctrl role='dialog' />
 <ctrl role='text' name='*.*' />
  ```
@@ -27,7 +29,7 @@ TimeSpan.FromMilliseconds(int_delayTime) # 딜레이 시간 넣을 떄 사용
 <ctrl  role = 'push button' name='계속'/>
 ```
 #### 엑셀 시트명 갖고오기
-excel scope에서 output workbook에 변수 만들기(wb)
+excel scope에서 output workbook에 변수 만들기(wb)  
 엑셀 시트명 확인 : if : wb.GetSheets.Contains(str_sheetName)
 
 ## 단축키 
