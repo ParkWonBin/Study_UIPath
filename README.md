@@ -9,11 +9,26 @@ TypeName() // object로 케스팅된 string은 string으로 뜸
 new list(of string)  
 new dictionary(of string, int32)  
 New Dictionary(Of String, string()) # 문자열 배열  
-dt_tmp.Columns.Contains("Column1") # dt에 해당 열 있는지 확인  
+dt_tmp.Columns.Contains("Column1") # dt에 해당 열 있는지 확인   
 dt_tmp.Columns(0).ColumnName = “newColumnName” # 열 이름 바꾸기   
-System.Drawing.Color.Gray  # 엑셀 셀 책 체우기 할 떄 사용
-TimeSpan.FromMilliseconds(int_delayTime) # 딜레이 시간 넣을 떄 사용  
-
+System.Drawing.Color.Gray  # 엑셀 셀 책 체우기 할 떄 사용  
+TimeSpan.FromMilliseconds(int_delayTime) # 딜레이 시간 넣을 떄 사용   
+ 
+ #### 셀렉터로 크롬창 팝업 잡기
+ 팝업창 내용 스크랩용
+ ```xml
+<html app='chrome.exe' title='' />
+<ctrl role='dialog' />
+<ctrl role='text' name='*.*' />
+ ```
+ 팝업창 버튼 클릭용
+```xml
+<ctrl role='dialog' />
+<ctrl  role = 'push button' name='계속'/>
+```
+#### 엑셀 시트명 갖고오기
+excel scope에서 output workbook에 변수 만들기(wb)
+엑셀 시트명 확인 : if : wb.GetSheets.Contains(str_sheetName)
 
 ## 단축키 
 ### 인라인
