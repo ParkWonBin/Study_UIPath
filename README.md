@@ -32,6 +32,31 @@ TimeSpan.FromMilliseconds(int_delayTime) # 딜레이 시간 넣을 떄 사용
 excel scope에서 output workbook에 변수 만들기(wb)  
 엑셀 시트명 확인 : if : wb.GetSheets.Contains(str_sheetName)
 
+#### Linq 관련
+```
+### convert dt to Dictionary
+DT_tmp.AsEnumerable.ToDictionary(Of String, Object)(Function (row) row("key").toString, Function (row) row("value").toString)
+
+데이터 필터링(abc열에서 값이 bcd인 행 찾기)
+DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").TosTing = "bdc").ToArray()
+
+Convert Column in Data Table to Array
+DT_tmp.AsEnumerable().Select(Function (a) a.Field(of string)("columnname").ToString).ToArray()
+
+### Row Reverse 
+DT_tmp = DT_tmp.AsEnumerable.Reverse().CopyToDataTable
+
+### Filtering
+abc열에서 값이 bcd인 행 모두 찾기
+DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").TosTing = "bdc").ToArray
+
+Copy는 열 이름에 상관 없이 값을 복사 붙여넣기 한다.
+DT_test = DT_tmp.Copy()
+
+Clone은 데이터는 복사하지 않고 Columns만 복사해서 넣는다.
+DT_test = DT_tmp.Clone()
+```
+
 ## 단축키 
 ### 인라인
  - 변수 추가 : Ctrl + K
