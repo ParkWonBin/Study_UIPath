@@ -57,6 +57,20 @@ Clone은 데이터는 복사하지 않고 Columns만 복사해서 넣는다.
 DT_test = DT_tmp.Clone()
 ```
 
+##### 엑셀 읽기 오류 관련
+[UIPATH 엑셀 StacOverFlow](https://stackoverflow.com/questions/2424718/how-to-know-if-a-cell-has-an-error-in-the-formula-in-c-sharp)  
+[UIPATH 엑셀 오류 정리글](https://deokpals.tistory.com/12)  
+```
+    ErrDiv0 = -2146826281,
+    ErrGettingData = -2146826245,
+    ErrNA = -2146826246,
+    ErrName = -2146826259,
+    ErrNull = -2146826288,
+    ErrNum = -2146826252,
+    ErrRef = -2146826265,
+    ErrValue = -2146826273
+```
+
 ## 단축키 
 ### 인라인
  - 변수 추가 : Ctrl + K
