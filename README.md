@@ -16,6 +16,10 @@ TimeSpan.FromMilliseconds(int_delayTime) # 딜레이 시간 넣을 떄 사용
 
 dtm_tmp = Date.ParseExact("20210212", "yyyyMMdd", System.Globalization.DateTimeFormatInfo.InvariantInfo)  
  
+ForEachRow 액티비티에서 row 를 다른 테이블에 AddDataRow 를 할 경우  
+“Add data row : This row already belongs to another table.” 오류 메시지가 나온다.   
+이 떄는 AddDataRow에서 row를 array로 넘기면 해결된다. : row.ItemArray  
+ 
  #### 셀렉터로 크롬창 팝업 잡기
  팝업창 선택할 떄 페이지 로드가 멈추는 곳이 있다.   
  target > WaitForReady > None 넣어놓기   
