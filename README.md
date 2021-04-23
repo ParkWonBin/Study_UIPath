@@ -12,7 +12,9 @@ New Dictionary(Of String, string()) # 문자열 배열
 dt_tmp.Columns.Contains("Column1") # dt에 해당 열 있는지 확인   
 dt_tmp.Columns(0).ColumnName = “newColumnName” # 열 이름 바꾸기   
 System.Drawing.Color.Gray  # 엑셀 셀 책 체우기 할 떄 사용  
-TimeSpan.FromMilliseconds(int_delayTime) # 딜레이 시간 넣을 떄 사용   
+TimeSpan.FromMilliseconds(int_delayTime) # 딜레이 시간 넣을 떄 사용    
+
+dtm_tmp = Date.ParseExact("20210212", "yyyyMMdd", System.Globalization.DateTimeFormatInfo.InvariantInfo)  
  
  #### 셀렉터로 크롬창 팝업 잡기
  팝업창 선택할 떄 페이지 로드가 멈추는 곳이 있다.   
