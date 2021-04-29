@@ -395,3 +395,16 @@ DT_tmp = DT_tmp.AsEnumerable.where(
 ### DT 값 호출
 1행 1열 Table의 값 호출
 dt_dumy(0)("dumy").ToString
+
+
+## Process 확인
+```
+Get Processes : processes = processes
+Assign : array = processes.AsEnumerable().Where(Function(x) x.ProcessName.Contains("OUTLOOK")).ToArray
+if : array.Count >0 : 
+	Write Line : "존재" + array(0).ProcessName
+	
+타입 : 
+processes = System.Collections.ObjectModel.Collection<System.Diagonotics.Process>
+array = System.Dianotics.Pcrocess[]
+```
