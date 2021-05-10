@@ -13,6 +13,9 @@ dt_tmp.Columns.Contains("Column1") # dt에 해당 열 있는지 확인
 dt_tmp.Columns(0).ColumnName = “newColumnName” # 열 이름 바꾸기   
 System.Drawing.Color.Gray  # 엑셀 셀 책 체우기 할 떄 사용  
 TimeSpan.FromMilliseconds(int_delayTime) # 딜레이 시간 넣을 떄 사용    
+Asc("A") = 65
+Chr(65) = "A"
+
 
 dtm_tmp = Date.ParseExact("20210212", "yyyyMMdd", System.Globalization.DateTimeFormatInfo.InvariantInfo)  
  
@@ -119,7 +122,6 @@ Environment.NewLine.ToArray 으로 나눌 수도 있다.
 str_test.split(chr(10)) 'is equivalent to
 str_test.split(Environment.NewLine.ToArray)
 ```
-
 ### Excel 설치x 컴퓨터
 .xlsx 파일만 작업이 가능하다.
 **읽기** : 시스템.파일.통합문서.Read Range
