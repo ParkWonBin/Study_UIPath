@@ -17,8 +17,8 @@ Asc("A") = 65
 Chr(65) = "A"
 
 
-dataTable 열이름 변경 : "Column1" -> "New Column"
-Assign : dt_tmp.Columns(dt_tmp.Columns.IndexOf("Column1")).ColumnName = "New Column"
+dataTable 열이름 변경 : "Column1" -> "New Column"   
+Assign : dt_tmp.Columns(dt_tmp.Columns.IndexOf("Column1")).ColumnName = "New Column"   
 
 dtm_tmp = Date.ParseExact("20210212", "yyyyMMdd", System.Globalization.DateTimeFormatInfo.InvariantInfo)  
  
