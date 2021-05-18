@@ -26,6 +26,27 @@ ForEachRow 액티비티에서 row 를 다른 테이블에 AddDataRow 를 할 경
 “Add data row : This row already belongs to another table.” 오류 메시지가 나온다.   
 이 떄는 AddDataRow에서 row를 array로 넘기면 해결된다. : row.ItemArray  
  
+ 
+ #### cron 사용법
+[cron 문법](https://www.leafcats.com/94)  
+[cron 디버깅](http://www.cronmaker.com/;jsessionid=node0109oq4rr76ib71nhs60lrghk15443008.node0?0)  
+```
+Cron 예시 :
+매년 매월 20일과 25일 13시 0분 0초
+0 0 13 20,25 * ? *
+(초, 분, 시, 일, 월, 요일, 년)
+
+
+* : 매번
+? : 모름 (일, 요일)에만 사용 가능하다
+/ : 증가 (ex : 10/15 = 10분부터 시작해 매 15분마다
+# : k#N 이달 N번째 K요일 (ex : 5#2 = 이달 두번째 목요일)
+L : 마지막 (일,요일)에만 사용 가능 (ex : 6L = 이달 마지막 금요일)
+W : 가장 가까운 평일 (ex : 10W = 이달 10일에서 가장 가까운 평일)
+"-" , "," : 범위 (1-12 =1월-12월, "20,25" = 20일과 25일
+```
+
+ 
  #### 셀렉터로 크롬창 팝업 잡기
  팝업창 선택할 떄 페이지 로드가 멈추는 곳이 있다.   
  target > WaitForReady > None 넣어놓기   
@@ -317,6 +338,11 @@ Default폴더 :
    - 사용이 끝난 큐item은 [성공 or 실패]상태로 남겨둘지 Delete 큐item으로 완전 제거할지 결정하면 된다.
 Transaction은 큐에서 가장 먼저 들어온 New 상태의 item을 의미한다고 생각하면 될 것 같다.
 
+#### 다루기 
+1. 패키지 배포 : studio에서 게시버튼 클릭 => 오케에 프로젝트명으로 패키지 업로드됨
+2. 프로세스 생성 : 해당 패키지/수행환경 설정 후 저장
+3. 스캐줄 관리 : 트리거에서 해당 프로세스/환경 설정 후 cron등으로 스캐줄 설정
+4. 작업 수행 명령 : 작업 탭에서 새로만들기(시작버튼 "▶" 누르면 새로 만들기 나옴, 패키지/환경 설정)
 
 ## Datatable 
 [row reverse 하는법](https://excelcult.com/how-to-reverse-a-datatable-in-uipath/)
