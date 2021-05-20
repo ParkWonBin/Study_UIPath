@@ -9,6 +9,8 @@ TypeName() // object로 케스팅된 string은 string으로 뜸
 new list(of string)  
 new dictionary(of string, int32)  
 New Dictionary(Of String, string()) # 문자열 배열  
+New String(){"1","2"} #string array 생성및 할당   
+
 dt_tmp.Columns.Contains("Column1") # dt에 해당 열 있는지 확인   
 dt_tmp.Columns(0).ColumnName = “newColumnName” # 열 이름 바꾸기   
 System.Drawing.Color.Gray  # 엑셀 셀 책 체우기 할 떄 사용  
