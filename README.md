@@ -15,7 +15,11 @@ System.Drawing.Color.Gray  # 엑셀 셀 책 체우기 할 떄 사용
 TimeSpan.FromMilliseconds(int_delayTime) # 딜레이 시간 넣을 떄 사용    
 Asc("A") = 65
 Chr(65) = "A"
-
+```
+숫자 표시형식 : 1 -> 0001  
+cint("1").ToString("0000")  
+"1".PadLeft(4,cchar("0"))
+```
 
 dataTable 열이름 변경 : "Column1" -> "New Column"   
 Assign : dt_tmp.Columns(dt_tmp.Columns.IndexOf("Column1")).ColumnName = "New Column"   
