@@ -32,10 +32,11 @@ new List(of string)
 new List(of string)(new string(){"가","나","다","라"})   
 new List(of String) from {{"보험"},{"세금"}}   
 
-new Dictionary(of string, int32)   
-new Dictionary(of string,int32) from {{"red",50},{"yellow",10},{"green",80}}   
+New Dictionary(of string, int32)   
+New Dictionary(of string,int32) from {{"red",50},{"yellow",10},{"green",80}}   
 New Dictionary(Of String, string()) # 문자열 배열    
- 
+New Dictionary(of string, object) from {{"test1","50"},{"test2","10"},{"test3","80"}}   
+
 #### 비밀번호 관련
 (new Net.NetworkCredential("",Str)).SecurePassword // secureString 반환
 (new Net.NetworkCredential("",Str)).Password // String 반환
