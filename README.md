@@ -33,7 +33,7 @@ ForEachRow 액티비티에서 row 를 다른 테이블에 AddDataRow 를 할 경
 이 떄는 AddDataRow에서 row를 array로 넘기면 해결된다. : row.ItemArray  
  
  
- dt 중복행 제거
+ dt 중복행 제거 [출처](https://forum.uipath.com/t/delete-duplicate-row-based-on-one-column-duplicate-data/217700)  
  ```
 DT_input      // System.Data.DataTable
 IEnum_DataRow // System.Collections.Generic.IEnumerable<System.Data.DataRow>
