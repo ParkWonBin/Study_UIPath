@@ -33,6 +33,22 @@ ForEachRow 액티비티에서 row 를 다른 테이블에 AddDataRow 를 할 경
 이 떄는 AddDataRow에서 row를 array로 넘기면 해결된다. : row.ItemArray  
  
  
+ dt 중복행 제거
+ ```
+DT_input      // System.Data.DataTable
+IEnum_DataRow // System.Collections.Generic.IEnumerable<System.Data.DataRow>
+DT_output     // System.Data.DataTable
+ 
+assgin : IEnum_DataRow = DT_input.AsEnumerable().GroupBy(Function(x) convert.ToString(x.Field(of object)("colName"))).SelectMany(function(gp) gp.ToArray().Take(1))
+ 
+assgin : DT_output = IEnum_DataRow.CopyToDataTable
+
+# 한줄 코드
+assgin :
+DT_output = DT_input.AsEnumerable().GroupBy(Function(x) convert.ToString(x.Field(of object)("colName"))).SelectMany(function(gp) gp.ToArray().Take(1)).CopyToDataTable
+ 
+ ```
+ 
  #### cron 사용법
 [cron 문법](https://www.leafcats.com/94)  
 [cron 디버깅](http://www.cronmaker.com/;jsessionid=node0109oq4rr76ib71nhs60lrghk15443008.node0?0)  
