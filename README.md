@@ -1,3 +1,7 @@
+[UIPATH 단축키](https://docs.uipath.com/studio/docs/keyboard-shortcuts)   
+[참고하기 좋은 블로그](https://mpaper-blog.tistory.com/)   
+[Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
+
 ## 자주쓰는 명령어
 cint(), cdbl(), .Tostring  
 Split(txt , ": ") // as string array  
@@ -5,35 +9,41 @@ join(row.ItemArray," | ") // as string
 {"A","B","C"}.contains("A") // isin, has 함수 VB버전    
 dic_tmp.ContainsKey("213") // dict에서 key 있는지 확인   
 file.Exists(str_FilePath) // 경로에 파일 있는지 확인  
-TypeName() // object로 케스팅된 string은 string으로 뜸  
-new list(of string)  
-new dictionary(of string, int32)  
-New Dictionary(Of String, string()) # 문자열 배열  
-New String(){"1","2"} #string array 생성및 할당   
+TypeName() // object로 케스팅된 string은 string으로 뜸
 
 dt_tmp.Columns.Contains("Column1") # dt에 해당 열 있는지 확인   
 dt_tmp.Columns(0).ColumnName = “newColumnName” # 열 이름 바꾸기   
 System.Drawing.Color.Gray  # 엑셀 셀 책 체우기 할 떄 사용  
 TimeSpan.FromMilliseconds(int_delayTime) # 딜레이 시간 넣을 떄 사용    
-Asc("A") = 65
-Chr(65) = "A"
+Asc("A") = 65  ,  Chr(65) = "A"
 ```
 숫자 표시형식 : 1 -> 0001  
 cint("1").ToString("0000")  
 "1".PadLeft(4,cchar("0"))
 ```
 
-dataTable 열이름 변경 : "Column1" -> "New Column"   
-Assign : dt_tmp.Columns(dt_tmp.Columns.IndexOf("Column1")).ColumnName = "New Column"   
+in_TransactionItem.SpecificContent("WIID").ToString // 큐에서 특정값 호출
 
-dtm_tmp = Date.ParseExact("20210212", "yyyyMMdd", System.Globalization.DateTimeFormatInfo.InvariantInfo)  
+#### 초기화 관련
+New String(){"1","2"} #string array 생성및 할당   
+
+new List(of int32)  
+new List(of string)   
+new List(of string)(new string(){"가","나","다","라"})   
+new List(of String) from {{"보험"},{"세금"}}   
+
+new Dictionary(of string, int32)   
+new Dictionary(of string,int32) from {{"red",50},{"yellow",10},{"green",80}}   
+New Dictionary(Of String, string()) # 문자열 배열    
  
-ForEachRow 액티비티에서 row 를 다른 테이블에 AddDataRow 를 할 경우  
-“Add data row : This row already belongs to another table.” 오류 메시지가 나온다.   
-이 떄는 AddDataRow에서 row를 array로 넘기면 해결된다. : row.ItemArray  
+#### 비밀번호 관련
+(new Net.NetworkCredential("",Str)).SecurePassword // secureString 반환
+(new Net.NetworkCredential("",Str)).Password // String 반환
+new System.Net.NetworkCredential(string.Empty, secureStr).Password //SecureStr -> str
  
- 
- dt 중복행 제거 [출처](https://forum.uipath.com/t/delete-duplicate-row-based-on-one-column-duplicate-data/217700)  
+ dt 중복행 제거  
+[출처 - 열 하나만](https://forum.uipath.com/t/delete-duplicate-row-based-on-one-column-duplicate-data/217700)  
+[출처 - 열 둘이상](https://mpaper-blog.tistory.com/27?category=832250)
  ```
 DT_input      // System.Data.DataTable
 IEnum_DataRow // System.Collections.Generic.IEnumerable<System.Data.DataRow>
@@ -43,11 +53,23 @@ assgin : IEnum_DataRow = DT_input.AsEnumerable().GroupBy(Function(x) convert.ToS
  
 assgin : DT_output = IEnum_DataRow.CopyToDataTable
 
-# 한줄 코드
+# 열 한개
 assgin :
 DT_output = DT_input.AsEnumerable().GroupBy(Function(x) convert.ToString(x.Field(of object)("colName"))).SelectMany(function(gp) gp.ToArray().Take(1)).CopyToDataTable
  
+# 열 두개 
+(From p In DT_input.AsEnumerable() Group By x= New With { Key.a =p.Item("A"),Key.b=p.Item("B")} Into Group Select Group(0)).ToArray().CopyToDataTable()
+
  ```
+dataTable 열이름 변경 : "Column1" -> "New Column"   
+Assign : dt_tmp.Columns(dt_tmp.Columns.IndexOf("Column1")).ColumnName = "New Column"   
+
+dtm_tmp = Date.ParseExact("20210212", "yyyyMMdd", System.Globalization.DateTimeFormatInfo.InvariantInfo)  
+ 
+ForEachRow 액티비티에서 row 를 다른 테이블에 AddDataRow 를 할 경우  
+“Add data row : This row already belongs to another table.” 오류 메시지가 나온다.   
+이 떄는 AddDataRow에서 row를 array로 넘기면 해결된다. : row.ItemArray  
+
  
  #### cron 사용법
 [cron 문법](https://www.leafcats.com/94)  
