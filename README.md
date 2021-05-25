@@ -42,6 +42,24 @@ New Dictionary(of string, object) from {{"test1","50"},{"test2","10"},{"test3","
 (new Net.NetworkCredential("",Str)).Password // String 반환
 new System.Net.NetworkCredential(string.Empty, secureStr).Password //SecureStr -> str
  
+ #### linq 관련
+ dt key값 겹치는 것 갱신
+
+ ```
+dt_destination : [key,열1,add열2,add열3]   
+dt_sorce : [key,add열2,add열3]   
+dataRow : System.Data>DataRow
+ 
+ ForEachRow : row in dt_destination
+    if : dt_sorce.AsEnumerable.Where(function(x) x("key").ToString.Trim=row("key").ToString).Count=1
+        then : 
+		assign : dataRow = dt_sorce.AsEnumerable.Where(function(x) x("key").ToString.Trim=row("key").ToString)(0)
+		assign : row("add열2") = dataRow.Item("add열2")
+		assign : row("add열3") = dataRow.Item("add열3")
+	Else : (Do Nothing)
+ ```
+
+ 
  dt 중복행 제거  
 [출처 - 열 하나만](https://forum.uipath.com/t/delete-duplicate-row-based-on-one-column-duplicate-data/217700)  
 [출처 - 열 둘이상](https://mpaper-blog.tistory.com/27?category=832250)
