@@ -80,6 +80,27 @@ DT_output = DT_input.AsEnumerable().GroupBy(Function(x) convert.ToString(x.Field
 (From p In DT_input.AsEnumerable() Group By x= New With { Key.a =p.Item("A"),Key.b=p.Item("B")} Into Group Select Group(0)).ToArray().CopyToDataTable()
 
  ```
+ dt 열 2개로 정렬
+ ```
+ Assign : dt_sorce =  
+ (From x In dt_sorce.AsEnumerable() Order By convert.Tostring(x("colName1")),convert.ToString(x("colName2")) Select x).CopyToDataTable
+ 
+# 정렬 우선순위1. colName1
+# 정렬 우선순위2. colName2
+실제 수행 : colName2로 정렬 수행 (최종적으로) colName1로 정렬
+ ```
+ 
+ dt 필터링 
+```
+ForEach row in dt_Temp :
+    Assign : 
+    enum_DataRows = dt_resultStep2.AsEnumerable.Where(function(x) x("key").ToString.Trim=row("key").ToString)
+
+이렇게 변수에 담으면 왜인지 모르게 호출이 안됨. 
+* enum_DataRows.Count 하면 오류남
+* 하지만 변수에 담지 않고 바로 사용하면 오류 안남.
+* dt_resultStep2.AsEnumerable.Where(function(x) x("key").ToString.Trim=row("key").ToString).count 수행가능
+```
 dataTable 열이름 변경 : "Column1" -> "New Column"   
 Assign : dt_tmp.Columns(dt_tmp.Columns.IndexOf("Column1")).ColumnName = "New Column"   
 
