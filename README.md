@@ -77,7 +77,7 @@ assgin :
 DT_output = DT_input.AsEnumerable().GroupBy(Function(x) convert.ToString(x.Field(of object)("colName"))).SelectMany(function(gp) gp.ToArray().Take(1)).CopyToDataTable
  
 # 열 두개 
-(From p In DT_input.AsEnumerable() Group By x= New With { Key.a =p.Item("A"),Key.b=p.Item("B")} Into Group Select Group(0)).ToArray().CopyToDataTable()
+(From p In DT_input.AsEnumerable() Group By x = New With { Key.a =p.Item("A"), Key.b=p.Item("B")} Into Group Select Group(0)).ToArray().CopyToDataTable()
 
  ```
  dt 열 2개로 정렬
@@ -90,16 +90,52 @@ DT_output = DT_input.AsEnumerable().GroupBy(Function(x) convert.ToString(x.Field
 실제 수행 : colName2로 정렬 수행 (최종적으로) colName1로 정렬
  ```
  
- dt 필터링 
+dt, Linq 관련 이슈
 ```
-ForEach row in dt_Temp :
-    Assign : 
-    enum_DataRows = dt_resultStep2.AsEnumerable.Where(function(x) x("key").ToString.Trim=row("key").ToString)
+요약 : 
+* EnumerableRowCollection<DataRow> 자료형에 dt.AsEnumerable.Where 값을 넣으면 호출시 오류가 발생함.
+* 하지만 그냥 EnumerableRowCollection<DataRow> 자료형에 dt.AsEnumerable 넣어서 호출하는 건 괜찮음.
+* 우회법으로는 array<DataRow> 자료형에dt.AsEnumerable.Where.toArray 넣는 것임.
+* 추정컨데 원인은 변수에 where값 할당 시 값 대신 "힙 어딘가에 있는 임시 주소"가 들어가는 것 같음. 
+  그냥 dt.AsEnumerable까지는 정상적인 주소가 할당되는데, where 연산 결과값은 힙 어딘가에서 바로 초기화 되어 주소를 찾을 수 없어는 것 같음.
 
-이렇게 변수에 담으면 왜인지 모르게 호출이 안됨. 
-* enum_DataRows.Count 하면 오류남
-* 하지만 변수에 담지 않고 바로 사용하면 오류 안남.
-* dt_resultStep2.AsEnumerable.Where(function(x) x("key").ToString.Trim=row("key").ToString).count 수행가능
+
+변수 :
+    dt_totalOutput : DataTable
+    dt_resultStep2 : DataTable
+    arr_DataRows: DataRow[]
+    enum_DataRows : EnumerableRowCollection<DataRow>
+
+정상1 : 바로 호출
+    ForEach row in dt_totalOutput :
+        LogMessage : 
+             dt_resultStep2.AsEnumerable.Where(function(x) x("관리번호").ToString.Trim=row("관리번호").ToString).Count
+    
+정상2 : DataRow[] 저장 후 호출
+    ForEach row in dt_totalOutput :
+        Assign : 
+	    arr_DataRows = dt_resultStep2.AsEnumerable.Where(function(x) x("관리번호").ToString=row("관리번호").ToString).ToArray
+	LogMessage : 
+	    arr_DataRows.count
+	
+정상3 : EnumerableRowCollection<DataRow> 저장 후 호출
+    ForEach row in dt_totalOutput :
+        Assign : 
+	    enum_DataRows = dt_resultStep2.AsEnumerable
+        ForEach dataRow in enum_DataRows :
+	    if : dataRow("관리번호").ToString = row("관리번호").ToString
+	       DoSomeThing
+	LogMessage : SomeThing	      
+
+###########
+오류 : EnumerableRowCollection<DataRow> 저장 후 호출
+    ForEach row in dt_totalOutput :
+        Assign : 
+	    enum_DataRows = dt_resultStep2.AsEnumerable.Where(function(x) x("관리번호").ToString=row("관리번호").ToString)
+	LogMessage : 
+	    enum_DataRows.count
+>>> 오류문구 : 
+  Log Message: Activity '1.9: VisualBasicValue<Object>' cannot access this public location reference because it is only valid for activity '1.14: VisualBasicValue<EnumerableRowCollection<DataRow>>'.  Only the activity which obtained the public location reference is allowed to use it.
 ```
 dataTable 열이름 변경 : "Column1" -> "New Column"   
 Assign : dt_tmp.Columns(dt_tmp.Columns.IndexOf("Column1")).ColumnName = "New Column"   
