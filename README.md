@@ -559,3 +559,24 @@ if : array.Count >0 :
 processes = System.Collections.ObjectModel.Collection<System.Diagonotics.Process>
 array = System.Dianotics.Pcrocess[]
 ```
+
+### sendMassage 주의사항
+
+### 복사 붙여넣기 주의사항
+메일 내 이미지 복사 붙여넣기시 주의사항
+(1) [Background] outlook.Message 사용
+    결과 : 문자열 추출 가능 (표 서식 및 이미지 깨짐)
+    의견 : 데이터 추출용으로 사용할 수 있을 것 같습니다.
+(2) [Forground] 웹브라우저로 메일함 들어가서 복사 붙여넣기
+    결과 : 표 서식 및 이미지 정보 정상적으로 복제 가능
+    의견 : 브라우저를 사용하여 웹에서 호출가능한 이미지 경로와 표 서식이 복사됩니다.
+(3) [Forground] outlook App 에서 복사 붙여넣기
+    결과 : 이미지 경로 깨짐으로 [x박스] 생성됨
+    의견 : 이미지 경로가 메일서버에서 로컬PC로 다운받은 경로로 ITMS 웹에서 인식할 수 없습니다.
+(4) [Forground] Uipath : Set Clipboard / Get From Clipboard 액티비티 사용
+    결과 : Set Clipboard 과정에서 테이블 서식과 이미지 정보가 모두 깨집니다.
+    의견 : 표와 이미지가 들어간 데이터는 UiPath Clipboard 액티비티를 사용할 수 없습니다. 
+    
+### SendMassage 주의사항 
+입력값 필드에 shift 체크를 풀어놓고 "A"를 입력할 떄, 실제로 입력되는 정보는 shift + 'a'다. 
+ctrl+c를 할 경우 c를 대문자로 입력하게 되면 ctrl+shift+c가 실행되므로 주의바람.
