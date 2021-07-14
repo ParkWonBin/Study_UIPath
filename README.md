@@ -23,10 +23,10 @@ cint("1").ToString("0000")
 ```
 
 #### 한글 날짜 요일 표시 방법 [출처](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=elduque&logNo=120096308343)
-1단계 : import 패털에서 System.Globalization 추가(CultureInfo 객체 사용을 위함)
-2단계 : writeLine 이나 LogMessage에서 출력값 확인하기
-- DateTime.Today.ToString("dddd", CultureInfo.CreateSpecificCulture("ko-KR")) # 목요일
-- DateTime.Today.ToString("ddd", CultureInfo.CreateSpecificCulture("ko-KR")) # 목
+1단계 : import 패널에서 System.Globalization 추가(CultureInfo 객체 사용을 위함)
+2단계 : writeLine 이나 LogMessage에서 출력값 확인하기목요일
+- DateTime.Today.ToString("dddd", CultureInfo.CreateSpecificCulture("ko-KR")) '목요일
+- DateTime.Today.ToString("ddd", CultureInfo.CreateSpecificCulture("ko-KR")) '목
 
 in_TransactionItem.SpecificContent("WIID").ToString // 큐에서 특정값 호출
 
