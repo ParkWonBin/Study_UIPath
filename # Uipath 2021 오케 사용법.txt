@@ -1,0 +1,15 @@
+# Uipath 2021 오케 사용법
+
+#### Tenant 설정 : 
+Uipath Assistant 에서 로그아웃 후 재로그인 과저에서 설정 가능
+
+#### Get Asset 설정
+```
+OrchestratorFolderPath = ""
+studio 설정 - My workspace : 오케 상에서 My Workspace의 Asset 값 사용
+studio 설정 - 하위 폴더  : 오케 상에서 하위 폴더에 설정된 Asset값 사용
+
+OrchestratorFolderPath = "하위폴더"
+studio 설정 - My workspace : 오케 상에서 해당 하위폴더 Asset값 사용
+studio 설정 - 하위 폴더  : 오케 상에서 해당 하위폴더 Asset값 사용
+```
