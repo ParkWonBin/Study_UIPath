@@ -18,4 +18,4 @@ studio 설정 - 하위 폴더  : 오케 상에서 해당 하위폴더 Asset값 �
 
 ![](https://github.com/ParkWonBin/UIPath_study/blob/main/orchestrator%20%EC%97%B0%EA%B2%B0%EB%B2%95/02_studioOrchestratorSetting.png)
 ![](https://github.com/ParkWonBin/UIPath_study/blob/main/orchestrator%20%EC%97%B0%EA%B2%B0%EB%B2%95/03_RootFolderAsset.png)
-![](https://github.com/ParkWonBin/UIPath_study/blob/main/orchestrator%20%EC%97%B0%EA%B2%B0%EB%B2%95/04_deeperFolderAsset.png)
+![](https://github.com/ParkWonBin/UIPath_study/blob/main/orchestrator%20%EC%97%B0%EA%B2%B0%EB%B2%95/04_deeperFolderAsset.png)****
