@@ -22,11 +22,20 @@ cint("1").ToString("0000")
 "1".PadLeft(4,cchar("0"))
 ```
 
+#### 파일명, 폴더명 가져오기
+str_targetPath = "폴더 경로"
+Directory.GetFiles(str_targetPath)
+Directory.GetDirectories(str_targetPath)
+
+
+
 #### 한글 날짜 요일 표시 방법 [출처](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=elduque&logNo=120096308343)
 1단계 : import 패널에서 System.Globalization 추가(CultureInfo 객체 사용을 위함)  
 2단계 : writeLine 이나 LogMessage에서 출력값 확인하기목요일  
 - DateTime.Today.ToString("dddd", CultureInfo.CreateSpecificCulture("ko-KR"))  #목요일
 - DateTime.Today.ToString("ddd", CultureInfo.CreateSpecificCulture("ko-KR"))   #목
+- Date.ParseExact("20210212", "yyyyMMdd", System.Globalization.DateTimeFormatInfo.InvariantInfo)  
+
 
 in_TransactionItem.SpecificContent("WIID").ToString // 큐에서 특정값 호출
 
@@ -145,8 +154,6 @@ dt, Linq 관련 이슈
 ```
 dataTable 열이름 변경 : "Column1" -> "New Column"   
 Assign : dt_tmp.Columns(dt_tmp.Columns.IndexOf("Column1")).ColumnName = "New Column"   
-
-dtm_tmp = Date.ParseExact("20210212", "yyyyMMdd", System.Globalization.DateTimeFormatInfo.InvariantInfo)  
  
 ForEachRow 액티비티에서 row 를 다른 테이블에 AddDataRow 를 할 경우  
 “Add data row : This row already belongs to another table.” 오류 메시지가 나온다.   
