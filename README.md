@@ -24,10 +24,15 @@ cint("1").ToString("0000")
 
 #### 파일명, 폴더명 가져오기
 str_targetPath = "폴더 경로"
-Directory.GetFiles(str_targetPath)
-Directory.GetDirectories(str_targetPath)
+Directory.GetFiles(str_targetPath) # string[] 형태로 경로 반환
+Directory.GetDirectories(str_targetPath) # string[] 형태로 경로 반환
+new FileInfo(str_targetPath) ## fileinfo 객채 선언
+new System.IO.FileInfo("str_targetPath").LastWriteTime # 마지막 수정시간 얻기
 
-
+#### 프로세스 작업시간 구하기
+assign : dtm_ProcessStartTime = DateTime.Now
+delay : 00:01:30
+writeLine : "작업수행시간 : " + cint(DateTime.Now.Subtract(dtm_ProcessStartTime).TotalSeconds).ToString + " 초"
 
 #### 한글 날짜 요일 표시 방법 [출처](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=elduque&logNo=120096308343)
 1단계 : import 패널에서 System.Globalization 추가(CultureInfo 객체 사용을 위함)  
