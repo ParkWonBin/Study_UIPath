@@ -2,6 +2,16 @@
 [참고하기 좋은 블로그](https://mpaper-blog.tistory.com/)   
 [Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
 
+## 자주 쓰는 알고리즘
+python 에 range(n)을 uipath에서 배열로 만들기
+```
+Assign : arr_tmp = New String(n){}
+ForEach : 속성{Value : arr_tmp , index : int_i, item : _ }
+    Assign : arr_tmp(int_i) = int_i.Tosting
+```
+
+
+
 ## 자주쓰는 명령어
 cint(), cdbl(), .Tostring  
 Split(txt , ": ") // as string array  
@@ -46,6 +56,7 @@ in_TransactionItem.SpecificContent("WIID").ToString // 큐에서 특정값 호�
 
 #### 초기화 관련
 New String(){"1","2"} #string array 생성및 할당   
+New String(n){} #원소가 n개인 string array 생성
 
 new List(of int32)  
 new List(of string)   
