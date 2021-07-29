@@ -8,8 +8,16 @@ python 에 range(n)을 uipath에서 배열로 만들기
 Assign : arr_tmp = New String(n){}
 ForEach : 속성{Value : arr_tmp , index : int_i, item : _ }
     Assign : arr_tmp(int_i) = int_i.Tosting
-```
 
+* New String(n){} = {"",""}  
+```
+string array 에서 Null,Empty,whiteSpace 항목 제거하는 방법
+arr_tmp.Where(Function(x) not string.IsNullOrWhiteSpace(x)).ToArray
+```
+Assign : arr_tmp = New String(2){""," ","abc"}
+Assign : arr_tmp = arr_tmp.Where(Function(x) not string.IsNullOrWhiteSpace(x)).ToArray
+* arr_tmp : string[1] {"abc"}
+```
 
 
 ## 자주쓰는 명령어
