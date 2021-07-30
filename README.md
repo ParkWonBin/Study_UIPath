@@ -19,6 +19,14 @@ Assign : arr_tmp = arr_tmp.Where(Function(x) not string.IsNullOrWhiteSpace(x)).T
 * arr_tmp : string[1] {"abc"}
 ```
 
+#### 엑셀 읽어서 해더명에 공백 제거
+```
+ForEach : col in dt_tmp.Columns
+    Assign : col.ColumnName = col.ColumnName.Replace(" ","")
+    
+* col 자료형 = System.Data.DataColumn
+```
+
 
 ## 자주쓰는 명령어
 cint(), cdbl(), .Tostring  
