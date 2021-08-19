@@ -67,8 +67,22 @@ writeLine : "작업수행시간 : " + cint(DateTime.Now.Subtract(dtm_ProcessStar
 - DateTime.Today.ToString("ddd", CultureInfo.CreateSpecificCulture("ko-KR"))   #목
 - Date.ParseExact("20210212", "yyyyMMdd", System.Globalization.DateTimeFormatInfo.InvariantInfo)  
 
-
 in_TransactionItem.SpecificContent("WIID").ToString // 큐에서 특정값 호출
+
+## 파워쉘로 작업/파일 실행시키는 방법
+```cmd
+# Uipath 경로로 이동
+cd "C:\Program Files (x86)\UiPath\Studio\"
+
+# 딜레이 시간 넣기
+Start-Sleep -Seconds 1
+
+# 파일 실행
+.\UiRobot.exe execute   --file "파일절대경로(xaml)"
+
+# 작업 실행
+.\UiRobot.exe execute  -p "작업이름"
+```
 
 #### 초기화 관련
 New String(){"1","2"} #string array 생성및 할당   
