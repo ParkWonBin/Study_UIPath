@@ -71,6 +71,14 @@ in_TransactionItem.SpecificContent("WIID").ToString // 큐에서 특정값 호�
 
 ## 파워쉘로 작업/파일 실행시키는 방법
 ```cmd
+# 파워쉘 열기
+1. window + X : 트레이 열기
+2. a : PowerShell 관리자 권한으로 실행
+3. cls 
+4. (Get-PSReadlineOption).HistorySavePath
+```
+
+```cmd
 # Uipath 경로로 이동
 cd "C:\Program Files (x86)\UiPath\Studio\"
 
