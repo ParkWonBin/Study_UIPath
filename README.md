@@ -70,6 +70,7 @@ writeLine : "작업수행시간 : " + cint(DateTime.Now.Subtract(dtm_ProcessStar
 in_TransactionItem.SpecificContent("WIID").ToString // 큐에서 특정값 호출
 
 ## 파워쉘로 작업/파일 실행시키는 방법
+[스케줄러로 돌릴 때 참고](https://deje0ng.tistory.com/78)
 ```cmd
 # 파워쉘 열기
 1. window + X : 트레이 열기
@@ -83,7 +84,9 @@ in_TransactionItem.SpecificContent("WIID").ToString // 큐에서 특정값 호�
 cd "C:\Program Files (x86)\UiPath\Studio\"
 
 # 딜레이 시간 넣기
+timeout 1 
 Start-Sleep -Seconds 1
+
 
 # 파일 실행
 .\UiRobot.exe execute   --file "파일절대경로(xaml)"
@@ -91,6 +94,8 @@ Start-Sleep -Seconds 1
 # 작업 실행
 .\UiRobot.exe execute  -p "작업이름"
 ```
+
+
 
 #### 초기화 관련
 New String(){"1","2"} #string array 생성및 할당   
