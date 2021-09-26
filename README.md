@@ -8,7 +8,7 @@
 Assign : arr_tmp = New String(n){}
 ForEach : 속성{Value : arr_tmp , index : int_i, item : _ }
     Assign : arr_tmp(int_i) = int_i.Tosting
-
+f
 * New String(n){} = {"",""}  
 ```
 #### string array 에서 Null,Empty,whiteSpace 항목 제거하는 방법
@@ -136,8 +136,10 @@ dataRow : System.Data>DataRow
  
  dt 중복행 제거  
 [출처 - 열 하나만](https://forum.uipath.com/t/delete-duplicate-row-based-on-one-column-duplicate-data/217700)  
-[출처 - 열 둘이상](https://mpaper-blog.tistory.com/27?category=832250)
- ```
+[출처 - 열 둘이상](https://mpaper-blog.tistory.com/27?category=832250)   
+- CopyToDataTable 쓸 때는 row 개수 확인 필수.
+
+```
 DT_input      // System.Data.DataTable
 IEnum_DataRow // System.Collections.Generic.IEnumerable<System.Data.DataRow>
 DT_output     // System.Data.DataTable
