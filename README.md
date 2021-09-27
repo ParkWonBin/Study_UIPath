@@ -71,6 +71,8 @@ in_TransactionItem.SpecificContent("WIID").ToString // 큐에서 특정값 호�
 
 ## 파워쉘로 작업/파일 실행시키는 방법
 [스케줄러로 돌릴 때 참고](https://deje0ng.tistory.com/78)
+[uipath 문서](https://docs.uipath.com/robot/docs/arguments-description)
+
 ```cmd
 # 파워쉘 열기
 1. window + X : 트레이 열기
@@ -93,6 +95,11 @@ Start-Sleep -Seconds 1
 
 # 작업 실행
 .\UiRobot.exe execute  -p "작업이름"
+
+# 예시.bat
+cd "C:\Program Files (x86)\UiPath\Studio\"
+.\UiRobot.exe execute  -process "KS출근" -input "{ 'str_code' : '178606' ,'str_ID' : 'wbpark'}"
+
 ```
 
 
