@@ -6,7 +6,8 @@
 ## 자주 쓰는 알고리즘
 #### python 에 range(n)을 uipath에서 배열로 만들기
 
-LinQ 사용하여 특정 조건을 만족하는 row와 col만 추출하기
+### LinQ 사용하여 특정 조건을 만족하는 row와 col만 추출하기
+[defaultView](https://newbiedev.tistory.com/24)
 ```
 dt_tmp : 열이름 = a,b,c,d,e,f,g
 
