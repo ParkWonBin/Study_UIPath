@@ -22,7 +22,7 @@ dt_tmp drArr_tmp.CopyToDataTable.DefaultView.ToTable(False, {"a","c","e"})
 # 반환값은 "a,b,c" 총 3개의 열만 가진다.
 
 ```
-* 열 22개, 행 31800 개인 엑셀로 Test한 결과
+##### 열 22개, 행 31800 개인 엑셀로 Test한 결과
 - 수행시간 | 작업내역
 - 0.11초 | LinQ 사용 : 행/열 모두 필터링
 - 2.50초 | FiltterDataTable : 행/열 모두 필터링
