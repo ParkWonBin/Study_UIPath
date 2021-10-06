@@ -8,19 +8,18 @@
 ### LinQ 사용하여 특정 조건을 만족하는 row와 col만 추출하기
 [defaultView](https://newbiedev.tistory.com/24)
 [Linq](https://www.vb-net.com/VB2015/Language/LINQ.%20Update,%20Combine,%20Custom%20func,%20LINQ%20Providers%20for%20Anonymous,%20Extension,%20Lambda,%20Generic,%20String,%20XML,%20Dataset,%20Arraylist,%20Assembly,%20FileSystem.pdf)
-```
-dt_tmp : 열이름 = a,b,c,d,e,f,g
-
-Row 필터링
+```vb
+' Row 필터링
 drArr_tmp = dt_tmp.AsEnumerable.Where(Function(x) x("a").ToString.Contains("1")).ToArray
-# DataRow를 원소로 하는 Array를 사용해야 CopyToDataTable을 원활하게 사용할 수 있다. 
 
-Col 필터링 후 DataTable로 반환
-if : drArr.count > 0 # CopyToDataTable은 count가 0일 때 에러가 발생한다.
+' Col 필터링 후 DataTable로 반환
+if : drArr.count > 0 
 dt_tmp drArr_tmp.CopyToDataTable.DefaultView.ToTable(False, {"a","c","e"})
-# DefaultView : 첫번쨰 인자는 false로 해야한다. True로 할 경우 오류 발생(distinct 속성)
-# 반환값은 "a,b,c" 총 3개의 열만 가진다.
 
+' CopyToDataTable은 count가 0일 때 에러가 발생하기 때문에 DataRow[] 를 사용하여 예외처리
+' DefaultView : 첫번쨰 인자는 false로 해야한다. True로 할 경우 오류 발생(distinct 속성)
+' 반환값은 "a,b,c" 총 3개의 열만 가진다.
+' 여담으로 LinQ에서 IEnumerable 의 I는 interface의 약자다. array 대산 iEnumerable<DataRow> 사용 가능
 ```
 ##### 열 22개, 행 31800 개인 엑셀로 Test한 결과
 - 수행시간 | 작업내역
