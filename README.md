@@ -2,13 +2,35 @@
 [참고하기 좋은 블로그](https://mpaper-blog.tistory.com/)   
 [Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
 
+
 ## 자주 쓰는 알고리즘
 #### python 에 range(n)을 uipath에서 배열로 만들기
+
+LinQ 사용하여 특정 조건을 만족하는 row와 col만 추출하기
+```
+dt_tmp : 열이름 = a,b,c,d,e,f,g
+
+Row 필터링
+drArr_tmp = dt_tmp.AsEnumerable.Where(Function(x) x("a").ToString.Contains("1")).ToArray
+# DataRow를 원소로 하는 Array를 사용해야 CopyToDataTable을 원활하게 사용할 수 있다. 
+
+
+
+Col 필터링 후 DataTable로 반환
+if : drArr.count > 0 # CopyToDataTable은 count가 0일 때 에러가 발생한다.
+dt_tmp drArr_tmp.CopyToDataTable.DefaultView.ToTable(False, {"a","c","e"})
+# DefaultView : 첫번쨰 인자는 false로 해야한다. True로 할 경우 오류 발생(distinct 속성)
+# 반환값은 "a,b,c" 총 3개의 열만 가진다.
+
+```
+
+
+
 ```
 Assign : arr_tmp = New String(n){}
 ForEach : 속성{Value : arr_tmp , index : int_i, item : _ }
     Assign : arr_tmp(int_i) = int_i.Tosting
-f
+
 * New String(n){} = {"",""}  
 ```
 #### string array 에서 Null,Empty,whiteSpace 항목 제거하는 방법
