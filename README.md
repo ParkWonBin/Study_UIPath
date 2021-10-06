@@ -8,7 +8,6 @@
 ### LinQ 사용하여 특정 조건을 만족하는 row와 col만 추출하기
 [defaultView](https://newbiedev.tistory.com/24)
 [Linq](https://www.vb-net.com/VB2015/Language/LINQ.%20Update,%20Combine,%20Custom%20func,%20LINQ%20Providers%20for%20Anonymous,%20Extension,%20Lambda,%20Generic,%20String,%20XML,%20Dataset,%20Arraylist,%20Assembly,%20FileSystem.pdf)
-
 ```
 dt_tmp : 열이름 = a,b,c,d,e,f,g
 
@@ -23,6 +22,13 @@ dt_tmp drArr_tmp.CopyToDataTable.DefaultView.ToTable(False, {"a","c","e"})
 # 반환값은 "a,b,c" 총 3개의 열만 가진다.
 
 ```
+* 열 22개, 행 31800 개인 엑셀로 Test한 결과
+- 수행시간 | 작업내역
+- 0.11초 | LinQ 사용 : 행/열 모두 필터링
+- 2.50초 | FiltterDataTable : 행/열 모두 필터링
+- 1.48초 | InvokeCode : For Each - setField
+- 2.00초 | ForEachRow : 액티비티 사용
+
 ### DataTable 값 update (Invoke code)
 
 ```vb
