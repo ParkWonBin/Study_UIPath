@@ -35,6 +35,7 @@ dt_tmp drArr_tmp.CopyToDataTable.DefaultView.ToTable(False, {"a","c","e"})
 For Each row  As datarow In dt_tmp.AsEnumerable()
 	row.SetField("ColName","Value")
 Next
+' argument dt_tmp는 in으로 주어도 정상적으로 수정됨
 ```
 
 
