@@ -37,7 +37,11 @@ Next
 ' argument dt_tmp는 in으로 주어도 정상적으로 수정됨
 ```
 
-
+### DataTable n번째 행부터 m개 Row만 선택
+```vb
+dt_tmp.AsEnumerable.Skip(int_n).Take(int_m).CopyToDataTable
+' int_n + int_m > dt_tmp.rows.count : 일때 에러 발생
+```
 
 ### python 에 range(n)을 uipath에서 배열로 만들기
 ```
