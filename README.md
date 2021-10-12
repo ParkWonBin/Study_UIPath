@@ -3,6 +3,9 @@
 [Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
 
 ## DataSet 사용하는 방법
+#### InvokeCode 사용 주의사항
+MethodName 의 경우 대소문자를 구분한다.
+"Add"로 써야할 것을 "add"로 쓸 경우 에러가 발생한다.
 #### DataSet - Only Activity
 ```
 0. 변수패널 : dt_tmp :DataSet, dt_tmp = DataTable
