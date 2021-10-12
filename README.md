@@ -4,7 +4,7 @@
 
 ## DataSet 사용하는 방법
 #### DataSet - Only Activity
-```md 
+```
 변수패널 : dt_tmp :DataSet, dt_tmp = DataTable
 
 Assign  :  ds_tmp = new dataset
