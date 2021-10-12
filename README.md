@@ -2,6 +2,48 @@
 [참고하기 좋은 블로그](https://mpaper-blog.tistory.com/)   
 [Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
 
+## DataSet 사용하는 방법
+#### DataSet - Only Activity
+```md 
+변수패널 : dt_tmp :DataSet, dt_tmp = DataTable
+
+Assign  :  ds_tmp = new dataset
+
+Assign  :  ds_tmp = new DataTable("테이블명")
+
+Invoke Method : 
+ - TargetType : (null)
+ - TargetObject : ds_tmp.Tables
+ - MethodName : Add
+ - Parameters : in | DataTable | dt_tmp
+ 
+Add Data Column : ds_tmp.Tables("테이블명") <- "열이름1"
+
+Log Message : ds_tmp.Tables("테이블명").Columns.Item(0).ColumnName
+ㄴ 반환 : "열이름1"
+```
+
+#### DataSet - Only Inovk Code
+```vb
+변수패널 : ds_tmp : DataSet
+
+Invoke Code : 
+ - Argument : out_ds_DataSet | Out | DataSet | ds_tmp
+ - 코드 내용
+	Dim dt_log As DataTable
+
+	dt_log = New dataTable("Log")
+	For Each col As String In {"성공여부", "비고"}
+		dt_log.Columns.Add(col)
+	Next
+
+	out_ds_DataSet = New Dataset
+	out_ds_DataSet .Tables.Add(dt_log)
+
+Log Message : ds_tmp.Tables("Log").Columns.Item(0).ColumnName
+ ㄴ 반환 : "성공여부"
+```
+
 
 ## 자주 쓰는 알고리즘
 
