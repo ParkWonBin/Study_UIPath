@@ -49,8 +49,8 @@ Invoke Code :
 	out_ds_DataSet .Tables.Add(dt_data1)
 	"""
 
-Log Message : ds_tmp.Tables("Log").Columns.Item(0).ColumnName
- ㄴ 반환 : "성공여부"
+Log Message : ds_tmp.Tables("Log").Columns.Item(0).ColumnName =>  반환 : "성공여부"
+Log Message : ds_tmp.Tables("Data").Columns.Item(0).ColumnName =>  반환 : "열1"
 ```
 
 
