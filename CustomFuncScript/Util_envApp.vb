@@ -5,6 +5,7 @@ out_envApp = Function(str_varName As String, str_Value As String)
 	str_sep = Environment.GetEnvironmentVariable("envSep")
 	If String.IsNullOrWhiteSpace(str_sep) Then 
 		str_sep = ":"
+		Environment.SetEnvironmentVariable("envSep",str_sep)
 	End If 
 	
 	str_val = Environment.GetEnvironmentVariable(str_varName)
