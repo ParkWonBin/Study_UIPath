@@ -5,31 +5,31 @@
 ## DataSet 사용하는 방법
 #### DataSet - Only Activity
 ```
-변수패널 : dt_tmp :DataSet, dt_tmp = DataTable
+0. 변수패널 : dt_tmp :DataSet, dt_tmp = DataTable
+1. Assign  :  ds_tmp = new dataset
+2. Assign  :  ds_tmp = new DataTable("테이블명")
 
-Assign  :  ds_tmp = new dataset
-Assign  :  ds_tmp = new DataTable("테이블명")
-
-Invoke Method : 
+3. Invoke Method : 
  - TargetType : (null)
  - TargetObject : ds_tmp.Tables
  - MethodName : Add
  - Parameters : in | DataTable | dt_tmp
  
-Add Data Column : ds_tmp.Tables("테이블명") <- "열이름1"
+4. Add Data Column : ds_tmp.Tables("테이블명") <- "열이름1"
 
-Log Message : ds_tmp.Tables("테이블명").Columns.Item(0).ColumnName
+5. Log Message : ds_tmp.Tables("테이블명").Columns.Item(0).ColumnName
 ㄴ 반환 : "열이름1"
 ```
 #### DataSet - whith Build DataTable
 ```
-Build Data Table : out = dt_tmp
+0. 변수패널 : dt_tmp :DataSet, dt_tmp = DataTable
+1. Assign  :  ds_tmp = new dataset
+2. Build Data Table : out = dt_tmp
+3. Assign : dt_tmp.TableName = "테이블명"
 
-Assign : dt_tmp.TableName = "테이블명"
-
-Invoke Method : 위와 동일
+4. Invoke Method : 위와 동일
  
-Log Message : ds_tmp.Tables("테이블명").Columns.Item(0).ColumnName
+5. Log Message : ds_tmp.Tables("테이블명").Columns.Item(0).ColumnName
 ㄴ 반환 : "열이름1"
 ```
 
