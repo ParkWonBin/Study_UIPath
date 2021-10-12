@@ -4,7 +4,7 @@
 
 ## DataSet 사용하는 방법
 #### InvokeCode 사용 주의사항
-MethodName 의 경우 대소문자를 구분한다.
+##### MethodName 의 경우 대소문자를 구분한다.
 "Add"로 써야할 것을 "add"로 쓸 경우 에러가 발생한다.
 #### DataSet - Only Activity
 ```
