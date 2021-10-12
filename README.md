@@ -30,15 +30,24 @@ Log Message : ds_tmp.Tables("테이블명").Columns.Item(0).ColumnName
 Invoke Code : 
  - Argument : out_ds_DataSet | Out | DataSet | ds_tmp
  - 코드 내용
+ 	"""
 	Dim dt_log As DataTable
+	Dim dt_data1 As DataTable
 
 	dt_log = New dataTable("Log")
 	For Each col As String In {"성공여부", "비고"}
 		dt_log.Columns.Add(col)
 	Next
+	
+	dt_data1 = New dataTable("Data")
+	For Each col As String In {"열1", "열2"}
+		dt_data1.Columns.Add(col)
+	Next
 
 	out_ds_DataSet = New Dataset
 	out_ds_DataSet .Tables.Add(dt_log)
+	out_ds_DataSet .Tables.Add(dt_data1)
+	"""
 
 Log Message : ds_tmp.Tables("Log").Columns.Item(0).ColumnName
  ㄴ 반환 : "성공여부"
