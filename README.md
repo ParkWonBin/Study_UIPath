@@ -20,8 +20,9 @@ Add Data Column : ds_tmp.Tables("테이블명") <- "열이름1"
 
 Log Message : ds_tmp.Tables("테이블명").Columns.Item(0).ColumnName
 ㄴ 반환 : "열이름1"
-
-'Build DataTable 썼을 떄는 다음과 같이 테이블명을 지정할 수 있다. 
+```
+#### DataSet - whith Build DataTable
+```
 Build Data Table : out - dt_tmp2
 Assign : dt_tmp2.TableName = "테이블명2"
 Invoke Method : dt_tmp2 등록
