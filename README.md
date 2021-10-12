@@ -23,9 +23,14 @@ Log Message : ds_tmp.Tables("테이블명").Columns.Item(0).ColumnName
 ```
 #### DataSet - whith Build DataTable
 ```
-Build Data Table : out - dt_tmp2
-Assign : dt_tmp2.TableName = "테이블명2"
-Invoke Method : dt_tmp2 등록
+Build Data Table : out = dt_tmp
+
+Assign : dt_tmp.TableName = "테이블명"
+
+Invoke Method : 위와 동일
+ 
+Log Message : ds_tmp.Tables("테이블명").Columns.Item(0).ColumnName
+ㄴ 반환 : "열이름1"
 ```
 
 #### DataSet - Only Inovk Code
