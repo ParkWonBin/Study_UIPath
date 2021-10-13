@@ -70,13 +70,19 @@ Log Message : ds_tmp.Tables("Data").Columns.Item(0).ColumnName =>  반환 : "열
 ## 자주 쓰는 알고리즘
 
 ### LinQ 사용하여 특정 조건을 만족하는 row와 col만 추출하기
+행 필터링, 열 필터링
 [defaultView](https://newbiedev.tistory.com/24)
 [Linq](https://www.vb-net.com/VB2015/Language/LINQ.%20Update,%20Combine,%20Custom%20func,%20LINQ%20Providers%20for%20Anonymous,%20Extension,%20Lambda,%20Generic,%20String,%20XML,%20Dataset,%20Arraylist,%20Assembly,%20FileSystem.pdf)
-```vb
-' Row 필터링
-drArr_tmp = dt_tmp.AsEnumerable.Where(Function(x) x("a").ToString.Contains("1")).ToArray
 
-' Col 필터링 후 DataTable로 반환
+#### 행 필터링, 샘플링
+```vb
+' Row Sampling
+drArr_tmp = dt_tmp.AsEnumerable.Where(Function(x) x("a").ToString.Contains("1")).ToArray
+```
+
+### 열 필터링, 선택
+```vb
+' Col selecting
 if : drArr.count > 0 
 dt_tmp drArr_tmp.CopyToDataTable.DefaultView.ToTable(False, {"a","c","e"})
 
@@ -102,6 +108,7 @@ Next
 ```
 
 ### DataTable n번째 행부터 m개 Row만 선택
+행 필터링, 행 샘플링(sampling)
 ```vb
 dt_tmp.AsEnumerable.Skip(int_n).Take(int_m).CopyToDataTable
 ' int_n + int_m > dt_tmp.rows.count : 일때 에러 발생
