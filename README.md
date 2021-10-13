@@ -84,7 +84,8 @@ drArr_tmp = dt_tmp.AsEnumerable.Where(Function(x) x("a").ToString.Contains("1"))
 ```vb
 ' Col selecting
 if : drArr.count > 0 
-dt_tmp drArr_tmp.CopyToDataTable.DefaultView.ToTable(False, {"a","c","e"})
+dt_tmp = dt_tmp.DefaultView.ToTable(false, {"a","c","e"} )
+dt_tmp = drArr_tmp.CopyToDataTable.DefaultView.ToTable(False, {"a","c","e"})
 
 ' CopyToDataTable은 count가 0일 때 에러가 발생하기 때문에 DataRow[] 를 사용하여 예외처리
 ' DefaultView : 첫번쨰 인자는 false로 해야한다. True로 할 경우 오류 발생(distinct 속성)
