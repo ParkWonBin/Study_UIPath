@@ -2,6 +2,10 @@
 [참고하기 좋은 블로그](https://mpaper-blog.tistory.com/)   
 [Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
 
+###  문자열, 배열 내 중복 제거
+```vb
+str_tmp = join(split(str_tmp,vbNewLine).Distinct().ToArray,vbNewLine)
+```
 ## DataSet 사용하는 방법
 #### InvokeCode 사용 주의사항
 ##### MethodName 의 경우 대소문자를 구분한다.
