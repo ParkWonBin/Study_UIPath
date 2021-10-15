@@ -21,6 +21,7 @@ str_tmp = join(split(str_tmp,vbNewLine).Distinct().ToArray,vbNewLine)
  - TargetObject : ds_tmp.Tables
  - MethodName : Add
  - Parameters : in | DataTable | dt_tmp
+ * MethodName에 "add"나 "ADD" 넣으면 오류 발생하니 주의
  
 4. Add Data Column : ds_tmp.Tables("테이블명") <- "열이름1"
 
