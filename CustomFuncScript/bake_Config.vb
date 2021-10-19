@@ -24,7 +24,7 @@ out_bake_Config = Function(dic_config As Dictionary(Of String, String), str_path
  		file.WriteAllText(str_path, str_dic)
 		str_result = "저장이 완료되었습니다."+ vbnewline + str_path
 	Catch exception As exception
-		str_result = "저장 실패 " + vbnewline + +exception.Message
+		str_result = "저장 실패 " + vbnewline + exception.Message
 	End Try 
 	
 	' 수행 결과 반환
