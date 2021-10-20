@@ -13,7 +13,14 @@ uiexplorer로 브라우저 팝업을 잡으려고 하면 Studio가 멈추는 경
 2.2. \<wnd/> 에서 title, aaname 으로 보이는 글자를 넣어본다.  
 2,3. \<ctrl/> 에서 role, name, text 등을 잡아본다.   
 3. target > WaitForReady > None 넣어놓는다.(무한대기 방지)  
-4. 예시  
+4. 예시 
+```xml
+<!-- Edge 팝업 확인 버튼 클릭 -->
+<html app='msedge.exe' url='*' />
+<ctrl role='dialog' />
+<ctrl  role = 'push button' name='확인'/>
+```
+
   ```xml
 <!-- Edge 팝업 내 나가기 버튼 클릭 -->
 <wnd app='msedge.exe' title='*나갈까요*' />
