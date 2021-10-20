@@ -6,6 +6,27 @@
 uiexplorer로 브라우저 팝업을 잡으려고 하면 Studio가 멈추는 경우가 있다.  
 이 떄는 Selector를 수동으로 입력해서 셀렉터를 파악하여 개발해야한다.  
 
+##### invokeCode Excel 제어 관련
+[dataTable 생성 관련](https://stackoverflow.com/questions/41454836/vb-net-datatable-to-excel)   
+위에 링크와 다른 것은 워크북과 시트에 이름 설정 부분이 다르다.   
+Grammar StrictOn의 경우 InvokeCode에서 암시적으로 워크시트를 인식하지 못하여 CTpe을 써주어야 사용이 가능하다.   
+
+```vb
+Dim excel As Microsoft.Office.Interop.Excel.Application
+Dim wb As Microsoft.Office.Interop.Excel.Workbook
+Dim ws As Microsoft.Office.Interop.Excel.Worksheet
+
+excel = New Microsoft.Office.Interop.Excel.Application
+wb = excel.Add() 
+ws = CTpe(wb.Worksheets.Add(), Workbook) ' 새로 추가된 시트가 ws에 담김
+ws = CType(wb.ActiveSheet, Worksheet) ' 현재 작업 중인 시트가 ws에 담김
+ws.Name = "변경할 시트명"
+wb.SaveAs("저장할 이름/경로")
+
+wb.Close()
+excel.Quit()
+```
+
 ##### 요령
 1. [Uipath 공식](https://docs.uipath.com/studio/docs/about-selectors)에서 셀렉터가 지원하는 테그 확인 
 2. \<html>, \<wnd>, \<ctrl> 등 테그 속성을 확인하고, 적절한 값으로 셀렉터 찍기  
