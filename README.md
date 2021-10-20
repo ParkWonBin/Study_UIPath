@@ -2,6 +2,36 @@
 [참고하기 좋은 블로그](https://mpaper-blog.tistory.com/)   
 [Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
 
+## 팝업 셀렉터 잡기
+uiexplorer로 브라우저 팝업을 잡으려고 하면 Studio가 멈추는 경우가 있다.
+이 떄는 Selector를 수동으로 입력해서 셀렉터를 파악하여 개발해야한다.
+
+##### 요령
+1. [Uipath 공식](https://docs.uipath.com/studio/docs/about-selectors)에서 셀렉터가 지원하는 테그 확인 
+2. <html>, <wnd>, <ctrl> 등 테그 속성을 확인하고, 적절한 값으로 셀렉터 찍기
+2.1. 팝업에 있는  Text는 name이나 title 속성에 들어있을 확률이 높다.
+2.2. <wnd/> 에서 title, aaname 으로 보이는 글자를 넣어본다.
+2,3. <ctrl/> 에서 role, name, text 등을 잡아본다. 
+3. target > WaitForReady > None 넣어놓는다.(무한대기 방지)
+4. 예시
+  ```xml
+<!-- Edge 팝업 내 나가기 버튼 클릭 -->
+<wnd app='msedge.exe' title='*나갈까요*' />
+<ctrl name='*나가기*' />
+ ```
+  ```xml
+<!-- GetText 크롬 팝업 내 텍스트 지정 -->
+<html app='chrome.exe' title='*' />
+<ctrl role='dialog' />
+<ctrl role='text' name='*.*' />
+ ```
+```xml
+<!-- Click 크롬 팝업 내 확인/계속 버튼 -->
+<ctrl role='dialog' />
+<ctrl  role = 'push button' name='계속'/>
+```
+
+
 ###  문자열, 배열 내 중복 제거
 ```vb
 str_tmp = join(split(str_tmp,vbNewLine).Distinct().ToArray,vbNewLine)
@@ -362,21 +392,6 @@ W : 가장 가까운 평일 (ex : 10W = 이달 10일에서 가장 가까운 평�
 "-" , "," : 범위 (1-12 =1월-12월, "20,25" = 20일과 25일
 ```
 
- 
- #### 셀렉터로 크롬창 팝업 잡기
- 팝업창 선택할 떄 페이지 로드가 멈추는 곳이 있다.   
- target > WaitForReady > None 넣어놓기   
- 팝업창 내용 스크랩용  
- ```xml
-<html app='chrome.exe' title='*' />
-<ctrl role='dialog' />
-<ctrl role='text' name='*.*' />
- ```
- 팝업창 버튼 클릭용
-```xml
-<ctrl role='dialog' />
-<ctrl  role = 'push button' name='계속'/>
-```
 #### 엑셀 시트명 갖고오기
 excel scope에서 output workbook에 변수 만들기(wb)  
 엑셀 시트명 확인 : if : wb.GetSheets.Contains(str_sheetName)
