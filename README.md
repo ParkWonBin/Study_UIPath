@@ -2,10 +2,6 @@
 [참고하기 좋은 블로그](https://mpaper-blog.tistory.com/)   
 [Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
 
-## 팝업 셀렉터 잡기
-uiexplorer로 브라우저 팝업을 잡으려고 하면 Studio가 멈추는 경우가 있다.  
-이 떄는 Selector를 수동으로 입력해서 셀렉터를 파악하여 개발해야한다.  
-
 ##### invokeCode Excel 제어 관련
 [dataTable 생성 관련](https://stackoverflow.com/questions/41454836/vb-net-datatable-to-excel)   
 위에 링크와 다른 것은 워크북과 시트에 이름 설정 부분이 다르다.   
@@ -27,7 +23,11 @@ wb.Close()
 excel.Quit()
 ```
 
-##### 요령
+## 팝업 셀렉터 잡기
+uiexplorer로 브라우저 팝업을 잡으려고 하면 Studio가 멈추는 경우가 있다.  
+이 떄는 Selector를 수동으로 입력해서 셀렉터를 파악하여 개발해야한다.  
+
+#### 요령
 1. [Uipath 공식](https://docs.uipath.com/studio/docs/about-selectors)에서 셀렉터가 지원하는 테그 확인 
 2. \<html>, \<wnd>, \<ctrl> 등 테그 속성을 확인하고, 적절한 값으로 셀렉터 찍기  
 2.1. 팝업에 있는  Text는 name이나 title 속성에 들어있을 확률이 높다.  
