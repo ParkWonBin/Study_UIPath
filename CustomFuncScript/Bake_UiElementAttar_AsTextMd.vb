@@ -1,4 +1,5 @@
 'Indicate On Screen =>  ui_tmp As UiPath.Core.UiElement 
+Dim Str_fileName As String = Environment.CurrentDirectory+"\UiAttar.md" 
 Dim dic_attar As dictionary(Of String, String)
 Dim Str_result As String  = ""
 
@@ -12,7 +13,6 @@ Str_result  = String.format("{0}{2} : {3}{1}", Str_result, vbnewline,"SelectorSt
 Str_result  = String.format("{0}{2} : {3}{1}", Str_result, vbnewline,"ParentSelector",ui_tmp.Parent.Selector.Text)
 Str_result  = String.format("{0}{2} : {3}{1}", Str_result, vbnewline,"TopParent",ui_tmp.TopParent().Selector.Text)
 
-Dim Str_fileName As String = Environment.CurrentDirectory+"\UiAttar.md" 
 If file.Exists(Str_fileName) Then 
 	file.delete(Str_fileName )
 End If 
