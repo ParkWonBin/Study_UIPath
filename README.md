@@ -8,12 +8,12 @@ uiexplorer로 브라우저 팝업을 잡으려고 하면 Studio가 멈추는 경
 
 ##### 요령
 1. [Uipath 공식](https://docs.uipath.com/studio/docs/about-selectors)에서 셀렉터가 지원하는 테그 확인 
-2. \<html>, \<wnd>, \<ctrl> 등 테그 속성을 확인하고, 적절한 값으로 셀렉터 찍기
-2.1. 팝업에 있는  Text는 name이나 title 속성에 들어있을 확률이 높다.
-2.2. \<wnd/> 에서 title, aaname 으로 보이는 글자를 넣어본다.
-2,3. \<ctrl/> 에서 role, name, text 등을 잡아본다. 
-3. target > WaitForReady > None 넣어놓는다.(무한대기 방지)
-4. 예시
+2. \<html>, \<wnd>, \<ctrl> 등 테그 속성을 확인하고, 적절한 값으로 셀렉터 찍기  
+2.1. 팝업에 있는  Text는 name이나 title 속성에 들어있을 확률이 높다.  
+2.2. \<wnd/> 에서 title, aaname 으로 보이는 글자를 넣어본다.  
+2,3. \<ctrl/> 에서 role, name, text 등을 잡아본다.   
+3. target > WaitForReady > None 넣어놓는다.(무한대기 방지)  
+4. 예시  
   ```xml
 <!-- Edge 팝업 내 나가기 버튼 클릭 -->
 <wnd app='msedge.exe' title='*나갈까요*' />
