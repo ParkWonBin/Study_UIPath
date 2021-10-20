@@ -3,8 +3,8 @@
 [Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
 
 ## 팝업 셀렉터 잡기
-uiexplorer로 브라우저 팝업을 잡으려고 하면 Studio가 멈추는 경우가 있다.
-이 떄는 Selector를 수동으로 입력해서 셀렉터를 파악하여 개발해야한다.
+uiexplorer로 브라우저 팝업을 잡으려고 하면 Studio가 멈추는 경우가 있다.  
+이 떄는 Selector를 수동으로 입력해서 셀렉터를 파악하여 개발해야한다.  
 
 ##### 요령
 1. [Uipath 공식](https://docs.uipath.com/studio/docs/about-selectors)에서 셀렉터가 지원하는 테그 확인 
