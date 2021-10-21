@@ -1,8 +1,8 @@
-out_Bake_Config_AsExcel = Function ( dic_config As dictionary(Of String, String) )
+'out_Bake_Config_AsExcel = Function ( dic_config As dictionary(Of String, String) )
 	Dim excel As New Microsoft.Office.Interop.Excel.Application
 	Dim wb As Microsoft.Office.Interop.Excel.Workbook
 	Dim ws As Microsoft.Office.Interop.Excel.Worksheet
-	Dim strFileName As String = Environment.CurrentDirectory+"\Bake_Config_"+now.tostring("yyMMdd")+".xlsx"
+	Dim strFileName As String = Environment.CurrentDirectory+"\"+now.tostring("yyMMdd")+"_Bake_Config.xlsx"
 		
 	' 초기변수 설정
 	wb = excel.Workbooks.Add()
@@ -38,5 +38,5 @@ out_Bake_Config_AsExcel = Function ( dic_config As dictionary(Of String, String)
 	wb.SaveAs(strFileName)
 	wb.Close()
 	excel.Quit()
-	Return "저장 성공 : "+vbnewline+strFileName
-End Function
+	'Return "저장 성공 : "+vbnewline+strFileName
+'End Function
