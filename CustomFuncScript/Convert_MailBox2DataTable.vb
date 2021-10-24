@@ -18,6 +18,10 @@ out_Func_MailBox2DataTable = Function(List_MailBox As List(of MailMessage), StrA
    StrArr_HeaderAttar = {"Uid","Date","DateCreated","DateRecieved","HtmlBody","PlainText","Size"}
    strArr_HeaderAttarUp = StrArr_HeaderAttar.select(Function(x) x.tostring.ToUpper).ToArray
 
+
+{"Sender","Subject","To","CC","Bcc","Attach","Uid","Date","DateCreated","DateRecieved","Size"}
+{"Body","HtmlBody","PlainText"}
+
    For Each mail As MailMessage In List_MailBox
       ' New Row 초기화
       StrArr_NewRow = New String(StrArr_Columns.Count-1){}
