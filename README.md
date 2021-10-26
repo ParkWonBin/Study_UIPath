@@ -3,6 +3,25 @@
 [Excel VB 참고 블로그](https://kdsoft-zeros.tistory.com/36?category=846222)
 [Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
 
+##### VB 문법 For Each
+```vb
+
+For int_i As Integer = 0 To 5
+	console.writeline(int_i.tostring)
+Next
+' 0 1 2 3 4 5
+
+For int_j As Integer = 5 To 0 Step -1
+	console.writeline(int_j.tostring)
+Next
+' 5 4 3 2 1 0
+
+For Each  int_k   As Integer In  {1, 2, 3, 4, 5}
+	console.writeline(int_k.tostring)
+Next
+' 0 1 2 3 4 5
+```
+
 ##### invokeCode Excel 제어 관련
 [dataTable 생성 관련](https://stackoverflow.com/questions/41454836/vb-net-datatable-to-excel)   
 위에 링크와 다른 것은 워크북과 시트에 이름 설정 부분이 다르다.   
