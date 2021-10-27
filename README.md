@@ -44,6 +44,12 @@ StrArr = Directory.GetFiles("절대경로") '딱 해당 경로의 파일경로�
 StrArr = Directory.GetFiles("절대경로").Select(function(x) new FileInfo(x).Name).ToArray '파일명 및 확장자까지
 StrArr = Directory.GetFiles("절대경로").Select(function(x) Split(x,"\").Last.ToString).ToArray '파일명 및 확장자까지
 StrArr = Directory.GetFiles(Environment.CurrentDirectory) '프로젝트 경로(Main.xaml 있는 위치)
+For Each row as Data.DataRow in DT_tmp
+    StrArr = row.ItemArray.Select(Function(x) x.ToString).ToArray
+Next
+* Row를 ItemArray로 바꿀 때, 해당 변수를 받을 때는 꼭 Object로 받고 호출시 ToString을 하자.
+* Row를 ItemArray로 바꾸는 과정에서 Null이 포함된 row에서 item을 String으로 받으면 에러가 발생한다. (Null을 String으로 형변환 못한다는 오류)
+* 따라서 Row.ItemArray를 쓸 일이 있을 경우 Object()로 받거나, Select를 통해 ToString을 직접 시켜주는 게 좋다.
 
 '[FileInfo]에 있는 유용한 속성값 Attributes, Name, Extension, FullName, DirectoryName, CreationTime, LastWriteTime, LastAccessTime...
 'System.IO.Directory.GetFiles
