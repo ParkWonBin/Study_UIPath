@@ -3,6 +3,42 @@
 [Excel VB 참고 블로그](https://kdsoft-zeros.tistory.com/36?category=846222)
 [Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
 
+
+
+#### Array 다루기
+##### 생성 
+```vb
+Dim StrArr as string()
+
+StrArr = split("1,2,3",",") 
+' StrArr : {"1","2","3"} 'Split(Str_source, Str_Seperator)
+
+StrArr = Enumerable.Range(1,3).Select(function(x) x.ToString).ToArray
+' StrArr : {"1","2","3"} 'Range(int_start, int_count)
+
+'repeat
+StrArr = Enumerable.Repeat(of string)("1", 3).toarray
+' StrArr : {"1","1","1"} 'Repeat(Type)(Str_source, int_count)
+
+'null
+StrArr = new string(2){} 
+' StrArr : {null,null,null} '안에 있는 숫자는 최대 index
+
+'concat
+StrArr = split("1,2",",").Concat( split("3,4,5",",") ).ToArray
+' StrArr : : {"1","2","3","4","5"}
+```
+
+##### 쿼리 필터링
+```vb
+Dim StrArr_tmp As String() = Split("1,2,3,4,5,6,7,8,9",",") 
+
+StrArr_tmp = (From item In StrArr_tmp Where CInt(item) < 3 Select item+"0").ToArray
+
+Console.WriteLine( Join(StrArr_tmp, " , "))
+' 10 , 20
+```
+
 #### Dictionary 필터링
 ```vb
 ' 선언과 초기화 동시에 진행
@@ -18,16 +54,6 @@ dic_config = dic_config.Keys.Where(Function(key) key.Contains("a"))
 For Each k As String In dic_config.Keys
 	console.WriteLine(string.Format("{0} : {1}",k , dic_config(k)))
 Next 
-```
-
-#### Array 쿼리 필터링
-```vb
-Dim StrArr_tmp As String() = Split("1,2,3,4,5,6,7,8,9",",") 
-
-StrArr_tmp = (From item In StrArr_tmp Where CInt(item) < 3 Select item+"0").ToArray
-
-Console.WriteLine( Join(StrArr_tmp, " , "))
-' 10 , 20
 ```
 
 #### 람다식에 인수 넣어주기
