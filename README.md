@@ -6,7 +6,6 @@
 
 
 #### Array 다루기
-##### 생성 
 ```vb
 Dim StrArr as string()
 
@@ -31,7 +30,7 @@ StrArr = split("1 2").Concat( split("3 4 5") ).ToArray
 
 ##### 쿼리 필터링
 ```vb
-Dim StrArr_tmp As String() = Split("1,2,3,4,5,6,7,8,9",",") 
+Dim StrArr_tmp As String() = Split("1 2 3 4 5 6")  
 
 StrArr_tmp = (From item In StrArr_tmp Where CInt(item) < 3 Select item+"0").ToArray
 
