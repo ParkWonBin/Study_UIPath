@@ -6,6 +6,7 @@
 
 
 #### Array 다루기
+##### 생성 관련
 ```vb
 Dim StrArr as string()
 
@@ -25,22 +26,48 @@ StrArr = Enumerable.Repeat(of string)("1", 3).toarray
 StrArr = new string(2){} 
 ' StrArr : {null,null,null} '안에 있는 숫자는 최대 index
 
-'concat
-StrArr = split("1 2").Concat( split("3 4 5") ).ToArray
-' StrArr : : {"1","2","3","4","5"} ' split 과 join의 기본 구분자는 " "이다. 
-
 * 참고 : UiPath에서 기본 split, join은 Strings 라이브러리의 것이다.
 * "문자열".split , {"String Array",""}.join 은 strings.split, strings.join과 다른 함수이다.
 ```
 
-##### 쿼리 필터링
+##### 편집 관련 Linq
 ```vb
-Dim StrArr_tmp As String() = Split("1 2 3 4 5 6")  
+'concat
+StrArr = split("1 2").Concat( split("3 4 5") ).ToArray
+' StrArr : : {"1","2","3","4","5"} ' split 과 join의 기본 구분자는 " "이다. 
 
-StrArr_tmp = (From item In StrArr_tmp Where CInt(item) < 3 Select item+"0").ToArray
+' Distinct
+StrArr = split("1 2 3 2 1 3 2 1").Distinct.ToArray
+'StrArr : {"1","2","3"} '중복된 값 제거(뒤쪽 인덱스에 중복값 등장 시 누락시키는 로직)
 
-Console.WriteLine( Join(StrArr_tmp, " , "))
-' 10 , 20
+' Select 
+StrArr = split("1 2 3").Select(function(x) "["+x+"]").ToArray
+' StrArr : {"[1]","[2]","[3]"} '원소 하나씩 select에 들어온 함수를 적용하여 갱신
+
+' OrderBy
+StrArr = split("2 3 1").OrderBy(function(x) cint(x) ).ToArray 
+' StrArr : {"1","2","3"} ' 정렬-오름차순
+
+' OrderByDescending
+StrArr = split("2 3 1").OrderByDescending(function(x) cint(x) ).ToArray 
+' StrArr : {"3","2","1"} ' 정렬-내림차순
+
+'Reverse
+StrArr = split("1 2 3").Reverse.ToArray 
+' StrArr : {"3","2","1"} ' 순서- 거꾸로
+
+'Skip, Take
+StrArr = split("0 1 2 3 4 5").Skip(3).Take(2).ToArray
+' StrArr : {"3","4","5"} 'Skip 개수만큼 앞에서 누락시키고, Take 개수만큼 취합
+
+'Intersect
+StrArr = split("0 1 2 3 4 5").Intersect(Split("1 3 5 7 9")).ToArray
+' StrArr : {"1","3","5"} ' 교집합
+
+'From Where Select
+StrArr_tmp = (From x In Split("1 2 3 4 5 6") Where (2<Cint(x) AndAlso Cint(x)<5)  Select "["+x+"]").ToArray
+'StrArr_tmp : {"[3]","[4]"}
+
 ```
 
 #### Dictionary 필터링
