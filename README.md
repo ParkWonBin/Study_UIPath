@@ -3,6 +3,39 @@
 [Excel VB 참고 블로그](https://kdsoft-zeros.tistory.com/36?category=846222)
 [Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
 
+#### Dictionary 필터링
+```vb
+' 선언과 초기화 동시에 진행
+Dim dic_config As New Dictionary(Of String, String) From{ {"a1","11"}, {"a2","12"}, {"b2","22"} }
+
+' ToDictionary 사용법
+dic_config =dic_config.Keys.Where(Function(key) key.Contains("a")).ToDictionary(Function(key) key, Function(key) dic_config(key))
+' 1. 호출 전 : String Array 형태로 가공한다. * pair 형태 아님!
+' 2. 인수 값 : 인자는 ,를 구분자로 하여 key값과 value 같을 정의할 function을 2개 넣어주어야 한다.
+	
+' 출력 예시
+For Each k As String In dic_config.Keys
+	console.WriteLine(string.Format("{0} : {1}",k , dic_config(k)))
+Next 
+```
+
+#### Array 쿼리 필터링
+```vb
+Dim StrArr_tmp As String() = Split("1,2,3,4,5,6,7,8,9",",") 
+
+StrArr_tmp = (From item In StrArr_tmp Where CInt(item) < 3 Select item+"0").ToArray
+
+Console.WriteLine( Join(StrArr_tmp, " , "))
+' 10 , 20
+```
+
+#### 람다식에 인수 넣어주기
+```vb
+Console.WriteLine(((Function(num As Integer) num + 1)(5)).ToString)
+' 그냥 람다식에 () 치고 바로 뒤에 (인수) 넣어주면 됨.
+```
+
+
 ##### VB 문법 For Each
 ```vb
 
