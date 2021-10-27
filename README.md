@@ -10,10 +10,6 @@
 ```vb
 Dim StrArr as string()
 
-StrArr = split("1,2,3",",") 
-' StrArr : {"1","2","3"} 'Split(Str_source, Str_Seperator)
-' StrArr = split("1 2 3") '기본 Seperator는 " " 이다.
-
 StrArr = Enumerable.Range(1,3).Select(function(x) x.ToString).ToArray
 ' StrArr : {"1","2","3"} 'Range(int_start, int_count) ' 기본 반환형은 Integer이다.
 ' IntArr = Enumerable.Range(0,3) '=> {0,1,2}
@@ -25,13 +21,17 @@ StrArr = Enumerable.Repeat(of string)("1", 3).toarray
 'null
 StrArr = new string(2){} 
 ' StrArr : {null,null,null} '안에 있는 숫자는 최대 index
-
-* 참고 : UiPath에서 기본 split, join은 Strings 라이브러리의 것이다.
-* "문자열".split , {"String Array",""}.join 은 strings.split, strings.join과 다른 함수이다.
 ```
 
 ##### 편집 관련 Linq
 ```vb
+' strings.split
+StrArr = split("1,2,3",",") 
+' StrArr : {"1","2","3"} 'Split(Str_source, Str_Seperator)
+' StrArr = split("1 2 3") '기본 Seperator는 " " 이다.
+* 참고 : UiPath에서 기본 split, join은 Strings 라이브러리의 것이다.
+* "문자열".split , {"String Array",""}.join 은 strings.split, strings.join과 다른 함수이다.
+
 'concat
 StrArr = split("1 2").Concat( split("3 4 5") ).ToArray
 ' StrArr : : {"1","2","3","4","5"} ' split 과 join의 기본 구분자는 " "이다. 
