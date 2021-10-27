@@ -11,6 +11,7 @@ Dim StrArr as string()
 
 StrArr = split("1,2,3",",") 
 ' StrArr : {"1","2","3"} 'Split(Str_source, Str_Seperator)
+' StrArr = split("1 2 3") '기본 Seperator는 " " 이다.
 
 StrArr = Enumerable.Range(1,3).Select(function(x) x.ToString).ToArray
 ' StrArr : {"1","2","3"} 'Range(int_start, int_count)
