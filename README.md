@@ -25,9 +25,8 @@ StrArr = new string(2){}
 
 'concat
 StrArr = split("1 2").Concat( split("3 4 5") ).ToArray
-' StrArr : : {"1","2","3","4","5"} ' 
+' StrArr : : {"1","2","3","4","5"} ' split 과 join의 기본 구분자는 " "이다. 
 
-split 과 join의 기본 구분자는 " "이다. # Strings 기준
 * 참고 : UiPath에서 기본 split, join은 Strings 라이브러리의 것이다.
 * "문자열".split , {"String Array",""}.join 은 strings.split, strings.join과 다른 함수이다.
 ```
