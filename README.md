@@ -25,8 +25,8 @@ StrArr = new string(2){}
 ' StrArr : {null,null,null} '안에 있는 숫자는 최대 index
 
 'concat
-StrArr = split("1,2",",").Concat( split("3,4,5",",") ).ToArray
-' StrArr : : {"1","2","3","4","5"}
+StrArr = split("1 2").Concat( split("3 4 5") ).ToArray
+' StrArr : : {"1","2","3","4","5"} ' split 기본 구분자는 " "이다.
 ```
 
 ##### 쿼리 필터링
