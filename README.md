@@ -6,6 +6,22 @@
 
 
 #### Array 다루기
+##### Split, join
+```vb
+' strings.split
+StrArr = split("1,2,3",",") 
+' StrArr : {"1","2","3"} 'Split(Str_source, Str_Seperator)
+' StrArr = split("1 2 3") '기본 Seperator는 " " 이다.
+
+' strings.join
+Str_Result = join(Split("1 2 3"), "|")
+' Str_Result : "1|2|3" ' join(StrArr_source, Str_Seperator)
+' Str_Result = join({"1","2"}) '기본 Seperator는 " " 이다.
+
+* 참고 : UiPath에서 기본 split, join은 Strings 라이브러리의 것이다.
+* "문자열".split , {"String Array",""}.join 은 strings.split, strings.join과 다른 함수이다.
+```
+
 ##### 생성 관련
 ```vb
 Dim StrArr as string()
@@ -21,16 +37,11 @@ StrArr = Enumerable.Repeat(of string)("1", 3).toarray
 'null
 StrArr = new string(2){} 
 ' StrArr : {null,null,null} '안에 있는 숫자는 최대 index
-```
 
-##### Split
-```vb
-' strings.split
-StrArr = split("1,2,3",",") 
-' StrArr : {"1","2","3"} 'Split(Str_source, Str_Seperator)
-' StrArr = split("1 2 3") '기본 Seperator는 " " 이다.
-* 참고 : UiPath에서 기본 split, join은 Strings 라이브러리의 것이다.
-* "문자열".split , {"String Array",""}.join 은 strings.split, strings.join과 다른 함수이다.
+' 자주 사용하는 함수
+StrArr = in_DIc_Config.Keys
+StrArr = Directory.GetFiles("절대경로") 'System.IO.Directory.GetFiles
+
 ```
 ##### 편집 관련 Linq
 ```vb
