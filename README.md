@@ -14,7 +14,8 @@ StrArr = split("1,2,3",",")
 ' StrArr = split("1 2 3") '기본 Seperator는 " " 이다.
 
 StrArr = Enumerable.Range(1,3).Select(function(x) x.ToString).ToArray
-' StrArr : {"1","2","3"} 'Range(int_start, int_count)
+' StrArr : {"1","2","3"} 'Range(int_start, int_count) ' 기본 반환형은 Integer이다.
+' IntArr = Enumerable.Range(0,3) '=> {0,1,2}
 
 'repeat
 StrArr = Enumerable.Repeat(of string)("1", 3).toarray
