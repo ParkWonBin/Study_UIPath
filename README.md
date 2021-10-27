@@ -40,8 +40,14 @@ StrArr = new string(2){}
 
 ' 자주 사용하는 함수
 StrArr = in_DIc_Config.Keys
-StrArr = Directory.GetFiles("절대경로") 'System.IO.Directory.GetFiles
+StrArr = Directory.GetFiles("절대경로") '딱 해당 경로의 파일경로만 반환, 보다 하위 폴더 파일은 선택되지 않음.
+StrArr = Directory.GetFiles("절대경로").Select(function(x) new FileInfo(x).Name).ToArray '파일명 및 확장자까지
+StrArr = Directory.GetFiles("절대경로").Select(function(x) Split(x,"\").Last.ToString).ToArray '파일명 및 확장자까지
+StrArr = Directory.GetFiles(Environment.CurrentDirectory) '프로젝트 경로(Main.xaml 있는 위치)
 
+'[FileInfo]에 있는 유용한 속성값 Attributes, Name, Extension, FullName, DirectoryName, CreationTime, LastWriteTime, LastAccessTime...
+'System.IO.Directory.GetFiles
+'System.IO.FileInfo
 ```
 ##### 편집 관련 Linq
 ```vb
