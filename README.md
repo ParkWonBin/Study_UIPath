@@ -9,7 +9,8 @@
 Dim dic_config As New Dictionary(Of String, String) From{ {"a1","11"}, {"a2","12"}, {"b2","22"} }
 
 ' ToDictionary 사용법
-dic_config =dic_config.Keys.Where(Function(key) key.Contains("a")).ToDictionary(Function(key) key, Function(key) dic_config(key))
+dic_config = dic_config.Keys.Where(Function(key) key.Contains("a"))
+             .ToDictionary(Function(key) key, Function(key) dic_config(key))
 ' 1. 호출 전 : String Array 형태로 가공한다. * pair 형태 아님!
 ' 2. 인수 값 : 인자는 ,를 구분자로 하여 key값과 value 같을 정의할 function을 2개 넣어주어야 한다.
 	
