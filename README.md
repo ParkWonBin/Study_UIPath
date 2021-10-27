@@ -60,7 +60,7 @@ StrArr = split("1 2 3").Reverse.ToArray
 
 'Skip, Take
 StrArr = split("0 1 2 3 4 5").Skip(3).Take(2).ToArray
-' StrArr : {"3","4","5"} 'Skip 개수만큼 앞에서 누락시키고, Take 개수만큼 취합
+' StrArr : {"3","4"} 'Skip 개수만큼 앞에서 누락시키고, Take 개수만큼 취합
 
 'Intersect
 StrArr = split("0 1 2 3 4 5").Intersect(Split("1 3 5 7 9")).ToArray
