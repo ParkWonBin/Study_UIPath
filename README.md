@@ -38,6 +38,12 @@ StrArr = Enumerable.Repeat(of string)("1", 3).toarray
 StrArr = new string(2){} 
 ' StrArr : {null,null,null} '안에 있는 숫자는 최대 index
 
+' DT 열이름 Array 추출
+StrArr = Enumerable.Range(0,dt_tmp.Columns.Count-1).Select(function(x) dt_tmp.Columns.Item(x).ColumnName).ToArray 
+
+'DT 열 하나만 뽑아서 Array로 추출
+StrArr = dt_tmp.AsEnumerable.Select(function(x) x("ColName").ToString).ToArray
+
 ' 자주 사용하는 함수
 StrArr = in_DIc_Config.Keys
 StrArr = Directory.GetFiles("절대경로") '딱 해당 경로의 파일경로만 반환, 보다 하위 폴더 파일은 선택되지 않음.
