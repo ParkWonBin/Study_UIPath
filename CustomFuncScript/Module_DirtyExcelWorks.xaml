@@ -1,0 +1,194 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Module" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1493,827" sap2010:WorkflowViewState.IdRef="Module_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="26">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="34">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Module_DirtyExcelWorks" sap:VirtualizedContainerService.HintSize="376,668" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_tmp" />
+      <Variable x:TypeArguments="s:String[]" Name="StrArr_Col" />
+      <Variable x:TypeArguments="s:String[]" Name="StrArr_Key" />
+      <Variable x:TypeArguments="x:Int32" Name="int_StartCol" />
+      <Variable x:TypeArguments="x:Int32" Name="int_StartRow" />
+      <Variable x:TypeArguments="x:String" Name="str_StartColName" />
+      <Variable x:TypeArguments="s:Func(x:String, x:String, sd:DataTable, x:String, x:String)" Name="Fuc_FindPos" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:BuildDataTable DataTable="[dt_tmp]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xD;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xD;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xD;&#xA;      &lt;xs:complexType&gt;&#xD;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xD;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xD;&#xA;            &lt;xs:complexType&gt;&#xD;&#xA;              &lt;xs:sequence&gt;&#xD;&#xA;                &lt;xs:element name=&quot;대분류&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;중분류&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;key&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xD;&#xA;                  &lt;xs:simpleType&gt;&#xD;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xD;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xD;&#xA;                    &lt;/xs:restriction&gt;&#xD;&#xA;                  &lt;/xs:simpleType&gt;&#xD;&#xA;                &lt;/xs:element&gt;&#xD;&#xA;                &lt;xs:element name=&quot;_x0032_021-08-21&quot; msdata:Caption=&quot;&quot; type=&quot;xs:anyType&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;_x0032_021-01-02&quot; msdata:Caption=&quot;&quot; type=&quot;xs:anyType&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;_x0032_021-01-03&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;_x0032_021-01-04&quot; msdata:Caption=&quot;&quot; type=&quot;xs:anyType&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;              &lt;/xs:sequence&gt;&#xD;&#xA;            &lt;/xs:complexType&gt;&#xD;&#xA;          &lt;/xs:element&gt;&#xD;&#xA;        &lt;/xs:choice&gt;&#xD;&#xA;      &lt;/xs:complexType&gt;&#xD;&#xA;    &lt;/xs:element&gt;&#xD;&#xA;  &lt;/xs:schema&gt;&#xD;&#xA;  &lt;TableName&gt;&#xD;&#xA;    &lt;대분류 /&gt;&#xD;&#xA;    &lt;중분류 /&gt;&#xD;&#xA;    &lt;key&gt;C2 해더&lt;/key&gt;&#xD;&#xA;    &lt;_x0032_021-08-21 xsi:type=&quot;xs:string&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;D2 월&lt;/_x0032_021-08-21&gt;&#xD;&#xA;    &lt;_x0032_021-01-02 xsi:type=&quot;xs:string&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;E2 화&lt;/_x0032_021-01-02&gt;&#xD;&#xA;    &lt;_x0032_021-01-03&gt;F2 수&lt;/_x0032_021-01-03&gt;&#xD;&#xA;    &lt;_x0032_021-01-04 xsi:type=&quot;xs:string&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;G2 목&lt;/_x0032_021-01-04&gt;&#xD;&#xA;  &lt;/TableName&gt;&#xD;&#xA;  &lt;TableName&gt;&#xD;&#xA;    &lt;대분류&gt;Class1&lt;/대분류&gt;&#xD;&#xA;    &lt;중분류&gt;mid1&lt;/중분류&gt;&#xD;&#xA;    &lt;key&gt;engine1&lt;/key&gt;&#xD;&#xA;    &lt;_x0032_021-08-21 xsi:type=&quot;xs:string&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; /&gt;&#xD;&#xA;    &lt;_x0032_021-01-02 xsi:type=&quot;xs:string&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;1&lt;/_x0032_021-01-02&gt;&#xD;&#xA;  &lt;/TableName&gt;&#xD;&#xA;  &lt;TableName&gt;&#xD;&#xA;    &lt;중분류 /&gt;&#xD;&#xA;    &lt;key&gt;engine2&lt;/key&gt;&#xD;&#xA;    &lt;_x0032_021-01-02 xsi:type=&quot;xs:string&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;E4 &amp;lt; - 나와야함&lt;/_x0032_021-01-02&gt;&#xD;&#xA;    &lt;_x0032_021-01-03&gt;1&lt;/_x0032_021-01-03&gt;&#xD;&#xA;  &lt;/TableName&gt;&#xD;&#xA;  &lt;TableName&gt;&#xD;&#xA;    &lt;대분류 /&gt;&#xD;&#xA;    &lt;중분류&gt;mid2&lt;/중분류&gt;&#xD;&#xA;    &lt;key&gt;engine3&lt;/key&gt;&#xD;&#xA;    &lt;_x0032_021-08-21 xsi:type=&quot;xs:string&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;1&lt;/_x0032_021-08-21&gt;&#xD;&#xA;  &lt;/TableName&gt;&#xD;&#xA;  &lt;TableName&gt;&#xD;&#xA;    &lt;key&gt;engine4&lt;/key&gt;&#xD;&#xA;  &lt;/TableName&gt;&#xD;&#xA;  &lt;TableName&gt;&#xD;&#xA;    &lt;대분류&gt;Class2&lt;/대분류&gt;&#xD;&#xA;    &lt;중분류&gt;mid3&lt;/중분류&gt;&#xD;&#xA;    &lt;key&gt;engine5&lt;/key&gt;&#xD;&#xA;    &lt;_x0032_021-01-04 xsi:type=&quot;xs:string&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;1&lt;/_x0032_021-01-04&gt;&#xD;&#xA;  &lt;/TableName&gt;&#xD;&#xA;&lt;/NewDataSet&gt;" />
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="' 사전 설정&#xD;&#xA;Environment.SetEnvironmentVariable(&quot;Fuc_FindPos_DT1_KeyColName&quot;,&quot;key&quot;)&#xD;&#xA;Environment.SetEnvironmentVariable(&quot;Fuc_FindPos_DT1_Offest_Col&quot;,&quot;1&quot;) &#xD;&#xA;Environment.SetEnvironmentVariable(&quot;Fuc_FindPos_DT1_Offest_Row&quot;,&quot;2&quot;) &#xD;&#xA;&#xD;&#xA;'인수화 할 부분&#xD;&#xA;'Dim Str_row As String = &quot;engine2&quot;&#xD;&#xA;'Dim Str_col As String = &quot;2021-01-02&quot;&#xD;&#xA;'Dim dt_tmp As DataTable&#xD;&#xA;'Dim Str_DTName As String = &quot;DT1&quot;&#xD;&#xA;&#xD;&#xA;Fuc_FindPos = Function(Str_row As String, Str_col As String, dt_tmp As DataTable, Str_DTName As String)&#xD;&#xA;' Function 내부&#xD;&#xA;Dim Str_KeyColName As String  = Environment.GetEnvironmentVariable( String.Format(&quot;Fuc_FindPos_{0}_KeyColName&quot;,Str_DTName) )&#xD;&#xA;Dim int_Offset_Col As Integer = CInt(Environment.GetEnvironmentVariable( String.Format(&quot;Fuc_FindPos_{0}_Offest_Col&quot;,Str_DTName)) )&#xD;&#xA;Dim int_Offset_Row As Integer = CInt(Environment.GetEnvironmentVariable( String.Format(&quot;Fuc_FindPos_{0}_Offest_Row&quot;,Str_DTName)) )&#xD;&#xA;&#xD;&#xA;console.WriteLine(&quot;Str_KeyColName : &quot;+Str_KeyColName)&#xD;&#xA;console.WriteLine(&quot;int_Offset_Col : &quot;+int_Offset_Col.ToString)&#xD;&#xA;console.WriteLine(&quot;int_Offset_Row : &quot;+int_Offset_Row.ToString)&#xD;&#xA;&#xD;&#xA;' DT에서 추출한 부분&#xD;&#xA;Dim StrArr_Cols As String() = Enumerable.Range(0,dt_tmp.Columns.Count-1).Select(Function(x) dt_tmp.Columns.Item(x).ColumnName).ToArray&#xD;&#xA;If array.IndexOf(StrArr_Cols, Str_KeyColName) = -1&#xD;&#xA;&#x9;Throw New Exception(String.Format(&quot;입력된 Dt에 Key Column이 없습니다.{0}{1}&quot;, vbnewline, Str_KeyColName))&#xD;&#xA;End If &#xD;&#xA;Dim StrArr_Rows As String() = dt_tmp.AsEnumerable.Select(Function(x) x( Str_KeyColName ).ToString).ToArray&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;' 계산할 부분&#xD;&#xA;Dim int_Index_Col As Integer = array.IndexOf(StrArr_Cols, Str_col)&#xD;&#xA;Dim int_Index_Row As Integer = array.IndexOf(StrArr_Rows, Str_row)&#xD;&#xA;Dim Str_Result As String = &quot;&quot;&#xD;&#xA;&#xD;&#xA;' 예외 처리&#xD;&#xA;If int_Index_Col = -1&#xD;&#xA;&#x9;Throw New Exception(String.Format(&quot;열을 찾지 못했습니다.{0}{1}&quot;,vbNewLine,Str_col))&#xD;&#xA;End If &#xD;&#xA;If int_Index_Row = -1&#xD;&#xA;&#x9;Throw New Exception(String.Format(&quot;행을 찾지 못했습니다.{0}{1}&quot;,vbNewLine,Str_row))&#xD;&#xA;End If &#xD;&#xA;&#xD;&#xA;' 좌표 계산&#xD;&#xA;Dim Int_ColNum As Integer = int_Index_Col + int_Offset_Col&#xD;&#xA;Dim Str_ColName As String  = &quot;&quot;&#xD;&#xA;&#xD;&#xA;Dim Int_Modulo As Integer&#xD;&#xA;While Int_ColNum &gt; 0&#xD;&#xA;&#x9;Int_Modulo =(Int_ColNum-1) Mod 26&#xD;&#xA;&#x9;Str_ColName = Convert.ToChar(65 + Int_Modulo).ToString() + Str_ColName&#xD;&#xA;&#x9;Int_ColNum = CInt( (Int_ColNum - Int_Modulo) / 26 )&#xD;&#xA;End While&#xD;&#xA;&#xD;&#xA;Str_Result  = Str_ColName + (int_Index_Row + int_Offset_Row).ToString&#xD;&#xA;Return Str_Result&#xD;&#xA;End Function&#xD;&#xA;&#xD;&#xA;'console.WriteLine(Str_Result)" DisplayName="Invoke code" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_3">
+      <ui:InvokeCode.Arguments>
+        <OutArgument x:TypeArguments="s:Func(x:String, x:String, sd:DataTable, x:String, x:String)" x:Key="Fuc_FindPos">[Fuc_FindPos]</OutArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_6" Message="[Fuc_FindPos(&quot;engine1&quot;,&quot;2021-08-21&quot;,dt_tmp,&quot;DT1&quot;)]" />
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="CommentOut_4">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="418,939" sap2010:WorkflowViewState.IdRef="Sequence_9">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Get StrArr - Col , Key" sap:VirtualizedContainerService.HintSize="376,252" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign.To>
+                <OutArgument x:TypeArguments="s:String[]">[StrArr_Col]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="s:String[]">[Enumerable.Range(0,dt_tmp.Columns.Count-1).Select(function(x) dt_tmp.Columns.Item(x).ColumnName).ToArray]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+              <Assign.To>
+                <OutArgument x:TypeArguments="s:String[]">[StrArr_Key]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="s:String[]">[dt_tmp.AsEnumerable.Select(function(x) x("key").ToString).ToArray]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+          <Sequence DisplayName="Get Start index" sap:VirtualizedContainerService.HintSize="376,556" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="s:Func(x:Int32, x:String)" Name="Fnc_index2ColName" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[str_StartColName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">D</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[int_StartCol]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[array.IndexOf(StrArr_Col,"2021-01-01")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[int_StartRow]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[array.IndexOf(StrArr_Key,"engine1")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="Fnc_index2ColName = Function(Int_ColNum As Integer)&#xA;'Dim Int_ColNum As Integer = 36&#xA;Dim Int_Modulo As Integer&#xA;Dim Str_ColName As String &#xA;&#xA;Str_ColName = &quot;&quot;&#xA;While Int_ColNum &gt; 0&#xA;&#x9;Int_Modulo =(Int_ColNum-1) Mod 26&#xA;&#x9;Str_ColName = Convert.ToChar(65 + Int_Modulo).ToString() + Str_ColName&#xA;&#x9;Int_ColNum = CInt( (Int_ColNum - Int_Modulo) / 26 )&#xA;End While&#xA;&#xA;'console.WriteLine(Str_ColName)&#xA;Return Str_ColName&#xA;End Function&#xA;" DisplayName="Invoke code" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_2">
+              <ui:InvokeCode.Arguments>
+                <OutArgument x:TypeArguments="s:Func(x:Int32, x:String)" x:Key="Fnc_index2ColName">[Fnc_index2ColName]</OutArgument>
+              </ui:InvokeCode.Arguments>
+            </ui:InvokeCode>
+          </Sequence>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="418,668" sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="test" sap:VirtualizedContainerService.HintSize="376,576" sap2010:WorkflowViewState.IdRef="Sequence_6">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;Start : Col &quot;+ array.IndexOf(StrArr_Col,&quot;2021-01-01&quot;).ToString]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;Target : Col &quot;+ array.IndexOf(StrArr_Col,&quot;2021-01-03&quot;).ToString]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_4" Message="[&quot;Start : row &quot;+ array.IndexOf(StrArr_Key,&quot;engine1&quot;).ToString]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_5" Message="[&quot;Target: row &quot;+ array.IndexOf(StrArr_Key,&quot;engine3&quot;).ToString]" />
+          </Sequence>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+  </Sequence>
+</Activity>
