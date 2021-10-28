@@ -2,6 +2,12 @@
 [참고하기 좋은 블로그](https://mpaper-blog.tistory.com/)   
 [Excel VB 참고 블로그](https://kdsoft-zeros.tistory.com/36?category=846222)
 [Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
+#### Windows-Workflow-Foundation  
+- UiPath의 근본이 되는 것
+- [FlowChart](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-flowchart-workflow)  
+- [Sequence](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-sequential-workflow)  
+- [StateMachine](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-state-machine-workflow)  
+
 
 ##### Print Dictionary
 ```vb
