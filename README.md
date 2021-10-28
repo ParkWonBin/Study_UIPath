@@ -38,21 +38,30 @@ StrArr = Enumerable.Repeat(of string)("1", 3).toarray
 'null
 StrArr = new string(2){} 
 ' StrArr : {null,null,null} '안에 있는 숫자는 최대 index
+'''
 
+##### 자주 쓰게 되는 String Array 모음
+'''vb
 ' DT 열이름 Array 추출
 StrArr = Enumerable.Range(0,dt_tmp.Columns.Count-1).Select(function(x) dt_tmp.Columns.Item(x).ColumnName).ToArray 
 
 'DT 열 하나만 뽑아서 Array로 추출
 StrArr = dt_tmp.AsEnumerable.Select(function(x) x("ColName").ToString).ToArray
 
-' 자주 사용하는 함수
 StrArr = in_DIc_Config.Keys
-StrArr = Directory.GetFiles("절대경로") '딱 해당 경로의 파일경로만 반환, 보다 하위 폴더 파일은 선택되지 않음.
-StrArr = Directory.GetFiles("절대경로").Select(function(x) new FileInfo(x).Name).ToArray '파일명 및 확장자까지
-StrArr = Directory.GetFiles("절대경로").Select(function(x) Split(x,"\").Last.ToString).ToArray '파일명 및 확장자까지
-StrArr = Directory.GetFiles(Environment.CurrentDirectory) '프로젝트 경로(Main.xaml 있는 위치)
+
+' 파일명 제어
+StrArr = Directory.GetFiles("절대경로") '각 파일의 절대경로 얻음
+StrArr = Directory.GetFiles("절대경로").Select(function(x) new FileInfo(x).Name).ToArray '파일명 및 확장자만 얻음
+StrArr = Directory.GetFiles("절대경로").Select(function(x) Split(x,"\").Last.ToString).ToArray '파일명, 확장자 얻음
+StrArr = Directory.GetFiles(Environment.CurrentDirectory) '프로젝트 경로파일 얻음
+
 For Each row as Data.DataRow in DT_tmp
-    StrArr = row.ItemArray.Select(Function(x) x.ToString).ToArray
+    For Each item as Object in row.ItemArray
+        ' item 을 item as String 으로 쓰면 Null 들어간 Row 처리할 떄 에러 발생함.
+	' item 은 꼭 Object로 선언하고, 호출할 떄 ToString 처리하는 것이 안전함.
+        Console.WriteLine( item.ToString ) 
+    Next
 Next
 * Row를 ItemArray로 바꿀 때, 해당 변수를 받을 때는 꼭 Object로 받고 호출시 ToString을 하자.
 * Row를 ItemArray로 바꾸는 과정에서 Null이 포함된 row에서 item을 String으로 받으면 에러가 발생한다. (Null을 String으로 형변환 못한다는 오류)
