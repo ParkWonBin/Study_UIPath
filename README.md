@@ -20,9 +20,17 @@ Dim dic_CSS = New Dictionary(Of String, String) From {
 { "width_col1" , "25" },
 { "width_col2" , "75" }
 }
+' key로 ( "width_col" + index.Tostring ) 가 존재할 경우 해당 순서의 열에 width 설정을 함
 
+
+' 전체 Table 출력
 Dim Str_HTML = string.Format("<table style=' {1} '> {0} {2} {3} </table>",vbNewLine,dic_CSS("table"),string.Format("<tr style=' {1} '>{0} {2} </tr>{0}",vbNewLine, dic_CSS("tr"), join( Enumerable.Range(0,DT_tmp.Columns.Count).Select(function(x) string.Format("<th style=' {1} {3} '> {2} </th>{0}",vbNewLine, dic_CSS("th"), DT_tmp.Columns.Item(x).ColumnName, if(dic_CSS.Keys.Contains("width_col"+x.ToString), string.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim ) , string.Empty ) ) ).ToArray ) ),Join( DT_tmp.AsEnumerable.Select( Function(row) String.Format("<tr style=' {1} '>{0} {2} {0}</tr>{0}",vbNewLine,dic_CSS("tr"), Join( Enumerable.Range(0,DT_tmp.Columns.Count).Select(Function(x) String.Format("<td style=' {0} {2} '> {1} </td>",dic_CSS("td"), row.Item(x).ToString, if(dic_CSS.Keys.Contains("width_col"+x.ToString) , string.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim) ,"")) ).ToArray, vbNewLine ) ) ).ToArray, vbNewLine))
 
+' Column만 출력
+string.Format("<tr style=' {1} '>{0} {2} </tr>{0}",vbNewLine, dic_CSS("tr"), join( Enumerable.Range(0,DT_tmp.Columns.Count).Select(function(x) string.Format("<th style=' {1} {3} '> {2} </th>{0}",vbNewLine, dic_CSS("th"), DT_tmp.Columns.Item(x).ColumnName, if(dic_CSS.Keys.Contains("width_col"+x.ToString), string.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim ) , string.Empty ) ) ).ToArray ) )
+
+' Data만 출력
+Join( DT_tmp.AsEnumerable.Select( Function(row) String.Format("<tr style=' {1} '>{0} {2} {0}</tr>{0}",vbNewLine,dic_CSS("tr"), Join( Enumerable.Range(0,DT_tmp.Columns.Count).Select(Function(x) String.Format("<td style=' {0} {2} '> {1} </td>",dic_CSS("td"), row.Item(x).ToString, if(dic_CSS.Keys.Contains("width_col"+x.ToString) , string.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim) ,"")) ).ToArray, vbNewLine ) ) ).ToArray, vbNewLine)
 ```
 
 ##### Print Dictionary
