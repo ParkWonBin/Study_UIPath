@@ -17,12 +17,14 @@ Dim Str_HTML As String
 dic_CSS = New Dictionary(Of String, String) From {
 { "table" , "color: black ; text-align: center; border-collapse: collapse; margin-top: 10px;" },
 { "tr" , "" },
-{ "th" , "background-color: #cccccc; border: 1px solid black;font-size: 14px; padding : 4px;" },
-{ "td" , "background-color: #cccccc; border: 1px solid black;font-size: 14px; padding : 4px;" },
-{ "width_col0" , "50" },
-{ "width_col1" , "25" },
-{ "width_col2" , "75" }
+{ "th" , "background-color:#d9d9d9; border:1px solid black; font-family:맑은 고딕; font-size:10pt; padding:4px; height:34px;" },
+{ "td" , "background-color:#ffffff; border:1px solid black; font-family:맑은 고딕; font-size:10pt; padding:4px; height:34px;" },
+{ "width_col0" , "100" },
+{ "width_col1" , "150" },
+{ "width_col2" , "50" }
 }
+' width가 너무 좁거나, width가 정의되지 않은 column은 "HTML 기본 width"로 설정됩니다.
+
 ' key로 ( "width_col" + index.Tostring ) 가 존재할 경우 해당 순서의 열에 width 설정을 함
 ' if(dic_CSS.Keys.Contains("width_col"+x.ToString), string.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim ) , string.Empty )
 
