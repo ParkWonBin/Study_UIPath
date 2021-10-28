@@ -11,7 +11,10 @@
 
 ##### Print DT as HTML with CSS
 ```vb
-Dim dic_CSS = New Dictionary(Of String, String) From {
+Dim dic_CSS As Dictionary(Of String, String) 
+Dim Str_HTML As String
+
+dic_CSS = New Dictionary(Of String, String) From {
 { "table" , "color: black ; text-align: center; border-collapse: collapse; margin-top: 10px;" },
 { "tr" , "" },
 { "th" , "background-color: #cccccc; border: 1px solid black;font-size: 14px; padding : 4px;" },
@@ -24,7 +27,9 @@ Dim dic_CSS = New Dictionary(Of String, String) From {
 ' if(dic_CSS.Keys.Contains("width_col"+x.ToString), string.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim ) , string.Empty )
 
 ' 전체 Table 출력
-Dim Str_HTML = string.Format("<table style=' {1} '> {0} {2} {3} </table>",vbNewLine,dic_CSS("table"),string.Format("<tr style=' {1} '>{0} {2} </tr>{0}",vbNewLine, dic_CSS("tr"), join( Enumerable.Range(0,DT_tmp.Columns.Count).Select(function(x) string.Format("<th style=' {1} {3} '> {2} </th>{0}",vbNewLine, dic_CSS("th"), DT_tmp.Columns.Item(x).ColumnName, if(dic_CSS.Keys.Contains("width_col"+x.ToString), string.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim ) , string.Empty ) ) ).ToArray ) ),Join( DT_tmp.AsEnumerable.Select( Function(row) String.Format("<tr style=' {1} '>{0} {2} {0}</tr>{0}",vbNewLine,dic_CSS("tr"), Join( Enumerable.Range(0,DT_tmp.Columns.Count).Select(Function(x) String.Format("<td style=' {0} {2} '> {1} </td>",dic_CSS("td"), row.Item(x).ToString, if(dic_CSS.Keys.Contains("width_col"+x.ToString) , string.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim) ,"")) ).ToArray, vbNewLine ) ) ).ToArray, vbNewLine))
+Str_HTML = String.Format("<table style=' {1} '> {0}{2}{0}{3}{0} </table>",vbNewLine,dic_CSS("table"),String.Format("<tr style=' {1} '>{0} {2} </tr>",vbNewLine, dic_CSS("tr"), Join( Enumerable.Range(0,DT_tmp.Columns.Count).Select(Function(x) String.Format("<th style=' {1} {3} '> {2} </th>",vbNewLine, dic_CSS("th"), DT_tmp.Columns.Item(x).ColumnName, If(dic_CSS.Keys.Contains("width_col"+x.ToString), String.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim ) , String.Empty ) ) ).ToArray,vbNewLine ) ),Join( DT_tmp.AsEnumerable.Select( Function(row) String.Format("<tr style=' {1} '>{0}{2}{0}</tr>",vbNewLine,dic_CSS("tr"), Join( Enumerable.Range(0,DT_tmp.Columns.Count).Select(Function(x) String.Format("<td style=' {0} {2} '> {1} </td>",dic_CSS("td"), row.Item(x).ToString, If(dic_CSS.Keys.Contains("width_col"+x.ToString) , String.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim) ,"")) ).ToArray, vbNewLine ) ) ).ToArray, vbNewLine))
+
+
 
 ' Column만 출력
 string.Format("<tr style=' {1} '>{0} {2} </tr>{0}",vbNewLine, dic_CSS("tr"), join( Enumerable.Range(0,DT_tmp.Columns.Count).Select(function(x) string.Format("<th style=' {1} {3} '> {2} </th>{0}",vbNewLine, dic_CSS("th"), DT_tmp.Columns.Item(x).ColumnName, if(dic_CSS.Keys.Contains("width_col"+x.ToString), string.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim ) , string.Empty ) ) ).ToArray ) )
