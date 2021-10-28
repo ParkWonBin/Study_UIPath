@@ -9,6 +9,22 @@
 - [StateMachine](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-state-machine-workflow)  
 
 
+##### Print DT as HTML with CSS
+```vb
+Dim dic_CSS = New Dictionary(Of String, String) From {
+{ "table" , "color: black ; text-align: center; border-collapse: collapse; margin-top: 10px;" },
+{ "tr" , "" },
+{ "th" , "background-color: #cccccc; border: 1px solid black;font-size: 14px; padding : 4px;" },
+{ "td" , "background-color: #cccccc; border: 1px solid black;font-size: 14px; padding : 4px;" },
+{ "width_col0" , "50" },
+{ "width_col1" , "25" },
+{ "width_col2" , "75" }
+}
+
+Dim Str_HTML = string.Format("<table style=' {1} '> {0} {2} {3} </table>",vbNewLine,dic_CSS("table"),string.Format("<tr style=' {1} '>{0} {2} </tr>{0}",vbNewLine, dic_CSS("tr"), join( Enumerable.Range(0,DT_tmp.Columns.Count).Select(function(x) string.Format("<th style=' {1} {3} '> {2} </th>{0}",vbNewLine, dic_CSS("th"), DT_tmp.Columns.Item(x).ColumnName, if(dic_CSS.Keys.Contains("width_col"+x.ToString), string.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim ) , string.Empty ) ) ).ToArray ) ),Join( DT_tmp.AsEnumerable.Select( Function(row) String.Format("<tr style=' {1} '>{0} {2} {0}</tr>{0}",vbNewLine,dic_CSS("tr"), Join( Enumerable.Range(0,DT_tmp.Columns.Count).Select(Function(x) String.Format("<td style=' {0} {2} '> {1} </td>",dic_CSS("td"), row.Item(x).ToString, if(dic_CSS.Keys.Contains("width_col"+x.ToString) , string.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim) ,"")) ).ToArray, vbNewLine ) ) ).ToArray, vbNewLine))
+
+```
+
 ##### Print Dictionary
 ```vb
 Dim in_Dic_Config As New Dictionary(Of String,String)
