@@ -24,7 +24,8 @@ Str_Result = join(Split("1 2 3"), "|")
 
 ##### 생성 관련
 ```vb
-Dim StrArr as string()
+Dim StrArr as string() ' 생성
+Dim StrArr as New String(){"1","2"} '#생성 및 할당
 
 StrArr = Enumerable.Range(1,3).Select(function(x) x.ToString).ToArray
 ' StrArr : {"1","2","3"} 'Range(int_start, int_count) ' 기본 반환형은 Integer이다.
