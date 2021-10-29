@@ -8,7 +8,36 @@
 - [Sequence](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-sequential-workflow)  
 - [StateMachine](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-state-machine-workflow)  
 
+##### UiElement 출력
+```vb
+Dim ui_tmp As Uipath.Core.UiElement
 
+' [Indicate On Screen] Or [Find Element] 통해서 ui_tmp 초기화
+
+' 셀렉터 및 Attribute 모두 출력
+string.Format("{1} : {2}{0}{3}",vbNewLine,"Selector",ui_tmp.Selector.ToString, join( ui_tmp.GetNodeAttributes(False).Keys.Select(Function(key) String.format("{1} : {2}", vbnewline, key, ui_tmp.GetNodeAttributes(False)(key))).ToArray, vbNewLine) )
+```
+
+##### Xaml에서 사용된 모든 Key값 출력
+
+```vb
+Dim Str_ReadXamlFile As String
+Dim StrArr_UsedKeys As String()
+Dim StrArr_ShouldAdd As String()
+Dim in_Dic_Config As Dictionary(Of String,String)
+
+' Read Text File : Main.Xaml => Str_ReadXamlFile
+
+' Xaml에서 사용된 모든 key 선택 (중복제거, 오름차순)
+StrArr_UsedKeys = split( Str_ReadXamlFile.Replace(vbNewLine,"").Replace(" ",""), "onfig(").skip(1).Select(Function(x) if( x.IndexOf(")") = -1, "", x.Substring(0,x.IndexOf(")")) ) ).Distinct.OrderBy(function(x) x.ToString).select(function(x) x.replace("""","")).ToArray
+
+' Xaml에서 사용된 key 중 Config에 없는 key만 선택
+StrArr_ShouldAdd = StrArr_UsedKeys.Where(function(x) not in_Dic_Config.Keys.Contains(x) ).ToArray
+
+' 누락된 key만 Dictionary에 바로 넣을 수 있는 형태로 출력
+join( StrArr_ShouldAdd.Select(function(x) string.Format("{1} {0}{3}{0} , {0}dummy{0}  {2}", chr(34),"{","}",x.ToString) ).ToArray, ","+vbNewLine)
+
+```
 ##### Print DT as HTML with CSS
 ```vb
 Dim dic_CSS As Dictionary(Of String, String) 
