@@ -8,6 +8,19 @@
 - [Sequence](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-sequential-workflow)  
 - [StateMachine](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-state-machine-workflow)  
 
+##### Excel index2ColName
+```vb
+int_colIndex As String
+
+int_colIndex = 0
+int_colIndex = 16383
+
+
+'로직 : 
+if(int_colIndex=0,"A", join( Enumerable.Range(0, CInt(math.Ceiling(math.log(1+int_colIndex,26))) ).Select(Function(x) chr( if(x=0,65,64)+cint(((int_colIndex\cint(math.Pow(26,x)) ) mod 26) )).ToString ).reverse.ToArray, string.Empty))
+
+```
+
 ##### UiElement 출력
 ```vb
 Dim ui_tmp As Uipath.Core.UiElement
