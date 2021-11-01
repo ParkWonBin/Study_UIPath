@@ -4,11 +4,10 @@
 [Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
 [Linq 관련 공식 문서](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/linq/introduction-to-linq)
 
-### [Linq 설명 with Code](https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example)
-#### Linq의 호출문은 2가지 형태가 있다. (Lambda/ Query)
-- Lambda 식은 무명함수로, Function(x) x 형태를 기본으로 한다. 무명함수에 인자로 들오언 (x)를 의미한다.
-- Query 식은 SQL 식과 유사한 쿼리식이다. From 이나 Aggregate 로 수식을 시작한다. 
-쿼리식은 직관성이 떨어지기 때문에 개인적으로 lambda식만 사용하고 있다. 
+### [Linq 설명](https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example) (Lambda/ Query)
+Lambda 식은 무명함수로, Function(x) x 형태를 기본으로 한다. 무명함수에 인자로 들오언 (x)를 의미한다.  
+Query 식은 SQL 식과 유사한 쿼리식이다. From 이나 Aggregate 로 수식을 시작한다.   
+쿼리식은 직관성이 떨어지기 때문에 개인적으로 lambda식만 사용하고 있다.   
 - [select 문](https://linqsamples.com/linq-to-objects/projection/Select-anonymousType-lambda-vb) : 데이터를 수정/생성 할 떄 사용
 - [GroupBY문](https://linqsamples.com/linq-to-objects/grouping/GroupBy-lambda-vb) : 인자로 받은 함수의 Return값을 key로 하여 구룹을 나눔.
 - [ThenBy 문](https://linqsamples.com/linq-to-objects/ordering/ThenBy-lambda-vb) : Orderby로 정렬한 순서에서, 같은 레벨에 있는 항목을 제2 기준으로 정렬
