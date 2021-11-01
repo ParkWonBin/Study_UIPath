@@ -2,17 +2,41 @@
 [참고하기 좋은 블로그](https://mpaper-blog.tistory.com/)   
 [Excel VB 참고 블로그](https://kdsoft-zeros.tistory.com/36?category=846222)
 [Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
+[LinQ 관련 공식 문서](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/linq/introduction-to-linq)
+
 #### Windows-Workflow-Foundation  
 - UiPath의 근본이 되는 것
 - [FlowChart](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-flowchart-workflow)  
 - [Sequence](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-sequential-workflow)  
 - [StateMachine](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-state-machine-workflow)  
 
-##### 함수 소개
+##### 함수 설명
 ```vb
 TypeName(<T>) : 해당 인자의 Type 이름을 String으로 반환한다.
 file.WriteAllText("절대경로", Str_Source) :  해당 경로에 파일을 저장한다.
 ```
+[VB 배열 관련](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/arrays/)
+[Linq 사용한 계산](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/linq/how-to-count-sum-or-average-data-by-using-linq)
+[Linq 사용 예시](https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example)
+
+
+```vb
+TypeName({1,2,3}) 'Integer()
+Dim numbers = New Integer() {1, 2, 4, 8}
+Dim numbers() As Integer = {5, 10, 15}
+
+Aggregate x in {1,2,3,4,5} into sum ' 15
+Aggregate x in {1,2,3,4,5} into count ' 5
+Aggregate x in {1,2,3,4,5} into average '3
+
+{1,2,3,4,5}.Aggregate(function(a,b) a+b) ' 15
+' a는 누적되어 저장된 값, b는 new Item. 
+' 위의 문장은 ForEach b in {1,2,3,4,5}  a = f(a,b) 반복이라 생각하면 됨.
+
+
+```
+
+
 
 ##### Excel index2ColName
 ```vb
