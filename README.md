@@ -22,12 +22,13 @@ file.WriteAllText("절대경로", Str_Source) :  해당 경로에 파일을 저�
 
 ```vb
 TypeName({1,2,3}) 'Integer()
-Dim numbers = New Integer() {1, 2, 4, 8}
-Dim numbers() As Integer = {5, 10, 15}
+Dim numbers = New Integer() {1,2,3,4,5}
+Dim numbers() As Integer = {1,2,3,4,5}
 
 Aggregate x in {1,2,3,4,5} into sum ' 15
 Aggregate x in {1,2,3,4,5} into count ' 5
 Aggregate x in {1,2,3,4,5} into average '3
+Aggregate x in split("1 2 3 4 5").Select(function(x) cint(x)) into sum
 
 {1,2,3,4,5}.Aggregate(function(a,b) a+b) ' 15
 ' a는 누적되어 저장된 값, b는 new Item. 
