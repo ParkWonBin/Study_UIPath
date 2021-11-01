@@ -11,24 +11,20 @@
 ##### Excel index2ColName
 ```vb
 int_colIndex As String
+' 엑셀 열 시작 = 0, 끝 = 16383
 
-int_colIndex = 0
-int_colIndex = 16383
-
-
-'로직 : 
+'Excel_Convert_index2ColName : 
 if(int_colIndex=0,"A", join( Enumerable.Range(0, CInt(math.Ceiling(math.log(1+int_colIndex,26))) ).Select(Function(x) chr( if(x=0,65,64)+cint(((int_colIndex\cint(math.Pow(26,x)) ) mod 26) )).ToString ).reverse.ToArray, string.Empty))
-
+ 
 ```
 
 ##### UiElement 출력
 ```vb
-Dim ui_tmp As Uipath.Core.UiElement
-
-' [Indicate On Screen] Or [Find Element] 통해서 ui_tmp 초기화
+Dim ui_tmp As Uipath.Core.UiElement ' [Indicate On Screen] Or [Find Element] 통해서 ui_tmp 초기화
 
 ' 셀렉터 및 Attribute 모두 출력
 string.Format("{1} : {2}{0}{3}",vbNewLine,"Selector",ui_tmp.Selector.ToString, join( ui_tmp.GetNodeAttributes(False).Keys.Select(Function(key) String.format("{1} : {2}", vbnewline, key, ui_tmp.GetNodeAttributes(False)(key))).ToArray, vbNewLine) )
+ 
 ```
 
 ##### Xaml에서 사용된 모든 Key값 출력
@@ -42,10 +38,12 @@ Dim in_Dic_Config As Dictionary(Of String,String)
 ' Read Text File : Main.Xaml => Str_ReadXamlFile
 
 ' Xaml에서 사용된 모든 key 선택 (중복제거, 오름차순)
-StrArr_UsedKeys = split( Str_ReadXamlFile.Replace(vbNewLine,"").Replace(" ",""), "onfig(").skip(1).Select(Function(x) if( x.IndexOf(")") = -1, "", x.Substring(0,x.IndexOf(")")) ) ).Distinct.OrderBy(function(x) x.ToString).select(function(x) x.replace("""","")).ToArray
+StrArr_UsedKeys = 
+split( Str_ReadXamlFile.Replace(vbNewLine,"").Replace(" ",""), "onfig(").skip(1).Select(Function(x) if( x.IndexOf(")") = -1, "", x.Substring(0,x.IndexOf(")")) ) ).Distinct.OrderBy(function(x) x.ToString).select(function(x) x.replace("""","")).ToArray
 
-' Xaml에서 사용된 key 중 Config에 없는 key만 선택
-StrArr_ShouldAdd = StrArr_UsedKeys.Where(function(x) not in_Dic_Config.Keys.Contains(x) ).ToArray
+' Xaml의 key 중 Config에 누락된 key 것만 선택
+StrArr_ShouldAdd = 
+StrArr_UsedKeys.Where(function(x) not in_Dic_Config.Keys.Contains(x) ).ToArray
 
 ' 누락된 key만 Dictionary에 바로 넣을 수 있는 형태로 출력
 join( StrArr_ShouldAdd.Select(function(x) string.Format("{1} {0}{3}{0} , {0}dummy{0}  {2}", chr(34),"{","}",x.ToString) ).ToArray, ","+vbNewLine)
@@ -66,12 +64,11 @@ dic_CSS = New Dictionary(Of String, String) From {
 { "width_col2" , "50" }
 }
 ' width가 너무 좁거나, width가 정의되지 않은 column은 "HTML 기본 width"로 설정됩니다.
-
 ' key로 ( "width_col" + index.Tostring ) 가 존재할 경우 해당 순서의 열에 width 설정을 함
 ' if(dic_CSS.Keys.Contains("width_col"+x.ToString), string.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim ) , string.Empty )
 
-' 전체 Table 출력
-Str_HTML = String.Format("<table style=' {1} '> {0} {2} {0} {3} {0} </table>",vbNewLine,dic_CSS("table"),String.Format("<tr style=' {1} '> {0} {2} {0} </tr>",vbNewLine, dic_CSS("tr"), Join( Enumerable.Range(0,DT_tmp.Columns.Count).Select(Function(x) String.Format("<th style=' {0} {1} '> {2} </th>", dic_CSS("th"), If(dic_CSS.Keys.Contains("width_col"+x.ToString), String.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim ) , String.Empty ), DT_tmp.Columns.Item(x).ColumnName ) ).ToArray, vbNewLine) ),Join( DT_tmp.AsEnumerable.Select( Function(row) String.Format("<tr style=' {1} '> {0} {2} {0} </tr>",vbNewLine,dic_CSS("tr"), Join( Enumerable.Range(0,DT_tmp.Columns.Count).Select(Function(x) String.Format("<td style=' {0} {1} '> {2} </td>", dic_CSS("td"), If(dic_CSS.Keys.Contains("width_col"+x.ToString) , String.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim) ,string.Empty), row.Item(x).ToString ) ).ToArray, vbNewLine ) ) ).ToArray, vbNewLine))
+Str_HTML = ' 전체 Table 출력
+String.Format("<table style=' {1} '> {0} {2} {0} {3} {0} </table>",vbNewLine,dic_CSS("table"),String.Format("<tr style=' {1} '> {0} {2} {0} </tr>",vbNewLine, dic_CSS("tr"), Join( Enumerable.Range(0,DT_tmp.Columns.Count).Select(Function(x) String.Format("<th style=' {0} {1} '> {2} </th>", dic_CSS("th"), If(dic_CSS.Keys.Contains("width_col"+x.ToString), String.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim ) , String.Empty ), DT_tmp.Columns.Item(x).ColumnName ) ).ToArray, vbNewLine) ),Join( DT_tmp.AsEnumerable.Select( Function(row) String.Format("<tr style=' {1} '> {0} {2} {0} </tr>",vbNewLine,dic_CSS("tr"), Join( Enumerable.Range(0,DT_tmp.Columns.Count).Select(Function(x) String.Format("<td style=' {0} {1} '> {2} </td>", dic_CSS("td"), If(dic_CSS.Keys.Contains("width_col"+x.ToString) , String.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim) ,string.Empty), row.Item(x).ToString ) ).ToArray, vbNewLine ) ) ).ToArray, vbNewLine))
 
 ' Column만 출력
 string.Format("<tr style=' {1} '>{0} {2} </tr>{0}",vbNewLine, dic_CSS("tr"), join( Enumerable.Range(0,DT_tmp.Columns.Count).Select(function(x) string.Format("<th style=' {1} {3} '> {2} </th>{0}",vbNewLine, dic_CSS("th"), DT_tmp.Columns.Item(x).ColumnName, if(dic_CSS.Keys.Contains("width_col"+x.ToString), string.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim ) , string.Empty ) ) ).ToArray ) )
@@ -85,7 +82,8 @@ Join( DT_tmp.AsEnumerable.Select( Function(row) String.Format("<tr style=' {1} '
 Dim in_Dic_Config As New Dictionary(Of String,String)
 Dim Str_Config As String
 
-Str_Config = string.Format("{1}{0}{3}{0}{2}",vbNewLine,"New Dictionary(Of String,String) From {","}", join( in_Dic_Config.Keys.Select(function(key) string.Format("{0} {2}{3}{2} , {2}{4}{2} {1}", "{","}", chr(34), key, in_Dic_Config(key).Replace(vbNewLine," ").Replace(chr(34),"'") ) ).ToArray, ","+vbNewLine) )
+Str_Config = 
+string.Format("{1}{0}{3}{0}{2}",vbNewLine,"New Dictionary(Of String,String) From {","}", join( in_Dic_Config.Keys.Select(function(key) string.Format("{0} {2}{3}{2} , {2}{4}{2} {1}", "{","}", chr(34), key, in_Dic_Config(key).Replace(vbNewLine," ").Replace(chr(34),"'") ) ).ToArray, ","+vbNewLine) )
 
 file.WriteAllText("Config.md", Str_Config)
 ```
