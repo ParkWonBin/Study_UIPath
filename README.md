@@ -1,3 +1,10 @@
+
+#### Windows-Workflow-Foundation  
+- UiPath의 근본이 되는 것
+- [FlowChart](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-flowchart-workflow)  
+- [Sequence](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-sequential-workflow)  
+- [StateMachine](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-state-machine-workflow)  
+- 
 [UIPATH 단축키](https://docs.uipath.com/studio/docs/keyboard-shortcuts)   
 [참고하기 좋은 블로그](https://mpaper-blog.tistory.com/)   
 [Excel VB 참고 블로그](https://kdsoft-zeros.tistory.com/36?category=846222)
@@ -13,13 +20,6 @@ Query 식은 SQL 식과 유사한 쿼리식이다. From 이나 Aggregate 로 수
 - [ThenBy 문](https://linqsamples.com/linq-to-objects/ordering/ThenBy-lambda-vb) : Orderby로 정렬한 순서에서, 같은 레벨에 있는 항목을 제2 기준으로 정렬
 - [Aggregate](https://linqsamples.com/linq-to-objects/aggregation/Aggregate-lambda-vb) : 특정 값을 누적하여 계산할 떄 사용. function(a,b)에서 a는 누적된 값, b는 작업중인 항목 의미.
 - [Zip 문](https://linqsamples.com/linq-to-objects/other/Zip-lambda-vb) : 2개의 array를 동일한 index에 대해 대해 매핑 작업을 할 떄 쓰임. (ex : 백터 내적 연산 등)
-
-
-#### Windows-Workflow-Foundation  
-- UiPath의 근본이 되는 것
-- [FlowChart](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-flowchart-workflow)  
-- [Sequence](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-sequential-workflow)  
-- [StateMachine](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-state-machine-workflow)  
 
 ##### 함수 설명
 ```vb
