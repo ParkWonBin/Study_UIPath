@@ -8,6 +8,12 @@
 - [Sequence](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-sequential-workflow)  
 - [StateMachine](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-state-machine-workflow)  
 
+##### 함수 소개
+```vb
+TypeName(<T>) : 해당 인자의 Type 이름을 String으로 반환한다.
+file.WriteAllText("절대경로", Str_Source) :  해당 경로에 파일을 저장한다.
+```
+
 ##### Excel index2ColName
 ```vb
 int_colIndex As String
