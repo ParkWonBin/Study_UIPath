@@ -2,7 +2,19 @@
 [참고하기 좋은 블로그](https://mpaper-blog.tistory.com/)   
 [Excel VB 참고 블로그](https://kdsoft-zeros.tistory.com/36?category=846222)
 [Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
-[LinQ 관련 공식 문서](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/linq/introduction-to-linq)
+[Linq 관련 공식 문서](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/linq/introduction-to-linq)
+
+### [Linq 설명 with Code](https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example)
+#### Linq의 호출문은 2가지 형태가 있다. (Lambda/ Query)
+- Lambda 식은 무명함수로, Function(x) x 형태를 기본으로 한다. 무명함수에 인자로 들오언 (x)를 의미한다.
+- Query 식은 SQL 식과 유사한 쿼리식이다. From 이나 Aggregate 로 수식을 시작한다. 
+쿼리식은 직관성이 떨어지기 때문에 개인적으로 lambda식만 사용하고 있다. 
+- [select 문](https://linqsamples.com/linq-to-objects/projection/Select-anonymousType-lambda-vb) : 데이터를 수정/생성 할 떄 사용
+- [GroupBY문](https://linqsamples.com/linq-to-objects/grouping/GroupBy-lambda-vb) : 인자로 받은 함수의 Return값을 key로 하여 구룹을 나눔.
+- [ThenBy 문](https://linqsamples.com/linq-to-objects/ordering/ThenBy-lambda-vb) : Orderby로 정렬한 순서에서, 같은 레벨에 있는 항목을 제2 기준으로 정렬
+- [Aggregate](https://linqsamples.com/linq-to-objects/aggregation/Aggregate-lambda-vb) : 특정 값을 누적하여 계산할 떄 사용. function(a,b)에서 a는 누적된 값, b는 작업중인 항목 의미.
+- [Zip 문](https://linqsamples.com/linq-to-objects/other/Zip-lambda-vb) : 2개의 array를 동일한 index에 대해 대해 매핑 작업을 할 떄 쓰임. (ex : 백터 내적 연산 등)
+
 
 #### Windows-Workflow-Foundation  
 - UiPath의 근본이 되는 것
@@ -17,8 +29,8 @@ file.WriteAllText("절대경로", Str_Source) :  해당 경로에 파일을 저�
 ```
 [VB 배열 관련](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/arrays/)
 [Linq 사용한 계산](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/linq/how-to-count-sum-or-average-data-by-using-linq)
-[Linq 사용 예시](https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example)
-
+#### [Linq 사용 예시1](https://linqsamples.com/linq-to-objects/element)
+#### [Linq 사용 예시2](https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example)
 
 ```vb
 TypeName({1,2,3}) 'Integer()
@@ -30,10 +42,16 @@ Aggregate x in {1,2,3,4,5} into count ' 5
 Aggregate x in {1,2,3,4,5} into average '3
 Aggregate x in split("1 2 3 4 5").Select(function(x) cint(x)) into sum
 
-{1,2,3,4,5}.Aggregate(function(a,b) a+b) ' 15
 ' a는 누적되어 저장된 값, b는 new Item. 
-' 위의 문장은 ForEach b in {1,2,3,4,5}  a = f(a,b) 반복이라 생각하면 됨.
-
+{1,2,3,4,5}.Aggregate(function(a,b) a+b) ' 15
+{1,2,3,4,5}.Aggregate(function(a,b) a*b) ' 120 
+{1,2,3,4,5}.Aggregate(10, Function(a,b) a+b) '25 : Aggregated numbers by addition with a seed of 10
+{1,2,3,4,5}.sum() ' 15
+{1,2,3,4,5}.Average() '3
+{1,2,3,4,5}.Count()
+{1,2,3,4,5}.Min()
+{1,2,3,4,5}.Max()
+{1,2,3,4,5}.
 
 ```
 
