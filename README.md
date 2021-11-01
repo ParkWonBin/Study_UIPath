@@ -4,12 +4,20 @@
 - [FlowChart](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-flowchart-workflow)  
 - [Sequence](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-sequential-workflow)  
 - [StateMachine](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-state-machine-workflow)  
-- 
+
+
 [UIPATH 단축키](https://docs.uipath.com/studio/docs/keyboard-shortcuts)   
 [참고하기 좋은 블로그](https://mpaper-blog.tistory.com/)   
 [Excel VB 참고 블로그](https://kdsoft-zeros.tistory.com/36?category=846222)
 [Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
+[SetValue 관련](https://stackoverflow.com/questions/10371712/how-to-assign-value-to-string-using-vb-net)
+
+###### 자주 참고할 것
+[Strings 클래스](https://docs.microsoft.com/ko-kr/dotnet/api/microsoft.visualbasic.strings?view=net-5.0)
+[Split 공식 문서](https://docs.microsoft.com/ko-kr/dotnet/api/microsoft.visualbasic.strings.split?view=net-5.0#Microsoft_VisualBasic_Strings_Split_System_String_System_String_System_Int32_Microsoft_VisualBasic_CompareMethod_)
+[Join 공식 문서](https://docs.microsoft.com/ko-kr/dotnet/api/microsoft.visualbasic.strings.join?view=net-5.0#Microsoft_VisualBasic_Strings_Join_System_String___System_String_)
 [Linq 관련 공식 문서](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/linq/introduction-to-linq)
+[Linq 코드 예시](https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example) 
 
 ### [Linq 설명](https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example) (Lambda/ Query)
 Lambda 식은 무명함수로, Function(x) x 형태를 기본으로 한다. 무명함수에 인자로 들오언 (x)를 의미한다.  
@@ -138,6 +146,7 @@ file.WriteAllText("Config.md", Str_Config)
 
 #### Array 다루기
 ##### Split, join
+
 ```vb
 ' strings.split
 StrArr = split("1,2,3",",") 
