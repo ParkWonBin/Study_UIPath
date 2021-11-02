@@ -55,11 +55,11 @@ string.Format("BuildDataTable{0} {0}Dt_tmp <- Add Columns :{0}{1}{0} {0}Dt_tmp <
 'select로 dt를 수정하는 함수를 호출하고, 리턴값 잘 조작하여 최종적으로 String 형태를 만들면 LogMassage에서 해당 code를 사용할 수 있다.
 
 'Log Message - Col만 추가
-string.Format("dt_tmp <- Add Columns :{0}{1}",vbNewLine, join(ArrStr_colName.Select(function(x) dt_tmp.Columns.Add(x).ToString).ToArray, " | ")
+join("col1|col2|col3".Split("|"c).Select(function(x) if(dt_tmp.Columns.Contains(x.trim), x.Trim+" (Skip-중복)", dt_tmp.Columns.Add(x.Trim).ToString)).ToArray," | ")
 ' 중복된 이름의 Column을 추가하려고 할 경우 오류 발생
 
 'Log Message - Data만 추가
-string.Format("dt_tmp <- Add Data : {0}{1}",vbNewLine, join(ArrArrStr_data.Select(function(row) join( dt_tmp.Rows.Add(row.Take(dt_tmp.Columns.Count).ToArray).itemArray.Select(function(x) x.ToString).ToArray , " | ")).ToArray , vbNewLine) )
+join("00|01\10|11|12|13|\20|21|22|23|24|25|26|27".Split("\"c).Select(function(tr) tr.Split("|"c).Select(function(td) td.trim).ToArray ).Select(function(tr) join( dt_tmp.Rows.Add(tr.Take(dt_tmp.Columns.Count).ToArray).itemArray.Select(function(td) td.ToString).ToArray , " | ")).ToArray , vbNewLine)
 ' newRow의 item.count가 col.count보다 작을 때는, 부족하면 맨 null을 체워넣는다.
 ' newRow의 item.count가 col.count보다 클 때는, Take를 통해 col.count 개수만큼만 사용하고 초과된 item은 버린다.
 
