@@ -41,8 +41,8 @@ ArrArrStr_data As String()()
 
 'Assign
 dt_tmp = new DataTable()
-ArrStr_colName = split("Col0|Col1|Col2|Col3","|")
-ArrArrStr_data = split( "00|01\10|11|12|13|\20|21|22|23|24|25|26|27","\").Select(function(row) split(row,"|").Select(function(data) data.Trim).ToArray ).ToArray
+ArrStr_colName = "col1|col2|col3".Split("|"c).Select(function(x) x.trim).ToArray
+ArrArrStr_data = "00|01\10|11|12|13|\20|21|22|23|24|25|26|27".Split("\"c).Select(function(tr) tr.Split("|"c).Select(function(td) td.trim).ToArray)
 
 'Log Message - 입력 데이터 확인
 string.Format("입력 데이터 확인{0}{1}{0}{2}",vbNewLine,join(ArrStr_colName," | "),  join(ArrArrStr_data.Select(function(tr) join(tr.Select(function(td) td.Trim).ToArray, " | ")).ToArray,vbNewLine) )
