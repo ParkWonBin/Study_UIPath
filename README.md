@@ -55,8 +55,8 @@ string.Format("dt_tmp <- Add Columns :{0}{1}",vbNewLine, join(ArrStr_colName.Sel
 
 'Log Message - Data만 추가
 string.Format("dt_tmp <- Add Data : {0}{1}",vbNewLine, join(ArrArrStr_data.Select(function(row) join( dt_tmp.Rows.Add(row.Take(dt_tmp.Columns.Count).ToArray).itemArray.Select(function(x) x.ToString).ToArray , " | ")).ToArray , vbNewLine) )
-' newRow에 col 항목이 부족하면 맨 뒤열 null로 넣음
-' Take를 써서 col 개수 초과하는 item은 무시함
+' newRow의 item.count가 col.count보다 작을 때는, 부족하면 맨 null을 체워넣는다.
+' newRow의 item.count가 col.count보다 클 때는, Take를 통해 col.count 개수만큼만 사용하고 초과된 item은 버린다.
 
 ' 요령
 ' 1. 반복문으로 수행할 함수는 Select를 통해 호출한다.
