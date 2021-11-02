@@ -49,6 +49,15 @@ string.Format("BuildDataTable {0} {0}Dt_tmp <- Add Columns : {0}{1}{0} {0} Dt_tm
 'dataTable.columns.Add() 와 dataTable.Rows.Add()는 각각 하고 입력받은 인수(String, DataRow)를 그대로 Return하는 함수다.
 'select로 dt를 수정하는 함수를 호출하고, 리턴값 잘 조작하여 최종적으로 String 형태를 만들면 LogMassage에서 해당 code를 사용할 수 있다.
 
+'Log Message - Col만 추가
+string.Format("dt_tmp <- Add Columns :{0}{1}",vbNewLine, join(ArrStr_colName.Select(function(x) dt_tmp.Columns.Add(x).ToString).ToArray, " | ")
+' 중복된 이름의 Column을 추가하려고 할 경우 오류 발생
+
+'Log Message - Data만 추가
+string.Format("dt_tmp <- Add Data : {0}{1}",vbNewLine, join(ArrArrStr_data.Select(function(row) join( dt_tmp.Rows.Add(row.Take(dt_tmp.Columns.Count).ToArray).itemArray.Select(function(x) x.ToString).ToArray , " | ")).ToArray , vbNewLine) )
+' newRow에 col 항목이 부족하면 맨 뒤열 null로 넣음
+' Take를 써서 col 개수 초과하는 item은 무시함
+
 ' 요령
 ' 1. 반복문으로 수행할 함수는 Select를 통해 호출한다.
 ' 2. object의 경우 {object}.ToString 을 사용하고하여 String으로 객체로 만들어 작업한다. (Nothing, null도 ""객체로 만들어준다.)
