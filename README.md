@@ -30,6 +30,7 @@ Query 식은 SQL 식과 유사한 쿼리식이다. From 이나 Aggregate 로 수
 
 ##### BuildDataTable by Sting
 ```vb
+' Variables 패널 설정
 dt_tmp As System.Data.DataTable
 ArrStr_colName As String()
 ArrArrStr_data As String()()
