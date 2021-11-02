@@ -1,23 +1,22 @@
-
 #### Windows-Workflow-Foundation  
 - UiPath의 근본이 되는 것
 - [FlowChart](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-flowchart-workflow)  
 - [Sequence](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-sequential-workflow)  
 - [StateMachine](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-state-machine-workflow)  
 
-
-[UIPATH 단축키](https://docs.uipath.com/studio/docs/keyboard-shortcuts)   
-[참고하기 좋은 블로그](https://mpaper-blog.tistory.com/)   
-[Excel VB 참고 블로그](https://kdsoft-zeros.tistory.com/36?category=846222)
-[Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
-[SetValue 관련](https://stackoverflow.com/questions/10371712/how-to-assign-value-to-string-using-vb-net)
-
-###### 자주 참고할 것
+#### 개발 관련 레퍼런스
 [Strings 클래스](https://docs.microsoft.com/ko-kr/dotnet/api/microsoft.visualbasic.strings?view=net-5.0)
 [Split 공식 문서](https://docs.microsoft.com/ko-kr/dotnet/api/microsoft.visualbasic.strings.split?view=net-5.0#Microsoft_VisualBasic_Strings_Split_System_String_System_String_System_Int32_Microsoft_VisualBasic_CompareMethod_)
 [Join 공식 문서](https://docs.microsoft.com/ko-kr/dotnet/api/microsoft.visualbasic.strings.join?view=net-5.0#Microsoft_VisualBasic_Strings_Join_System_String___System_String_)
 [Linq 관련 공식 문서](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/linq/introduction-to-linq)
 [Linq 코드 예시](https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example) 
+
+#### 리서치 레퍼런스
+[UIPATH 단축키](https://docs.uipath.com/studio/docs/keyboard-shortcuts)   
+[참고하기 좋은 블로그](https://mpaper-blog.tistory.com/)   
+[Excel VB 참고 블로그](https://kdsoft-zeros.tistory.com/36?category=846222)
+[Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
+[SetValue 관련](https://stackoverflow.com/questions/10371712/how-to-assign-value-to-string-using-vb-net)
 
 ### [Linq 설명](https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example) (Lambda/ Query)
 Lambda 식은 무명함수로, Function(x) x 형태를 기본으로 한다. 무명함수에 인자로 들오언 (x)를 의미한다.  
@@ -28,6 +27,38 @@ Query 식은 SQL 식과 유사한 쿼리식이다. From 이나 Aggregate 로 수
 - [ThenBy 문](https://linqsamples.com/linq-to-objects/ordering/ThenBy-lambda-vb) : Orderby로 정렬한 순서에서, 같은 레벨에 있는 항목을 제2 기준으로 정렬
 - [Aggregate](https://linqsamples.com/linq-to-objects/aggregation/Aggregate-lambda-vb) : 특정 값을 누적하여 계산할 떄 사용. function(a,b)에서 a는 누적된 값, b는 작업중인 항목 의미.
 - [Zip 문](https://linqsamples.com/linq-to-objects/other/Zip-lambda-vb) : 2개의 array를 동일한 index에 대해 대해 매핑 작업을 할 떄 쓰임. (ex : 백터 내적 연산 등)
+
+##### BuildDataTable by Sting
+```vb
+dt_tmp As System.Data.DataTable
+ArrStr_colName As String()
+ArrArrStr_data As String()()
+
+'Assign
+dt_tmp = new DataTable()
+ArrStr_colName = split("Col0|Col1|Col2|Col3","|")
+ArrArrStr_data = split( "00|01\10|11|12|13|\20|21|22|23|24|25|26|27","\").Select(function(row) split(row,"|").Select(function(data) data.Trim).ToArray ).ToArray
+
+'Log Message - 입력 데이터 확인
+string.Format("입력 데이터 확인{0}{1}{0}{2}",vbNewLine,join(ArrStr_colName," | "),  join(ArrArrStr_data.Select(function(tr) join(tr.Select(function(td) td.Trim).ToArray, " | ")).ToArray,vbNewLine) )
+
+'Log Message - 데이터 적용
+string.Format("BuildDataTable {0} {0}Dt_tmp <- Add Columns : {0}{1}{0} {0} Dt_tmp <- Add Data : {0}{2}{0}",vbNewLine,join(ArrStr_colName.Select(function(colName) dt_tmp.Columns.Add(colName.Trim).ToString).ToArray, " | "),  join(ArrArrStr_data.Select(function(tr) join( dt_tmp.Rows.Add(tr.Take(dt_tmp.Columns.Count).ToArray).itemArray.Select(function(td) td.ToString).ToArray , " | ")).ToArray , vbNewLine))
+
+'원리 설명
+'dataTable.columns.Add() 와 dataTable.Rows.Add()는 각각 하고 입력받은 인수(String, DataRow)를 그대로 Return하는 함수다.
+'select로 dt를 수정하는 함수를 호출하고, 리턴값 잘 조작하여 최종적으로 String 형태를 만들면 LogMassage에서 해당 code를 사용할 수 있다.
+
+' 요령
+' 1. 반복문으로 수행할 함수는 Select를 통해 호출한다.
+' 2. object의 경우 {object}.ToString 을 사용하고하여 String으로 객체로 만들어 작업한다. (Nothing, null도 ""객체로 만들어준다.)
+' 3. IEnumerable의 경우 {enumarable}.Select(Function(x) x.ToString).Array 를 통해 String Arrray 형태로 만들어 작업한다.
+' 4. String Array의 경우 Strings.Join() 함수를 통해 String으로 만든다.
+' 5. 개별적으로 동작하는 함수를 String을 반환하도록 마들었다면.  String.Format() 함수를 통해 One-Line으로 병합한다.
+' 6. String.Format에 인수가 입력되는 과정에서 위에서 정의한 함수가 1번씩 실행된다. 굳이 {0}등으로 내용을 표시를 하지 않아도, 입력받은 인자 순서대로 Code가 동작한다.
+' 7. 위 방법의 한계는 "값을 산출하는 함수"만 호출할 수 있다는 것이다. 값을 산출하지 않는 함수는 function을 인자로 받는 함수를 통해 호출할 수 없다.
+```
+
 
 ##### 함수 설명
 ```vb
