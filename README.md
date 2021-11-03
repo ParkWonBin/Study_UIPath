@@ -186,13 +186,15 @@ string.Format("<tr style=' {1} '>{0} {2} </tr>{0}",vbNewLine, dic_CSS("tr"), joi
 Join( DT_tmp.AsEnumerable.Select( Function(row) String.Format("<tr style=' {1} '>{0} {2} {0}</tr>{0}",vbNewLine,dic_CSS("tr"), Join( Enumerable.Range(0,DT_tmp.Columns.Count).Select(Function(x) String.Format("<td style=' {0} {2} '> {1} </td>",dic_CSS("td"), row.Item(x).ToString, if(dic_CSS.Keys.Contains("width_col"+x.ToString) , string.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim) ,"")) ).ToArray, vbNewLine ) ) ).ToArray, vbNewLine)
 ```
 
-##### Print Dictionary
+##### Print Dictionary / Bake Config
 ```vb
 Dim in_Dic_Config As New Dictionary(Of String,String)
 Dim Str_Config As String
 
 Str_Config = 
-string.Format("{1}{0}{3}{0}{2}",vbNewLine,"New Dictionary(Of String,String) From {","}", join( in_Dic_Config.Keys.Select(function(key) string.Format("{0} {2}{3}{2} , {2}{4}{2} {1}", "{","}", chr(34), key, in_Dic_Config(key).Replace(vbNewLine," ").Replace(chr(34),"'") ) ).ToArray, ","+vbNewLine) )
+String.Format("{1}{0}{3}{0}{2}",vbNewLine,"New Dictionary(Of String,String) From {","}", Join( in_Dic_Config.Keys.Select(Function(key) String.Format("{0} {2}{3}{2} , {2}{4}{2} {1}", "{","}", chr(34), key, in_Dic_Config(key).Replace(vbNewLine," ").Replace(chr(10),"'").Replace(chr(34),"'") ) ).ToArray, ","+vbNewLine) )
+'chr(10) : 엑셀 줄바꿈 문자열
+'chr(34) : 쌍따옴표 "
 
 file.WriteAllText("Config.md", Str_Config)
 ```
