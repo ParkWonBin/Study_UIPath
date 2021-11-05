@@ -18,6 +18,23 @@
 [Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
 [SetValue 관련](https://stackoverflow.com/questions/10371712/how-to-assign-value-to-string-using-vb-net)
 
+### Empty, Nothing, null
+Empty : 변수 생성 후 초기화 하지 않음 (string, int 생성만 했을 때)
+Nothing : 해당 변수가 참조하는 개체가 없음 (DataTable, Dictionary, List 등)
+null : 알 수 없는 데이터(DataTable 생성 후 값을 입력하지 않음)
+* Tostring은 에러를 배출하지 않는다.
+* Nothing인 객체에 Tosting을 하면 에러가 발생한다. (참조개체가 없으므로 Tostring 매소드 호출할 수 없기 때문)
+* System.Convert.ToString(Nothing)을 하게 되면 ""가 반환된다. Conver.ToString는 이미 정의되어 있고 null, Nothing 체크를 하기 때문
+Nothing.Tostring = 에러 : 참조개체가 없어 "개체.ToString" 정의되지 않음
+Convert.ToString(Nothing) = "" : ToString 함수는 Convert에서 정의 됨, null, Nothing 체크가능
+
+### [엑셀]
+pivotTable 
+- 단축키 : Alt+D + p
+- 경로 : 리본>삽입>피벗테이블
+- 옵션 : 새 시트로 생성 > [필터, 열 레이블, 행 레이블, 값] 설정
+- 수정 : 테이블 우클릭 > 피벗테이블 필드 표시
+ 
 ### [Linq 설명](https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example) (Lambda/ Query)
 Lambda 식은 무명함수로, Function(x) x 형태를 기본으로 한다. 무명함수에 인자로 들오언 (x)를 의미한다.  
 Query 식은 SQL 식과 유사한 쿼리식이다. From 이나 Aggregate 로 수식을 시작한다.   
