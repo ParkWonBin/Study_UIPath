@@ -177,8 +177,16 @@ join( StrArr_ShouldAdd.Select(function(x) string.Format("{1} {0}{3}{0} , {0}dumm
 ```
 ##### Bake DT as Log Text
 ```vb
-dt_temp As DataTable
+' Assign
+dt_temp = new DataTable()
 
+' LogMassege -Add Column
+join("||".Split("|"c).Select(function(x) if(dt_tmp.Columns.Contains(x.trim), x.Trim+" (Skip-중복)", dt_tmp.Columns.Add(x.Trim).ToString)).ToArray," | ")
+
+' LogMassege - Add Data
+join("a|1|0\a|2|0\a|2|0\b|2|0\b|3|0".Split("\"c).Select(function(tr) tr.Split("|"c).Select(function(td) td.trim).ToArray ).Select(function(tr) join( dt_tmp.Rows.Add(tr.Take(dt_tmp.Columns.Count).ToArray).itemArray.Select(function(td) td.ToString).ToArray , " | ")).ToArray , vbNewLine)
+
+' LogMassege - print
 string.Format("Index{1}{2}{0}{3}",vbNewLine,vbTab, join(Enumerable.Range(0,DT_tmp.Columns.Count).Select(function(x) DT_tmp.Columns.Item(x).ColumnName).ToArray," | "), join(Enumerable.Range(0,DT_tmp.Rows.Count).Select(function(tr) string.Format("{1}{0}{2}", vbTab, tr.ToString("000"),  join( DT_tmp.Rows(tr).ItemArray.Select(function(td) Convert.ToString(td)).ToArray, " | ") ) ).ToArray,vbNewLine))
 ```
 
