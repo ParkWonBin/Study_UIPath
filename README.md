@@ -175,7 +175,14 @@ StrArr_UsedKeys.Where(function(x) not in_Dic_Config.Keys.Contains(x) ).ToArray
 join( StrArr_ShouldAdd.Select(function(x) string.Format("{1} {0}{3}{0} , {0}dummy{0}  {2}", chr(34),"{","}",x.ToString) ).ToArray, ","+vbNewLine)
 
 ```
-##### Print DT as HTML with CSS
+##### Bake DT as Log Text
+```vb
+dt_temp As DataTable
+
+string.Format("Index{1}{2}{0}{3}",vbNewLine,vbTab, join(Enumerable.Range(0,DT_tmp.Columns.Count).Select(function(x) DT_tmp.Columns.Item(x).ColumnName).ToArray," | "), join(Enumerable.Range(0,DT_tmp.Rows.Count).Select(function(tr) string.Format("{1}{0}{2}", vbTab, tr.ToString("000"),  join( DT_tmp.Rows(tr).ItemArray.Select(function(td) Convert.ToString(td)).ToArray, " | ") ) ).ToArray,vbNewLine))
+```
+
+##### Bake DT as HTML with CSS
 ```vb
 Dim dic_CSS As Dictionary(Of String, String) 
 Dim Str_HTML As String
