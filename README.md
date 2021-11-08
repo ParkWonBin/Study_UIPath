@@ -18,6 +18,23 @@
 [Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
 [SetValue 관련](https://stackoverflow.com/questions/10371712/how-to-assign-value-to-string-using-vb-net)
 
+### 셀렉터 잡을 떄 팁
+```vb
+' Indicate To screen > ui_tmp
+' Log Message
+String.Format("{1} : {2}{0}{3}",vbNewLine,"Selector",ui_tmp.Selector.ToString, Join( ui_tmp.GetNodeAttributes(False).Keys.Select(Function(key) String.format("{1} : {2}", vbnewline, key, ui_tmp.GetNodeAttributes(False)(key))).ToArray, vbNewLine) )
+
+' Assign : ui_tmp = ui_tmp.parent
+' Log Message : 상동
+
+' Assign : ui_tmp = ui_tmp.parent
+' Log Message : 상동
+```
+UI 구조가 a > b > c > d 이런식으로 되어 있을 때. Selector는     
+a > d, a> c 이런식으로 중간 단계가 누락되어 있을 수 있다.  
+셀렉터가 너무 불안정 할 때는 부모 selector를 확인해서 하위로 진입하는 식으로 잡는게 안정성 있다.
+
+
 ### Empty, Nothing, null
 Empty : 변수 생성 후 초기화 하지 않음 (string, int 생성만 했을 때)
 Nothing : 해당 변수가 참조하는 개체가 없음 (DataTable, Dictionary, List 등)
