@@ -26,17 +26,17 @@
 [RS_참고하기]:https://mpaper-blog.tistory.com/
  
 #### Naming Tip Boolean
-| 자료형  | 요령                     | 예시                         |
-| ------- | ------------------------ | ---------------------------- |
-| Boolean | Is_상태                  | Is_Exist                     |
-| Boolean | Is_설정                  | Is_NonDebugMode              |
-| Boolean | Is_대상_상태             | Is_Element_Exist             |
-| Boolean | Is_동작_상태             | Is_ProcrssName_Done          |
-| Boolean | Is_동작_대상_상태        | Is_Download_PDF_Succeed      |
-| Boolean | Has_대상                 | Has_Error                    |
-| Boolean | Should_동작              | Should_Start/Retry/Stop/Skip |
-| Boolean | Should_동작_대상         | Should_Upload_Directory      |
-| Boolean | IsNot, HasNot, ShouldNot | -                            |
+| 자료형  | 요령                     | 예시                    | 비고                                    |
+| ------- | ------------------------ | ----------------------- | --------------------------------------- |
+| Boolean | Is_값                    | Is_WhiteSpace           | null, Empty, Nothing, nan               |
+| Boolean | Is_상태                  | Is_Exist                | NonDebugMode,Vaild                      |
+| Boolean | Is_대상_상태             | Is_Element_Exist        | Button_Changed, Window_Closed           |
+| Boolean | Is_동작_상태             | Is_ProcrssName_Done     | Done, Succeed, Fail, Processing         |
+| Boolean | Is_동작_대상_상태        | Is_Download_PDF_Succeed | Search_Data_HasError                    |
+| Boolean | Has_대상                 | Has_Error               | SystemError, BussinessError, AttachFile |
+| Boolean | Should_동작              | Should_Retry            | Start, Stop, Skip, Extract, Print       |
+| Boolean | Should_동작_대상         | Should_Upload_Directory | Clear_Dir, Send_Email                   |
+| Boolean | IsNot, HasNot, ShouldNot | -                       |
 
 #### Naming Tip Integer
 | 자료형  | 요령               | 예시                        |
