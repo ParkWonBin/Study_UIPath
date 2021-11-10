@@ -1,24 +1,57 @@
-#### Windows-Workflow-Foundation  
-- UiPath의 근본이 되는 것
-- [FlowChart](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-flowchart-workflow)  
-- [Sequence](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-sequential-workflow)  
-- [StateMachine](https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-state-machine-workflow)  
+### 레퍼런스 모음
+[Markdown 사용법](https://gist.github.com/ihoneymon/652be052a0727ad59601)
 
-#### 개발 관련 레퍼런스
-[Strings 클래스](https://docs.microsoft.com/ko-kr/dotnet/api/microsoft.visualbasic.strings?view=net-5.0)
-[Split 공식 문서](https://docs.microsoft.com/ko-kr/dotnet/api/microsoft.visualbasic.strings.split?view=net-5.0#Microsoft_VisualBasic_Strings_Split_System_String_System_String_System_Int32_Microsoft_VisualBasic_CompareMethod_)
-[Join 공식 문서](https://docs.microsoft.com/ko-kr/dotnet/api/microsoft.visualbasic.strings.join?view=net-5.0#Microsoft_VisualBasic_Strings_Join_System_String___System_String_)
-[Linq 관련 공식 문서](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/linq/introduction-to-linq)
-[Linq 코드 예시](https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example) 
+| Uipath 근본                 | 개발 관련                       | 리서치                              |
+| --------------------------- | ------------------------------- | ----------------------------------- |
+| [StateMachine][WdSm]        | [Linq 코드 예시][Dev_LinqCode]  | [참고하기 좋은 블로그][RS_참고하기] |
+| [FlowChart][WdFc]           | [Linq 공식 문서][Dev_LinqDoc]   | [Custom 액티비티 만들기][RS_Custom] |
+| [Sequnce][WdSq]             | [Split 공식 문서][Dev_SplitDoc] | [SetValue 관련][RS_SetValue]        |
+| [SW접근성][SWAuto]          | [Join 공식 문서][Dev_JoinDoc]   | [Excel VB 참고 블로그][RS_ExcelVB]  |
+| [Server-Side 권장안함][SSA] | [Strings 클래스][Dev_StrClass]  | [UIPATH 단축키][RS_UIPATH]          |
 
-#### 리서치 레퍼런스
-[UIPATH 단축키](https://docs.uipath.com/studio/docs/keyboard-shortcuts)   
-[참고하기 좋은 블로그](https://mpaper-blog.tistory.com/)   
-[Excel VB 참고 블로그](https://kdsoft-zeros.tistory.com/36?category=846222)
-[Custom 액티비티 만들기](https://mpaper-blog.tistory.com/15?category=832250)   
-[SetValue 관련](https://stackoverflow.com/questions/10371712/how-to-assign-value-to-string-using-vb-net)
+[WdFc]:https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-flowchart-workflow
+[WdSq]:https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-sequential-workflow
+[WdSm]:https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/how-to-create-a-state-machine-workflow
+[SWAuto]:https://ehpub.co.kr/category/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EA%B8%B0%EC%88%A0/sw%EC%A0%91%EA%B7%BC%EC%84%B1-%EA%B8%B0%EC%88%A0-ui-%EC%9E%90%EB%8F%99%ED%99%94/
+[SSA]:https://support.microsoft.com/en-us/topic/considerations-for-server-side-automation-of-office-48bcfe93-8a89-47f1-0bce-017433ad79e2
+[Dev_StrClass]:https://docs.microsoft.com/ko-kr/dotnet/api/microsoft.visualbasic.strings?view=net-5.0
+[Dev_SplitDoc]:https://docs.microsoft.com/ko-kr/dotnet/api/microsoft.visualbasic.strings.split?view=net-5.0#Microsoft_VisualBasic_Strings_Split_System_String_System_String_System_Int32_Microsoft_VisualBasic_CompareMethod_
+[Dev_JoinDoc]:https://docs.microsoft.com/ko-kr/dotnet/api/microsoft.visualbasic.strings.join?view=net-5.0#Microsoft_VisualBasic_Strings_Join_System_String___System_String_
+[Dev_LinqDoc]:https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/linq/introduction-to-linq
+[Dev_LinqCode]:https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example
+[RS_UIPATH]:https://docs.uipath.com/studio/docs/keyboard-shortcuts
+[RS_SetValue]:https://stackoverflow.com/questions/10371712/how-to-assign-value-to-string-using-vb-net
+[RS_ExcelVB]:https://kdsoft-zeros.tistory.com/36?category=846222
+[RS_Custom]:https://mpaper-blog.tistory.com/15?category=832250
+[RS_참고하기]:https://mpaper-blog.tistory.com/
+ 
+#### Naming Tip Boolean
+| 자료형  | 요령                     | 예시                         |
+| ------- | ------------------------ | ---------------------------- |
+| Boolean | Is_상태                  | Is_Exist                     |
+| Boolean | Is_설정                  | Is_NonDebugMode              |
+| Boolean | Is_대상_상태             | Is_Element_Exist             |
+| Boolean | Is_동작_상태             | Is_ProcrssName_Done          |
+| Boolean | Is_동작_대상_상태        | Is_Download_PDF_Succeed      |
+| Boolean | Has_대상                 | Has_Error                    |
+| Boolean | Should_동작              | Should_Start/Retry/Stop/Skip |
+| Boolean | Should_동작_대상         | Should_Upload_Directory      |
+| Boolean | IsNot, HasNot, ShouldNot | -                            |
 
-### 셀렉터 잡을 떄 팁
+#### Naming Tip Integer
+| 자료형  | 요령               | 예시                        |
+| ------- | ------------------ | --------------------------- |
+| Integer | 수열Max            | Int_RetryMax                |
+| Integer | 횟수Cnt  (Count)   | Int_RetryCnt                |
+| Integer | 위치Idx  (Index)   | Int_RowIdx                  |
+| Integer | 배열Num  (Number)  | Int_TransActionNum          |
+| Integer | 대상_속성          | Int_DT_Width                |
+| Integer | 대상_속성_세부속성 | Int_Scrollbar_ClickOffset_X |
+
+
+
+
+### 셀렉터 잡을 때 팁
 ```vb
 ' Indicate To screen > ui_tmp
 ' Log Message
