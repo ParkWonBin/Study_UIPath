@@ -268,7 +268,7 @@ string.Format("<tr style=' {1} '>{0} {2} </tr>{0}",vbNewLine, dic_CSS("tr"), joi
 Join( DT_tmp.AsEnumerable.Select( Function(row) String.Format("<tr style=' {1} '>{0} {2} {0}</tr>{0}",vbNewLine,dic_CSS("tr"), Join( Enumerable.Range(0,DT_tmp.Columns.Count).Select(Function(x) String.Format("<td style=' {0} {2} '> {1} </td>",dic_CSS("td"), row.Item(x).ToString, if(dic_CSS.Keys.Contains("width_col"+x.ToString) , string.Format("width : {0}px;", dic_CSS("width_col"+x.ToString).Trim) ,"")) ).ToArray, vbNewLine ) ) ).ToArray, vbNewLine)
 ```
 
-##### Print Dictionary / Bake Config
+##### Print Dictionary / Bake Config.log, Config.excel
 ```vb
 Dim in_Dic_Config As New Dictionary(Of String,String)
 Dim Str_Config As String
@@ -279,6 +279,50 @@ String.Format("{1}{0}{3}{0}{2}",vbNewLine,"New Dictionary(Of String,String) From
 'chr(34) : 쌍따옴표 "
 
 file.WriteAllText("Config.md", Str_Config)
+
+
+'out_Bake_Config_AsExcel = Function ( dic_config As dictionary(Of String, String) )
+	Dim excel As New Microsoft.Office.Interop.Excel.Application
+	Dim wb As Microsoft.Office.Interop.Excel.Workbook
+	Dim ws As Microsoft.Office.Interop.Excel.Worksheet
+	Dim strFileName As String = Environment.CurrentDirectory+"\"+now.tostring("yyMMdd")+"_Bake_Config.xlsx"
+		
+	' 초기변수 설정
+	wb = excel.Workbooks.Add()
+	ws = CType(wb.ActiveSheet, Microsoft.Office.Interop.Excel.Worksheet)
+	ws.Name = "Config"
+	
+	' Header 작성 Cells(row, col)
+	 excel.Cells(1, 1) = "Name"
+	 excel.Cells(1, 2) = "Value"
+	 excel.Cells(1, 3) = "Description"
+	 ws.Range("A1:C1").Font.Bold = True 
+	 ws.Range("A1:C1").Interior.Color = Color.LightGray
+	
+	Dim rowIndex As Integer = 1
+	Dim keys As String()
+	keys = dic_config.keys().toarray
+	system.array.sort(keys)
+	For Each key As String In keys 
+	    rowIndex = rowIndex + 1
+		excel.Cells(rowIndex, 1) = key
+	 	excel.Cells(rowIndex, 2) = dic_config(key)
+	Next
+	
+	' 열 너비 설정
+	ws.Columns.AutoFit()
+	
+	' 파일 존재여부 확인
+	If System.IO.File.Exists(strFileName) Then
+	    System.IO.File.Delete(strFileName)
+	End If
+	
+	' 저장 및 종료
+	wb.SaveAs(strFileName)
+	wb.Close()
+	excel.Quit()
+	'Return "저장 성공 : "+vbnewline+strFileName
+'End Function
 ```
 
 #### Array 다루기
