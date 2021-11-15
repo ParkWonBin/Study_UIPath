@@ -40,6 +40,9 @@ Attach 로 이미지 파일 첨부하고,
 
 
 ## [EDGE 관련 단축키](https://mainia.tistory.com/4086)
+[Reference1](https://mainia.tistory.com/4086)
+[Reference2](https://thelumine.wordpress.com/2015/08/27/microsoft-edge-keyboard-shortcuts/)
+
 |단축키 | 기능 |
 |--|--|
 | Ctrl+W | 현재 탭 닫기 |
