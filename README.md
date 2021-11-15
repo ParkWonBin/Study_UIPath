@@ -34,9 +34,8 @@ Attach 로 이미지 파일 첨부하고,
 <!--  첨부파일 이미지가 "123.png"라면 -->
 <img src='cid:123.png' width='300' height='300' >
 ```
-[참고][Outlook Attach] 
+[참고](https://stackoverflow.com/questions/29369862/outlook-email-picture-attachment-not-showing-when-i-displaying-outlook-html-ema?rq=1)
 위와 같이 이미지를 첨부하고 크기를 설정할 수 있습니다.
-[Outlook Attach]:https://stackoverflow.com/questions/29369862/outlook-email-picture-attachment-not-showing-when-i-displaying-outlook-html-ema?rq=1
 
 
 
