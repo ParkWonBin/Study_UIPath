@@ -1,4 +1,4 @@
-### 레퍼런스 모음
+## 레퍼런스 모음
 [Markdown 사용법](https://gist.github.com/ihoneymon/652be052a0727ad59601)
 
 | Uipath 근본                 | 개발 관련                       | 리서치                              |
@@ -24,6 +24,35 @@
 [RS_ExcelVB]:https://kdsoft-zeros.tistory.com/36?category=846222
 [RS_Custom]:https://mpaper-blog.tistory.com/15?category=832250
 [RS_참고하기]:https://mpaper-blog.tistory.com/
+
+
+
+## OutLook 사진첨부
+Attach 로 이미지 파일 첨부하고, 
+메일 본문을 html형식으로 설정한 이후 <img> 테그를 사용하여 보낼 수 있습니다.참
+```html
+<!--  첨부파일 이미지가 "123.png"라면 -->
+<img src='cid:123.png' width='300' height='300' >
+```
+[참고][Outlook Attach] 
+위와 같이 이미지를 첨부하고 크기를 설정할 수 있습니다.
+[Outlook Attach]:https://stackoverflow.com/questions/29369862/outlook-email-picture-attachment-not-showing-when-i-displaying-outlook-html-ema?rq=1
+
+
+
+## [EDGE 관련 단축키](https://mainia.tistory.com/4086)
+|단축키 | 기능 |
+|--|--|
+| Ctrl+W | 현재 탭 닫기 |
+| Ctrl+1~Ctrl+8 | 창의 특정 위치에 있는 탭으로 이동 |
+| Ctrl+9 | 창의 마지막 탭으로 이동 |
+| Ctrl+Shift+T | 마지막으로 닫았던 탭 열기 |
+| Ctrl+Tab | 창의 다음 탭으로 이동	|
+| Ctrl+Shift+Tab | 창의 이전 탭으로 이동	|
+| Ctrl+U | 페이지 소스 보기 |
+| Ctrl+Shift+I | 개발자 도구 패널 표시/숨김 | 
+
+
  
 #### Naming Tip Boolean
 | 자료형  | 요령                     | 예시                    | 비고                                    |
