@@ -25,8 +25,12 @@
 [RS_Custom]:https://mpaper-blog.tistory.com/15?category=832250
 [RS_참고하기]:https://mpaper-blog.tistory.com/
 
-
-
+## 특정일로부터 n개 날짜 선택하기
+```vb
+Str_tmp = "2021-11-21"
+int_cnt = 50
+join( Enumerable.Range(cint(DateTime.Parse(Str_tmp).ToOADate), int_cnt).Select(function(x) datetime.FromOADate(x).ToString("yyyy-MM-dd") ).ToArray ,vbNewLine)
+```
 ## OutLook 사진첨부
 Attach 로 이미지 파일 첨부하고, 
 메일 본문을 html형식으로 설정한 이후 <img> 테그를 사용하여 보낼 수 있습니다.참
