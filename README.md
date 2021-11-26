@@ -25,6 +25,42 @@
 [RS_Custom]:https://mpaper-blog.tistory.com/15?category=832250
 [RS_참고하기]:https://mpaper-blog.tistory.com/
 
+## StrArr to DataTable Column
+```vb
+DT_tmp = new DataTable
+StrArr_data = "제목|data1|data2|data3".Split("|"c)
+
+# 1. Column 추가
+dT_tmp.Columns.Add( StrArr_data.First )
+
+# 2. Data 추가
+join( StrArr_data.Skip(1).Select(function(x) join( DT_tmp.Rows.Add({x}.take(1).ToArray ).ItemArray.select(function(y) y.ToString).ToArray , " | ") ).ToArray, vbNewLine )
+
+# 3. 합본
+string.Format("{1}{0}{2}",vbNewLine,dT_tmp.Columns.Add( StrArr_data.First ) , join(  StrArr_data.Skip(1).Select(function(x) join( DT_tmp.Rows.Add({x}.take(1).ToArray ).ItemArray.select(function(y) y.ToString).ToArray , " | ") ).ToArray, vbNewLine ) )
+
+```
+
+## DataSet에 Table 넣고 Data 초기화
+```vb
+DS_RPA = new dataset()
+StrArr_cols = "DT1|col1|col2".Split("|"c)
+StrArr_data = "data1|data2".Split("|"c)
+
+# 1. Table 추가
+DS_RPA.Tables.Add(StrArr_cols.First).TableName
+
+# 2. Column 추가
+join( StrArr_cols.Skip(1).Select(function(x) DS_RPA.Tables(StrArr_cols.First).Columns.Add( x.ToString.Trim ).ColumnName).ToArray , " | " )
+
+# 3. Data 추가
+join(DS_RPA.Tables(StrArr_cols.First).Rows.Add(StrArr_data).itemArray.select(function(x) x.ToString).ToArray , "|")
+
+# 4. 합본
+string.Format("{1}{0}{2}{0}{3}",vbNewLine, DS_RPA.Tables.Add(StrArr_cols.First).TableName , join( StrArr_cols.Skip(1).Select(function(x) DS_RPA.Tables(StrArr_cols.First).Columns.Add( x.ToString.Trim ).ColumnName).ToArray , " | " ) , join(DS_RPA.Tables(StrArr_cols.First).Rows.Add(StrArr_data).itemArray.select(function(x) x.ToString).ToArray , "|"))
+
+```
+
 ## 특정일로부터 n개 날짜 선택하기
 ```vb
 Str_tmp = "2021-11-21"
