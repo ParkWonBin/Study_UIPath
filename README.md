@@ -18,7 +18,7 @@
 [Dev_SplitDoc]:https://docs.microsoft.com/ko-kr/dotnet/api/microsoft.visualbasic.strings.split?view=net-5.0#Microsoft_VisualBasic_Strings_Split_System_String_System_String_System_Int32_Microsoft_VisualBasic_CompareMethod_
 [Dev_JoinDoc]:https://docs.microsoft.com/ko-kr/dotnet/api/microsoft.visualbasic.strings.join?view=net-5.0#Microsoft_VisualBasic_Strings_Join_System_String___System_String_
 [Dev_LinqDoc]:https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/linq/introduction-to-linq
-[Dev_LinqCode]:https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example
+[Dev_LinqCode]:https://linqsamples.com/linq-to-objects/
 [RS_UIPATH]:https://docs.uipath.com/studio/docs/keyboard-shortcuts
 [RS_SetValue]:https://stackoverflow.com/questions/10371712/how-to-assign-value-to-string-using-vb-net
 [RS_ExcelVB]:https://kdsoft-zeros.tistory.com/36?category=846222
