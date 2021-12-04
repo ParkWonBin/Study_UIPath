@@ -3,7 +3,7 @@
 
 | Uipath 근본                 | 개발 관련                       | 리서치                              |
 | --------------------------- | ------------------------------- | ----------------------------------- |
-| [StateMachine][WdSm]        | **[※Linq 코드 예시][Dev_LinqCode]**  | [참고하기 좋은 블로그][RS_참고하기] |
+| [StateMachine][WdSm]        | **[※ Linq 코드 예시][Dev_LinqCode]**  | [참고하기 좋은 블로그][RS_참고하기] |
 | [FlowChart][WdFc]           | [Linq 공식 문서][Dev_LinqDoc]   | [Custom 액티비티 만들기][RS_Custom] |
 | [Sequnce][WdSq]             | [Split 공식 문서][Dev_SplitDoc] | [SetValue 관련][RS_SetValue]        |
 | [SW접근성][SWAuto]          | [Join 공식 문서][Dev_JoinDoc]   | [Excel VB 참고 블로그][RS_ExcelVB]  |
