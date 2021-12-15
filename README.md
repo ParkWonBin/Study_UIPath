@@ -25,6 +25,22 @@
 [RS_Custom]:https://mpaper-blog.tistory.com/15?category=832250
 [RS_참고하기]:https://mpaper-blog.tistory.com/
 
+# 엑셀 다루기 팁
+1. 웬만한 서식은 모두 "조건부 서식"을 사용한다.
+```EXCEL
+조건문 관련
+=Not(IsBlank($A1))        # 해당 행의 A열의 값이 비어있지 않으면 서식 적용
+=ISNUMBER(SEARCH("1",A1)) # 해당 위치에 있는 문자열이 '1'을 포함하고 있으면 True
+
+데이터 편집 관련
+=TEXTJOIN(",",TRUE, B3,B4,...) # 구분자를 ","로 하고, 빈셀무시=True로 하여, 해당 좌표들의 값을 join함
+```
+
+2. Uipath > Excel에 CopyPasteRange 사용
+- 해당 range의 병합된 셀의 서식까지 모두 붙여넣어진다.
+- WriteRange할떄, 병합되어 생략된 위치에 data는 제대로 갱신되지 않으니 주의 
+- 병합된 셀에 값을 갱신할 떄는(dummy rowdata로 생략된 셀을 체우든, writecell로 필요한 좌표만 찍든 해야함
+
 ## StrArr to DataTable Column
 ```vb
 DT_tmp = new DataTable
