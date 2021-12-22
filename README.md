@@ -25,10 +25,11 @@
 [RS_Custom]:https://mpaper-blog.tistory.com/15?category=832250
 [RS_참고하기]:https://mpaper-blog.tistory.com/
 
-#### vba
-[VBA : Excel Range -> HTML](https://stackoverflow.com/questions/54033321/excel-vba-convert-range-with-pictures-and-buttons-to-html)
+
 
 # 엑셀 다루기 팁
+### [VBA : Excel Range -> HTML](https://stackoverflow.com/questions/54033321/excel-vba-convert-range-with-pictures-and-buttons-to-html)
+
 1. 웬만한 서식은 모두 "조건부 서식"을 사용한다.
 ```EXCEL
 조건문 관련
