@@ -519,6 +519,7 @@ StrArr = split("0 1 2 3 4 5").Intersect(Split("1 3 5 7 9")).ToArray
 
 'From Where Select
 StrArr_tmp = (From x In Split("1 2 3 4 5 6") Where (2<Cint(x) AndAlso Cint(x)<5)  Select "["+x+"]").ToArray
+StrArr_tmp = Split("1 2 3 4 5 6").Where(function(x) (2<Cint(x) AndAlso Cint(x)<5) ).Select(function(x) "["+x+"]").ToArray
 'StrArr_tmp : {"[3]","[4]"}
 
 ```
