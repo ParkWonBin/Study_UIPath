@@ -26,14 +26,72 @@
 [RS_참고하기]:https://mpaper-blog.tistory.com/
 
 
+##### VB 문법 For Each
+```vb
+
+For int_i As Integer = 0 To 5
+	console.writeline(int_i.tostring)
+Next
+' 0 1 2 3 4 5
+
+For int_j As Integer = 5 To 0 Step -1
+	console.writeline(int_j.tostring)
+Next
+' 5 4 3 2 1 0
+
+For Each  int_k   As Integer In  {1, 2, 3, 4, 5}
+	console.writeline(int_k.tostring)
+Next
+' 0 1 2 3 4 5
+```
+
+
+#### 엑셀 시트명 갖고오기
+excel scope에서 output workbook에 변수 만들기(wb)  
+엑셀 시트명 확인 : if : wb.GetSheets.Contains(str_sheetName)
+
+#### DataTable 관련
+```
+### convert dt to Dictionary
+DT_tmp.AsEnumerable.ToDictionary(Of String, Object)(Function (row) row("key").toString, Function (row) row("value").toString)
+
+데이터 필터링(abc열에서 값이 bcd인 행 찾기)
+DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").TosTing = "bdc").ToArray()
+
+Convert Column in Data Table to Array
+DT_tmp.AsEnumerable().Select(Function (a) a.Field(of string)("columnname").ToString).ToArray()
+
+### Row Reverse 
+DT_tmp = DT_tmp.AsEnumerable.Reverse().CopyToDataTable
+
+### Filtering
+abc열에서 값이 bcd인 행 모두 찾기
+DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").TosTing = "bdc").ToArray
+
+Copy는 열 이름에 상관 없이 값을 복사 붙여넣기 한다.
+DT_test = DT_tmp.Copy()
+
+Clone은 데이터는 복사하지 않고 Columns만 복사해서 넣는다.
+DT_test = DT_tmp.Clone()
+```
+
+
 #### Array 다루기
 ##### Split, join
 
 ```vb
+' uipath에서 사용할 수 있는 split 함수는 2가지 종류다.
+
 ' strings.split
 StrArr = split("1,2,3",",") 
 ' StrArr : {"1","2","3"} 'Split(Str_source, Str_Seperator)
 ' StrArr = split("1 2 3") '기본 Seperator는 " " 이다.
+' Strings.Split(Expression As String, Delimiter As String, ... )
+
+' string.split
+StrArr = "1,2,3".split(","c) 
+' StrArr : {"1","2","3"} 
+' String.Split(Seperator As Char(), ... )
 
 ' strings.join
 Str_Result = join(Split("1 2 3"), "|")
@@ -43,6 +101,8 @@ Str_Result = join(Split("1 2 3"), "|")
 * 참고 : UiPath에서 기본 split, join은 Strings 라이브러리의 것이다.
 * "문자열".split , {"String Array",""}.join 은 strings.split, strings.join과 다른 함수이다.
 ```
+
+#### Linq 다루기
 
 ##### 생성 관련
 ```vb
@@ -60,39 +120,8 @@ StrArr = Enumerable.Repeat(of string)("1", 3).toarray
 'null
 StrArr = new string(2){} 
 ' StrArr : {null,null,null} '안에 있는 숫자는 최대 index
-'''
-
-##### 자주 쓰게 되는 String Array 모음
-'''vb
-' DT 열이름 Array 추출
-StrArr = Enumerable.Range(0,dt_tmp.Columns.Count-1).Select(function(x) dt_tmp.Columns.Item(x).ColumnName).ToArray 
-
-'DT 열 하나만 뽑아서 Array로 추출
-StrArr = dt_tmp.AsEnumerable.Select(function(x) x("ColName").ToString).ToArray
-
-StrArr = in_DIc_Config.Keys
-
-' 파일명 제어
-StrArr = Directory.GetFiles("절대경로") '각 파일의 절대경로 얻음
-StrArr = Directory.GetFiles("절대경로").Select(function(x) new FileInfo(x).Name).ToArray '파일명 및 확장자만 얻음
-StrArr = Directory.GetFiles("절대경로").Select(function(x) Split(x,"\").Last.ToString).ToArray '파일명, 확장자 얻음
-StrArr = Directory.GetFiles(Environment.CurrentDirectory) '프로젝트 경로파일 얻음
-
-For Each row as Data.DataRow in DT_tmp
-    For Each item as Object in row.ItemArray
-        ' item 을 item as String 으로 쓰면 Null 들어간 Row 처리할 떄 에러 발생함.
-	' item 은 꼭 Object로 선언하고, 호출할 떄 ToString 처리하는 것이 안전함.
-        Console.WriteLine( item.ToString ) 
-    Next
-Next
-* Row를 ItemArray로 바꿀 때, 해당 변수를 받을 때는 꼭 Object로 받고 호출시 ToString을 하자.
-* Row를 ItemArray로 바꾸는 과정에서 Null이 포함된 row에서 item을 String으로 받으면 에러가 발생한다. (Null을 String으로 형변환 못한다는 오류)
-* 따라서 Row.ItemArray를 쓸 일이 있을 경우 Object()로 받거나, Select를 통해 ToString을 직접 시켜주는 게 좋다.
-
-'[FileInfo]에 있는 유용한 속성값 Attributes, Name, Extension, FullName, DirectoryName, CreationTime, LastWriteTime, LastAccessTime...
-'System.IO.Directory.GetFiles
-'System.IO.FileInfo
 ```
+
 ##### 편집 관련 Linq
 ```vb
 'concat
@@ -139,6 +168,51 @@ StrArr_tmp = Split("1 2 3 4 5 6").Where(function(x) (2<Cint(x) AndAlso Cint(x)<5
 
 ```
 
+
+#### 람다식에 인수 넣어주기
+```vb
+Console.WriteLine(((Function(num As Integer) num + 1)(5)).ToString)
+' 그냥 람다식에 () 치고 바로 뒤에 (인수) 넣어주면 됨.
+
+'람다식에 변수 2개 넣어줄 시 첫번째 변수는 값, 2번째 변수는 index를 의미함
+StrArr_tmp = Split("가 나 다").Select(function(x,i) string.format("x='{0}'|i={1}",x, i.tostring) ).ToArray
+'StrArr_tmp : {"x='가'|i=0" , "x='나'|i=1" , "x='다'|i=2" }
+
+```
+
+##### 자주 쓰게 되는 String Array 모음
+```vb
+' DT 열이름 Array 추출
+StrArr = Enumerable.Range(0,dt_tmp.Columns.Count-1).Select(function(x) dt_tmp.Columns.Item(x).ColumnName).ToArray 
+
+'DT 열 하나만 뽑아서 Array로 추출
+StrArr = dt_tmp.AsEnumerable.Select(function(x) x("ColName").ToString).ToArray
+
+StrArr = in_DIc_Config.Keys
+
+' 파일명 제어
+StrArr = Directory.GetFiles("절대경로") '각 파일의 절대경로 얻음
+StrArr = Directory.GetFiles("절대경로").Select(function(x) new FileInfo(x).Name).ToArray '파일명 및 확장자만 얻음
+StrArr = Directory.GetFiles("절대경로").Select(function(x) Split(x,"\").Last.ToString).ToArray '파일명, 확장자 얻음
+StrArr = Directory.GetFiles(Environment.CurrentDirectory) '프로젝트 경로파일 얻음
+
+For Each row as Data.DataRow in DT_tmp
+    For Each item as Object in row.ItemArray
+        ' item 을 item as String 으로 쓰면 Null 들어간 Row 처리할 떄 에러 발생함.
+	' item 은 꼭 Object로 선언하고, 호출할 떄 ToString 처리하는 것이 안전함.
+        Console.WriteLine( item.ToString ) 
+    Next
+Next
+* Row를 ItemArray로 바꿀 때, 해당 변수를 받을 때는 꼭 Object로 받고 호출시 ToString을 하자.
+* Row를 ItemArray로 바꾸는 과정에서 Null이 포함된 row에서 item을 String으로 받으면 에러가 발생한다. (Null을 String으로 형변환 못한다는 오류)
+* 따라서 Row.ItemArray를 쓸 일이 있을 경우 Object()로 받거나, Select를 통해 ToString을 직접 시켜주는 게 좋다.
+
+'[FileInfo]에 있는 유용한 속성값 Attributes, Name, Extension, FullName, DirectoryName, CreationTime, LastWriteTime, LastAccessTime...
+'System.IO.Directory.GetFiles
+'System.IO.FileInfo
+```
+
+
 #### Dictionary 필터링
 ```vb
 ' 선언과 초기화 동시에 진행
@@ -156,18 +230,12 @@ For Each k As String In dic_config.Keys
 Next 
 ```
 
-#### 람다식에 인수 넣어주기
-```vb
-Console.WriteLine(((Function(num As Integer) num + 1)(5)).ToString)
-' 그냥 람다식에 () 치고 바로 뒤에 (인수) 넣어주면 됨.
-
-'람다식에 변수 2개 넣어줄 시 첫번째 변수는 값, 2번째 변수는 index를 의미함
-StrArr_tmp = Split("가 나 다").Select(function(x,i) string.format("x='{0}'|i={1}",x, i.tostring) ).ToArray
-'StrArr_tmp : {"x='가'|i=0" , "x='나'|i=1" , "x='다'|i=2" }
-
-```
 ### [Linq 설명](https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example) (Lambda/ Query)
-Lambda 식은 무명함수로, Function(x) x 형태를 기본으로 한다. 무명함수에 인자로 들오언 (x)를 의미한다.  
+Lambda 식은 무명함수로, Function(x) x는 해당 Enun(Array 등)의 item을 부르는 변수다.   
+반드시 x로 쓸 필요는 없고, ForEach안에 있는 로컬변수 선언하듯이 적당한 이름을 넣곤 한다.    
+Dt.AsEnumerable을 사용한 경우 funtion(row) 이런식으로 지역변수명을 row로 선언하면 보다 알아보기 좋은 수식이 된다.   
+(예시 : Arr_StrArr_dt = Dt.AsEnumerable.Select( funtion(row) row.itemArray.Select(function(x) x.Tostring).ToArray ).ToArray )
+
 Query 식은 SQL 식과 유사한 쿼리식이다. From 이나 Aggregate 로 수식을 시작한다.   
 쿼리식은 직관성이 떨어지기 때문에 개인적으로 lambda식만 사용하고 있다.   
 - [select 문](https://linqsamples.com/linq-to-objects/projection/Select-anonymousType-lambda-vb) : 데이터를 수정/생성 할 떄 사용
@@ -586,25 +654,6 @@ file.WriteAllText("Config.md", Str_Config)
 'End Function
 ```
 
-##### VB 문법 For Each
-```vb
-
-For int_i As Integer = 0 To 5
-	console.writeline(int_i.tostring)
-Next
-' 0 1 2 3 4 5
-
-For int_j As Integer = 5 To 0 Step -1
-	console.writeline(int_j.tostring)
-Next
-' 5 4 3 2 1 0
-
-For Each  int_k   As Integer In  {1, 2, 3, 4, 5}
-	console.writeline(int_k.tostring)
-Next
-' 0 1 2 3 4 5
-```
-
 ##### invokeCode Excel 제어 관련
 [dataTable 생성 관련](https://stackoverflow.com/questions/41454836/vb-net-datatable-to-excel)   
 위에 링크와 다른 것은 워크북과 시트에 이름 설정 부분이 다르다.   
@@ -1021,35 +1070,6 @@ Cron 예시 :
 L : 마지막 (일,요일)에만 사용 가능 (ex : 6L = 이달 마지막 금요일)
 W : 가장 가까운 평일 (ex : 10W = 이달 10일에서 가장 가까운 평일)
 "-" , "," : 범위 (1-12 =1월-12월, "20,25" = 20일과 25일
-```
-
-#### 엑셀 시트명 갖고오기
-excel scope에서 output workbook에 변수 만들기(wb)  
-엑셀 시트명 확인 : if : wb.GetSheets.Contains(str_sheetName)
-
-#### Linq 관련
-```
-### convert dt to Dictionary
-DT_tmp.AsEnumerable.ToDictionary(Of String, Object)(Function (row) row("key").toString, Function (row) row("value").toString)
-
-데이터 필터링(abc열에서 값이 bcd인 행 찾기)
-DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").TosTing = "bdc").ToArray()
-
-Convert Column in Data Table to Array
-DT_tmp.AsEnumerable().Select(Function (a) a.Field(of string)("columnname").ToString).ToArray()
-
-### Row Reverse 
-DT_tmp = DT_tmp.AsEnumerable.Reverse().CopyToDataTable
-
-### Filtering
-abc열에서 값이 bcd인 행 모두 찾기
-DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").TosTing = "bdc").ToArray
-
-Copy는 열 이름에 상관 없이 값을 복사 붙여넣기 한다.
-DT_test = DT_tmp.Copy()
-
-Clone은 데이터는 복사하지 않고 Columns만 복사해서 넣는다.
-DT_test = DT_tmp.Clone()
 ```
 
 ##### 엑셀 읽기 오류 관련
