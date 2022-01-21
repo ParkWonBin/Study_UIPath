@@ -26,7 +26,277 @@
 [RS_참고하기]:https://mpaper-blog.tistory.com/
 
 
+#### Array 다루기
+##### Split, join
 
+```vb
+' strings.split
+StrArr = split("1,2,3",",") 
+' StrArr : {"1","2","3"} 'Split(Str_source, Str_Seperator)
+' StrArr = split("1 2 3") '기본 Seperator는 " " 이다.
+
+' strings.join
+Str_Result = join(Split("1 2 3"), "|")
+' Str_Result : "1|2|3" ' join(StrArr_source, Str_Seperator)
+' Str_Result = join({"1","2"}) '기본 Seperator는 " " 이다.
+
+* 참고 : UiPath에서 기본 split, join은 Strings 라이브러리의 것이다.
+* "문자열".split , {"String Array",""}.join 은 strings.split, strings.join과 다른 함수이다.
+```
+
+##### 생성 관련
+```vb
+Dim StrArr as string() ' 생성
+Dim StrArr as New String(){"1","2"} '#생성 및 할당
+
+StrArr = Enumerable.Range(1,3).Select(function(x) x.ToString).ToArray
+' StrArr : {"1","2","3"} 'Range(int_start, int_count) ' 기본 반환형은 Integer이다.
+' IntArr = Enumerable.Range(0,3) '=> {0,1,2}
+
+'repeat
+StrArr = Enumerable.Repeat(of string)("1", 3).toarray
+' StrArr : {"1","1","1"} 'Repeat(Type)(Str_source, int_count)
+
+'null
+StrArr = new string(2){} 
+' StrArr : {null,null,null} '안에 있는 숫자는 최대 index
+'''
+
+##### 자주 쓰게 되는 String Array 모음
+'''vb
+' DT 열이름 Array 추출
+StrArr = Enumerable.Range(0,dt_tmp.Columns.Count-1).Select(function(x) dt_tmp.Columns.Item(x).ColumnName).ToArray 
+
+'DT 열 하나만 뽑아서 Array로 추출
+StrArr = dt_tmp.AsEnumerable.Select(function(x) x("ColName").ToString).ToArray
+
+StrArr = in_DIc_Config.Keys
+
+' 파일명 제어
+StrArr = Directory.GetFiles("절대경로") '각 파일의 절대경로 얻음
+StrArr = Directory.GetFiles("절대경로").Select(function(x) new FileInfo(x).Name).ToArray '파일명 및 확장자만 얻음
+StrArr = Directory.GetFiles("절대경로").Select(function(x) Split(x,"\").Last.ToString).ToArray '파일명, 확장자 얻음
+StrArr = Directory.GetFiles(Environment.CurrentDirectory) '프로젝트 경로파일 얻음
+
+For Each row as Data.DataRow in DT_tmp
+    For Each item as Object in row.ItemArray
+        ' item 을 item as String 으로 쓰면 Null 들어간 Row 처리할 떄 에러 발생함.
+	' item 은 꼭 Object로 선언하고, 호출할 떄 ToString 처리하는 것이 안전함.
+        Console.WriteLine( item.ToString ) 
+    Next
+Next
+* Row를 ItemArray로 바꿀 때, 해당 변수를 받을 때는 꼭 Object로 받고 호출시 ToString을 하자.
+* Row를 ItemArray로 바꾸는 과정에서 Null이 포함된 row에서 item을 String으로 받으면 에러가 발생한다. (Null을 String으로 형변환 못한다는 오류)
+* 따라서 Row.ItemArray를 쓸 일이 있을 경우 Object()로 받거나, Select를 통해 ToString을 직접 시켜주는 게 좋다.
+
+'[FileInfo]에 있는 유용한 속성값 Attributes, Name, Extension, FullName, DirectoryName, CreationTime, LastWriteTime, LastAccessTime...
+'System.IO.Directory.GetFiles
+'System.IO.FileInfo
+```
+##### 편집 관련 Linq
+```vb
+'concat
+StrArr = split("1 2").Concat( split("3 4 5") ).ToArray
+' StrArr : : {"1","2","3","4","5"} ' split 과 join의 기본 구분자는 " "이다. 
+
+' Distinct
+StrArr = split("1 2 3 2 1 3 2 1").Distinct.ToArray
+'StrArr : {"1","2","3"} '중복된 값 제거(뒤쪽 인덱스에 중복값 등장 시 누락시키는 로직)
+
+' Select 
+StrArr = split("1 2 3").Select(function(x) "["+x+"]").ToArray
+' StrArr : {"[1]","[2]","[3]"} '원소 하나씩 select에 들어온 함수를 적용하여 갱신
+
+' OrderBy
+StrArr = split("2 3 1").OrderBy(function(x) cint(x) ).ToArray 
+' StrArr : {"1","2","3"} ' 정렬-오름차순
+
+' OrderByDescending
+StrArr = split("2 3 1").OrderByDescending(function(x) cint(x) ).ToArray 
+' StrArr : {"3","2","1"} ' 정렬-내림차순
+
+'Reverse
+StrArr = split("1 2 3").Reverse.ToArray 
+' StrArr : {"3","2","1"} ' 순서- 거꾸로
+
+'Skip, Take
+StrArr = split("0 1 2 3 4 5").Skip(3).Take(2).ToArray
+' StrArr : {"3","4"} 'Skip 개수만큼 앞에서 누락시키고, Take 개수만큼 취합
+
+'Intersect
+StrArr = split("0 1 2 3 4 5").Intersect(Split("1 3 5 7 9")).ToArray
+' StrArr : {"1","3","5"} ' 교집합
+
+'Linq 맛보기
+
+' 쿼리형 : From Where Select
+StrArr_tmp = (From x In Split("1 2 3 4 5 6") Where (2<Cint(x) AndAlso Cint(x)<5)  Select "["+x+"]").ToArray
+'StrArr_tmp : {"[3]","[4]"}
+
+' 람다형 : where(function() ).select(function())
+StrArr_tmp = Split("1 2 3 4 5 6").Where(function(x) (2<Cint(x) AndAlso Cint(x)<5) ).Select(function(x) "["+x+"]").ToArray
+'StrArr_tmp : {"[3]","[4]"}
+
+```
+
+#### Dictionary 필터링
+```vb
+' 선언과 초기화 동시에 진행
+Dim dic_config As New Dictionary(Of String, String) From{ {"a1","11"}, {"a2","12"}, {"b2","22"} }
+
+' ToDictionary 사용법
+dic_config = dic_config.Keys.Where(Function(key) key.Contains("a"))
+             .ToDictionary(Function(key) key, Function(key) dic_config(key))
+' 1. 호출 전 : String Array 형태로 가공한다. * pair 형태 아님!
+' 2. 인수 값 : 인자는 ,를 구분자로 하여 key값과 value 같을 정의할 function을 2개 넣어주어야 한다.
+	
+' 출력 예시
+For Each k As String In dic_config.Keys
+	console.WriteLine(string.Format("{0} : {1}",k , dic_config(k)))
+Next 
+```
+
+#### 람다식에 인수 넣어주기
+```vb
+Console.WriteLine(((Function(num As Integer) num + 1)(5)).ToString)
+' 그냥 람다식에 () 치고 바로 뒤에 (인수) 넣어주면 됨.
+
+'람다식에 변수 2개 넣어줄 시 첫번째 변수는 값, 2번째 변수는 index를 의미함
+StrArr_tmp = Split("가 나 다").Select(function(x,i) string.format("x='{0}'|i={1}",x, i.tostring) ).ToArray
+'StrArr_tmp : {"x='가'|i=0" , "x='나'|i=1" , "x='다'|i=2" }
+
+```
+### [Linq 설명](https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example) (Lambda/ Query)
+Lambda 식은 무명함수로, Function(x) x 형태를 기본으로 한다. 무명함수에 인자로 들오언 (x)를 의미한다.  
+Query 식은 SQL 식과 유사한 쿼리식이다. From 이나 Aggregate 로 수식을 시작한다.   
+쿼리식은 직관성이 떨어지기 때문에 개인적으로 lambda식만 사용하고 있다.   
+- [select 문](https://linqsamples.com/linq-to-objects/projection/Select-anonymousType-lambda-vb) : 데이터를 수정/생성 할 떄 사용
+- [GroupBY문](https://linqsamples.com/linq-to-objects/grouping/GroupBy-lambda-vb) : 인자로 받은 함수의 Return값을 key로 하여 구룹을 나눔.
+- [ThenBy 문](https://linqsamples.com/linq-to-objects/ordering/ThenBy-lambda-vb) : Orderby로 정렬한 순서에서, 같은 레벨에 있는 항목을 제2 기준으로 정렬
+- [Aggregate](https://linqsamples.com/linq-to-objects/aggregation/Aggregate-lambda-vb) : 특정 값을 누적하여 계산할 떄 사용. function(a,b)에서 a는 누적된 값, b는 작업중인 항목 의미.
+- [Zip 문](https://linqsamples.com/linq-to-objects/other/Zip-lambda-vb) : 2개의 array를 동일한 index에 대해 대해 매핑 작업을 할 떄 쓰임. (ex : 백터 내적 연산 등)
+
+##### 함수 설명
+```vb
+TypeName(<T>) : 해당 인자의 Type 이름을 String으로 반환한다.
+file.WriteAllText("절대경로", Str_Source) :  해당 경로에 파일을 저장한다.
+```
+[VB 배열 관련](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/arrays/)
+[Linq 사용한 계산](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/linq/how-to-count-sum-or-average-data-by-using-linq)
+#### [Linq 사용 예시1](https://linqsamples.com/linq-to-objects/element)
+#### [Linq 사용 예시2](https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example)
+
+```vb
+TypeName({1,2,3}) 'Integer()
+Dim numbers = New Integer() {1,2,3,4,5}
+Dim numbers() As Integer = {1,2,3,4,5}
+
+Aggregate x in {1,2,3,4,5} into sum ' 15
+Aggregate x in {1,2,3,4,5} into count ' 5
+Aggregate x in {1,2,3,4,5} into average '3
+Aggregate x in split("1 2 3 4 5").Select(function(x) cint(x)) into sum
+
+' a는 누적되어 저장된 값, b는 new Item. 
+{1,2,3,4,5}.Aggregate(function(a,b) a+b) ' 15
+{1,2,3,4,5}.Aggregate(function(a,b) a*b) ' 120 
+{1,2,3,4,5}.Aggregate(10, Function(a,b) a+b) '25 : Aggregated numbers by addition with a seed of 10
+{1,2,3,4,5}.sum() ' 15
+{1,2,3,4,5}.Average() '3
+{1,2,3,4,5}.Count()
+{1,2,3,4,5}.Min()
+{1,2,3,4,5}.Max()
+{1,2,3,4,5}.
+```
+
+#### Groupby 사용하기
+groupby는 인자로 넣어준 functnion의 계산값을 기준으로 data를 grouping합니다.    
+groupby의 반환형은 iEnumerable(of iGrouping(of key, Tsource ))입니다.    
+해석하자면, 함수를 호출하기 전에 원래 갖고 있었던 자료형(Tscource)을 유지하되, grouping할 떄 기준이 되었던 값을 key로 저장을 하고.    
+여러개로 나눠진 Grouping 객체를 Enum의 형태로 반환한다는 뜻입니다.   
+변수형 앞에 있는 i는 interface의 약자이며, 뭉뚱그려 생각하자면, 해당 객체의 interface(직접적으로 말하면 매소드=내장된 함수 등)를 사용할 수 있는 객체 형태라는 뜻입니다.   
+(예시) ienumerable : 해당 객체는 Enumerable 자료형 안에 내장된 함수를 사용할 수 있습니다. (대충 AsEnumerable 처리 된 것과 유사하다고 생각하면 됩니다.)    
+iEnumerable의 형태는 초급 개발자들이 공부하고 사용하기에 혼란스러울 수 있으므로, 개발 작업 시 ToArray() 처리를 하여, Array형식으로 저장 및 사용 하는 것을 권장합니다.    
+
+##### 코드 예시
+```vb
+'이런 자료형을 사용한다는 것 정도만 보고 넘어갑니다.
+Dim arr_groupby_BusinessNumber As System.Linq.IGrouping<System.String, System.Data.DataRow>[]
+
+'DT 를 "사업자 등록번호"열의 값을 기준으로 Grouping 합니다.
+arr_groupby_BusinessNumber = DT_Source.AsEnumerable.GroupBy(Function(row) row("사업자 등록번호").ToString).ToArray
+
+'해당 Group의 사업자 등록번호를 모두 가져옵니다.
+arr_Key_gpName_by_BSNum = arr_groupby_BusinessNumber.Select(function(gp) gp.key).ToArray
+
+`사업자 번호별 공급가액, 세액의 부분합계를 가져옵니다.
+arr_sum_taxBase_by_BSNum = arr_groupby_BusinessNumber.Select(function(gp) gp.sum(function(row) Cdbl(row("공급가액").tostring) )).ToArray
+arr_sum_taxAmnt_by_BSNum = arr_groupby_BusinessNumber.Select(function(gp) gp.sum(function(row) Cdbl(row("세액").tostring) )).ToArray
+
+' 계산한 결과를 Table로 만듭니다.
+Dim Dt_result As System.Data.DataTable
+' DT 생성
+Dt_result = New DataTable
+For Each colName As String In "사업자등록번호|공급가액_합계|세액_합계".Split("|"c)
+    Dt_result.Columns.Add(colName, System.Type.GetType("System.String") )
+Next
+' DT 데이터 넣기
+For Each i As Integer in enumerable.Range(0,arr_group_BSNum.Count)
+    Dt_result.Rows.Add({arr_Key_gpName_by_BSNum(i).ToString, arr_sum_taxBase_by_BSNum(i).ToString, arr_sum_taxAmnt_by_BSNum(i).ToString})
+Next
+```
+
+##### BuildDataTable by Sting
+Uipath Debug에서 Immediate로 멈춰두고 아래 코드수행하면,  
+Local에서 값이 바뀐다. (메모리에 저장된 dt 위치의 값을 직접 수정하는 명령 포함)  
+에러났을 때 끄지 않고 DT 값을 수정 후 이어서 Retry 할 수 있게 한다.
+
+```vb
+' Variables 패널 설정
+dt_tmp As System.Data.DataTable
+ArrStr_colName As String()
+ArrArrStr_data As String()()
+
+'Assign
+dt_tmp = new DataTable()
+ArrStr_colName = "col1|col2|col3".Split("|"c).Select(function(x) x.trim).ToArray
+ArrArrStr_data = "00|01\10|11|12|13|\20|21|22|23|24|25|26|27".Split("\"c).Select(function(tr) tr.Split("|"c).Select(function(td) td.trim).ToArray)
+
+'Log Message - 입력 데이터 확인
+string.Format("입력 데이터 확인{0}{1}{0}{2}",vbNewLine,join(ArrStr_colName," | "),  join(ArrArrStr_data.Select(function(tr) join(tr.Select(function(td) td.Trim).ToArray, " | ")).ToArray,vbNewLine) )
+
+'Log Message - 데이터 적용
+string.Format("BuildDataTable{0} {0}Dt_tmp <- Add Columns :{0}{1}{0} {0}Dt_tmp <- Add Data :{0}{2}{0}",vbNewLine,join(ArrStr_colName.Select(function(colName) dt_tmp.Columns.Add(colName.Trim).ToString).ToArray, " | "),  join(ArrArrStr_data.Select(function(tr) join( dt_tmp.Rows.Add(tr.Take(dt_tmp.Columns.Count).ToArray).itemArray.Select(function(td) td.ToString).ToArray , " | ")).ToArray , vbNewLine))
+
+'원리 설명
+'dataTable.columns.Add() 와 dataTable.Rows.Add()는 각각 하고 입력받은 인수(String, DataRow)를 그대로 Return하는 함수다.
+'select로 dt를 수정하는 함수를 호출하고, 리턴값 잘 조작하여 최종적으로 String 형태를 만들면 LogMassage에서 해당 code를 사용할 수 있다.
+
+'Log Message - Col만 추가
+join("col1|col2|col3".Split("|"c).Select(function(x) if(dt_tmp.Columns.Contains(x.trim), x.Trim+" (Skip-중복)", dt_tmp.Columns.Add(x.Trim).ToString)).ToArray," | ")
+' 중복된 이름의 Column을 추가하려고 할 경우 오류 발생
+
+'Log Message - Data만 추가
+join("00|01\10|11|12|13|\20|21|22|23|24|25|26|27".Split("\"c).Select(function(tr) tr.Split("|"c).Select(function(td) td.trim).ToArray ).Select(function(tr) join( dt_tmp.Rows.Add(tr.Take(dt_tmp.Columns.Count).ToArray).itemArray.Select(function(td) td.ToString).ToArray , " | ")).ToArray , vbNewLine)
+' newRow의 item.count가 col.count보다 작을 때는, 부족하면 맨 null을 체워넣는다.
+' newRow의 item.count가 col.count보다 클 때는, Take를 통해 col.count 개수만큼만 사용하고 초과된 item은 버린다.
+
+' 요령
+' 1. 반복문으로 수행할 함수는 Select를 통해 호출한다.
+' 2. object의 경우 {object}.ToString 을 사용하고하여 String으로 객체로 만들어 작업한다. (Nothing, null도 ""객체로 만들어준다.)
+' 3. IEnumerable의 경우 {enumarable}.Select(Function(x) x.ToString).Array 를 통해 String Arrray 형태로 만들어 작업한다.
+' 4. String Array의 경우 Strings.Join() 함수를 통해 String으로 만든다.
+' 5. 개별적으로 동작하는 함수를 String을 반환하도록 마들었다면.  String.Format() 함수를 통해 One-Line으로 병합한다.
+' 6. String.Format에 인수가 입력되는 과정에서 위에서 정의한 함수가 1번씩 실행된다. 굳이 {0}등으로 내용을 표시를 하지 않아도, 입력받은 인자 순서대로 Code가 동작한다.
+' 7. 위 방법의 한계는 "값을 산출하는 함수"만 호출할 수 있다는 것이다. 값을 산출하지 않는 함수는 function을 인자로 받는 함수를 통해 호출할 수 없다.
+
+'Make DummyDataTable
+dt_tmp = new DataTable()
+'log Message - Add Column
+join("|||||".Split("|"c).Select(function(x) if(dt_tmp.Columns.Contains(x.trim), x.Trim+" (Skip-중복)", dt_tmp.Columns.Add(x.Trim).ToString)).ToArray," | ")
+'log Message - Add Data
+join("00|01\10|\20|21\".Split("\"c).Select(function(tr) tr.Split("|"c).Select(function(td) td.trim).ToArray ).Select(function(tr) join( dt_tmp.Rows.Add(tr.Take(dt_tmp.Columns.Count).ToArray).itemArray.Select(function(td) td.ToString).ToArray , " | ")).ToArray , vbNewLine)
+ 
+```
 # 엑셀 다루기 팁
 ### [VBA : Excel Range -> HTML](https://stackoverflow.com/questions/54033321/excel-vba-convert-range-with-pictures-and-buttons-to-html)
 
@@ -141,7 +411,6 @@ Attach 로 이미지 파일 첨부하고,
 
 
 
-
 ### 셀렉터 잡을 때 팁
 ```vb
 ' Indicate To screen > ui_tmp
@@ -176,105 +445,6 @@ pivotTable
 - 옵션 : 새 시트로 생성 > [필터, 열 레이블, 행 레이블, 값] 설정
 - 수정 : 테이블 우클릭 > 피벗테이블 필드 표시
  
-### [Linq 설명](https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example) (Lambda/ Query)
-Lambda 식은 무명함수로, Function(x) x 형태를 기본으로 한다. 무명함수에 인자로 들오언 (x)를 의미한다.  
-Query 식은 SQL 식과 유사한 쿼리식이다. From 이나 Aggregate 로 수식을 시작한다.   
-쿼리식은 직관성이 떨어지기 때문에 개인적으로 lambda식만 사용하고 있다.   
-- [select 문](https://linqsamples.com/linq-to-objects/projection/Select-anonymousType-lambda-vb) : 데이터를 수정/생성 할 떄 사용
-- [GroupBY문](https://linqsamples.com/linq-to-objects/grouping/GroupBy-lambda-vb) : 인자로 받은 함수의 Return값을 key로 하여 구룹을 나눔.
-- [ThenBy 문](https://linqsamples.com/linq-to-objects/ordering/ThenBy-lambda-vb) : Orderby로 정렬한 순서에서, 같은 레벨에 있는 항목을 제2 기준으로 정렬
-- [Aggregate](https://linqsamples.com/linq-to-objects/aggregation/Aggregate-lambda-vb) : 특정 값을 누적하여 계산할 떄 사용. function(a,b)에서 a는 누적된 값, b는 작업중인 항목 의미.
-- [Zip 문](https://linqsamples.com/linq-to-objects/other/Zip-lambda-vb) : 2개의 array를 동일한 index에 대해 대해 매핑 작업을 할 떄 쓰임. (ex : 백터 내적 연산 등)
-
-##### BuildDataTable by Sting
-Uipath Debug에서 Immediate로 멈춰두고 아래 코드수행하면,  
-Local에서 값이 바뀐다. (메모리에 저장된 dt 위치의 값을 직접 수정하는 명령 포함)  
-에러났을 때 끄지 않고 DT 값을 수정 후 이어서 Retry 할 수 있게 한다.
-
-```vb
-' Variables 패널 설정
-dt_tmp As System.Data.DataTable
-ArrStr_colName As String()
-ArrArrStr_data As String()()
-
-'Assign
-dt_tmp = new DataTable()
-ArrStr_colName = "col1|col2|col3".Split("|"c).Select(function(x) x.trim).ToArray
-ArrArrStr_data = "00|01\10|11|12|13|\20|21|22|23|24|25|26|27".Split("\"c).Select(function(tr) tr.Split("|"c).Select(function(td) td.trim).ToArray)
-
-'Log Message - 입력 데이터 확인
-string.Format("입력 데이터 확인{0}{1}{0}{2}",vbNewLine,join(ArrStr_colName," | "),  join(ArrArrStr_data.Select(function(tr) join(tr.Select(function(td) td.Trim).ToArray, " | ")).ToArray,vbNewLine) )
-
-'Log Message - 데이터 적용
-string.Format("BuildDataTable{0} {0}Dt_tmp <- Add Columns :{0}{1}{0} {0}Dt_tmp <- Add Data :{0}{2}{0}",vbNewLine,join(ArrStr_colName.Select(function(colName) dt_tmp.Columns.Add(colName.Trim).ToString).ToArray, " | "),  join(ArrArrStr_data.Select(function(tr) join( dt_tmp.Rows.Add(tr.Take(dt_tmp.Columns.Count).ToArray).itemArray.Select(function(td) td.ToString).ToArray , " | ")).ToArray , vbNewLine))
-
-'원리 설명
-'dataTable.columns.Add() 와 dataTable.Rows.Add()는 각각 하고 입력받은 인수(String, DataRow)를 그대로 Return하는 함수다.
-'select로 dt를 수정하는 함수를 호출하고, 리턴값 잘 조작하여 최종적으로 String 형태를 만들면 LogMassage에서 해당 code를 사용할 수 있다.
-
-'Log Message - Col만 추가
-join("col1|col2|col3".Split("|"c).Select(function(x) if(dt_tmp.Columns.Contains(x.trim), x.Trim+" (Skip-중복)", dt_tmp.Columns.Add(x.Trim).ToString)).ToArray," | ")
-' 중복된 이름의 Column을 추가하려고 할 경우 오류 발생
-
-'Log Message - Data만 추가
-join("00|01\10|11|12|13|\20|21|22|23|24|25|26|27".Split("\"c).Select(function(tr) tr.Split("|"c).Select(function(td) td.trim).ToArray ).Select(function(tr) join( dt_tmp.Rows.Add(tr.Take(dt_tmp.Columns.Count).ToArray).itemArray.Select(function(td) td.ToString).ToArray , " | ")).ToArray , vbNewLine)
-' newRow의 item.count가 col.count보다 작을 때는, 부족하면 맨 null을 체워넣는다.
-' newRow의 item.count가 col.count보다 클 때는, Take를 통해 col.count 개수만큼만 사용하고 초과된 item은 버린다.
-
-' 요령
-' 1. 반복문으로 수행할 함수는 Select를 통해 호출한다.
-' 2. object의 경우 {object}.ToString 을 사용하고하여 String으로 객체로 만들어 작업한다. (Nothing, null도 ""객체로 만들어준다.)
-' 3. IEnumerable의 경우 {enumarable}.Select(Function(x) x.ToString).Array 를 통해 String Arrray 형태로 만들어 작업한다.
-' 4. String Array의 경우 Strings.Join() 함수를 통해 String으로 만든다.
-' 5. 개별적으로 동작하는 함수를 String을 반환하도록 마들었다면.  String.Format() 함수를 통해 One-Line으로 병합한다.
-' 6. String.Format에 인수가 입력되는 과정에서 위에서 정의한 함수가 1번씩 실행된다. 굳이 {0}등으로 내용을 표시를 하지 않아도, 입력받은 인자 순서대로 Code가 동작한다.
-' 7. 위 방법의 한계는 "값을 산출하는 함수"만 호출할 수 있다는 것이다. 값을 산출하지 않는 함수는 function을 인자로 받는 함수를 통해 호출할 수 없다.
-
-'Make DummyDataTable
-dt_tmp = new DataTable()
-'log Message - Add Column
-join("|||||".Split("|"c).Select(function(x) if(dt_tmp.Columns.Contains(x.trim), x.Trim+" (Skip-중복)", dt_tmp.Columns.Add(x.Trim).ToString)).ToArray," | ")
-'log Message - Add Data
-join("00|01\10|\20|21\".Split("\"c).Select(function(tr) tr.Split("|"c).Select(function(td) td.trim).ToArray ).Select(function(tr) join( dt_tmp.Rows.Add(tr.Take(dt_tmp.Columns.Count).ToArray).itemArray.Select(function(td) td.ToString).ToArray , " | ")).ToArray , vbNewLine)
- 
-```
-
-
-##### 함수 설명
-```vb
-TypeName(<T>) : 해당 인자의 Type 이름을 String으로 반환한다.
-file.WriteAllText("절대경로", Str_Source) :  해당 경로에 파일을 저장한다.
-```
-[VB 배열 관련](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/arrays/)
-[Linq 사용한 계산](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/linq/how-to-count-sum-or-average-data-by-using-linq)
-#### [Linq 사용 예시1](https://linqsamples.com/linq-to-objects/element)
-#### [Linq 사용 예시2](https://www.tutlane.com/tutorial/linq/linq-aggregate-function-with-example)
-
-```vb
-TypeName({1,2,3}) 'Integer()
-Dim numbers = New Integer() {1,2,3,4,5}
-Dim numbers() As Integer = {1,2,3,4,5}
-
-Aggregate x in {1,2,3,4,5} into sum ' 15
-Aggregate x in {1,2,3,4,5} into count ' 5
-Aggregate x in {1,2,3,4,5} into average '3
-Aggregate x in split("1 2 3 4 5").Select(function(x) cint(x)) into sum
-
-' a는 누적되어 저장된 값, b는 new Item. 
-{1,2,3,4,5}.Aggregate(function(a,b) a+b) ' 15
-{1,2,3,4,5}.Aggregate(function(a,b) a*b) ' 120 
-{1,2,3,4,5}.Aggregate(10, Function(a,b) a+b) '25 : Aggregated numbers by addition with a seed of 10
-{1,2,3,4,5}.sum() ' 15
-{1,2,3,4,5}.Average() '3
-{1,2,3,4,5}.Count()
-{1,2,3,4,5}.Min()
-{1,2,3,4,5}.Max()
-{1,2,3,4,5}.
-
-```
-
-
-
 ##### Excel index2ColName
 ```vb
 int_colIndex As String
@@ -415,138 +585,6 @@ file.WriteAllText("Config.md", Str_Config)
 	'Return "저장 성공 : "+vbnewline+strFileName
 'End Function
 ```
-
-#### Array 다루기
-##### Split, join
-
-```vb
-' strings.split
-StrArr = split("1,2,3",",") 
-' StrArr : {"1","2","3"} 'Split(Str_source, Str_Seperator)
-' StrArr = split("1 2 3") '기본 Seperator는 " " 이다.
-
-' strings.join
-Str_Result = join(Split("1 2 3"), "|")
-' Str_Result : "1|2|3" ' join(StrArr_source, Str_Seperator)
-' Str_Result = join({"1","2"}) '기본 Seperator는 " " 이다.
-
-* 참고 : UiPath에서 기본 split, join은 Strings 라이브러리의 것이다.
-* "문자열".split , {"String Array",""}.join 은 strings.split, strings.join과 다른 함수이다.
-```
-
-##### 생성 관련
-```vb
-Dim StrArr as string() ' 생성
-Dim StrArr as New String(){"1","2"} '#생성 및 할당
-
-StrArr = Enumerable.Range(1,3).Select(function(x) x.ToString).ToArray
-' StrArr : {"1","2","3"} 'Range(int_start, int_count) ' 기본 반환형은 Integer이다.
-' IntArr = Enumerable.Range(0,3) '=> {0,1,2}
-
-'repeat
-StrArr = Enumerable.Repeat(of string)("1", 3).toarray
-' StrArr : {"1","1","1"} 'Repeat(Type)(Str_source, int_count)
-
-'null
-StrArr = new string(2){} 
-' StrArr : {null,null,null} '안에 있는 숫자는 최대 index
-'''
-
-##### 자주 쓰게 되는 String Array 모음
-'''vb
-' DT 열이름 Array 추출
-StrArr = Enumerable.Range(0,dt_tmp.Columns.Count-1).Select(function(x) dt_tmp.Columns.Item(x).ColumnName).ToArray 
-
-'DT 열 하나만 뽑아서 Array로 추출
-StrArr = dt_tmp.AsEnumerable.Select(function(x) x("ColName").ToString).ToArray
-
-StrArr = in_DIc_Config.Keys
-
-' 파일명 제어
-StrArr = Directory.GetFiles("절대경로") '각 파일의 절대경로 얻음
-StrArr = Directory.GetFiles("절대경로").Select(function(x) new FileInfo(x).Name).ToArray '파일명 및 확장자만 얻음
-StrArr = Directory.GetFiles("절대경로").Select(function(x) Split(x,"\").Last.ToString).ToArray '파일명, 확장자 얻음
-StrArr = Directory.GetFiles(Environment.CurrentDirectory) '프로젝트 경로파일 얻음
-
-For Each row as Data.DataRow in DT_tmp
-    For Each item as Object in row.ItemArray
-        ' item 을 item as String 으로 쓰면 Null 들어간 Row 처리할 떄 에러 발생함.
-	' item 은 꼭 Object로 선언하고, 호출할 떄 ToString 처리하는 것이 안전함.
-        Console.WriteLine( item.ToString ) 
-    Next
-Next
-* Row를 ItemArray로 바꿀 때, 해당 변수를 받을 때는 꼭 Object로 받고 호출시 ToString을 하자.
-* Row를 ItemArray로 바꾸는 과정에서 Null이 포함된 row에서 item을 String으로 받으면 에러가 발생한다. (Null을 String으로 형변환 못한다는 오류)
-* 따라서 Row.ItemArray를 쓸 일이 있을 경우 Object()로 받거나, Select를 통해 ToString을 직접 시켜주는 게 좋다.
-
-'[FileInfo]에 있는 유용한 속성값 Attributes, Name, Extension, FullName, DirectoryName, CreationTime, LastWriteTime, LastAccessTime...
-'System.IO.Directory.GetFiles
-'System.IO.FileInfo
-```
-##### 편집 관련 Linq
-```vb
-'concat
-StrArr = split("1 2").Concat( split("3 4 5") ).ToArray
-' StrArr : : {"1","2","3","4","5"} ' split 과 join의 기본 구분자는 " "이다. 
-
-' Distinct
-StrArr = split("1 2 3 2 1 3 2 1").Distinct.ToArray
-'StrArr : {"1","2","3"} '중복된 값 제거(뒤쪽 인덱스에 중복값 등장 시 누락시키는 로직)
-
-' Select 
-StrArr = split("1 2 3").Select(function(x) "["+x+"]").ToArray
-' StrArr : {"[1]","[2]","[3]"} '원소 하나씩 select에 들어온 함수를 적용하여 갱신
-
-' OrderBy
-StrArr = split("2 3 1").OrderBy(function(x) cint(x) ).ToArray 
-' StrArr : {"1","2","3"} ' 정렬-오름차순
-
-' OrderByDescending
-StrArr = split("2 3 1").OrderByDescending(function(x) cint(x) ).ToArray 
-' StrArr : {"3","2","1"} ' 정렬-내림차순
-
-'Reverse
-StrArr = split("1 2 3").Reverse.ToArray 
-' StrArr : {"3","2","1"} ' 순서- 거꾸로
-
-'Skip, Take
-StrArr = split("0 1 2 3 4 5").Skip(3).Take(2).ToArray
-' StrArr : {"3","4"} 'Skip 개수만큼 앞에서 누락시키고, Take 개수만큼 취합
-
-'Intersect
-StrArr = split("0 1 2 3 4 5").Intersect(Split("1 3 5 7 9")).ToArray
-' StrArr : {"1","3","5"} ' 교집합
-
-'From Where Select
-StrArr_tmp = (From x In Split("1 2 3 4 5 6") Where (2<Cint(x) AndAlso Cint(x)<5)  Select "["+x+"]").ToArray
-StrArr_tmp = Split("1 2 3 4 5 6").Where(function(x) (2<Cint(x) AndAlso Cint(x)<5) ).Select(function(x) "["+x+"]").ToArray
-'StrArr_tmp : {"[3]","[4]"}
-
-```
-
-#### Dictionary 필터링
-```vb
-' 선언과 초기화 동시에 진행
-Dim dic_config As New Dictionary(Of String, String) From{ {"a1","11"}, {"a2","12"}, {"b2","22"} }
-
-' ToDictionary 사용법
-dic_config = dic_config.Keys.Where(Function(key) key.Contains("a"))
-             .ToDictionary(Function(key) key, Function(key) dic_config(key))
-' 1. 호출 전 : String Array 형태로 가공한다. * pair 형태 아님!
-' 2. 인수 값 : 인자는 ,를 구분자로 하여 key값과 value 같을 정의할 function을 2개 넣어주어야 한다.
-	
-' 출력 예시
-For Each k As String In dic_config.Keys
-	console.WriteLine(string.Format("{0} : {1}",k , dic_config(k)))
-Next 
-```
-
-#### 람다식에 인수 넣어주기
-```vb
-Console.WriteLine(((Function(num As Integer) num + 1)(5)).ToString)
-' 그냥 람다식에 () 치고 바로 뒤에 (인수) 넣어주면 됨.
-```
-
 
 ##### VB 문법 For Each
 ```vb
