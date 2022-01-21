@@ -44,12 +44,6 @@ For Each  int_k   As Integer In  {1, 2, 3, 4, 5}
 Next
 ' 0 1 2 3 4 5
 ```
-
-
-#### 엑셀 시트명 갖고오기
-excel scope에서 output workbook에 변수 만들기(wb)  
-엑셀 시트명 확인 : if : wb.GetSheets.Contains(str_sheetName)
-
 #### Array 다루기
 ##### Split, join
 
@@ -154,6 +148,10 @@ StrArr_tmp = Split("가 나 다").Select(function(x,i) string.format("x='{0}'|i=
 
 ```
 
+
+#### 엑셀 시트명 갖고오기
+excel scope에서 output workbook에 변수 만들기(wb)  
+엑셀 시트명 확인 : if : wb.GetSheets.Contains(str_sheetName)
 
 #### DataTable 관련
 ```vb
