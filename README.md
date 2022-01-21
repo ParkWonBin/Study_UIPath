@@ -267,8 +267,6 @@ arr_Key_gpName_by_BSNum = arr_groupby_BusinessNumber.Select(function(gp) gp.key)
 arr_sum_taxBase_by_BSNum = arr_groupby_BusinessNumber.Select(function(gp) gp.sum(function(row) Cdbl(row("공급가액").tostring) )).ToArray
 arr_sum_taxAmnt_by_BSNum = arr_groupby_BusinessNumber.Select(function(gp) gp.sum(function(row) Cdbl(row("세액").tostring) )).ToArray
 
-' 계산한 결과를 Table로 만듭니다.
-Dim Dt_result As System.Data.DataTable
 ' DT 생성
 Dt_result = New DataTable
 For Each colName As String In "사업자등록번호|공급가액_합계|세액_합계".Split("|"c)
