@@ -147,37 +147,6 @@ StrArr_tmp = Split("가 나 다").Select(function(x,i) string.format("x='{0}'|i=
 'StrArr_tmp : {"x='가'|i=0" , "x='나'|i=1" , "x='다'|i=2" }
 
 ```
-
-
-#### 엑셀 시트명 갖고오기
-excel scope에서 output workbook에 변수 만들기(wb)  
-엑셀 시트명 확인 : if : wb.GetSheets.Contains(str_sheetName)
-
-#### DataTable 관련
-```vb
-'### convert dt to Dictionary
-DT_tmp.AsEnumerable.ToDictionary(Of String, Object)(Function (row) row("key").toString, Function (row) row("value").toString)
-
-'데이터 필터링(abc열에서 값이 bcd인 행 찾기)
-DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").TosTing = "bdc").ToArray()
-
-'Convert Column in Data Table to Array
-DT_tmp.AsEnumerable().Select(Function (a) a.Field(of string)("columnname").ToString).ToArray()
-
-'### Row Reverse 
-DT_tmp = DT_tmp.AsEnumerable.Reverse().CopyToDataTable
-
-'### Filtering abc열에서 값이 bcd인 행 모두 찾기
-DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").TosTing = "bdc").ToArray
-
-' Copy는 열 이름에 상관 없이 값을 복사 붙여넣기 한다.
-DT_test = DT_tmp.Copy()
-
-' Clone은 데이터는 복사하지 않고 Columns만 복사해서 넣는다.
-DT_test = DT_tmp.Clone()
-```
-
-
 ##### 자주 쓰게 되는 String Array 모음
 ```vb
 ' DT 열이름 Array 추출
@@ -363,8 +332,36 @@ join("|||||".Split("|"c).Select(function(x) if(dt_tmp.Columns.Contains(x.trim), 
 join("00|01\10|\20|21\".Split("\"c).Select(function(tr) tr.Split("|"c).Select(function(td) td.trim).ToArray ).Select(function(tr) join( dt_tmp.Rows.Add(tr.Take(dt_tmp.Columns.Count).ToArray).itemArray.Select(function(td) td.ToString).ToArray , " | ")).ToArray , vbNewLine)
  
 ```
-# 엑셀 다루기 팁
-### [VBA : Excel Range -> HTML](https://stackoverflow.com/questions/54033321/excel-vba-convert-range-with-pictures-and-buttons-to-html)
+## 엑셀 다루기 팁
+#### [VBA : Excel Range -> HTML](https://stackoverflow.com/questions/54033321/excel-vba-convert-range-with-pictures-and-buttons-to-html)
+
+#### 엑셀 시트명 갖고오기
+excel scope에서 output workbook에 변수 만들기(wb)  
+엑셀 시트명 확인 : if : wb.GetSheets.Contains(str_sheetName)
+
+#### DataTable 관련
+```vb
+'### convert dt to Dictionary
+DT_tmp.AsEnumerable.ToDictionary(Of String, Object)(Function (row) row("key").toString, Function (row) row("value").toString)
+
+'데이터 필터링(abc열에서 값이 bcd인 행 찾기)
+DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").TosTing = "bdc").ToArray()
+
+'Convert Column in Data Table to Array
+DT_tmp.AsEnumerable().Select(Function (a) a.Field(of string)("columnname").ToString).ToArray()
+
+'### Row Reverse 
+DT_tmp = DT_tmp.AsEnumerable.Reverse().CopyToDataTable
+
+'### Filtering abc열에서 값이 bcd인 행 모두 찾기
+DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").TosTing = "bdc").ToArray
+
+' Copy는 열 이름에 상관 없이 값을 복사 붙여넣기 한다.
+DT_test = DT_tmp.Copy()
+
+' Clone은 데이터는 복사하지 않고 Columns만 복사해서 넣는다.
+DT_test = DT_tmp.Clone()
+```
 
 1. 웬만한 서식은 모두 "조건부 서식"을 사용한다.
 ```EXCEL
