@@ -10,8 +10,8 @@ Dim str_path As String = in_str_path
 
 list_str_dir.Add(str_path)
 While list_str_dir.Count <> 0
-	str_path = list_str_dir(0)
-	list_str_dir.RemoveAt(0)
+	str_path = list_str_dir.Last
+	list_str_dir.RemoveAt(list_str_dir.Count -1)
 	list_str_dir.AddRange(System.IO.Directory.GetDirectories(str_path).Where(Function(x) Not x.Contains(".screenshots")).ToArray)
 	list_str_file.AddRange(System.IO.Directory.GetFiles(str_path))
     Console.WriteLine(String.Format("남은 폴더 : {0}, 현재 파일 : {1}",list_str_dir.Count.ToString, list_str_file.Count.ToString))
@@ -19,7 +19,27 @@ End While
 
 out_ArrStr_AllFiles = list_str_file.ToArray
 ' join(StrArr_AllFiles.Where(Function(x) x.Contains(".xaml")).ToArray,vbNewLine)
-
+```
+### Get_AllFiels 함수화
+```vb
+' Dim Fnc_Get_All_Files As System.Func<System.String, System.String[]>
+Fnc_Get_All_Files = Function(str_path As String)
+	Dim list_str_dir  As New List(Of String) 
+	Dim list_str_file  As New List(Of String)
+	Dim out_StrArr_Files As String()
+	
+	list_str_dir.Add(str_path)
+	While list_str_dir.Count <> 0
+		str_path = list_str_dir.Last
+		list_str_dir.RemoveAt(list_str_dir.Count -1)
+		list_str_dir.AddRange(System.IO.Directory.GetDirectories(str_path).Where(Function(x) Not x.Contains(".screenshots")).ToArray)
+		list_str_file.AddRange(System.IO.Directory.GetFiles(str_path))
+	End While
+	
+	out_StrArr_Files = list_str_file.Where(Function(x) x.Contains(".xaml")).ToArray
+	Console.WriteLine(String.Format(" 파일 : {0} 개 확인", out_StrArr_Files.Count.ToString))	
+	Return out_StrArr_Files
+End Function
 ```
 
 ### Find UI Activities From Xaml
