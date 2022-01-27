@@ -25,7 +25,15 @@
 [RS_Custom]:https://mpaper-blog.tistory.com/15?category=832250
 [RS_참고하기]:https://mpaper-blog.tistory.com/
 
-
+```vb
+'숫자 표시형식
+cint("1").ToString("0000") '= 0001
+' 문자열 & 아스키코드
+Asc("A") '= 65 
+Chr(65) '= "A"
+' Convert 문자열 -> 아스키코드 번호
+join(str_tmp.ToCharArray.Select(function(x) asc(x).ToString).ToArray, " ")
+```
 ##### VB 문법 For Each
 ```vb
 
