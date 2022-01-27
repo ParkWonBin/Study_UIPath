@@ -33,6 +33,13 @@ Asc("A") '= 65
 Chr(65) '= "A"
 ' Convert 문자열 -> 아스키코드 번호
 join(str_tmp.ToCharArray.Select(function(x) asc(x).ToString).ToArray, " ")
+
+' ShortCode :
+"문자열 : 아스키코드 "+vbNewLine+join(str_tmp.ToCharArray.Select(function(x) string.Format("{0} : {1}",x,asc(x).ToString) ).ToArray, vbNewLine)
+
+' CSV 열 구분 : chr(44) | ,
+' CSV 행 구분 : chr(13)+chr(10) | 줄바꿈
+' 엑셀 셀 내부 줄바꿈 : chr(10) 
 ```
 ##### VB 문법 For Each
 ```vb
