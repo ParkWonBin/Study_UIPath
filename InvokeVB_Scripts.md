@@ -1,33 +1,9 @@
-### Get_AllFiels
-파일탐색 
 ```vb
-' Dim in_str_path As String
-' Dim out_ArrStr_AllFiles As String[]
-
-Dim list_str_dir  As New List(Of String) 
-Dim list_str_file  As New List(Of String)
-Dim str_path As String = in_str_path
-
-list_str_dir.Add(str_path)
-While list_str_dir.Count <> 0
-	str_path = list_str_dir.Last
-	list_str_dir.RemoveAt(list_str_dir.Count -1)
-	list_str_dir.AddRange(System.IO.Directory.GetDirectories(str_path).Where(Function(x) Not x.Contains(".screenshots")).ToArray)
-	list_str_file.AddRange(System.IO.Directory.GetFiles(str_path))
-    Console.WriteLine(String.Format("남은 폴더 : {0}, 현재 파일 : {1}",list_str_dir.Count.ToString, list_str_file.Count.ToString))
-End While
-
-out_ArrStr_AllFiles = list_str_file.ToArray
-' join(StrArr_AllFiles.Where(Function(x) x.Contains(".xaml")).ToArray,vbNewLine)
-```
-### Get_AllFiels 함수화
-```vb
-' Dim Fnc_Get_All_Files As System.Func<System.String, System.String[]>
-Fnc_Get_All_Files = Function(str_path As String)
+'Fnc_Get_All_Files
+Dim Fnc_Get_All_Files As System.Func(Of String, String()) = Function(str_path As String) As String()
 	Dim list_str_dir  As New List(Of String) 
 	Dim list_str_file  As New List(Of String)
-	Dim out_StrArr_Files As String()
-	
+
 	list_str_dir.Add(str_path)
 	While list_str_dir.Count <> 0
 		str_path = list_str_dir.Last
@@ -36,58 +12,100 @@ Fnc_Get_All_Files = Function(str_path As String)
 		list_str_file.AddRange(System.IO.Directory.GetFiles(str_path))
 	End While
 	
-	out_StrArr_Files = list_str_file.Where(Function(x) x.Contains(".xaml")).ToArray
-	Console.WriteLine(String.Format(" 파일 : {0} 개 확인", out_StrArr_Files.Count.ToString))	
-	Return out_StrArr_Files
+	Dim StrArr_Files As String() = list_str_file.Where(Function(x) x.Contains(".xaml")).ToArray
+	Console.WriteLine(String.Format(" 파일 : {0} 개 확인", StrArr_Files.Count.ToString))	
+	Return StrArr_Files
 End Function
-```
+'------------------------------------------------------------------------------------------------------------------------------------------
+'Fnc_GetAttr 
+Dim Fnc_GetAttr As System.Func(Of System.Xml.XmlNode, String, String)  = Function(Node As System.Xml.XmlNode, AttrName As String) As String
+    If Node.Attributes.count > 0 Then
+        Return If( Enumerable.Range(0, Node.Attributes.count).Select(Function(i) Node.Attributes.ItemOf(i).Name.ToString ).ToArray.Contains(AttrName) , Node.Attributes(AttrName).value.ToString , "")
+    Else
+        Return ""
+    End If
+End Function
+'------------------------------------------------------------------------------------------------------------------------------------------
+'Fnc_ExtractData
+Dim Fnc_ExtractData As System.Func(Of String, DataTable, DataTable) = Function( XamlPath As String, Dt_result As DataTable) As DataTable
+    ' dt 확인
+    If Dt_result Is Nothing OrElse Dt_result.Columns.count = 0
+        Dt_result = New DataTable()
+        For Each colName As String In "is_Web_UI|DirectoryName|FileName|ActivityName|DisplayName|Refid|Selector|Selector_Recommended|ReMarks".split("|"c)
+                Dt_result.Columns.Add(colName, System.Type.GetType("System.String"))
+        Next
+    End If
 
-### Find UI Activities From Xaml
-```vb
-'Dim in_str_xmlPath As String
-'Dim out_Dt_result As DataTable
-Dim doc As System.Xml.XmlDocument
-Dim tags As System.Xml.XmlNodeList
-Dim Arr_Nodes As System.Xml.XmlNode()
+    ' Xaml 읽기 시도.
+    Dim doc As System.Xml.XmlDocument = New XmlDocument()
+    console.WriteLine("Xaml 읽기 시도 : "+vbNewLine+XamlPath)
+    doc.Load(XamlPath)
 
-'초기 설정
-doc = New XmlDocument()
-doc.Load(in_str_xmlPath)
+    ' 데이터 추출 시도
+    Dim Str_DirName As String = (New System.IO.FileInfo(XamlPath)).DirectoryName.Split("\"c).last
+    Dim Str_FileName As String = (New System.IO.FileInfo(XamlPath)).Name
 
-' 전체 요소 선택 > Attribute 있는 요소만 선택 > Selector 있는 요소만 선택
-tags  = doc.GetElementsByTagName("*")
-Arr_Nodes = Enumerable.range(0, tags.Count).Select(Function(i) tags(i) ).where(Function(x) x.Attributes.count>0).toArray
-Arr_Nodes = Arr_Nodes.where(Function(x) enumerable.range(0, x.Attributes.count).Select(Function(i) x.Attributes.ItemOf(i).Name.ToString ).ToArray.Contains("Selector")).ToArray
+    ' 전체 요소 선택 > Attribute 있는 요소만 선택 > Selector 있는 요소만 선택
+    Dim tags As System.Xml.XmlNodeList = doc.GetElementsByTagName("*")
+    Dim Arr_Nodes As System.Xml.XmlNode() = Enumerable.range(0, tags.Count).Select(Function(i) tags(i) ).where(Function(x) Not String.IsNullOrWhiteSpace(Fnc_GetAttr(x, "Selector"))).ToArray
+    
+    ' 데이터 추출 및 DT에 갱신
+    If Arr_Nodes.count > 0 
+        ' GetValue, SetValue, TypeInto 등 처리 | 2계층 위
+        Dim StrArr_Refid As String() = Arr_Nodes.Select(Function(x) Fnc_GetAttr( x.ParentNode.ParentNode, "sap2010:WorkflowViewState.IdRef") ).toArray
+		Dim StrArr_ActivityNames As String() = Arr_Nodes.Select(Function(x) x.ParentNode.ParentNode.Name ).toArray
+        Dim StrArr_DisplayNames As String() = Arr_Nodes.Select(Function(x) Fnc_GetAttr( x.ParentNode.ParentNode, "DisplayName") ).toArray
+        Dim StrArr_Selectors As String() = Arr_Nodes.Select(Function(x) x.Attributes("Selector").value.Replace(chr(10).ToString,"").Replace(chr(13).ToString,"") ).toArray
+		Dim StrArr_Selectors_RCMD As String() = StrArr_Selectors.Select(Function(x) x.Replace("'iexplore.exe'","'msedge.exe'") ).toArray
+        Dim StrArr_Is_Web_UI As String() = StrArr_Selectors.Select(Function(x) (x.Contains("<html") OrElse x.Contains("<webctrl") OrElse x.Contains("iexplore") OrElse x.Contains("x:Null") ).ToString ).toArray
+        Dim StrArr_ReMarks As String() = Enumerable.Repeat(Of String)("Type A", Arr_Nodes.count).ToArray
+        
+        ' WaitUiElementVanish, Attach 등 처리 | 0계층 위
+        StrArr_Refid = StrArr_ActivityNames.Select(Function(x,i) If( Not String.IsNullOrWhiteSpace(StrArr_DisplayNames(i)) AndAlso x.Contains("ui:"),  StrArr_Refid(i) , Fnc_GetAttr( Arr_Nodes(i),"sap2010:WorkflowViewState.IdRef") ) ).toArray
+		StrArr_ReMarks = StrArr_ActivityNames.Select(Function(x,i) If( Not String.IsNullOrWhiteSpace(StrArr_DisplayNames(i)) AndAlso x.Contains("ui:"),  StrArr_ReMarks(i) ,String.Format("Type B{0}BrowserType : {1}{0}UiBrowser : {2}"," | ".ToString,Fnc_GetAttr( Arr_Nodes(i), "BrowserType"),Fnc_GetAttr( Arr_Nodes(i), "UiBrowser") )) ).toArray
+		StrArr_DisplayNames = StrArr_ActivityNames.Select(Function(x,i) If( Not String.IsNullOrWhiteSpace(StrArr_DisplayNames(i)) AndAlso x.Contains("ui:"),  StrArr_DisplayNames(i) , Fnc_GetAttr( Arr_Nodes(i),"DisplayName") ) ).toArray
+        StrArr_ActivityNames = StrArr_ActivityNames.Select(Function(x,i) If( Not String.IsNullOrWhiteSpace(StrArr_DisplayNames(i)) AndAlso x.Contains("ui:") , x , Arr_Nodes(i).Name ) ).toArray
+        
+        ' Open, Attach, Browse scope 등 처리 | 6계층 위
+		StrArr_Refid = StrArr_ActivityNames.Select(Function(x,i) If( x <> "ui:Target",  StrArr_Refid(i) , Fnc_GetAttr( Arr_Nodes(i).ParentNode.ParentNode.ParentNode.ParentNode.ParentNode.ParentNode, "sap2010:WorkflowViewState.IdRef")  ) ).toArray
+		StrArr_ReMarks = StrArr_ActivityNames.Select(Function(x,i) If( x <> "ui:Target",  StrArr_ReMarks(i) , String.Format("Type C{0}BrowserType : {1}{0}UiBrowser : {2}"," | ".ToString,Fnc_GetAttr( Arr_Nodes(i).ParentNode.ParentNode.ParentNode.ParentNode.ParentNode.ParentNode, "BrowserType"),Fnc_GetAttr( Arr_Nodes(i).ParentNode.ParentNode.ParentNode.ParentNode.ParentNode.ParentNode, "UiBrowser") )  ) ).toArray
+        StrArr_DisplayNames = StrArr_ActivityNames.Select(Function(x,i) If( x <> "ui:Target",  StrArr_DisplayNames(i) , Fnc_GetAttr( Arr_Nodes(i).ParentNode.ParentNode.ParentNode.ParentNode.ParentNode.ParentNode, "DisplayName")  ) ).toArray
+        StrArr_ActivityNames = StrArr_ActivityNames.Select(Function(x,i) If( x <> "ui:Target" , x , Arr_Nodes(i).ParentNode.ParentNode.ParentNode.ParentNode.ParentNode.ParentNode.Name ) ).toArray
+		
+        For Each i As Integer In Enumerable.Range(0,StrArr_Selectors.Count)
+                Dt_result.Rows.Add({StrArr_Is_Web_UI(i),Str_DirName, Str_FileName, StrArr_ActivityNames(i), StrArr_DisplayNames(i),StrArr_Refid(i), StrArr_Selectors(i),StrArr_Selectors_RCMD(i), StrArr_ReMarks(i)})
+        Next
+    End If
+	
+    Return Dt_result
+End Function
+'------------------------------------------------------------------------------------------------------------------------------------------
+'Convert_DT_to_CSV
+Dim Convert_DT_to_CSV As system.func(Of DataTable, String) = Function(DT_Source As DataTable) As String
+	Dim colSep As String =","
+	Dim rowSep As String = chr(13).ToString+chr(10).ToString
+	Dim StrArr_cols As String() = Enumerable.Range(0,DT_Source.Columns.Count).Select(Function(x) DT_Source.Columns.Item(x).ColumnName).ToArray 
+	Dim StrArr_rows As String()  = DT_Source.AsEnumerable.Select(Function(row) Join(row.ItemArray.Select(Function(x) x.ToString.Trim).toArray, colSep) ).ToArray
+	Dim Str_CSV As String  = Join(StrArr_cols, colSep) & rowSep & Join(StrArr_rows, rowSep)
+	Return Str_CSV 
+End Function
+'------------------------------------------------------------------------------------------------------------------------------------------
+'Write CSV
+Dim Write_CSV As System.Func(Of String, String, String) = Function(Str_FilePath As String, Str_Contents As String) As String
+	If file.Exists(Str_FilePath ) Then
+		file.Delete(Str_FilePath) 
+	End If
+	file.WriteAllText(Str_FilePath,Str_Contents, System.Text.Encoding.UTF8)
+End Function
+'------------------------------------------------------------------------------------------------------------------------------------------
+'main
+Dim Dt_tmp As DataTable = New DataTable
+Dim Str_ProjectPath As String = "D:\H_GA_207_휴양소관리_휴양소_객실_확보_예약_처리"
+Dim Str_ProjectName As String = Str_ProjectPath.Split("\"c).Where(Function(x) Not String.IsNullOrWhiteSpace(x)).Last
 
-Dim Str_DirName As String
-Dim Str_FileName As String
-Dim StrArr_ActivityNames As String()
-Dim StrArr_DisplayNames As String()
-Dim StrArr_Selectors As String()
-Dim StrArr_Is_Web_UI As String()
-
-Str_DirName = (new System.IO.FileInfo(in_str_xmlPath)).DirectoryName.Split("\"c).last
-Str_FileName = New system.io.FileInfo(in_str_xmlPath).Name
-StrArr_ActivityNames = Arr_Nodes.Select(Function(x) x.ParentNode.ParentNode.Name ).toArray
-StrArr_DisplayNames = Arr_Nodes.Select(Function(x) x.ParentNode.ParentNode.Attributes("DisplayName").value ).toArray
-StrArr_Selectors = Arr_Nodes.Select(Function(x) x.Attributes("Selector").value ).toArray
-StrArr_Is_Web_UI = StrArr_Selectors.Select(Function(x) (x.Contains("<html") OrElse x.Contains("<webctrl") OrElse x.Contains("iexplore")).ToString ).toArray
-
-'Dim out_Dt_result As DataTable
-out_Dt_result = New DataTable()
-
-'열추가
-For Each colName As String In "DirectoryName|FileName|ActivityName|DisplayName|Selector|is_Web_UI".split("|"c)
-	out_Dt_result.Columns.Add(colName, System.Type.GetType("System.String"))
+For Each xamlPath As String In Fnc_Get_All_Files(Str_ProjectPath)
+    Dt_tmp = Fnc_ExtractData(xamlPath,Dt_tmp)
 Next
-
-'OpenBrowser
-For Each tag As System.Xml.XmlNode In doc.GetElementsByTagName("ui:OpenBrowser")
-	out_Dt_result.Rows.Add({Str_DirName, Str_FileName, tag.Name, tag.Attributes("DisplayName").value, "UiBrowser : " & tag.Attributes("UiBrowser").Value,"TRUE" })
-Next
-
-'Selector 존재하는 데이터 추가
-For Each i As Integer In Enumerable.Range(0,StrArr_Selectors.Count)
-	out_Dt_result.Rows.Add({Str_DirName, Str_FileName, StrArr_ActivityNames(i), StrArr_DisplayNames(i), StrArr_Selectors(i), StrArr_Is_Web_UI(i)})
-Next
+'Write CSV
+Write_CSV(Str_ProjectName+"_Refactoring.csv", Convert_DT_to_CSV(Dt_tmp) ) 
 ```
