@@ -25,6 +25,18 @@
 [RS_Custom]:https://mpaper-blog.tistory.com/15?category=832250
 [RS_참고하기]:https://mpaper-blog.tistory.com/
 
+#### Uipath Invoke Code 사용자 정의 함수
+invoke code 안에서 함수 정의하고 재호출 하는 것도 가능하다.
+```vb
+Dim test As System.Func(Of String,String)  = Function (str_tmp As String) As String
+	console.WriteLine(str_tmp)
+	Return str_tmp
+End Function
+test(test("123"))
+'123
+'123
+```
+
 ```vb
 '숫자 표시형식
 cint("1").ToString("0000") '= 0001
