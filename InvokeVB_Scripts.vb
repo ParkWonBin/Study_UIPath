@@ -1,9 +1,10 @@
-```vb
+Dim in_Str_ProjPath As String = "{Directory 절대경로 입력바람}"
+'------------------------------------------------------------------------------------------------------------------------------------------
 'Fnc_Get_All_Files
 Dim Fnc_Get_All_Files As System.Func(Of String, String()) = Function(str_path As String) As String()
-	Dim list_str_dir  As New List(Of String) 
-	Dim list_str_file  As New List(Of String)
-
+	Dim list_str_dir As New System.Collections.Generic.List(Of String) 
+	Dim list_str_file As New System.Collections.Generic.List(Of String)
+	
 	list_str_dir.Add(str_path)
 	While list_str_dir.Count <> 0
 		str_path = list_str_dir.Last
@@ -27,17 +28,17 @@ Dim Fnc_GetAttr As System.Func(Of System.Xml.XmlNode, String, String)  = Functio
 End Function
 '------------------------------------------------------------------------------------------------------------------------------------------
 'Fnc_ExtractData
-Dim Fnc_ExtractData As System.Func(Of String, DataTable, DataTable) = Function( XamlPath As String, Dt_result As DataTable) As DataTable
+Dim Fnc_ExtractData As System.Func(Of String, System.Data.DataTable, System.Data.DataTable) = Function( XamlPath As String, Dt_result As System.Data.DataTable) As System.Data.DataTable
     ' dt 확인
     If Dt_result Is Nothing OrElse Dt_result.Columns.count = 0
-        Dt_result = New DataTable()
+        Dt_result = New System.Data.DataTable()
         For Each colName As String In "is_Web_UI|DirectoryName|FileName|ActivityName|DisplayName|Refid|Selector|Selector_Recommended|ReMarks".split("|"c)
                 Dt_result.Columns.Add(colName, System.Type.GetType("System.String"))
         Next
     End If
 
     ' Xaml 읽기 시도.
-    Dim doc As System.Xml.XmlDocument = New XmlDocument()
+    Dim doc As System.Xml.XmlDocument = New System.Xml.XmlDocument()
     console.WriteLine("Xaml 읽기 시도 : "+vbNewLine+XamlPath)
     doc.Load(XamlPath)
 
@@ -81,7 +82,7 @@ Dim Fnc_ExtractData As System.Func(Of String, DataTable, DataTable) = Function( 
 End Function
 '------------------------------------------------------------------------------------------------------------------------------------------
 'Convert_DT_to_CSV
-Dim Convert_DT_to_CSV As system.func(Of DataTable, String) = Function(DT_Source As DataTable) As String
+Dim Convert_DT_to_CSV As System.Func(Of System.Data.DataTable, String) = Function(DT_Source As System.Data.DataTable) As String
 	Dim colSep As String =","
 	Dim rowSep As String = chr(13).ToString+chr(10).ToString
 	Dim StrArr_cols As String() = Enumerable.Range(0,DT_Source.Columns.Count).Select(Function(x) DT_Source.Columns.Item(x).ColumnName).ToArray 
@@ -92,20 +93,22 @@ End Function
 '------------------------------------------------------------------------------------------------------------------------------------------
 'Write CSV
 Dim Write_CSV As System.Func(Of String, String, String) = Function(Str_FilePath As String, Str_Contents As String) As String
-	If file.Exists(Str_FilePath ) Then
-		file.Delete(Str_FilePath) 
+	If Str_FilePath.Split("."c).Last.ToString.ToUpper <> "CSV" Then
+		Str_FilePath = Str_FilePath + ".csv"
 	End If
-	file.WriteAllText(Str_FilePath,Str_Contents, System.Text.Encoding.UTF8)
+	If System.IO.File.Exists(Str_FilePath ) Then
+		System.IO.File.Delete(Str_FilePath) 
+	End If
+	System.IO.File.WriteAllText(Str_FilePath,Str_Contents, System.Text.Encoding.UTF8)
 End Function
 '------------------------------------------------------------------------------------------------------------------------------------------
 'main
-Dim Dt_tmp As DataTable = New DataTable
-Dim Str_ProjectPath As String = "D:\H_GA_207_휴양소관리_휴양소_객실_확보_예약_처리"
+Dim Dt_Proj As New System.Data.DataTable
+Dim Str_ProjectPath As String = in_Str_ProjPath
 Dim Str_ProjectName As String = Str_ProjectPath.Split("\"c).Where(Function(x) Not String.IsNullOrWhiteSpace(x)).Last
 
 For Each xamlPath As String In Fnc_Get_All_Files(Str_ProjectPath)
-    Dt_tmp = Fnc_ExtractData(xamlPath,Dt_tmp)
+    Dt_Proj = Fnc_ExtractData(xamlPath,Dt_Proj)
 Next
 'Write CSV
-Write_CSV(Str_ProjectName+"_Refactoring.csv", Convert_DT_to_CSV(Dt_tmp) ) 
-```
+Write_CSV(Str_ProjectName, Convert_DT_to_CSV(Dt_Proj) ) 
