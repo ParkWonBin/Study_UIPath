@@ -25,6 +25,12 @@
 [RS_Custom]:https://mpaper-blog.tistory.com/15?category=832250
 [RS_참고하기]:https://mpaper-blog.tistory.com/
 
+#### Uipath 사용시 주의사항
+패키지 및 studio 버전에 유의해야합니다. 
+- "UiPath.UIAutomation.Activities" : 버전과 브라우저에 따라 Selector의 '구조'가 달라질 수 있습니다.
+- "UiPath.System.Activities": 버전에 따라 kill process, while scope 등을 인식 못할 수 있고, invokeCode 내에서 사용가능한 library의 제한이 다릅니다. 
+- "UiPath.Excel.Activities": 버전에 따라 excel scope 를 인식 못할 수 있습니다.
+
 #### Uipath Invoke Code 사용자 정의 함수
 invoke code 안에서 함수 정의하고 재호출 하는 것도 가능하다.
 ```vb
@@ -707,6 +713,8 @@ uiexplorer로 브라우저 팝업을 잡으려고 하면 Studio가 멈추는 경
 2,3. \<ctrl/> 에서 role, name, text 등을 잡아본다.   
 3. target > WaitForReady > None 넣어놓는다.(무한대기 방지)  
 4. 예시 
+
+##### UiAutomation.Activities 19.10?
 ```xml
 <!-- Edge 팝업 확인 버튼 클릭 -->
 <html app='msedge.exe' url='*' />
@@ -731,6 +739,25 @@ uiexplorer로 브라우저 팝업을 잡으려고 하면 Studio가 멈추는 경
 <ctrl  role = 'push button' name='계속'/>
 ```
 
+##### UiAutomation.Activities 21.4.4
+
+```xml
+<!-- Edge Alert 텍스트 박스 - GetText -->
+<wnd app='msedge.exe' title='*' />
+<ctrl role='dialog' />
+<ctrl idx='15' role='pane' />
+```
+
+
+```xml
+<!-- Edge Alert/Confirm 1번째 버튼 - Click -->
+<wnd app='msedge.exe' title='*' />
+<ctrl role='dialog' />
+<ctrl role='pane' idx='4' />
+<ctrl role='push button' idx='1' />
+<!-- 해당 UI의 버튼에 써있는 글자는 name 속성으로 - Get Attr -->
+<!-- Confirm에서 취소버튼 등 2번째 버튼은 마지막 테그의 idx = '2' 입력 -->
+```
 
 ###  문자열, 배열 내 중복 제거
 ```vb
