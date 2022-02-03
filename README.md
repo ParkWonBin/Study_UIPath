@@ -28,7 +28,8 @@
 #### Uipath 사용시 주의사항
 패키지 및 studio 버전에 유의해야합니다. 
 - "UiPath.UIAutomation.Activities" : 버전과 브라우저에 따라 Selector의 '구조'가 달라질 수 있습니다.
-- "UiPath.System.Activities": 버전에 따라 kill process, while scope 등을 인식 못할 수 있고, invokeCode 내에서 사용가능한 library의 제한이 다릅니다. 
+- "UiPath.System.Activities": 버전에 따라 kill process, while scope 등을 인식 못할 수 있습니다. 
+- "UiPath.System.Activities": invokeCode에서 사용가능한 library 버전이 다릅니다. 
 - "UiPath.Excel.Activities": 버전에 따라 excel scope 를 인식 못할 수 있습니다.
 
 #### Uipath Invoke Code 사용자 정의 함수
