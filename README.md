@@ -43,10 +43,14 @@ test(test("123"))
 '123
 '123
 ```
-
+##### Tostring 관련
 ```vb
 '숫자 표시형식
 cint("1").ToString("0000") '= 0001
+
+'날짜 표시 형식
+now.ToString("yyyy_MM_dd")
+
 ' 문자열 & 아스키코드
 Asc("A") '= 65 
 Chr(65) '= "A"
