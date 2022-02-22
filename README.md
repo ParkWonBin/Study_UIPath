@@ -217,6 +217,13 @@ Next
 'System.IO.FileInfo
 ```
 
+#### Bake Config
+```vb
+' Write Text File
+' "Config.log"
+String.Format("{1}{0}{3}{0}{2}",vbNewLine,"New Dictionary(Of String,String) From {","}", Join( Dic_Config.Keys.Select(Function(key) String.Format("{0} {2}{3}{2} , {2}{4}{2} {1}", "{","}", chr(34), key, System.Convert.ToString(Dic_Config(key)).Replace(vbNewLine," ").Replace(chr(10)," ").Replace(chr(34),"'") ) ).ToArray, ","+vbNewLine) )
+```
+
 
 #### Dictionary 필터링
 ```vb
