@@ -20,11 +20,27 @@ System.IO.Directory.GetDirectories(Str_Path) ' 해당 경로에 위치한 폴더
 System.IO.Directory.GetFiles(Str_Path) ' 해당 경로에 위치한 파일의 절대경로를 String_Array로 반환한다. 
 
 ' 파일 작성 및 삭제 관련
+System.IO.Directory.CreateDirectory(Str_Path) ' 폴더 생성
 System.IO.File.ReadAllText(Str_Path, System.Text.Encoding.UTF8) ' 파일 읽기. Encoding 설정 가능
 System.IO.File.WriteAllText(Str_Path, Str_Content, System.Text.Encoding.UTF8) '파일 생성. Encoding 설정 가능
 System.IO.File.AppendAllText(Str_Path, Str_Content, System.Text.Encoding.UTF8) '파일 이어서 쓰기. Encoding 설정 가능
 System.IO.File.Copy(Str_Sorce,Str_Dest,Bln_overwite) ' 파일 복제. 덮어쓰기 여부 선택
 System.IO.File.Delete(Str_Path) ' 파일 삭제
+
+'--- 사용자 정의 함수
+Dim Fnc_Get_All_Files As System.Func(Of String, String()) = Function(str_path As String) As String()
+	Dim list_str_dir As New System.Collections.Generic.List(Of String) 
+	Dim list_str_file As New System.Collections.Generic.List(Of String)
+	
+	list_str_dir.Add(str_path)
+	While list_str_dir.Count <> 0
+		str_path = list_str_dir.Last
+		list_str_dir.RemoveAt(list_str_dir.Count -1)
+		list_str_dir.AddRange(System.IO.Directory.GetDirectories(str_path))
+		list_str_file.AddRange(System.IO.Directory.GetFiles(str_path))
+	End While
+ Return list_str_file
+End Function
 ```
 ### System.Environment 관련
 ```vb
@@ -36,7 +52,12 @@ System.Environment.SetEnvironmentVariable(Str_KeyName, Str_Value) ' 해당 Key�
 ### process
 ```vb
 System.Diagnostics.Process.GetProcessesByName(Str_ProcessName) ' ProcessName으로 프로세스 검색, Enum
-System.Diagnostics.Process.GetProcessesByName(Str_ProcessName).Select(function(p) p.Kill()) ' Kill All Process
+
+' Kill All Process
+For Each p As System.Diagnostics.Process In System.Diagnostics.Process.GetProcessesByName(Str_ProcessName)
+ p.Kill()
+Next
+
 ```
 
 ## 함수 정의 방법
