@@ -39,7 +39,7 @@ Dim Fnc_Get_All_Files As System.Func(Of String, String()) = Function(str_path As
 		list_str_dir.AddRange(System.IO.Directory.GetDirectories(str_path))
 		list_str_file.AddRange(System.IO.Directory.GetFiles(str_path))
 	End While
- Return list_str_file
+	Return list_str_file
 End Function
 ```
 ### System.Environment 관련
