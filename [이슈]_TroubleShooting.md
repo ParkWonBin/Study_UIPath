@@ -1,7 +1,7 @@
 # 특이사항
 알고 싶지 않았으나 알게된 정보를 정리합니다.   
 
-## [시작] 메뉴 패널 안열릴 떄 window app 사용하기
+## 1. [시작] 메뉴 패널 안열릴 떄 window app 사용하기
 시작버튼, window 키를 눌러도 패널이 열리지 않을 때 Window 기본 app 사용 방법  
 윈도우 탐색기가 열린다면 시스템 경로 이동하여 수동으로 app 실행이 가능합니다.  
 
@@ -11,7 +11,7 @@
 원격접속 | mstsc.exe
 그림판 | mspaint.exe
 
-## System32 경로 내 존재하지 않는 앱이 System32 경로에서 실행되는 경우
+## 2. System32 경로 내 존재하지 않는 앱이 System32 경로에서 실행되는 경우
 | 폴더명 | 경로 위치 | 
 |:---:|---|
 System32 | C:\Windows\System32
@@ -35,7 +35,7 @@ https://msdn.microsoft.com/ko-kr/library/windows/desktop/aa365744(v=vs.85).aspx
 ```
 
 
-##### 동일한 문자열이 고장날 떄
+## 3. 동일한 문자열이 고장날 떄
 눈에 보이지 않는 공백문자가 포함되어 있을 수 있다.  
 글자의 가로 길이가 0인 특수문자가 포함되어 있는 문자다.  
 
@@ -49,4 +49,11 @@ System.IO.File.Exists(B) | False| 해당 파일 속성>보안>개체이름 에�
 A.Length | 39
 B.Length | 40 | 글자의 폭이 0 인 문자가 끼어있음
 
+VScode에 복사 붙여넣기 하면 명확한데,
+A | "C:\Users\H2109941\Desktop\tmp\test.xlsx"
+B | "[U+202A]C:\Users\H2109941\Desktop\tmp\test.xlsx"
+로 표시된다. 
+
+다음과 같은 Linq로 보완로직을 만들면 해당 이슈를 예방할 수 있다. 아스키 63번은  아스키 코드에 등록되지 않은 ? 문자이다. 
+B = join(B.where(function(x) asc(x)<>63).Select(function(x) x.ToString).ToArray,"")
 ```
