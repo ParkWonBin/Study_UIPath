@@ -33,3 +33,20 @@ https://msdn.microsoft.com/ko-kr/library/windows/desktop/aa384187(v=vs.85).aspx
 32bit 프로세스가 System32 폴더에 접근하고 싶다면 Wow64EnableWow64FsRedirection API를 사용해 리다이렉트 기능을 끄고 강제로 접근하면된다.  
 https://msdn.microsoft.com/ko-kr/library/windows/desktop/aa365744(v=vs.85).aspx
 ```
+
+
+##### 동일한 문자열이 고장날 떄
+눈에 보이지 않는 공백문자가 포함되어 있을 수 있다.  
+글자의 가로 길이가 0인 특수문자가 포함되어 있는 문자다.  
+
+```vb
+A = "C:\Users\H2109941\Desktop\tmp\test.xlsx"
+B = "‪C:\Users\H2109941\Desktop\tmp\test.xlsx"
+
+System.IO.File.Exists(A) | True | window 탐색기 주소창에서 복사
+System.IO.File.Exists(B) | False| 해당 파일 속성>보안>개체이름 에서 왼쪽에서 오른쪽으로 드레그하여 복사
+
+A.Length | 39
+B.Length | 40 | 글자의 폭이 0 인 문자가 끼어있음
+
+```
