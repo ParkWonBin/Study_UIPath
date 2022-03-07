@@ -40,8 +40,8 @@ https://msdn.microsoft.com/ko-kr/library/windows/desktop/aa365744(v=vs.85).aspx
 글자의 가로 길이가 0인 특수문자가 포함되어 있는 문자다.  
 
 ```vb
-A = "C:\Users\H2109941\Desktop\tmp\test.xlsx"
-B = "‪C:\Users\H2109941\Desktop\tmp\test.xlsx"
+A = "C:\Users\UserName\Desktop\tmp\test.xlsx"
+B = "‪C:\Users\UserName\Desktop\tmp\test.xlsx"
 
 System.IO.File.Exists(A) | True | window 탐색기 주소창에서 복사
 System.IO.File.Exists(B) | False| 해당 파일 속성>보안>개체이름 에서 왼쪽에서 오른쪽으로 드레그하여 복사
@@ -50,8 +50,8 @@ A.Length | 39
 B.Length | 40 | 글자의 폭이 0 인 문자가 끼어있음
 
 VScode에 복사 붙여넣기 하면 명확한데,
-A | "C:\Users\H2109941\Desktop\tmp\test.xlsx"
-B | "[U+202A]C:\Users\H2109941\Desktop\tmp\test.xlsx"
+A | "C:\Users\UserName\Desktop\tmp\test.xlsx"
+B | "[U+202A]C:\Users\UserName\Desktop\tmp\test.xlsx"
 로 표시된다. 
 
 다음과 같은 Linq로 보완로직을 만들면 해당 이슈를 예방할 수 있다. 아스키 63번은  아스키 코드에 등록되지 않은 ? 문자이다. 
