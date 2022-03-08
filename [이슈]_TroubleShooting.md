@@ -57,3 +57,16 @@ B | "[U+202A]C:\Users\UserName\Desktop\tmp\test.xlsx"
 다음과 같은 Linq로 보완로직을 만들면 해당 이슈를 예방할 수 있다. 아스키 63번은  아스키 코드에 등록되지 않은 ? 문자이다. 
 B = join(B.where(function(x) asc(x)<>63).Select(function(x) x.ToString).ToArray,"")
 ```
+
+
+## 4. Edge에서 간헐적으로 팝업을 못잡을 떄
+최상의 셀렉터를 설정할 떄 ``` idx='*' ``` 를 명시해야 여러 Wndow를 동시에 확인한다.   
+셀렉터가 모호할 때, 가능한 최대 경우의 수에 대해 자동으로 탐색해주지 않는다고 생각하는 게 이롭다.   
+
+```xml
+<!-- 가장 앞서 포커스된 Edge에 대해 동작함 -->
+<wnd app='msedge.exe'/>
+
+<!-- Process에 열려있는 모든 Edge Window를 살펴보나봄 -->
+<wnd app='msedge.exe' idx='*' />
+```
