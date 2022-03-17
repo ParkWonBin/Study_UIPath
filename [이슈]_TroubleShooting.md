@@ -1,5 +1,26 @@
 # 특이사항
 알고 싶지 않았으나 알게된 정보를 정리합니다.   
+```yaml
+IE 브라우저 Edge로 셀렉터 변환 : 
+  Description : 
+    텍스트 에디터로 xaml에서 바로 Replace 시켜버릴 것
+  Before:
+    - "&lt;html title
+    - "&lt;html html
+    - app='iexplore.exe'
+    - BrowserType="IE"
+  After:
+    - "&lt;html app='msedge.exe' title
+    - "&lt;html app='msedge.exe' html
+    - app='msedge.exe'
+    - BrowserType="Edge"
+  Target:
+    - app이 명시되지 않은 UI 셀렉터
+    - app이 명시되지 않은 UI 셀렉터
+    - app이 IE로 명시된 UI셀렉터
+    - Open, Attach Browser에 콤보박스 변경
+```
+
 
 ## 1. [시작] 메뉴 패널 안열릴 떄 window app 사용하기
 시작버튼, window 키를 눌러도 패널이 열리지 않을 때 Window 기본 app 사용 방법  
