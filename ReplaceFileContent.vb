@@ -68,11 +68,11 @@ Module Module1
 
     '-----------------------------------------------
     ' main
-    Dim StrArr_XamlFiles As String() = Fnc_Get_All_Files(Fnc_Get_DirPath())
+    Dim StrArr_XamlFiles As String() = Fnc_Get_All_Files(Fnc_Get_DirPath()).where(function(x) x.contains(".xaml")).ToArray
     Dim Before As String() = {"a","b","c"}
     Dim After As String() = {"A","B","C"}
    
-    For Each Xaml_File As String in StrArr_XamlFiles.where(function(x) x.contains(".xaml"))
+    For Each Xaml_File As String in StrArr_XamlFiles
       Fnc_Replace_File(Xaml_File,Before,After)
     Next
     
