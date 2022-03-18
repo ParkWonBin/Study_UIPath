@@ -99,10 +99,16 @@ StrArr = "1,2,3".split(","c)
 ' StrArr : {"1","2","3"} 
 ' String.Split(Seperator As Char(), ... )
 
+StrArr = "1, .2:;3".Split(New Char() {" "c, ","c, "."c, ";"c, ":"c}, StringSplitOptions.RemoveEmptyEntries )
+' StrArr : {"1","2","3"}
+
 ' strings.join
 Str_Result = join(Split("1 2 3"), "|")
 ' Str_Result : "1|2|3" ' join(StrArr_source, Str_Seperator)
 ' Str_Result = join({"1","2"}) '기본 Seperator는 " " 이다.
+
+Str_Result = join("1 2,3..::.4;;5 :6".Split(New Char() {" "c, ","c, "."c, ";"c, ":"c}, StringSplitOptions.RemoveEmptyEntries), " ")
+'Str_Result : "1 2 3 4 5 6
 
 * 참고 : UiPath에서 기본 split, join은 Strings 라이브러리의 것이다.
 * "문자열".split , {"String Array",""}.join 은 strings.split, strings.join과 다른 함수이다.
