@@ -1,5 +1,12 @@
 ## 레퍼런스 모음
-[Markdown 사용법](https://gist.github.com/ihoneymon/652be052a0727ad59601)
+- #### [Markdown 사용법](https://gist.github.com/ihoneymon/652be052a0727ad59601)  
+- #### [YAML 사용법](https://luran.me/397) , [YAML 공식문서](https://yaml.org/)
+- #### [.NET 공식문서](https://docs.microsoft.com/ko-kr/dotnet/api/?view=net-6.0) (CODE짤 때 틈틈히 읽을 것)
+   - [System.Linq](https://docs.microsoft.com/ko-kr/dotnet/api/system.linq?view=net-6.0)
+   - [System.Data](https://docs.microsoft.com/ko-kr/dotnet/api/system.data?view=net-6.0)
+   - [System.IO](https://docs.microsoft.com/ko-kr/dotnet/api/system.io?view=net-6.0)
+   - System. [Reflection, Diagnostics, Net, Runtime, Xml, Text, Security ]
+
 
 | Uipath 근본                 | 개발 관련                       | 리서치                              |
 | --------------------------- | ------------------------------- | ----------------------------------- |
