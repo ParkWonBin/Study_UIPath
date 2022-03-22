@@ -2,10 +2,10 @@
 - #### [Markdown 사용법](https://gist.github.com/ihoneymon/652be052a0727ad59601)  
 - #### [YAML 사용법](https://luran.me/397) , [YAML 공식문서](https://yaml.org/)
 - #### [.NET 공식문서](https://docs.microsoft.com/ko-kr/dotnet/api/?view=net-6.0) (CODE짤 때 틈틈히 읽을 것)
-   - [System.Linq](https://docs.microsoft.com/ko-kr/dotnet/api/system.linq?view=net-6.0)
-   - [System.Data](https://docs.microsoft.com/ko-kr/dotnet/api/system.data?view=net-6.0)
-   - [System.IO](https://docs.microsoft.com/ko-kr/dotnet/api/system.io?view=net-6.0)
+   - [System.Linq](https://docs.microsoft.com/ko-kr/dotnet/api/system.linq?view=net-6.0), [System.Data](https://docs.microsoft.com/ko-kr/dotnet/api/system.data?view=net-6.0) ,  [System.IO](https://docs.microsoft.com/ko-kr/dotnet/api/system.io?view=net-6.0)
    - System. [Reflection, Diagnostics, Net, Runtime, Xml, Text, Security ]
+   - [System.Windows.Automation](https://docs.microsoft.com/ko-KR/dotnet/api/system.windows.automation?view=windowsdesktop-6.0)
+   - 자동화 관련 [.NET UI 자동화](https://docs.microsoft.com/ko-kr/dotnet/framework/ui-automation/ui-automation-overview)
 
 
 | Uipath 근본                 | 개발 관련                       | 리서치                              |
