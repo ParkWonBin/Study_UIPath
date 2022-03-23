@@ -1,24 +1,36 @@
 # 특이사항
 알고 싶지 않았으나 알게된 정보를 정리합니다.   
+
+#### Kill Process 액티비티
 ```yaml
-IE 브라우저 Edge로 셀렉터 변환 : 
-  Description : 
-    텍스트 에디터로 xaml에서 바로 Replace 시켜버릴 것
-  Before:
-    - "&lt;html title
-    - "&lt;html html
-    - app='iexplore.exe'
-    - BrowserType="IE"
-  After:
-    - "&lt;html app='msedge.exe' title
-    - "&lt;html app='msedge.exe' html
-    - app='msedge.exe'
-    - BrowserType="Edge"
-  Target:
-    - app이 명시되지 않은 UI 셀렉터
-    - app이 명시되지 않은 UI 셀렉터
-    - app이 IE로 명시된 UI셀렉터
-    - Open, Attach Browser에 콤보박스 변경
+Description : 
+  UiPath.Core.System.Activity 버전이 18.4 -> 19.4 로 변경될 때 kill process의 대상이
+  이미 꺼져있는 경우(process 목록에서 찾지 못한 경우) 에러를 발생하도록 변경되었다.
+ToDo:
+  이전과제에 적용된 Kill Process를 모두 찾아 ContinueOnError=True를 적용하여 해결
+After : 
+  kill process 를 Uipath 액티비티로 사용하기 보다는 Custom Activity나 library를 만들어 사용하는 게 좋을 것
+```
+
+#### IE 브라우저 Edge로 셀렉터 변환 
+```yaml
+Description : 
+  텍스트 에디터로 xaml에서 바로 Replace 시켜버릴 것
+Before:
+  - "&lt;html title
+  - "&lt;html html
+  - app='iexplore.exe'
+  - BrowserType="IE"
+After:
+  - "&lt;html app='msedge.exe' title
+  - "&lt;html app='msedge.exe' html
+  - app='msedge.exe'
+  - BrowserType="Edge"
+Target:
+  - app이 명시되지 않은 UI 셀렉터
+  - app이 명시되지 않은 UI 셀렉터
+  - app이 IE로 명시된 UI셀렉터
+  - Open, Attach Browser에 콤보박스 변경
 ```
 
 
