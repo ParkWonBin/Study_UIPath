@@ -1,6 +1,22 @@
 # 특이사항
 알고 싶지 않았으나 알게된 정보를 정리합니다.   
 
+#### UiPath 라이브러리 올릴 떄 참고
+```yaml
+주석관련 : 
+  - Activity에 커서올리면 바로 볼 수 있는 주석 설정하기 :
+    - 방법 : Project패널 > 해당 xaml 우클릭 > Properties > tooltip 설정 > Save
+    - 비고 : 최상위 activity에 주석 넣어놓으면, tooltip 설정할 때 자동으로 주석 내용을 넣어준다.
+             tooltip 을 적용하면 xaml에 <sap2010:Annotation.AnnotationText> 항목이 생긴다. 
+에러관련 : 
+  - 배포 후 NameSpace 컴파일 에러 : 
+    - Invoke Code에서 liblaray 함수/객체 명을 strict하게 쓰지 않았을 때 주로 생김 (특힉 workbook)
+    - 다른 라이브러리와 객체/함수 명이 같아 생기는 오류. 함수/객체 호출 시 System부터 쭉 경로 다 써줘야 예방 가능
+  - 배포 후 잘못된 형식 관련 에러 : 
+    - Library 안에서 State Machine 사용했을 떄, 트랜젝션 Triger에 Element Exist 등 넣어두면 해당 오류 생김.
+    - 정확한 원인은 모르겠으나. 트렌젝션에서 처리하는 내용을 entry나 exist 마지막 부분으로 이동시키면 해결 가능.
+```
+
 #### Kill Process 액티비티
 ```yaml
 Description : 
