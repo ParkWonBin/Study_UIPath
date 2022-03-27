@@ -1,12 +1,4 @@
-## [스케줄러 참고](https://deje0ng.tistory.com/78)
-```cmd 
-# KS출근.bat
-cd "<C:\Program Files (x86)\UiPath\Studio\>"
-.\UiRobot.exe execute  -process "KS출근" -input "{ 'str_workTime' : '8-17' , 'str_ID' : 'wbpark' }"
-```
 
-
-## [UiPath 문서 참고](https://docs.uipath.com/robot/docs/arguments-description)
 ```powershell
 UiRobot <parameters>
 
