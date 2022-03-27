@@ -146,3 +146,33 @@ Transaction은 큐에서 가장 먼저 들어온 New 상태의 item을 의미한
 3. 스캐줄 관리 : 트리거에서 해당 프로세스/환경 설정 후 cron등으로 스캐줄 설정
 4. 작업 수행 명령 : 작업 탭에서 새로만들기(시작버튼 "▶" 누르면 새로 만들기 나옴, 패키지/환경 설정)
 
+#### 파워쉘로 작업/파일 실행시키는 방법
+[스케줄러로 돌릴 때 참고](https://deje0ng.tistory.com/78)
+[uipath 문서](https://docs.uipath.com/robot/docs/arguments-description)
+
+```cmd
+# 파워쉘 열기
+1. window + X : 트레이 열기
+2. a : PowerShell 관리자 권한으로 실행
+3. cls 
+4. (Get-PSReadlineOption).HistorySavePath
+```
+
+```cmd
+# Uipath 경로로 이동
+cd "C:\Program Files (x86)\UiPath\Studio\"
+
+# 딜레이 시간 넣기
+timeout 1 
+Start-Sleep -Seconds 1
+
+# 파일 실행
+.\UiRobot.exe execute   --file "파일절대경로(xaml)"
+
+# 작업 실행
+.\UiRobot.exe execute  -p "작업이름"
+
+# 예시.bat
+cd "C:\Program Files (x86)\UiPath\Studio\"
+.\UiRobot.exe execute  -process "KS출근" -input "{ 'str_code' : '178606' ,'str_ID' : 'wbpark'}"
+```

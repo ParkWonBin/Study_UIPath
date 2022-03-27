@@ -39,3 +39,18 @@ Dim Fnc_Get_All_Files As System.Func(Of String, String()) = Function(str_path As
 End Function
 ```
 
+
+##### Print Dictionary / Bake Config.log, Config.excel
+```vb
+Dim in_Dic_Config As New Dictionary(Of String,String)
+Dim Str_Config As String
+
+Str_Config = 
+String.Format("{1}{0}{3}{0}{2}",vbNewLine,"New Dictionary(Of String,String) From {","}", Join( in_Dic_Config.Keys.Select(Function(key) String.Format("{0} {2}{3}{2} , {2}{4}{2} {1}", "{","}", chr(34), key, in_Dic_Config(key).Replace(vbNewLine," ").Replace(chr(10)," ").Replace(chr(34),"'") ) ).ToArray, ","+vbNewLine) )
+
+'chr(10) : 엑셀 줄바꿈 문자열
+'chr(34) : 쌍따옴표 "
+file.WriteAllText("Config.md", Str_Config)
+```
+
+

@@ -1,43 +1,29 @@
+#### UiPath Invoke Code 주의사항
+Invoke Code 안에서는 Sub를 새로 만들 수 없어, 함수를 변수 안에 저장해서 호출하는 방식으로 코드블록을 정리합니다.    
+Sub 하나에 붙여넣으면 사용할 수 있는 형태로 코드를 정리하여 올립니다.
 
-####  작업할 때 참고할 것
-
+dotNet으로 파일을 만들 경우 아래 서식에 붙여넣고 RunVb.Bat을 실행시키면 됩니다.  
 ```vb
+
+'RunVB.vb
+Imports System
+Module RunVB
+    Public Sub Main()
+    '-----------------------------------------------
+    'Paste Code Block Here
+    '-----------------------------------------------
+    end Sub
+end Module 
+```
+
+
+#### 자주 사용하는 라이브러리
+```vb
+System.IO
+System.Linq
+System.Threading.Thread.Sleep()
+System.Diagnostics.Process
 ' Foreground
 Microsoft.VisualBasic.Interaction
 System.Windows.Forms
-' System
-System.IO
-System.Linq
-System.File
-```
-
-## 파워쉘로 작업/파일 실행시키는 방법
-[스케줄러로 돌릴 때 참고](https://deje0ng.tistory.com/78)
-[uipath 문서](https://docs.uipath.com/robot/docs/arguments-description)
-
-```cmd
-# 파워쉘 열기
-1. window + X : 트레이 열기
-2. a : PowerShell 관리자 권한으로 실행
-3. cls 
-4. (Get-PSReadlineOption).HistorySavePath
-```
-
-```cmd
-# Uipath 경로로 이동
-cd "C:\Program Files (x86)\UiPath\Studio\"
-
-# 딜레이 시간 넣기
-timeout 1 
-Start-Sleep -Seconds 1
-
-# 파일 실행
-.\UiRobot.exe execute   --file "파일절대경로(xaml)"
-
-# 작업 실행
-.\UiRobot.exe execute  -p "작업이름"
-
-# 예시.bat
-cd "C:\Program Files (x86)\UiPath\Studio\"
-.\UiRobot.exe execute  -process "KS출근" -input "{ 'str_code' : '178606' ,'str_ID' : 'wbpark'}"
 ```
