@@ -80,14 +80,7 @@ null : 알 수 없는 데이터(DataTable 생성 후 값을 입력하지 않음)
 * System.Convert.ToString(Nothing)을 하게 되면 ""가 반환된다. Conver.ToString는 이미 정의되어 있고 null, Nothing 체크를 하기 때문
 Nothing.Tostring = 에러 : 참조개체가 없어 "개체.ToString" 정의되지 않음
 Convert.ToString(Nothing) = "" : ToString 함수는 Convert에서 정의 됨, null, Nothing 체크가능
-
-### [엑셀]
-pivotTable 
-- 단축키 : Alt+D + p
-- 경로 : 리본>삽입>피벗테이블
-- 옵션 : 새 시트로 생성 > [필터, 열 레이블, 행 레이블, 값] 설정
-- 수정 : 테이블 우클릭 > 피벗테이블 필드 표시
-- 
+ 
 ### OutLook 사진첨부
 Attach 로 이미지 파일 첨부하고, 
 메일 본문을 html형식으로 설정한 이후 <img> 테그를 사용하여 보낼 수 있습니다.참
