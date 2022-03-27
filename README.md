@@ -1,10 +1,3 @@
-#### Bake Config
-```vb
-' Write Text File
-' "Config.log"
-String.Format("{1}{0}{3}{0}{2}",vbNewLine,"New Dictionary(Of String,String) From {","}", Join( Dic_Config.Keys.Select(Function(key) String.Format("{0} {2}{3}{2} , {2}{4}{2} {1}", "{","}", chr(34), key, System.Convert.ToString(Dic_Config(key)).Replace(vbNewLine," ").Replace(chr(10)," ").Replace(chr(34),"'") ) ).ToArray, ","+vbNewLine) )
-```
-
 #### Dictionary 필터링
 ```vb
 ' 선언과 초기화 동시에 진행
@@ -113,15 +106,6 @@ join(DS_RPA.Tables(StrArr_cols.First).Rows.Add(StrArr_data).itemArray.select(fun
 string.Format("{1}{0}{2}{0}{3}",vbNewLine, DS_RPA.Tables.Add(StrArr_cols.First).TableName , join( StrArr_cols.Skip(1).Select(function(x) DS_RPA.Tables(StrArr_cols.First).Columns.Add( x.ToString.Trim ).ColumnName).ToArray , " | " ) , join(DS_RPA.Tables(StrArr_cols.First).Rows.Add(StrArr_data).itemArray.select(function(x) x.ToString).ToArray , "|"))
 
 ```
-
-## 특정일로부터 n개 날짜 선택하기
-```vb
-Str_tmp = "2021-11-21"
-int_cnt = 50
-join( Enumerable.Range(cint(DateTime.Parse(Str_tmp).ToOADate), int_cnt).Select(function(x) datetime.FromOADate(x).ToString("yyyy-MM-dd") ).ToArray ,vbNewLine)
-```
-
-
 
 
 
