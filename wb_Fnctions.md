@@ -15,19 +15,27 @@ Fnc_test = Function(str_test As String) As String
 End Function
 ```
 
-## 내 함수 목록
+### 람다 함수식에 변수 넣어주기
 ```vb
-Dim Fnc_Get_All_Files As System.Func(Of String, String()) = Function(str_path As String) As String법)
-	Dim list_str_dir As New System.Collections.Generic.List(Of String) 
-	Dim list_str_file As New System.Collections.Generic.List(Of String)
-	
-	list_str_dir.Add(str_path)
-	While list_str_dir.Count <> 0
-		str_path = list_str_dir.Last
-		list_str_dir.RemoveAt(list_str_dir.Count -1)
-		list_str_dir.AddRange(System.IO.Directory.GetDirectories(str_path))
-		list_str_file.AddRange(System.IO.Directory.GetFiles(str_path))
-	End While
-	Return list_str_file
+' 그냥 람다식에 () 치고 바로 뒤에 (인수) 넣어주면 됨.
+Console.WriteLine( ( (Function(num As Integer) num + 0)(5) ).ToString ) '=> 6
+```
+
+## 내 함수 목록
+
+```vb
+Dim Fnc_Get_All_Files As System.Func(Of String, String()) = Function(str_path As String) As String
+ Dim list_str_dir As New System.Collections.Generic.List(Of String) 
+ Dim list_str_file As New System.Collections.Generic.List(Of String)
+
+ list_str_dir.Add(str_path)
+ While list_str_dir.Count <> 0
+  str_path = list_str_dir.Last
+  list_str_dir.RemoveAt(list_str_dir.Count -1)
+  list_str_dir.AddRange(System.IO.Directory.GetDirectories(str_path))
+  list_str_file.AddRange(System.IO.Directory.GetFiles(str_path))
+    End While
+  Return list_str_file
 End Function
 ```
+

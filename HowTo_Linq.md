@@ -13,7 +13,8 @@ uipath에서 사용할 수 있는 split 함수는 3가지 종류다.
 1. [Strings.Split(Of String, String)][Split1]
 2. [String.Split(Of Char)][Split2]
 3. [System.Text.Regularexpressions.Regex.Split(Of String, String)][Split3]
-참고 : 정규식 공부
+4. [정규식 공부](https://regex101.com/)
+
 [Split1]:https://docs.microsoft.com/ko-kr/dotnet/api/microsoft.visualbasic.strings.split?view=net-6.0
 [Split2]:https://docs.microsoft.com/ko-kr/dotnet/api/system.string.split?view=net-6.0
 [Split3]:https://docs.microsoft.com/ko-kr/dotnet/api/system.text.regularexpressions.regex.split?view=net-6.0
@@ -165,10 +166,9 @@ Aggregate x in split("1 2 3 4 5").Select(function(x) cint(x)) into sum
 {1,2,3,4,5}.Aggregate(10, Function(a,b) a+b) '25 : Aggregated numbers by addition with a seed of 10
 {1,2,3,4,5}.sum() ' 15
 {1,2,3,4,5}.Average() '3
-{1,2,3,4,5}.Count()
-{1,2,3,4,5}.Min()
-{1,2,3,4,5}.Max()
-{1,2,3,4,5}.
+{1,2,3,4,5}.Count() '5
+{1,2,3,4,5}.Min() '1
+{1,2,3,4,5}.Max() '5
 ```
 
 #### Groupby 사용하기
@@ -210,12 +210,52 @@ Next
 [defaultView](https://newbiedev.tistory.com/24)
 [Linq](https://www.vb-net.com/VB2015/Language/LINQ.%20Update,%20Combine,%20Custom%20func,%20LINQ%20Providers%20for%20Anonymous,%20Extension,%20Lambda,%20Generic,%20String,%20XML,%20Dataset,%20Arraylist,%20Assembly,%20FileSystem.pdf)
 
-### DataColumn Filtering
+## Datatable 
 ```vb
+' Copy는 열 이름에 상관 없이 값을 복사 붙여넣기 한다.
+DT_test = DT_tmp.Copy()
+
+' Clone은 데이터는 복사하지 않고 Columns만 복사해서 넣는다.
+DT_test = DT_tmp.Clone()
+
+' DataTable Row 순서 반대로 바꾸기
+DT_tmp = DT_tmp.AsEnumerable.Reverse().CopyToDataTable
+
+' DT DataRow 필터링
+dt_tmp.AsEnumerable.Skip(int_n).Take(int_m).CopyToDataTabl
+
+' DataTable 짝수 행만 선택
+DT_tmp = DT_tmp.AsEnumerable.Where(Function(x,i) i%2==1).CopyToDataTable
+
+'DT DataColumn 필터링
+dt_tmp = dt_tmp.DefaultView.ToTable(false, {"a","c","e"} ) '열 필터링
+' DefaultView : 첫번쨰 인자는 false로 해야한다. True로 할 경우 오류 발생(distinct 속성)
+if : drArr.count > 0  Then
+    ' CopyToDataTable은 count가 0일 때 에러가 발생하기 때문에 DataRow[] 를 사용하여 예외처리
+    dt_tmp  = drArr_tmp.CopyToDataTable.DefaultView.ToTable(False, {"a","c","e"}) '열 필터링
+End if 
+
+' 특정 열 Data String Array로 뽑기
+StrArr_ColData = DT_tmp.AsEnumerable.Select(Function(row) row.Field(of string)("ColName").ToString).ToArray
+StrArr_ColData = DT_tmp.AsEumnerable.Select(Function(row) row.item("ColName").ToString).ToArray
+
+For Each row  As System.Data.DataRow In dt_tmp.AsEnumerable
+    row.SetField("ColName","Value")
+    row("ColName") = "Value"
+Next
+' argument dt_tmp는 in으로 주어도 정상적으로 수정됨, 
+
+'### convert dt to Dictionary
+DT_tmp.AsEnumerable.ToDictionary(Of String, Object)(Function (row) row("key").toString, Function (row) row("value").toString)
+
 ```
-### DataRow Filtering
-행 필터링, 행 샘플링(sampling)
+
+#### DataSet
 ```vb
-dt_tmp.AsEnumerable.Skip(int_n).Take(int_m).CopyToDataTable
-' int_n + int_m > dt_tmp.rows.count : 일때 에러 발생
+Dim Ds_tmp As New System.Data.DataSet
+Dim Dt_tmp As New System.Data.DataTable("TableName")
+' table 추가
+Ds_tmp.Tables.Add(Dt_tmp)
+Ds_tmp.Tables.Add("TableName2")
+"c1,c2,c3".split(","c).Select(Function(x) Ds_tmp.Tables("TableName2").Columns.Add(x System.Type.GetType("System.String") ))
 ```

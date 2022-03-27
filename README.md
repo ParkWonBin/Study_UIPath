@@ -39,6 +39,15 @@
 - "UiPath.System.Activities": invokeCode에서 사용가능한 library 버전이 다릅니다. 
 - "UiPath.Excel.Activities": 버전에 따라 excel scope 를 인식 못할 수 있습니다.
  
+
+#### UIPath 개발 시 참고
+Uipath는 Microsoft workflow에서 GUI 툴 그대로 가져와서 사용한다. [MS workflow로 트레킹 하는 영상][MS_WF]   
+RPA 프로그램은 미국 데스크탑 앱 개발 SW 접근성(시각/청각 장애우도 사용 가능해야 함) 도구가 발전해서 만들어졌다. 따라서 UIPath 개발 시 MS의 WorkFlow 문서를 참고하는 것이 좋다. 여담으로 [MS office는 Server-Side 개발을 권장하지 않는다.][MS_ref2] -by 이석원 프로님
+[테스트 케이스 자동화](https://academy.uipath.com/learningpath-viewer/2234/1/155237/16)
+
+[MS_WF]:https://youtu.be/pPnpFvM02HA
+[MS_ref2]:https://support.microsoft.com/en-us/help/257757/considerations-for-server-side-automation-of-office?wa=wsignin1.0%3Fwa%3Dwsignin1.0
+
 #### Naming Tip Boolean
 | 자료형  | 요령                     | 예시                    | 비고                                    |
 | ------- | ------------------------ | ----------------------- | --------------------------------------- |
@@ -61,23 +70,6 @@
 | Integer | 배열Num  (Number)  | Int_TransActionNum          |
 | Integer | 대상_속성          | Int_DT_Width                |
 | Integer | 대상_속성_세부속성 | Int_Scrollbar_ClickOffset_X |
-
-
-## [EDGE 관련 단축키](https://mainia.tistory.com/4086)
-[Reference1](https://mainia.tistory.com/4086)
-[Reference2](https://thelumine.wordpress.com/2015/08/27/microsoft-edge-keyboard-shortcuts/)
-
-|단축키 | 기능 |
-|--|--|
-| Ctrl+W | 현재 탭 닫기 |
-| Ctrl+1~Ctrl+8 | 창의 특정 위치에 있는 탭으로 이동 |
-| Ctrl+9 | 창의 마지막 탭으로 이동 |
-| Ctrl+0 | 창의 화면 비율 100%로 조정 |
-| Ctrl+Shift+T | 마지막으로 닫았던 탭 열기 |
-| Ctrl+Tab | 창의 다음 탭으로 이동	|
-| Ctrl+Shift+Tab | 창의 이전 탭으로 이동	|
-| Ctrl+U | 페이지 소스 보기 |
-| Ctrl+Shift+I | 개발자 도구 패널 표시/숨김 | 
 
 ### Empty, Nothing, null
 Empty : 변수 생성 후 초기화 하지 않음 (string, int 생성만 했을 때)
@@ -106,6 +98,22 @@ Attach 로 이미지 파일 첨부하고,
 [참고](https://stackoverflow.com/questions/29369862/outlook-email-picture-attachment-not-showing-when-i-displaying-outlook-html-ema?rq=1)
 위와 같이 이미지를 첨부하고 크기를 설정할 수 있습니다.
  
+### [EDGE 관련 단축키](https://mainia.tistory.com/4086)
+[Reference1](https://mainia.tistory.com/4086)
+[Reference2](https://thelumine.wordpress.com/2015/08/27/microsoft-edge-keyboard-shortcuts/)
+
+|단축키 | 기능 |
+|--|--|
+| Ctrl+W | 현재 탭 닫기 |
+| Ctrl+1~Ctrl+8 | 창의 특정 위치에 있는 탭으로 이동 |
+| Ctrl+9 | 창의 마지막 탭으로 이동 |
+| Ctrl+0 | 창의 화면 비율 100%로 조정 |
+| Ctrl+Shift+T | 마지막으로 닫았던 탭 열기 |
+| Ctrl+Tab | 창의 다음 탭으로 이동	|
+| Ctrl+Shift+Tab | 창의 이전 탭으로 이동	|
+| Ctrl+U | 페이지 소스 보기 |
+| Ctrl+Shift+I | 개발자 도구 패널 표시/숨김 | 
+
 ### 셀렉터 관련
 [Uipath 공식](https://docs.uipath.com/studio/docs/about-selectors)에서 셀렉터가 지원하는 테그 확인 
 1. \<html>, \<wnd>, \<ctrl> 등 테그 속성을 확인하고, 적절한 값으로 셀렉터 찍기  
@@ -113,6 +121,7 @@ Attach 로 이미지 파일 첨부하고,
 3. \<wnd/> 에서 title, aaname 으로 보이는 글자를 넣어본다.  
 4. \<ctrl/> 에서 role, name, text 등을 잡아본다.   
 5. "app" 속성 명시하고, url로 잡으면 팝업은 웬만해서 잡을 수 있다. (2022.03.27)
+
 ### 팝업 셀렉터 잡기
 ui explorer로 브라우저 팝업을 잡으려고 하면 Studio가 멈추는 경우가 있다.  
 이 떄는 Selector를 수동으로 입력해서 셀렉터를 파악하여 개발해야한다.  
@@ -147,11 +156,11 @@ target > WaitForReady > None 넣어놓는다.(무한대기 방지)
  #### cron 사용법
 [cron 문법](https://www.leafcats.com/94)  
 [cron 디버깅](http://www.cronmaker.com/;jsessionid=node0109oq4rr76ib71nhs60lrghk15443008.node0?0)  
-```
+```text
 Cron 예시 :
-매년 매월 20일과 25일 13시 0분 0초
-0 0 13 20,25 * ? *
-(초, 분, 시, 일, 월, 요일, 년)
+  - 매년 매월 20일과 25일 13시 0분 0초
+  - 0 0 13 20,25 * ? *
+  - (초, 분, 시, 일, 월, 요일, 년)
 
 
 * : 매번
@@ -161,19 +170,4 @@ Cron 예시 :
 L : 마지막 (일,요일)에만 사용 가능 (ex : 6L = 이달 마지막 금요일)
 W : 가장 가까운 평일 (ex : 10W = 이달 10일에서 가장 가까운 평일)
 "-" , "," : 범위 (1-12 =1월-12월, "20,25" = 20일과 25일
-```
-
-
-##### 엑셀 읽기 오류 관련
-[UIPATH 엑셀 StacOverFlow](https://stackoverflow.com/questions/2424718/how-to-know-if-a-cell-has-an-error-in-the-formula-in-c-sharp)  
-[UIPATH 엑셀 오류 정리글](https://deokpals.tistory.com/12)  
-```
-    ErrDiv0 = -2146826281,
-    ErrGettingData = -2146826245,
-    ErrNA = -2146826246,
-    ErrName = -2146826259,
-    ErrNull = -2146826288,
-    ErrNum = -2146826252,
-    ErrRef = -2146826265,
-    ErrValue = -2146826273
 ```

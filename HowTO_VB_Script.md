@@ -54,8 +54,8 @@ System.Environment.SetEnvironmentVariable(Str_KeyName, Str_Value) ' 해당 Key�
 
 ### TimeSpan
 ```vb
-
-TimeSpan.FromMilliseconds(int_delayTime) # 딜레이 시간 넣을 떄 사용    
+TimeSpan.FromMilliseconds(int_delayTime) ' 딜레이 시간 넣을 떄 사용    
+System.Threading.Thread.Sleep(2000)
 ```
 
 ### process
@@ -115,13 +115,6 @@ Next
 * Row를 ItemArray로 바꾸는 과정에서 Null이 포함된 row에서 item을 String으로 받으면 에러가 발생한다. (Null을 String으로 형변환 못한다는 오류)
 * 따라서 Row.ItemArray를 쓸 일이 있을 경우 Object()로 받거나, Select를 통해 ToString을 직접 시켜주는 게 좋다.
 ```
-
-### 람다 함수식에 변수 넣어주기
-```vb
-Console.WriteLine( ( (Function(num As Integer) num + 1)(5) ).ToString ) '=> 6
-' 그냥 람다식에 () 치고 바로 뒤에 (인수) 넣어주면 됨.
-```
-
 
 #### 엑셀 읽어서 해더명에 공백 제거
 ```vb

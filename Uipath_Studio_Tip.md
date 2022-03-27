@@ -5,10 +5,11 @@
 
 
 #### 프로세스 작업시간 구하기
-assign : dtm_StartTime = DateTime.Now   
-delay : 00:01:30   
-LogMessate : DateTime.Now.Subtract(dtm_StartTime).TotalSeconds.ToString("0.00") + " 초"   
-
+```vb
+Dim dtm_startTime As System.DateTime = System.DateTime.Now
+System.Threading.Tasks.Delay(System.Runtime.TimeSpan.FromSeconds(10))
+System.Console.WriteLine(System.DateTime.Now.Subtract(dtm_startTime).TotalSeconds.Tostring("0.00") & " 초")
+```
 
 #### 한글 날짜 요일 표시 방법 [출처](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=elduque&logNo=120096308343)
 1단계 : import 패널에서 System.Globalization 추가(CultureInfo 객체 사용을 위함)  
@@ -16,10 +17,11 @@ LogMessate : DateTime.Now.Subtract(dtm_StartTime).TotalSeconds.ToString("0.00") 
 - DateTime.Today.ToString("dddd", CultureInfo.CreateSpecificCulture("ko-KR"))  #목요일
 - DateTime.Today.ToString("ddd", CultureInfo.CreateSpecificCulture("ko-KR"))   #목
 - Date.ParseExact("20210212", "yyyyMMdd", System.Globalization.DateTimeFormatInfo.InvariantInfo)  
-in_TransactionItem.SpecificContent("WIID").ToString // 큐에서 특정값 호출
+in_TransactionItem.Specifi련Content("WIID").ToString // 큐에서 특정값 호출
 
-
-### Uipath 단축키
+#### Uipath 관련
+```yaml
+Uipath Studio 단축키 :
  - 변수 추가 : Ctrl + K
  - 인수 추가 : Ctrl + M
  - 자동 완성 : Ctrl + space
@@ -31,6 +33,7 @@ in_TransactionItem.SpecificContent("WIID").ToString // 큐에서 특정값 호�
  - 액티비티 시도 : Ctrl + T (Try Catch)
  - 액티비티 추가 : Ctrl + Shift + T 
  - FlowChart set start node : 우클릭 + A
+```
  
 ## sellector 변수처리
 {{item}} : 이렇게 중괄호 2개로 덮히면 셀럭터 변수처리가 가능하다.
@@ -68,54 +71,6 @@ String에서 케스팅된 Object라도 암시적으로 String으로 변환하지
 입력값 필드에 shift 체크를 풀어놓고 "A"를 입력할 떄, 실제로 입력되는 정보는 shift + 'a'다. 
 ctrl+c를 할 경우 c를 대문자로 입력하게 되면 ctrl+shift+c가 실행되므로 주의바람.
 
-## Excel Activity
-엑셀에서 alt+enter로 생성된 문자열은 chr(10)이다.
-셀 안에 있는 줄바꿈으로 문자열을 나누려면 chr(10)으로 split하라.
-Environment.NewLine.ToArray 으로 나눌 수도 있다.
-```vb
-str_test.split(chr(10)) 'is equivalent to
-str_test.split(Environment.NewLine.ToArray)
-```
-### Excel 설치x 컴퓨터
-.xlsx 파일만 작업이 가능하다.
-**읽기** : 시스템.파일.통합문서.Read Range
-**쓰기** : 시스템.파일.통합문서.Write Range
- - 수식 자동완성 안됨. "=SUM(A1:B1)"입력 시 문자열 그대로 들어감.
-
-엑셀이 설치된 컴퓨터에서는 어플스코프 사용 권장함. 어플 스코프 사용시 범위 임력으로 수식 자동 체우기도 지원됨.
-
-### Excel 설치된 컴퓨터 
-#### Excel application scope 사용
-#### [VBA : Excel Range -> HTML](https://stackoverflow.com/questions/54033321/excel-vba-convert-range-with-pictures-and-buttons-to-html)
-
-#### 엑셀 시트명 갖고오기
-excel scope에서 output workbook에 변수 만들기(wb)  
-엑셀 시트명 확인 : if : wb.GetSheets.Contains(str_sheetName)
-
-엑셀 어플리케이션으로 파일을 직접 열어서 작업이 진행됨. 스코프 안에서는 현제 작업 중인 파일을 기준으로 제어됨.
-
-**입력** : 앱통합.Excel.테이블.Read Range
-
-**출력** : 앱통합.Excel.테이블.Write Range
-- "=SUM(A1:B1)"입력시 상대위치를 통해 수식이 적용됨.
-
-데이터 읽을 때는 반드시 header가 체크 되어있는지 확인할 것 (데이터 row가 밀려쓰기 될 수 있다.)
-
-1. 웬만한 서식은 모두 "조건부 서식"을 사용한다.
-```EXCEL
-조건문 관련
-=Not(IsBlank($A1))        # 해당 행의 A열의 값이 비어있지 않으면 서식 적용
-=ISNUMBER(SEARCH("1",A1)) # 해당 위치에 있는 문자열이 '1'을 포함하고 있으면 True
-
-데이터 편집 관련
-=TEXTJOIN(",",TRUE, B3,B4,...) # 구분자를 ","로 하고, 빈셀무시=True로 하여, 해당 좌표들의 값을 join함
-```
-
-2. Uipath > Excel에 CopyPasteRange 사용
-- 해당 range의 병합된 셀의 서식까지 모두 붙여넣어진다.
-- WriteRange할떄, 병합되어 생략된 위치에 data는 제대로 갱신되지 않으니 주의 
-- 병합된 셀에 값을 갱신할 떄는(dummy rowdata로 생략된 셀을 체우든, writecell로 필요한 좌표만 찍든 해야함
-
 
 ## 비즈니즈 관점
 원버튼 : 마우스, 키보드 조차 모른다고 생각하고 접근
@@ -123,12 +78,15 @@ excel scope에서 output workbook에 변수 만들기(wb)
  - 전원이 켜진 상태라면 unattended 로봇으로 작성한 스캐줄대로 움직이거나
  - 사람이 Robot으로 실행버튼 정도는 누르는 식으로 하는 것 (이 번거로움을 문제로 상정할 수 있다.)
 
-### UIPath 개발 시 참고
-Microsoft workflow에서 GUI 툴 그대로 가져와서 사용함.
-미국에는 데스크탑 앱 개발 시 소프트웨어 접근성(시각/청각 장애우도 사용 가능한 기능)이 요구된다. 그 접근성 앱 개발을 위한 도구가 발전해서 RPA 프로그램이 된 것이다. [UIPath를 사용하지 않고 MS workflow로 트레킹하는 영상](https://ehpub.co.kr/category/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EA%B8%B0%EC%88%A0/sw%EC%A0%91%EA%B7%BC%EC%84%B1-%EA%B8%B0%EC%88%A0-ui-%EC%9E%90%EB%8F%99%ED%99%94/) 따라서 UIPath 개발 시 MS의 WorkFlow 문서를 참고하는 것이 좋다. 여담으로 [MS office는 서버-side 개발을 권장하지 않는다.](https://support.microsoft.com/en-us/help/257757/considerations-for-server-side-automation-of-office?wa=wsignin1.0%3Fwa%3Dwsignin1.0) -by 이석원 프로님
 
-### 테스트 케이스
+
+#### UIPath 개발 시 참고
+Uipath는 Microsoft workflow에서 GUI 툴 그대로 가져와서 사용한다. [MS workflow로 트레킹 하는 영상][MS_WF]   
+RPA 프로그램은 미국 데스크탑 앱 개발 SW 접근성(시각/청각 장애우도 사용 가능해야 함) 도구가 발전해서 만들어졌다. 따라서 UIPath 개발 시 MS의 WorkFlow 문서를 참고하는 것이 좋다. 여담으로 [MS office는 Server-Side 개발을 권장하지 않는다.][MS_ref2] -by 이석원 프로님
 [테스트 케이스 자동화](https://academy.uipath.com/learningpath-viewer/2234/1/155237/16)
+
+[MS_WF]:https://youtu.be/pPnpFvM02HA
+[MS_ref2]:https://support.microsoft.com/en-us/help/257757/considerations-for-server-side-automation-of-office?wa=wsignin1.0%3Fwa%3Dwsignin1.0
 
 
 # 윈도우 자격증명 쓰는법

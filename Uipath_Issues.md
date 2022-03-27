@@ -134,18 +134,3 @@ cd "<C:\Program Files (x86)\UiPath\Studio\>"
 
 ##### Invoke Code 사용할 경우 MethodName 의 경우 대소문자를 구분 필수
 "Add"로 써야할 것을 "add"로 쓸 경우 에러가 발생한다.
-
-##### 엑셀 읽기 오류 관련
-[UIPATH 엑셀 StacOverFlow](https://stackoverflow.com/questions/2424718/how-to-know-if-a-cell-has-an-error-in-the-formula-in-c-sharp)  
-[UIPATH 엑셀 오류 정리글](https://deokpals.tistory.com/12)  
-```yaml
-Excel Error ReadRange 값: 
-  - ErrNA : -2146826246,
-  - ErrNum : -2146826252,
-  - ErrRef : -2146826265,
-  - ErrNull : -2146826288,
-  - ErrDiv0 : -2146826281,
-  - ErrName : -2146826259,
-  - ErrValue : -2146826273
-  - ErrGettingData : -2146826245,
-```
