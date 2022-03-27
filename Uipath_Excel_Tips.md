@@ -24,6 +24,12 @@ Excel ReadRange - Value of Errors:
 Excel Template 만들 떄 좋은 함수 : 
   - =TEXTJOIN(",",TRUE, B3,B4,...) # 빈셀무시=True, 구분자=",", String Join
   - =vlookup()
+  
+Pivot Table 설정 : 
+  - 단축키 : Alt+D + p
+  - 경로 : 리본>삽입>피벗테이블
+  - 옵션 : 새 시트로 생성 > [필터, 열 레이블, 행 레이블, 값] 설정
+  - 수정 : 테이블 우클릭 > 피벗테이블 필드 표시
 ```
 
 ### Excel Activities 사용 관련 
