@@ -12,8 +12,8 @@ echo off
 set targetPath=C:\test.vb
 
 ::: 같은 이름의 VB파일로 경로명 변경
-::: set targetPath%0%
-::: set targetPath%filePath:~1,-4%vb
+::set targetPath=%0
+::set targetPath=%targetPath:~1,-4%vb
 
 echo
 echo [ Run VB File ]
