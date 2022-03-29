@@ -8,12 +8,12 @@ echo off
 : 주의사항4   : 변수 호출은 %변수명%으로 이루어지며, 문자열이 replace되어 명령으로 전달되는 느낌입니다.
 :::::::::: [ Cmd 명령 구간 ]::::::::::::::
 
-::: VB script 위치 입력
-set targetPath=C:\test.vb
-
 ::: 같은 이름의 VB파일로 경로명 변경
-::set targetPath=%0
-::set targetPath=%targetPath:~1,-4%vb
+set targetPath=%0
+set targetPath=%targetPath:~1,-4%vb
+::: VB script 위치 직접 입력 (경로 입력 시 = 앞뒤 공백 없어야함)
+::set targetPath=C:\test.vb
+
 
 echo
 echo [ Run VB File ]
