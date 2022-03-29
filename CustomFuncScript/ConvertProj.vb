@@ -46,11 +46,12 @@ Dim int_Result_Cnt As Integer = 0
 
 System.Console.WriteLine("변환 완료 : ")
 For Each Str_FilePath As String In Fnc_Get_All_Files(Str_Dir_Source)
-    '결과 폴더를 따로 만들기
+    ' 파일 작성
     Dim Str_File_ResultPath As String = Str_FilePath.replace(Str_Dir_Source,Str_Dir_Result)    
+    Str_File_ResultPath=Str_File_ResultPath.replace("%20"," ")
     System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(Str_File_ResultPath))
-
-    'xaml은 일괄적으로 변경 후 저장
+        
+    'xaml은 읽고 replace
     If System.IO.Path.GetExtension(Str_FilePath).ToUpper = ".XAML"
         Dim Str_FileContent As String = System.IO.File.ReadAllText(Str_FilePath)
         
@@ -65,7 +66,6 @@ For Each Str_FilePath As String In Fnc_Get_All_Files(Str_Dir_Source)
             Str_FileContent=Str_FileContent.replace(StrArr_Before(int_i),StrArr_After(int_i))
         Next 
 
-        ' 파일 작성
         System.IO.File.WriteAllText(Str_File_ResultPath, Str_FileContent, System.Text.Encoding.UTF8)
     Else
         System.IO.File.Copy(Str_Dir_Source, Str_File_ResultPath)
