@@ -4,14 +4,14 @@
 
 ```yaml
 Excel ReadRange - Value of Errors: 
-  - ErrNA : -2146826247,
-  - ErrNum : -2146826253,
-  - ErrRef : -2146826266,
-  - ErrNull : -2146826289,
-  - ErrName : -2146826260,
-  - ErrDiv-0 : -2146826281,
+  - ErrNA : -2146826247
+  - ErrNum : -2146826253
+  - ErrRef : -2146826266
+  - ErrNull : -2146826289
+  - ErrName : -2146826260
+  - ErrDiv-0 : -2146826281
   - ErrValue : -2146826274
-  - ErrGettingData : -2146826246,
+  - ErrGettingData : -2146826246
 편의기능 : 
   - 한/영 자동변환 해제 : 파일 > 옵션 > 언어교정 > 자동 고침 옵션 > 한/영 자동 고침(K) 해제
 ```
