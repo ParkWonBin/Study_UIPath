@@ -36,8 +36,8 @@ Dim Fnc_Get_All_Files As System.Func(Of String, String()) = Function(str_path As
 End Function
 '-----------------------------------------------
 ' main
-Dim StrArr_Before As String() = {"&lt;html html","&lt;html title","&lt;html idx","&lt;html app='iexplore.exe'","BrowserType=""IE"""}
-Dim StrArr_After As String() = {"&lt;html app='msedge.exe' html","&lt;html app='msedge.exe' title","&lt;html app='msedge.exe' idx","&lt;html app='msedge.exe'","BrowserType=""Edge"""}
+Dim StrArr_Before As String() = {"&lt;html html","&lt;html title","&lt;html idx","&lt;html app='iexplore.exe'","BrowserType=""IE""","BrowserType=""{x:Null}""","ProcessName=""iexplore"" />"}
+Dim StrArr_After As String() = {"&lt;html app='msedge.exe' html","&lt;html app='msedge.exe' title","&lt;html app='msedge.exe' idx","&lt;html app='msedge.exe'","BrowserType=""Edge""","BrowserType=""Edge""","ProcessName=""msedge"" />"}
 Dim Str_ptn As String = "Selector=""\[[^]]+\]"""
 Dim Str_Description As String = "###############\n#IE -> Edge 변환 :#\n변환할 Project의 폴더를 선택해주세요.".replace("\n",VbNewLine)
 
@@ -63,8 +63,10 @@ For Each Str_FilePath As String In Fnc_Get_All_Files(Str_Dir_Source)
         
         ' 셀렉터 내 변수 부분 {{}}로 바꿔주기
         For Each x As System.Text.RegularExpressions.Match In System.Text.RegularExpressions.Regex.Matches(Str_FileContent,Str_ptn)
-            Dim Str_replaceTo As String = x.Tostring.replace("[&quot;","").replace("&quot;+","{{").replace("+&quot;","}}").replace("&quot;]","").replace("&quot;","""")
-            Str_FileContent=Str_FileContent.replace(x.tostring,Str_replaceTo)
+		    If Not x.Tostring.ToUpper.Contains(".TOSTRING") 
+	            Dim Str_replaceTo As String = x.Tostring.replace("[&quot;","").replace("&quot;+","{{").replace("+&quot;","}}").replace("&quot;]","").replace("&quot;","""")
+	            Str_FileContent=Str_FileContent.replace(x.tostring,Str_replaceTo)
+			End If
         Next
 
         ' app 및 Attach Edge,IE 일괄 변경
