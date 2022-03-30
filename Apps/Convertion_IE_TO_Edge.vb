@@ -63,10 +63,10 @@ For Each Str_FilePath As String In Fnc_Get_All_Files(Str_Dir_Source)
         
         ' 셀렉터 내 변수 부분 {{}}로 바꿔주기
         For Each x As System.Text.RegularExpressions.Match In System.Text.RegularExpressions.Regex.Matches(Str_FileContent,Str_ptn)
-		    If Not x.Tostring.ToUpper.Contains(".TOSTRING") 
-	            Dim Str_replaceTo As String = x.Tostring.replace("[&quot;","").replace("&quot;+","{{").replace("+&quot;","}}").replace("&quot;]","").replace("&quot;","""")
-	            Str_FileContent=Str_FileContent.replace(x.tostring,Str_replaceTo)
-			End If
+		If Not x.Tostring.ToUpper.Contains(".TOSTRING") 
+			Dim Str_replaceTo As String = x.Tostring.replace("[&quot;","").replace("&quot;+","{{").replace("+&quot;","}}").replace("&quot;]","").replace("&quot;","""")
+			Str_FileContent=Str_FileContent.replace(x.tostring,Str_replaceTo)
+		End If
         Next
 
         ' app 및 Attach Edge,IE 일괄 변경
