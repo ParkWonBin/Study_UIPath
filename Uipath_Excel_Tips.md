@@ -12,7 +12,10 @@ Excel ReadRange - Value of Errors:
   - ErrDiv-0 : -2146826281,
   - ErrValue : -2146826274
   - ErrGettingData : -2146826246,
+편의기능 : 
+  - 한/영 자동변환 해제 : 파일 > 옵션 > 언어교정 > 자동 고침 옵션 > 한/영 자동 고침(K) 해제
 ```
+[엑셀 한영 자동변환 풀기 .틴](https://hxxgcy.tistory.com/24)
 
 
 ### Excle 함수
