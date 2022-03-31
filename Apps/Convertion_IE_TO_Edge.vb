@@ -45,7 +45,7 @@ Dim Str_Msg_title As String = "과제설명"
 Dim Str_Desc_msg As String = String.format("###########{0} 패키지 업데이트는 수동으로 진행하셔야 합니다.{0}파일명에 %20이 있는 경우 ' '으로 바꿔줍니다.{0}###########{0}{0}Attach Browser의 BrowserType을 IE에서 Edge로 바꿉니다.{0}{0}",VbNewLine)
 Str_Desc_msg=Str_Desc_msg+"Selector 내 변수가 사용된 경우 {{ }}로 바꾸어줍니다."+VbNewLine+"before -> After"+VbNewLine
 Str_Desc_msg=Str_Desc_msg+Join(StrArr_Before.Select(Function(x,i) x+" => "+StrArr_After(i) ).ToArray,VbNewLine)
-Microsoft.visualbasic.interaction.msgbox(Str_Desc_msg,,Str_Msg_title)
+Microsoft.visualbasic.interaction.msgbox(Str_Desc_msg,vbSystemModal,Str_Msg_title)
 
 Dim Str_Dir_Source As String = Fnc_Get_DirPath(Str_Description)
 Dim Str_Dir_Result As String = Str_Dir_Source+"_Replaced"
