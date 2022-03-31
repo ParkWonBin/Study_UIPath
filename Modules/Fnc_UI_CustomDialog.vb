@@ -29,5 +29,5 @@ console.WriteLine(Str_tmp)
 ' https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/objects-and-classes/object-initializers-named-and-anonymous-types
 ' code : 
 ' https://stackoverflow.com/questions/5427020/prompt-dialog-in-windows-forms
-
+' https://docs.microsoft.com/ko-kr/dotnet/api/system.windows.forms.combobox.text?view=windowsdesktop-6.0&viewFallbackFrom=dotnet-plat-ext-6.0
 
