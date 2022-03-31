@@ -7,7 +7,8 @@
 [UIPATH 엑셀 오류 정리글](https://deokpals.tistory.com/11)  
 
 ```yaml
-Excel ReadRange - Value of Errors: 
+Value of Errors: 
+  - Description : Value of UiPath ReadRange 
   - ErrNA : -2146826247
   - ErrNum : -2146826253
   - ErrRef : -2146826266
