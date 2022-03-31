@@ -24,3 +24,10 @@ End Function
 
 Dim Str_tmp As String = Fnc_UI_CustomDialog("caption","text","selStr")
 console.WriteLine(Str_tmp)
+              
+' New With  :
+' https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/objects-and-classes/object-initializers-named-and-anonymous-types
+' code : 
+' https://stackoverflow.com/questions/5427020/prompt-dialog-in-windows-forms
+
+
