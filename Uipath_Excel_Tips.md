@@ -8,7 +8,7 @@
 
 ```yaml
 Value of Errors: 
-  - Description : Value of UiPath ReadRange 
+  - Value of UiPath ReadRange 
   - ErrNA : -2146826247
   - ErrNum : -2146826253
   - ErrRef : -2146826266
