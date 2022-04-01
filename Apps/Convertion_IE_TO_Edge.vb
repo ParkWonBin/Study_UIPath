@@ -1,4 +1,6 @@
 'Convertion_IE_TO_Edge.vb
+'UIAutomation의 버전상이할 경우, 버전이 높든 낮든 상관 없이 다른 버전에서 Validate 한 셀렉터를 제대로 인식하지 못하는 문제가 있습니다.
+'이 앱은 UIAutomation=21.4를기준으로 동작합니다.
 Imports System
 Imports Microsoft
 Module Convertion_IE_TO_Edge
@@ -42,10 +44,10 @@ Dim Str_ptn As String = "Selector=""\[[^]]+\]"""
 Dim Str_Description As String = "###############\n#IE -> Edge 변환 :#\n변환할 Project의 폴더를 선택해주세요.".replace("\n",VbNewLine)
 
 Dim Str_Msg_title As String = "과제설명"
-Dim Str_Desc_msg As String = String.format("###########{0} 패키지 업데이트는 수동으로 진행하셔야 합니다.{0}파일명에 %20이 있는 경우 ' '으로 바꿔줍니다.{0}###########{0}{0}Attach Browser의 BrowserType을 IE에서 Edge로 바꿉니다.{0}{0}",VbNewLine)
-Str_Desc_msg=Str_Desc_msg+"Selector 내 변수가 사용된 경우 {{ }}로 바꾸어줍니다."+VbNewLine+"before -> After"+VbNewLine
+Dim Str_Desc_msg As String = String.format("###########{0} 패키지 업데이트는 수동으로 진행하셔야 합니다.{0}파일명에 %20이 있는 경우 ' '으로 바꿔줍니다.{0}###########{0}{0}Attach Browser의 BrowserType을 IE에서 Edge로 바꿉니다.{0}",VbNewLine)
+Str_Desc_msg=Str_Desc_msg+"Selector 내 변수가 사용된 경우 {{ }}로 바꾸어줍니다."+VbNewLine+"(셀렉터 '.tostring','(',')' 미포함 시에만 작동)"+VbNewLine+VbNewLine+"before -> After"+VbNewLine
 Str_Desc_msg=Str_Desc_msg+Join(StrArr_Before.Select(Function(x,i) x+" => "+StrArr_After(i) ).ToArray,VbNewLine)
-Microsoft.visualbasic.interaction.msgbox(Str_Desc_msg,vbSystemModal,Str_Msg_title)
+microsoft.visualbasic.interaction.msgbox(Str_Desc_msg,vbSystemModal,Str_Msg_title)
 
 Dim Str_Dir_Source As String = Fnc_Get_DirPath(Str_Description)
 Dim Str_Dir_Result As String = Str_Dir_Source+"_Replaced"
@@ -61,13 +63,13 @@ For Each Str_FilePath As String In Fnc_Get_All_Files(Str_Dir_Source)
     If System.IO.Path.GetExtension(Str_FilePath).ToUpper = ".XAML"
         Dim Str_FileContent As String = System.IO.File.ReadAllText(Str_FilePath)
         
-        ' 셀렉터 내 변수 부분 {{}}로 바꿔주기
-        For Each x As System.Text.RegularExpressions.Match In System.Text.RegularExpressions.Regex.Matches(Str_FileContent,Str_ptn)
-		If Not x.Tostring.ToUpper.Contains(".TOSTRING") 
-			Dim Str_replaceTo As String = x.Tostring.replace("[&quot;","").replace("&quot;+","{{").replace("+&quot;","}}").replace("&quot;]","").replace("&quot;","""")
+       ' 셀렉터 내 변수 부분 {{}}로 바꿔주기
+	For Each x As System.Text.RegularExpressions.Match In System.Text.RegularExpressions.Regex.Matches(Str_FileContent,Str_ptn) 
+		If Not (x.Tostring.ToUpper.Contains(".TOSTRING") OrElse x.ToString.Contains("(") OrElse  x.ToString.Contains(")") ) Then
+			Dim Str_replaceTo As String = x.Tostring.replace("[&quot;","").replace("&quot;+","{{").replace("+&quot;","}}").replace("&quot;]","")
 			Str_FileContent=Str_FileContent.replace(x.tostring,Str_replaceTo)
 		End If
-        Next
+	Next
 
         ' app 및 Attach Edge,IE 일괄 변경
         For int_i As Integer = 0 To StrArr_Before.length-1
