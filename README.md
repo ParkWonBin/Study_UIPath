@@ -204,3 +204,9 @@ join(str_tmp.ToCharArray.Select(function(x) string.Format("{0} : {1}",x,asc(x).T
 ' 파일명 제어
 StrArr = System.IO.Directory.GetFiles("절대경로") '각 파일의 절대경로 얻음
 StrArr = System.IO.Directory.GetFiles(Environment.CurrentDirectory) '프로젝트 경로파일 얻음
+
+#### Linq Functions
+```vb
+'메일 참조에서
+StrArr_ReceiveMail_CC = System.Text.RegularExpressions.Regex.split(Mail_ReceiveMail.cc.ToString,"[^\w@.-]+").Where(function(x) x.Contains("@")).ToArray 
+```
