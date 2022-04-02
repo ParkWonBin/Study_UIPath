@@ -1,0 +1,17 @@
+Fnc_UI_Get_DirPath.vb : 
+  - Count : 2
+  - App_Convertion_IE_TO_Edge
+  - App_Update_Functions_And_Readme
+Fnc_Ui_MsgBox.vb : 
+  - Count : 1
+  - App_Convertion_IE_TO_Edge
+Fnc_Get_All_Files.vb : 
+  - Count : 2
+  - App_Convertion_IE_TO_Edge
+  - App_Update_Functions_And_Readme
+Fnc_Text_Replace.vb : 
+  - Count : 1
+  - App_Convertion_IE_TO_Edge
+Fnc_Regex_Replace_Selector.vb : 
+  - Count : 1
+  - App_Convertion_IE_TO_Edge
