@@ -82,7 +82,7 @@ End Function
 '-----------------------
 ' Input
 Dim in_Str_DirPath As String = ""
-'in_Str_DirPath = System.IO.Path.Combine(System.Environment.CurrentDirectory,"Apps")
+in_Str_DirPath = System.IO.Path.Combine(System.Environment.CurrentDirectory,"Apps")
 App_Update_Functions_And_Readme(in_Str_DirPath)
 '-----------------------------------------------
     end Sub

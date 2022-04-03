@@ -1,3 +1,6 @@
+Module RunVB
+    Public Sub Main()
+'-----------------------------------------------
 Dim Fnc_UI_Get_DirPath As System.Func(Of String, String) = Function(str_Desc As String) As String
   '2022.04.02|wbpark|폴더 선택용 UI
   Dim Dlg_FolderBrowser As System.Windows.Forms.FolderBrowserDialog = New System.Windows.Forms.FolderBrowserDialog() 
@@ -101,3 +104,6 @@ End Function
 Dim in_StrArr_Before As String() = {"&lt;html html","&lt;html title","&lt;html idx","&lt;html app='iexplore.exe'","BrowserType=""IE""","BrowserType=""{x:Null}""","ProcessName=""iexplore"">"}
 Dim in_StrArr_After As String() = {"&lt;html app='msedge.exe' html","&lt;html app='msedge.exe' title","&lt;html app='msedge.exe' idx","&lt;html app='msedge.exe'","BrowserType=""Edge""","BrowserType=""Edge""","ProcessName=""msedge"">"}
 App_Convertion_IE_TO_Edge(in_StrArr_Before,in_StrArr_After)
+'-----------------------------------------------
+    end Sub
+end Module 
