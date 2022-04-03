@@ -153,6 +153,7 @@ Dim App_Update_Functions_And_Readme As System.Func(Of String, String) = Function
   Dim Str_ReadMelog As String = Join(Dic_Ref.keys.Select(Function(k) k+" : "+vbNewLine+"  - Count : "+Dic_Ref(k).Count.Tostring+vbNewLine+Join(Dic_Ref(k).Select(Function(x) "  - "+x).ToArray,vbNewLine)).ToArray,vbNewLine)
   System.IO.File.WriteAllText(Str_SavePath_Fnc+"\Readme.md",Str_ReadMeContent)
   System.IO.File.WriteAllText(Str_SavePath_Fnc+"\Readme.yaml",Str_ReadMelog)
+  
   ' Open Result Directory
   System.Diagnostics.Process.Start("explorer.exe", Str_SavePath_Fnc)
   System.Diagnostics.Process.Start("notepad.exe", Str_SavePath_Fnc+"\Readme.yaml")
