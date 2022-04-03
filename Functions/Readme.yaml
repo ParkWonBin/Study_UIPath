@@ -15,3 +15,9 @@ Fnc_Text_Replace.vb :
 Fnc_Regex_Replace_Selector.vb : 
   - Count : 1
   - App_Convertion_IE_TO_Edge
+App_Convertion_IE_TO_Edge.vb : 
+  - Count : 1
+  - App_Convertion_IE_TO_Edge
+App_Update_Functions_And_Readme.vb : 
+  - Count : 1
+  - App_Update_Functions_And_Readme
