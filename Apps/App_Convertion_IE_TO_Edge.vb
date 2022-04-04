@@ -101,8 +101,8 @@ End Function
 ' Main
 '-----------------------
 ' inputs
-Dim in_StrArr_Before As String() = {"&lt;html html","&lt;html title","&lt;html idx","&lt;html app='iexplore.exe'","BrowserType=""IE""","BrowserType=""{x:Null}""","ProcessName=""iexplore"">"}
-Dim in_StrArr_After As String() = {"&lt;html app='msedge.exe' html","&lt;html app='msedge.exe' title","&lt;html app='msedge.exe' idx","&lt;html app='msedge.exe'","BrowserType=""Edge""","BrowserType=""Edge""","ProcessName=""msedge"">"}
+Dim in_StrArr_Before As String() = {"&lt;html url","&lt;html html","&lt;html title","&lt;html idx","&lt;html app='iexplore.exe'","BrowserType=""IE""","BrowserType=""{x:Null}""","ProcessName=""iexplore"">"}
+Dim in_StrArr_After As String() = {"&lt;html app='msedge.exe' url","&lt;html app='msedge.exe' html","&lt;html app='msedge.exe' title","&lt;html app='msedge.exe' idx","&lt;html app='msedge.exe'","BrowserType=""Edge""","BrowserType=""Edge""","ProcessName=""msedge"">"}
 App_Convertion_IE_TO_Edge(in_StrArr_Before,in_StrArr_After)
 '-----------------------------------------------
     end Sub
