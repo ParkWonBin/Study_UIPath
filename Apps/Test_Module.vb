@@ -19,3 +19,16 @@ Dim Fnc_Back_Config As System.Func(Of System.Collections.Generic.Dictionary(Of S
   'Fnc_Back_Config( New System.Collections.Generic.Dictionary(Of String, String) From {{"key","value"},{"k2","v2"}}  )}
 End Function
 '-----------------------
+Dim Fnc_Set_Env_With_Config As System.Func(Of System.Collections.Generic.Dictionary(Of String, String), String) = Function(Dic_Config As System.Collections.Generic.Dictionary(Of String, String) ) As String
+  Dim Str_Error As String =""
+  For Each Key As String In Dic_Config.Keys
+    Try
+      System.Environment.SetEnvironmentVariable(Key,in_Dic_Config(Key).tostring )
+    Catch ex As System.Exception
+		Str_Error=Str_Error+ex.message+vbnewline
+    End Try
+  Next
+  System.Console.WriteLine(Str_Error)
+  Return Str_Error
+End Function
+'-----------------------
