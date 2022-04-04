@@ -19,7 +19,8 @@ Dim Fnc_Back_Config As System.Func(Of System.Collections.Generic.Dictionary(Of S
   'Fnc_Back_Config( New System.Collections.Generic.Dictionary(Of String, String) From {{"key","value"},{"k2","v2"}}  )}
 End Function
 '-----------------------
-Dim Fnc_Set_Env_With_Config As System.Func(Of System.Collections.Generic.Dictionary(Of String, String), String) = Function(Dic_Config As System.Collections.Generic.Dictionary(Of String, String) ) As String
+Dim Fnc_Set_Env_With_Config As System.Func(Of System.Collections.Generic.Dictionary(Of String, Object), String) = Function(Dic_Config As System.Collections.Generic.Dictionary(Of String, Object) ) As String
+  '2022.04.04|wbpark|Config값 환경변수로 넣기
   Dim Str_Error As String =""
   For Each Key As String In Dic_Config.Keys
     Try
@@ -30,5 +31,6 @@ Dim Fnc_Set_Env_With_Config As System.Func(Of System.Collections.Generic.Diction
   Next
   System.Console.WriteLine(Str_Error)
   Return Str_Error
+  'Fnc_Set_Env_With_Config(in_Dic_Config)
 End Function
 '-----------------------
