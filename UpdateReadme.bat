@@ -4,11 +4,6 @@ echo off
 set targetPath=%0
 set targetPath=%targetPath:~1,-4%vb
 
-echo
-echo [ Run VB File ]
-echo  %targetPath%
-echo
-
 ::: Window에 기본적으로 내장된 VB Compiler 입력
 set vbcCompiler=C:\Windows\Microsoft.NET\Framework64\v4.0.30319\vbc.exe
 

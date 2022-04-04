@@ -22,8 +22,8 @@ Dim Fnc_UI_CustomDialog As System.Func(Of String,String,String,String) = Functio
   Return String.Format("{0};{1}", textBox.Text, cmbx.SelectedItem.ToString)
 End Function
 
-Dim Str_tmp As String = Fnc_UI_CustomDialog("caption","text","selStr")
-console.WriteLine(Str_tmp)
+'Dim Str_tmp As String = Fnc_UI_CustomDialog("caption","text","selStr")
+'console.WriteLine(Str_tmp)
               
 ' New With  :
 ' https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/objects-and-classes/object-initializers-named-and-anonymous-types
