@@ -74,7 +74,7 @@ Dim App_Update_Functions_And_Readme As System.Func(Of String, String) = Function
   System.IO.File.WriteAllText(Str_SavePath_Fnc+"\Dereference.yaml",Str_Dereference)
   ' Open Result Directory
   System.Diagnostics.Process.Start("explorer.exe", Str_SavePath_Fnc)
-  System.Diagnostics.Process.Start("notepad.exe", Str_SavePath_Fnc+"\Readme.yaml")
+  System.Diagnostics.Process.Start("notepad.exe", Str_SavePath_Fnc+"\Dereference.yaml")
   Return Str_Error_Log
 End Function
 '-----------------------

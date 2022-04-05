@@ -50,3 +50,46 @@ Dim Fnc_Bake_UiElementAttar As System.Func(Of UiPath.Core.UiElement, String) = F
   Return Str_result
 End Function
 '-----------------------
+Dim Fnc_Mail_GetAttr As System.Func(Of System.Net.Mail.MailMessage,String,String) = Function(msg_mail  As System.Net.Mail.MailMessage, Str_AttarName As String) As String
+  ' 2022.04.05|wbpark|MailMessage 속성별 호출 방법 통일 시키기. 대소문자 구분 안함
+  Str_AttarName=Str_AttarName.Trim.ToUpper
+  If Str_AttarName = "SENDER" Then
+    Return msg_mail.Sender.Address
+  Else If Str_AttarName = "SUBJECT" Then
+    Return msg_mail.Subject
+  Else If Str_AttarName = "BODY" Then 
+    Return msg_mail.Body
+  Else If Str_AttarName = "TO" Then
+    Return String.Join( ";", msg_mail.To.Select(Function(x) x.Address).ToArray)
+  Else If Str_AttarName = "CC" Then
+    Return String.Join( ";", msg_mail.CC.Select(Function(x) x.Address).ToArray)
+  Else If Str_AttarName = "BCC" Then
+    Return String.Join( ";", msg_mail.Bcc.Select(Function(x) x.Address).ToArray)
+  Else If Str_AttarName = "ATTACH" Then
+    Return String.Join(vbNewLine, msg_mail.Attachments.Select(Function(x) x.Name).ToArray)         
+  Else
+    Dim StrArr_HeaderKeys = "Uid|Date|DateCreated|DateRecieved|Size|Body|HtmlBody|PlainText".ToUpper().Split("|"c)
+    Dim IndexHeader As Integer = Array.IndexOf(StrArr_HeaderKeys, Str_AttarName.ToUpper.Trim)
+    If IndexHeader <> -1 Then
+      Return msg_mail.Headers(StrArr_HeaderKeys(IndexHeader))
+    Else
+      Return "No AttarName : "+Str_AttarName
+    End If 
+  End If 
+End Function
+'-----------------------
+Dim Fnc_MailList_To_DataTable As System.Func(Of List(Of System.Net.Mail.MailMessage), String(), System.Data.DataTable)= Function(List_MailBox As List(Of System.Net.Mail.MailMessage), StrArr_Columns As String()) As System.Data.DataTable
+  ' 2022.04.05|wbpark|메일함 데이터 DataTable로 만들어 저장
+  Dim Dt_MailData As New DataTable
+  For Each colName As String In StrArr_Columns
+    Dt_MailData.Columns.Add(colName.Trim, System.Type.GetType("System.String"))
+  Next
+  For Each mail As System.Net.Mail.MailMessage In List_MailBox
+    Dim StrArr_NewRow As String() = StrArr_Columns.Select(Function(x) Fnc_Mail_GetAttr(mail,x) ).ToArray
+    Dt_MailData.Rows.Add(StrArr_NewRow)
+  Next
+  Return Dt_MailData
+  ' 예시 : StrArr_ColNames = Sender|Subject|To|Cc|Bcc|Attach|Uid|Date|DateCreated|DateRecieved|Size|Body|HtmlBody|PlainText".Split("|"c).Distinct.toArray
+  ' out_dt = Fnc_Convert_MailList_To_DataTable(in_list_mail,StrArr_ColNames)
+End Function
+'-----------------------

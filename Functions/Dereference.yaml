@@ -22,5 +22,9 @@ Fnc_Set_Env_With_Config.vb :
   - 1. Test_Module
 Fnc_Bake_UiElementAttar.vb : 
   - 1. Test_Module
+Fnc_Mail_GetAttr.vb : 
+  - 1. Test_Module
+Fnc_MailList_To_DataTable.vb : 
+  - 1. Test_Module
 Fnc_UI_CustomDialog.vb : 
   - 1. Test_UI_CustomDialog
