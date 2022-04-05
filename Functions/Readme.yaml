@@ -1,38 +1,26 @@
 Fnc_UI_Get_DirPath.vb : 
-  - Count : 2
-  - App_Convertion_IE_TO_Edge
-  - App_Update_Functions_And_Readme
+  - 1. App_Convertion_IE_TO_Edge
+  - 2. App_Update_Functions_And_Readme
 Fnc_Get_All_Files.vb : 
-  - Count : 2
-  - App_Convertion_IE_TO_Edge
-  - App_Update_Functions_And_Readme
+  - 1. App_Convertion_IE_TO_Edge
+  - 2. App_Update_Functions_And_Readme
 Fnc_Ui_MsgBox.vb : 
-  - Count : 1
-  - App_Convertion_IE_TO_Edge
+  - 1. App_Convertion_IE_TO_Edge
 Fnc_Text_Replace.vb : 
-  - Count : 1
-  - App_Convertion_IE_TO_Edge
+  - 1. App_Convertion_IE_TO_Edge
 Fnc_Regex_Replace_Selector.vb : 
-  - Count : 1
-  - App_Convertion_IE_TO_Edge
+  - 1. App_Convertion_IE_TO_Edge
 App_Convertion_IE_TO_Edge.vb : 
-  - Count : 1
-  - App_Convertion_IE_TO_Edge
+  - 1. App_Convertion_IE_TO_Edge
 App_Update_Functions_And_Readme.vb : 
-  - Count : 1
-  - App_Update_Functions_And_Readme
+  - 1. App_Update_Functions_And_Readme
 Fnc_Kill_Process_By_Name.vb : 
-  - Count : 1
-  - Test_Module
+  - 1. Test_Module
 Fnc_Back_Config.vb : 
-  - Count : 1
-  - Test_Module
+  - 1. Test_Module
 Fnc_Set_Env_With_Config.vb : 
-  - Count : 1
-  - Test_Module
+  - 1. Test_Module
 Fnc_Bake_UiElementAttar.vb : 
-  - Count : 1
-  - Test_Module
+  - 1. Test_Module
 Fnc_UI_CustomDialog.vb : 
-  - Count : 1
-  - Test_UI_CustomDialog
+  - 1. Test_UI_CustomDialog

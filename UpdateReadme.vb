@@ -68,8 +68,8 @@ Dim App_Update_Functions_And_Readme As System.Func(Of String, String) = Function
       End Try
     Next
   Next
-  Dim Str_ReadMeContent As String = Join(Dic_ReadMe.keys.OrderByDescending(Function(k) Dic_Ref(k).Count).Select(Function(k) String.Format("### {1}{0}{0}```vb{0}{2}{0}```{0}{0}```yaml{0}Dereference :{0}{3}{0}```{0}",vbNewLine,k,Dic_ReadMe(k),Join(Dic_Ref(k).Select(Function(x,i) "  - "+(i+1).Tostring+". "+x).ToArray,vbNewLine) )).ToArray ,vbNewLine)
-  Dim Str_ReadMelog As String = Join(Dic_Ref.keys.OrderByDescending(Function(k) Dic_Ref(k).Count).Select(Function(k) k+" : "+vbNewLine+"  - Count : "+Dic_Ref(k).Count.Tostring+vbNewLine+Join(Dic_Ref(k).Select(Function(x) "  - "+x).ToArray,vbNewLine)).ToArray,vbNewLine)
+  Dim Str_ReadMeContent As String = Join(Dic_ReadMe.keys.OrderByDescending(Function(k) Dic_Ref(k).Count).Select(Function(k) String.Format("### {1}{0}{0}```yaml{0}Dereference :{0}{3}{0}```{0}{0}```vb{0}{2}{0}```{0}",vbNewLine,k,Dic_ReadMe(k),Join(Dic_Ref(k).Select(Function(x,i) "  - "+(i+1).Tostring+". "+x).ToArray,vbNewLine) )).ToArray ,vbNewLine)
+  Dim Str_ReadMelog As String = Join(Dic_Ref.keys.OrderByDescending(Function(k) Dic_Ref(k).Count).Select(Function(k) k+" : "+vbNewLine+Join(Dic_Ref(k).Select(Function(x,i) "  - "+(i+1).Tostring+". "+x).ToArray,vbNewLine)).ToArray,vbNewLine)
   System.IO.File.WriteAllText(Str_SavePath_Fnc+"\Readme.md",Str_ReadMeContent)
   System.IO.File.WriteAllText(Str_SavePath_Fnc+"\Readme.yaml",Str_ReadMelog)
   ' Open Result Directory

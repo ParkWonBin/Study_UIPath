@@ -1,5 +1,11 @@
 ### Fnc_UI_Get_DirPath.vb
 
+```yaml
+Dereference :
+  - 1. App_Convertion_IE_TO_Edge
+  - 2. App_Update_Functions_And_Readme
+```
+
 ```vb
 Dim Fnc_UI_Get_DirPath As System.Func(Of String, String) = Function(str_Desc As String) As String
   '2022.04.02|wbpark|폴더 선택용 UI
@@ -16,13 +22,13 @@ Dim Fnc_UI_Get_DirPath As System.Func(Of String, String) = Function(str_Desc As 
 End Function
 ```
 
+### Fnc_Get_All_Files.vb
+
 ```yaml
 Dereference :
   - 1. App_Convertion_IE_TO_Edge
   - 2. App_Update_Functions_And_Readme
 ```
-
-### Fnc_Get_All_Files.vb
 
 ```vb
 Dim Fnc_Get_All_Files As System.Func(Of String, String()) = Function(str_path As String) As String()
@@ -41,13 +47,12 @@ Dim Fnc_Get_All_Files As System.Func(Of String, String()) = Function(str_path As
 End Function
 ```
 
+### Fnc_Ui_MsgBox.vb
+
 ```yaml
 Dereference :
   - 1. App_Convertion_IE_TO_Edge
-  - 2. App_Update_Functions_And_Readme
 ```
-
-### Fnc_Ui_MsgBox.vb
 
 ```vb
 Dim Fnc_Ui_MsgBox As System.Func(Of String, String, Boolean) = Function(Str_Massege As String, Str_title As String) As Boolean
@@ -57,12 +62,12 @@ Dim Fnc_Ui_MsgBox As System.Func(Of String, String, Boolean) = Function(Str_Mass
 End Function
 ```
 
+### Fnc_Text_Replace.vb
+
 ```yaml
 Dereference :
   - 1. App_Convertion_IE_TO_Edge
 ```
-
-### Fnc_Text_Replace.vb
 
 ```vb
 Dim Fnc_Text_Replace As System.Func(Of String, String(), String(),String) = Function(Str_Source As String, Replace_Before As String(), Replace_After As String()) As String
@@ -74,12 +79,12 @@ Dim Fnc_Text_Replace As System.Func(Of String, String(), String(),String) = Func
 End Function
 ```
 
+### Fnc_Regex_Replace_Selector.vb
+
 ```yaml
 Dereference :
   - 1. App_Convertion_IE_TO_Edge
 ```
-
-### Fnc_Regex_Replace_Selector.vb
 
 ```vb
 Dim Fnc_Regex_Replace_Selector As System.Func(Of String, String, String) = Function(Str_Source As String, Str_ptn As String) As String
@@ -94,12 +99,12 @@ Dim Fnc_Regex_Replace_Selector As System.Func(Of String, String, String) = Funct
 End Function
 ```
 
+### App_Convertion_IE_TO_Edge.vb
+
 ```yaml
 Dereference :
   - 1. App_Convertion_IE_TO_Edge
 ```
-
-### App_Convertion_IE_TO_Edge.vb
 
 ```vb
 Dim App_Convertion_IE_TO_Edge As System.Func(Of String(), String(), String) = Function(StrArr_Before As String(), StrArr_After As String()) As String
@@ -144,12 +149,12 @@ Dim App_Convertion_IE_TO_Edge As System.Func(Of String(), String(), String) = Fu
 End Function
 ```
 
+### App_Update_Functions_And_Readme.vb
+
 ```yaml
 Dereference :
-  - 1. App_Convertion_IE_TO_Edge
+  - 1. App_Update_Functions_And_Readme
 ```
-
-### App_Update_Functions_And_Readme.vb
 
 ```vb
 Dim App_Update_Functions_And_Readme As System.Func(Of String, String) = Function(Str_DirPath As String) As String
@@ -188,8 +193,8 @@ Dim App_Update_Functions_And_Readme As System.Func(Of String, String) = Function
       End Try
     Next
   Next
-  Dim Str_ReadMeContent As String = Join(Dic_ReadMe.keys.OrderByDescending(Function(k) Dic_Ref(k).Count).Select(Function(k,i) String.Format("### {1}{0}```vb{0}{2}{0}```{0}",vbNewLine,k,Dic_ReadMe(k))).ToArray ,vbNewLine)
-  Dim Str_ReadMelog As String = Join(Dic_Ref.keys.OrderByDescending(Function(k) Dic_Ref(k).Count).Select(Function(k) k+" : "+vbNewLine+"  - Count : "+Dic_Ref(k).Count.Tostring+vbNewLine+Join(Dic_Ref(k).Select(Function(x) "  - "+x).ToArray,vbNewLine)).ToArray,vbNewLine)
+  Dim Str_ReadMeContent As String = Join(Dic_ReadMe.keys.OrderByDescending(Function(k) Dic_Ref(k).Count).Select(Function(k) String.Format("### {1}{0}{0}```yaml{0}Dereference :{0}{3}{0}```{0}{0}```vb{0}{2}{0}```{0}",vbNewLine,k,Dic_ReadMe(k),Join(Dic_Ref(k).Select(Function(x,i) "  - "+(i+1).Tostring+". "+x).ToArray,vbNewLine) )).ToArray ,vbNewLine)
+  Dim Str_ReadMelog As String = Join(Dic_Ref.keys.OrderByDescending(Function(k) Dic_Ref(k).Count).Select(Function(k) k+" : "+vbNewLine+Join(Dic_Ref(k).Select(Function(x,i) "  - "+(i+1).Tostring+". "+x).ToArray,vbNewLine)).ToArray,vbNewLine)
   System.IO.File.WriteAllText(Str_SavePath_Fnc+"\Readme.md",Str_ReadMeContent)
   System.IO.File.WriteAllText(Str_SavePath_Fnc+"\Readme.yaml",Str_ReadMelog)
   ' Open Result Directory
@@ -199,12 +204,12 @@ Dim App_Update_Functions_And_Readme As System.Func(Of String, String) = Function
 End Function
 ```
 
+### Fnc_Kill_Process_By_Name.vb
+
 ```yaml
 Dereference :
-  - 1. App_Update_Functions_And_Readme
+  - 1. Test_Module
 ```
-
-### Fnc_Kill_Process_By_Name.vb
 
 ```vb
 Dim Fnc_Kill_Process_By_Name As System.Func(Of String, String) = Function(ProcessName As String) As String
@@ -221,12 +226,12 @@ Dim Fnc_Kill_Process_By_Name As System.Func(Of String, String) = Function(Proces
 End Function
 ```
 
+### Fnc_Back_Config.vb
+
 ```yaml
 Dereference :
   - 1. Test_Module
 ```
-
-### Fnc_Back_Config.vb
 
 ```vb
 Dim Fnc_Back_Config As System.Func(Of System.Collections.Generic.Dictionary(Of String, String),String) = Function(dic_config As System.Collections.Generic.Dictionary(Of String, String)) As String
@@ -238,12 +243,12 @@ Dim Fnc_Back_Config As System.Func(Of System.Collections.Generic.Dictionary(Of S
 End Function
 ```
 
+### Fnc_Set_Env_With_Config.vb
+
 ```yaml
 Dereference :
   - 1. Test_Module
 ```
-
-### Fnc_Set_Env_With_Config.vb
 
 ```vb
 Dim Fnc_Set_Env_With_Config As System.Func(Of System.Collections.Generic.Dictionary(Of String, Object), String) = Function(Dic_Config As System.Collections.Generic.Dictionary(Of String, Object) ) As String
@@ -262,12 +267,12 @@ Dim Fnc_Set_Env_With_Config As System.Func(Of System.Collections.Generic.Diction
 End Function
 ```
 
+### Fnc_Bake_UiElementAttar.vb
+
 ```yaml
 Dereference :
   - 1. Test_Module
 ```
-
-### Fnc_Bake_UiElementAttar.vb
 
 ```vb
 Dim Fnc_Bake_UiElementAttar As System.Func(Of UiPath.Core.UiElement, String) = Function(ui_tmp As UiPath.Core.UiElement) As String
@@ -287,12 +292,12 @@ Dim Fnc_Bake_UiElementAttar As System.Func(Of UiPath.Core.UiElement, String) = F
 End Function
 ```
 
+### Fnc_UI_CustomDialog.vb
+
 ```yaml
 Dereference :
-  - 1. Test_Module
+  - 1. Test_UI_CustomDialog
 ```
-
-### Fnc_UI_CustomDialog.vb
 
 ```vb
 Dim Fnc_UI_CustomDialog As System.Func(Of String,String,String,String) = Function(caption As String, text As String, selStr As String) As String
@@ -327,9 +332,4 @@ End Function
 ' code : 
 ' https://stackoverflow.com/questions/5427020/prompt-dialog-in-windows-forms
 ' https://docs.microsoft.com/ko-kr/dotnet/api/system.windows.forms.combobox.text?view=windowsdesktop-6.0&viewFallbackFrom=dotnet-plat-ext-6.0
-```
-
-```yaml
-Dereference :
-  - 1. Test_UI_CustomDialog
 ```
