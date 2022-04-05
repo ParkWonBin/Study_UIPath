@@ -1,4 +1,5 @@
 ### Fnc_UI_Get_DirPath.vb
+
 ```vb
 Dim Fnc_UI_Get_DirPath As System.Func(Of String, String) = Function(str_Desc As String) As String
   '2022.04.02|wbpark|폴더 선택용 UI
@@ -15,16 +16,14 @@ Dim Fnc_UI_Get_DirPath As System.Func(Of String, String) = Function(str_Desc As 
 End Function
 ```
 
-### Fnc_Ui_MsgBox.vb
-```vb
-Dim Fnc_Ui_MsgBox As System.Func(Of String, String, Boolean) = Function(Str_Massege As String, Str_title As String) As Boolean
-  '2022.04.02|wbpark|message와 title을 입력받아 확인/취소 여부를 bool로 입력받습니다.
-  Dim Result As System.Windows.Forms.DialogResult = System.Windows.Forms.MessageBox.Show(Str_Massege, Str_title, MessageBoxButtons.YesNo)
-  Return If(Result = System.Windows.Forms.DialogResult.Yes,True,False)
-End Function
+```yaml
+Dereference :
+  - 1. App_Convertion_IE_TO_Edge
+  - 2. App_Update_Functions_And_Readme
 ```
 
 ### Fnc_Get_All_Files.vb
+
 ```vb
 Dim Fnc_Get_All_Files As System.Func(Of String, String()) = Function(str_path As String) As String()
   '2022.04.02|wbpark|숨김파일 및 운영체제에 의해 숨겨진 파일까지 모두 파악.
@@ -42,7 +41,29 @@ Dim Fnc_Get_All_Files As System.Func(Of String, String()) = Function(str_path As
 End Function
 ```
 
+```yaml
+Dereference :
+  - 1. App_Convertion_IE_TO_Edge
+  - 2. App_Update_Functions_And_Readme
+```
+
+### Fnc_Ui_MsgBox.vb
+
+```vb
+Dim Fnc_Ui_MsgBox As System.Func(Of String, String, Boolean) = Function(Str_Massege As String, Str_title As String) As Boolean
+  '2022.04.02|wbpark|message와 title을 입력받아 확인/취소 여부를 bool로 입력받습니다.
+  Dim Result As System.Windows.Forms.DialogResult = System.Windows.Forms.MessageBox.Show(Str_Massege, Str_title, MessageBoxButtons.YesNo)
+  Return If(Result = System.Windows.Forms.DialogResult.Yes,True,False)
+End Function
+```
+
+```yaml
+Dereference :
+  - 1. App_Convertion_IE_TO_Edge
+```
+
 ### Fnc_Text_Replace.vb
+
 ```vb
 Dim Fnc_Text_Replace As System.Func(Of String, String(), String(),String) = Function(Str_Source As String, Replace_Before As String(), Replace_After As String()) As String
   '2022.04.02|wbpark|입력된 문자열 일괄 replace
@@ -53,7 +74,13 @@ Dim Fnc_Text_Replace As System.Func(Of String, String(), String(),String) = Func
 End Function
 ```
 
+```yaml
+Dereference :
+  - 1. App_Convertion_IE_TO_Edge
+```
+
 ### Fnc_Regex_Replace_Selector.vb
+
 ```vb
 Dim Fnc_Regex_Replace_Selector As System.Func(Of String, String, String) = Function(Str_Source As String, Str_ptn As String) As String
   ' 2022.04.02|wbpark|셀렉터 내 변수 부분 {{}}로 바꿔주기
@@ -67,7 +94,13 @@ Dim Fnc_Regex_Replace_Selector As System.Func(Of String, String, String) = Funct
 End Function
 ```
 
+```yaml
+Dereference :
+  - 1. App_Convertion_IE_TO_Edge
+```
+
 ### App_Convertion_IE_TO_Edge.vb
+
 ```vb
 Dim App_Convertion_IE_TO_Edge As System.Func(Of String(), String(), String) = Function(StrArr_Before As String(), StrArr_After As String()) As String
   '2022.04.04|wbpark|UiPath UIAutomation=21.4를 기준으로 IE 셀렉터를 Edge로 변환합니다.
@@ -111,7 +144,13 @@ Dim App_Convertion_IE_TO_Edge As System.Func(Of String(), String(), String) = Fu
 End Function
 ```
 
+```yaml
+Dereference :
+  - 1. App_Convertion_IE_TO_Edge
+```
+
 ### App_Update_Functions_And_Readme.vb
+
 ```vb
 Dim App_Update_Functions_And_Readme As System.Func(Of String, String) = Function(Str_DirPath As String) As String
   '2022.04.04|wbpark|Readme갱신 및 Function 기록관리
@@ -149,14 +188,148 @@ Dim App_Update_Functions_And_Readme As System.Func(Of String, String) = Function
       End Try
     Next
   Next
-  Dim Str_ReadMeContent As String = Join(Dic_ReadMe.keys.Select(Function(k,i) String.Format("### {1}{0}```vb{0}{2}{0}```{0}",vbNewLine,k,Dic_ReadMe(k))).ToArray ,vbNewLine)
-  Dim Str_ReadMelog As String = Join(Dic_Ref.keys.Select(Function(k) k+" : "+vbNewLine+"  - Count : "+Dic_Ref(k).Count.Tostring+vbNewLine+Join(Dic_Ref(k).Select(Function(x) "  - "+x).ToArray,vbNewLine)).ToArray,vbNewLine)
+  Dim Str_ReadMeContent As String = Join(Dic_ReadMe.keys.OrderByDescending(Function(k) Dic_Ref(k).Count).Select(Function(k,i) String.Format("### {1}{0}```vb{0}{2}{0}```{0}",vbNewLine,k,Dic_ReadMe(k))).ToArray ,vbNewLine)
+  Dim Str_ReadMelog As String = Join(Dic_Ref.keys.OrderByDescending(Function(k) Dic_Ref(k).Count).Select(Function(k) k+" : "+vbNewLine+"  - Count : "+Dic_Ref(k).Count.Tostring+vbNewLine+Join(Dic_Ref(k).Select(Function(x) "  - "+x).ToArray,vbNewLine)).ToArray,vbNewLine)
   System.IO.File.WriteAllText(Str_SavePath_Fnc+"\Readme.md",Str_ReadMeContent)
   System.IO.File.WriteAllText(Str_SavePath_Fnc+"\Readme.yaml",Str_ReadMelog)
-  
   ' Open Result Directory
   System.Diagnostics.Process.Start("explorer.exe", Str_SavePath_Fnc)
   System.Diagnostics.Process.Start("notepad.exe", Str_SavePath_Fnc+"\Readme.yaml")
   Return Str_Error_Log
 End Function
+```
+
+```yaml
+Dereference :
+  - 1. App_Update_Functions_And_Readme
+```
+
+### Fnc_Kill_Process_By_Name.vb
+
+```vb
+Dim Fnc_Kill_Process_By_Name As System.Func(Of String, String) = Function(ProcessName As String) As String
+  '2022.04.04|wbpark|DRM 있는 엑셀 종료를 위해 제작
+  Dim Arr_process As System.Diagnostics.Process() = System.Diagnostics.Process.GetProcesses.Where(Function(x) x.ProcessName.ToUpper = ProcessName.ToUpper).toArray
+    While Arr_process.Count>0
+        For Each p As System.Diagnostics.Process In Arr_process
+            p.kill()
+        Next
+        System.Threading.Thread.Sleep(1000)	'1초 딜레이
+        Arr_process=System.Diagnostics.Process.GetProcesses.Where(Function(x) x.ProcessName.ToUpper = ProcessName.ToUpper).toArray
+    End While 
+    Return ProcessName+" 종료"
+End Function
+```
+
+```yaml
+Dereference :
+  - 1. Test_Module
+```
+
+### Fnc_Back_Config.vb
+
+```vb
+Dim Fnc_Back_Config As System.Func(Of System.Collections.Generic.Dictionary(Of String, String),String) = Function(dic_config As System.Collections.Generic.Dictionary(Of String, String)) As String
+  '2022.04.04|wbpark|Config Value에 null값이 있으면 에러가 발생합니다.
+  Dim Str_Result = String.Format("{0}{0}{3}{0}{2}",vbNewLine,"New Dictionary(Of String,String) From {","}", Join( Dic_Config.Keys.Select(Function(key) String.Format("{0} {2}{3}{2} , {2}{4}{2} {1}", "{","}", chr(34), key, System.Convert.ToString(Dic_Config(key)).Replace(vbNewLine," ").Replace(chr(10)," ").Replace(chr(34),"'") ) ).ToArray, ","+vbNewLine) )
+  System.IO.File.WriteAllText(System.IO.Path.Combine(System.Environment.CurrentDirectory,"Config.log",str_result))
+  Return Str_Result
+  'Fnc_Back_Config( New System.Collections.Generic.Dictionary(Of String, String) From {{"key","value"},{"k2","v2"}}  )}
+End Function
+```
+
+```yaml
+Dereference :
+  - 1. Test_Module
+```
+
+### Fnc_Set_Env_With_Config.vb
+
+```vb
+Dim Fnc_Set_Env_With_Config As System.Func(Of System.Collections.Generic.Dictionary(Of String, Object), String) = Function(Dic_Config As System.Collections.Generic.Dictionary(Of String, Object) ) As String
+  '2022.04.04|wbpark|Config값 환경변수로 넣기
+  Dim Str_Error As String =""
+  For Each Key As String In Dic_Config.Keys
+    Try
+      System.Environment.SetEnvironmentVariable(Key,in_Dic_Config(Key).tostring )
+    Catch ex As System.Exception
+		Str_Error=Str_Error+ex.message+vbnewline
+    End Try
+  Next
+  System.Console.WriteLine(Str_Error)
+  Return Str_Error
+  'Fnc_Set_Env_With_Config(in_Dic_Config)
+End Function
+```
+
+```yaml
+Dereference :
+  - 1. Test_Module
+```
+
+### Fnc_Bake_UiElementAttar.vb
+
+```vb
+Dim Fnc_Bake_UiElementAttar As System.Func(Of UiPath.Core.UiElement, String) = Function(ui_tmp As UiPath.Core.UiElement) As String
+  '2022.04.04|wbpark|Uipath Activity와 함께 써야하는 함수. Invoke Code 내에서 Uipath Core 함수 호출 방법 불명.
+  Dim Str_result As String  = ""
+  Dim Str_fileName As String = Environment.CurrentDirectory+"\UiElementAttar.log"
+  Dim dic_attar As dictionary(Of String, String) = ui_tmp.GetNodeAttributes(False)
+  For Each key As String In dic_attar.keys()
+    Str_result = String.format("{0}{2} : {3}{1}", Str_result, vbnewline,key,dic_attar(key))
+  Next
+  Str_result  = String.format("{0}{2} : {3}{1}", Str_result, vbnewline,"Selector",ui_tmp.Selector.Text)
+  Str_result  = String.format("{0}{2} : {3}{1}", Str_result, vbnewline,"SelectorStrategy",ui_tmp.SelectorStrategy.ToString)
+  Str_result  = String.format("{0}{2} : {3}{1}", Str_result, vbnewline,"ParentSelector",ui_tmp.Parent.Selector.Text)
+  Str_result  = String.format("{0}{2} : {3}{1}", Str_result, vbnewline,"TopParent",ui_tmp.TopParent().Selector.Text)
+  System.IO.File.WriteAllText(Str_fileName ,Str_result)
+  Return Str_result
+End Function
+```
+
+```yaml
+Dereference :
+  - 1. Test_Module
+```
+
+### Fnc_UI_CustomDialog.vb
+
+```vb
+Dim Fnc_UI_CustomDialog As System.Func(Of String,String,String,String) = Function(caption As String, text As String, selStr As String) As String
+  Dim prompt As New System.Windows.Forms.Form With {.Width = 280, .Height = 200, .Text = caption}
+  Dim textLabel As New System.Windows.Forms.Label With { .Left = 16, .Top = 20, .Width = 240, .Text = text }
+  Dim textBox As New System.Windows.Forms.TextBox With { .Left = 16, .Top = 50, .Width = 240, .TabIndex = 0, .TabStop = True }
+  Dim selLabel As New System.Windows.Forms.Label With { .Left = 16, .Top = 130, .Width = 88, .Text = selStr }
+  Dim cmbx As New System.Windows.Forms.ComboBox With { .Left = 112, .Top = 130, .Width = 144}
+  cmbx.Items.Add("Dark Grey")
+  cmbx.Items.Add("Orange")
+  cmbx.Items.Add("None")
+  cmbx.SelectedIndex = 0
+  Dim confirmation As New System.Windows.Forms.Button With { .Text = "In Ordnung!", .Left = 16, .Width = 80, .Top = 88, .TabIndex = 1, .TabStop = True }
+  AddHandler confirmation.Click, Sub(sender, e) prompt.Close()
+  prompt.Controls.Add(textLabel)
+  prompt.Controls.Add(textBox)
+  prompt.Controls.Add(selLabel)
+  prompt.Controls.Add(cmbx)
+  prompt.Controls.Add(confirmation)
+  prompt.AcceptButton = confirmation
+  prompt.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+  prompt.TopMost=True
+  prompt.ShowDialog()
+  Return String.Format("{0};{1}", textBox.Text, cmbx.SelectedItem.ToString)
+End Function
+
+'Dim Str_tmp As String = Fnc_UI_CustomDialog("caption","text","selStr")
+'console.WriteLine(Str_tmp)
+              
+' New With  :
+' https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/objects-and-classes/object-initializers-named-and-anonymous-types
+' code : 
+' https://stackoverflow.com/questions/5427020/prompt-dialog-in-windows-forms
+' https://docs.microsoft.com/ko-kr/dotnet/api/system.windows.forms.combobox.text?view=windowsdesktop-6.0&viewFallbackFrom=dotnet-plat-ext-6.0
+```
+
+```yaml
+Dereference :
+  - 1. Test_UI_CustomDialog
 ```
