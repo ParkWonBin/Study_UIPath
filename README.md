@@ -91,60 +91,6 @@ Attach 로 이미지 파일 첨부하고,
 [참고](https://stackoverflow.com/questions/29369862/outlook-email-picture-attachment-not-showing-when-i-displaying-outlook-html-ema?rq=1)
 위와 같이 이미지를 첨부하고 크기를 설정할 수 있습니다.
  
-### [EDGE 관련 단축키](https://mainia.tistory.com/4086)
-[Reference1](https://mainia.tistory.com/4086)
-[Reference2](https://thelumine.wordpress.com/2015/08/27/microsoft-edge-keyboard-shortcuts/)
-
-|단축키 | 기능 |
-|--|--|
-| Ctrl+W | 현재 탭 닫기 |
-| Ctrl+1~Ctrl+8 | 창의 특정 위치에 있는 탭으로 이동 |
-| Ctrl+9 | 창의 마지막 탭으로 이동 |
-| Ctrl+0 | 창의 화면 비율 100%로 조정 |
-| Ctrl+Shift+T | 마지막으로 닫았던 탭 열기 |
-| Ctrl+Tab | 창의 다음 탭으로 이동	|
-| Ctrl+Shift+Tab | 창의 이전 탭으로 이동	|
-| Ctrl+U | 페이지 소스 보기 |
-| Ctrl+Shift+I | 개발자 도구 패널 표시/숨김 | 
-
-### 셀렉터 관련
-[Uipath 공식](https://docs.uipath.com/studio/docs/about-selectors)에서 셀렉터가 지원하는 테그 확인 
-1. \<html>, \<wnd>, \<ctrl> 등 테그 속성을 확인하고, 적절한 값으로 셀렉터 찍기  
-2. 팝업에 있는  Text는 name이나 title 속성에 들어있을 확률이 높다.  
-3. \<wnd/> 에서 title, aaname 으로 보이는 글자를 넣어본다.  
-4. \<ctrl/> 에서 role, name, text 등을 잡아본다.   
-5. "app" 속성 명시하고, url로 잡으면 팝업은 웬만해서 잡을 수 있다. (2022.03.27)
-
-### 팝업 셀렉터 잡기
-ui explorer로 브라우저 팝업을 잡으려고 하면 Studio가 멈추는 경우가 있다.  
-이 떄는 Selector를 수동으로 입력해서 셀렉터를 파악하여 개발해야한다.  
-target > WaitForReady > None 넣어놓는다.(무한대기 방지)  
-
-```xml
-<!-- Edge 팝업 확인 버튼 클릭 -->
-<html app='msedge.exe' url='*' />
-<ctrl role='dialog' />
-<ctrl role = 'push button' name='확인'/>
-
-<!-- GetText 크롬 팝업 내 텍스트 지정 -->
-<html app='chrome.exe' title='*' />
-<ctrl role='dialog' />
-<ctrl role='text' name='*.*' />
-
-<!-- Edge Alert 텍스트 박스 - GetText -->
-<wnd app='msedge.exe' title='*' />
-<ctrl role='dialog' />
-<ctrl idx='15' role='pane' />
-
-<!-- Edge Alert/Confirm 1번째 버튼 - Click -->
-<wnd app='msedge.exe' title='*' />
-<ctrl role='dialog' />
-<ctrl role='pane' idx='4' />
-<ctrl role='push button' idx='1' />
-<!-- 해당 UI의 버튼에 써있는 글자는 name 속성으로 - Get Attr -->
-<!-- Confirm에서 취소버튼 등 2번째 버튼은 마지막 테그의 idx = '2' 입력 -->
-```
-
 
  #### cron 사용법
 [cron 문법](https://www.leafcats.com/94)  
