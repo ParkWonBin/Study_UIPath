@@ -55,19 +55,12 @@ join(str_tmp.ToCharArray.Select(function(x) string.Format("{0} : {1}",x,asc(x).T
 ### System.IO
 ```vb
 ' 경로 입력 관련
-System.IO.Path.Combine(A,B,...) ' 입력 받은 경로를 모두 경로 구분자로 합친다. 
-System.IO.Path.GetDirectoryName(Str_Path) : '입력 받은 경로의 상위 폴더의 절대경로를 반환한다.
-
-' 경로 유효성 관련
-System.IO.File.Exists(Str_Path) ' 해당 경로에 파일이 존재하면 True
-System.IO.Directory.Exists(Str_Path) '해당 경로에 폴더가 존제하면 True
-System.IO.File.GetCreationTimeUtc(Str_Path) '파일 생성일시 Date로 반환 
-System.IO.File.GetLastAccessTimeUtc(Str_Path) ' 파일 마지막 접근일시 Date로 반환
-System.IO.File.GetLastWriteTimeUtc(Str_Path) '파일 마지막 수정일시 Date로 반환  
+System.IO.Path.Combine(A,B,...) ' 경로 합쳐서 반환. 
+' A,B,C... 의 마지막 문자에 경로 구분자(\)가 있든 없든 정상적으로 경로 합쳐서 반환하기 떄문에 많이 씁니다.
 
 ' 경로 내 검색 관련
+System.IO.Directory.GetFiles(Str_Path)       ' 해당 경로에 위치한 파일의 절대경로를 String_Array로 반환한다. 
 System.IO.Directory.GetDirectories(Str_Path) ' 해당 경로에 위치한 폴더의 절대경로를 String_Array로 반환한다.
-System.IO.Directory.GetFiles(Str_Path) ' 해당 경로에 위치한 파일의 절대경로를 String_Array로 반환한다. 
 
 ' 파일 작성 및 삭제 관련
 System.IO.Directory.CreateDirectory(Str_Path) ' 폴더 생성
@@ -76,6 +69,29 @@ System.IO.File.WriteAllText(Str_Path, Str_Content, System.Text.Encoding.UTF8) '�
 System.IO.File.AppendAllText(Str_Path, Str_Content, System.Text.Encoding.UTF8) '파일 이어서 쓰기. Encoding 설정 가능
 System.IO.File.Copy(Str_Sorce,Str_Dest,Bln_overwite) ' 파일 복제. 덮어쓰기 여부 선택
 System.IO.File.Delete(Str_Path) ' 파일 삭제
+
+' 파일 정보 관련 (Static 함수)
+System.IO.Directory.Exists(Str_Path)        ' 폴더 존제하면 True
+System.IO.File.Exists(Str_Path)             ' 파일 존재하면 True
+System.IO.file.GetCreationTime(Str_Path)    ' 파일 최초 생성 시간
+System.IO.file.GetLastWriteTime(Str_Path)   ' 파일 최종 수정 시간
+System.IO.file.GetLastAccessTime(Str_Path)  ' 파일 최종 접근 시간
+System.IO.file.GetAttributes(Str_AttarName) ' 파일 속성 확인
+System.IO.Path.GetDirectoryName(Str_Path) : ' 해당 경로의 상위 폴더 경로를 반환한다.
+System.IO.Path.GetFileName(Str_Path)        ' 확장자 포함 파일명 ex) "Main.xaml"
+System.IO.Path.GetExtension(Str_Path)       ' 확장자 반환 ex) ".xaml"
+System.IO.Path.GetFileNameWithoutExtension(Str_Path) ' 확장자 미포함 파일명 ex) "Main"
+
+' 파일 정보 관련 (객체 매소드 사용)
+(new System.IO.DirectoryInfo(Str_Path)).Exists    ' 폴더 존재하면 True
+(new System.IO.FileInfo(Str_Path)).Exists         ' 파일 존재하면 True
+(new System.IO.FileInfo(Str_Path)).CreationTime   ' 파일 최초 생성 시간
+(new System.IO.FileInfo(Str_Path)).LastWriteTime  ' 파일 최종 수정 시간
+(new System.IO.FileInfo(Str_Path)).LastAccessTime ' 파일 최종 접근 시간
+(new System.IO.FileInfo(Str_Path)).Attributes(Str_AttarName) ' 파일 속성 확인
+(new System.IO.FileInfo(Str_Path)).DirectoryName  ' 해당 경로의 상위 폴더 경로를 반환한다.
+(new System.IO.FileInfo(Str_Path)).Name           ' 확장자 포함 파일명 ex) "Main.xaml"
+(new System.IO.FileInfo(Str_Path)).Extension      ' 확장자 반환 ex) ".xaml"
 ```
 
 ### System.Environment 관련
