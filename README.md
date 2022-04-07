@@ -1,12 +1,15 @@
-  ### 공사중!
-1. 시스템 이슈 및 Howto 작성 => Issues 통해 정리중
-2. 함수 및 app 정리 => 프로그램 제작 중.. Function 에 중간결과 나옴
-3. 추가로 알아볼것
+## 공사중! 
+1. Howto 작성 => Issues 정리중 [▶ 이슈 보기](https://github.com/ParkWonBin/UIPath_study/issues)
+2. App으로 Function 정리 [▶ wbpark Custom Functions](https://github.com/ParkWonBin/UIPath_study/blob/Master/Functions/Readme.md)  
+3. 할일 정리 [▶ wbpark TodoList ](https://github.com/ParkWonBin/UIPath_study/issues/5)
 
+### 공부할거 스크랩
 열 추가와 동시에 기본값 넣기. eval 함수처럼 넣을 수 있음
 ```vb
  DT_result.columns.Add("Process Code", gettype(string), string.Format("substring({0}, 1,8)", "ReleaseName")) 
 ```
+
+
 ## 레퍼런스 모음
 - #### [Markdown 사용법](https://gist.github.com/ihoneymon/652be052a0727ad59601)  
 - #### [YAML 사용법](https://luran.me/397) , [YAML 공식문서](https://yaml.org/)
