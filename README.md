@@ -7,6 +7,7 @@
 열 추가와 동시에 기본값 넣기. eval 함수처럼 넣을 수 있음
 ```vb
  DT_result.columns.Add("Process Code", gettype(string), string.Format("substring({0}, 1,8)", "ReleaseName")) 
+ dt_tmp.Columns("Str_ColName").SetOrdinal(1) ' 열 위치 변경
 ```
 
 
