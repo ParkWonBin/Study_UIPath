@@ -93,3 +93,14 @@ Dim Fnc_MailList_To_DataTable As System.Func(Of List(Of System.Net.Mail.MailMess
   ' out_dt = Fnc_Convert_MailList_To_DataTable(in_list_mail,StrArr_ColNames)
 End Function
 '-----------------------
+Dim Fnc_img_to_base64 As System.Func(Of String, String) = Function( Str_img_Path As String ) As String
+  ' 2022.04.11|wbpark|image 파일을 base64 String으로 반환합니다.
+  Dim fs As New  System.io.FileStream(str_img_path,system.io.FileMode.Open,System.IO.FileAccess.Read)
+  Dim bt As System.Byte() = New System.Byte(CInt(fs.Length)) {}
+  fs.Read(bt,0,bt.Length)
+  fs.Close()
+  Return System.Convert.ToBase64String(bt)
+' Console.WriteLine(Fnc_img_to_base64(Environment.CurrentDirectory+"\test.png"))
+End Function
+
+
