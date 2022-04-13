@@ -93,14 +93,22 @@ Dim Fnc_MailList_To_DataTable As System.Func(Of List(Of System.Net.Mail.MailMess
   ' out_dt = Fnc_Convert_MailList_To_DataTable(in_list_mail,StrArr_ColNames)
 End Function
 '-----------------------
-Dim Fnc_img_to_base64 As System.Func(Of String, String) = Function( Str_img_Path As String ) As String
+Dim fnc_img2base64 As System.Func(Of String, String) = Function( img_Path As String ) As String
   ' 2022.04.11|wbpark|image 파일을 base64 String으로 반환합니다.
   Dim fs As New  System.io.FileStream(str_img_path,system.io.FileMode.Open,System.IO.FileAccess.Read)
   Dim bt As System.Byte() = New System.Byte(CInt(fs.Length)) {}
   fs.Read(bt,0,bt.Length)
   fs.Close()
   Return System.Convert.ToBase64String(bt)
-' Console.WriteLine(Fnc_img_to_base64(Environment.CurrentDirectory+"\test.png"))
+' Console.WriteLine(fnc_img2base64(Environment.CurrentDirectory+"\test.png"))
 End Function
-
+'------------------------------
+'fnc_img2base64 Example
+Dim Str_img_Path As String = path.Combine(Environment.CurrentDirectory,"TEST.png")
+Dim Str_HTML As String = String.Format("<img src={0}data:image/png;base64,{1}{0}/>","""",fnc_img2base64(Str_img_Path))
+Dim Str_MD As String = String.Format("![test_img](data:image/png;base64,{0})",fnc_img2base64(Str_img_Path))
+Dim Str_Content As String  = Join({Str_HTML,Str_MD}, vbnewline+vbnewline)
+System.IO.File.WriteAllText(path.Combine(Environment.CurrentDirectory,"Test_IMG.md"),Str_Content,System.Text.Encoding.UTF8)
+'------------------------------
+															
 
