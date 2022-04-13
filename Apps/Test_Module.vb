@@ -110,5 +110,14 @@ Dim Str_MD As String = String.Format("![test_img](data:image/png;base64,{0})",fn
 Dim Str_Content As String  = Join({Str_HTML,Str_MD}, vbnewline+vbnewline)
 System.IO.File.WriteAllText(path.Combine(Environment.CurrentDirectory,"Test_IMG.md"),Str_Content,System.Text.Encoding.UTF8)
 '------------------------------
-															
+Dim Fnc_Get_HTML_From_Clipboard_Excel As System.Func(Of String) = Function() As String
+  ' 2022.04.13|wbpark|Excel Range 복사 > html로 내보내기
+  If System.Windows.Clipboard.ContainsData(system.Windows.DataFormats.Html) Then
+	  Dim HTML As String = System.Windows.Clipboard.GetData(System.Windows.DataFormats.Html).tostring
+    Return HTML.substring(HTML.indexof("<html"))
+  Else 
+	Return "No Html Found in Clipboard"
+  End If
+End Function
+out_Fnc_excel_to_HTML = Fnc_Get_HTML_From_Clipboard_Excel												
 
