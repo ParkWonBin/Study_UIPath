@@ -226,6 +226,7 @@ StrArr = Directory.GetFiles("절대경로") '각 파일의 절대경로 얻음
 StrArr = Directory.GetFiles("절대경로").Select(function(x) new FileInfo(x).Name).ToArray '파일명 및 확장자만 얻음
 StrArr = Directory.GetFiles("절대경로").Select(function(x) Split(x,"\").Last.ToString).ToArray '파일명, 확장자 얻음
 StrArr = Directory.GetFiles(Environment.CurrentDirectory) '프로젝트 경로파일 얻음
+StrArr = Directory.GetFiles(Str_Path,"*",System.IO.SearchOption.AllDirectories) '해당 경로 내 모든 파일
 
 For Each row as Data.DataRow in DT_tmp
     For Each item as Object in row.ItemArray
