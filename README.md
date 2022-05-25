@@ -9,6 +9,16 @@
  dt_tmp.columns.Add("Str_NewColName", gettype(string), string.Format("substring({0}, 1,8)", "Str_ColName1")) 
  dt_tmp.Columns("Str_ColName").SetOrdinal(1) ' 열 위치 변경
 ```
+특정열 기준으로 중복제거 
+```
+Dim Fnc_Distinct As System.Func(Of System.Data.Datatable, String, System.Data.Datatable) = Function( _dt_tmp As System.Data.Datatable, _colName As String) As System.Data.Datatable
+	Return _dt_tmp.AsEnumerable.GroupBy(Function(row) Join(_colName.Split("|"c).Select(Function(x) row(x).tostring).ToArray,"|") ).Select(Function(gp) gp.First).CopyToDataTable
+End Function
+'GroupBy 결과값에 .Select(function(gp) ~~) 할떄 참고
+' gp.firt : 해당 구룹의 value 
+' gp.key 해당 구룹 분류기준 
+' gp.count 해당 구룹 항목 개수
+```
 
 
 ## 레퍼런스 모음
