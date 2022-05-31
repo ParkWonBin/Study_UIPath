@@ -19,7 +19,10 @@ End Function
 ' gp.key 해당 구룹 분류기준 
 ' gp.count 해당 구룹 항목 개수
 ```
-
+- ##### [Dt.AsEumerable 안될떄](https://forum.uipath.com/t/asenumerable-is-not-a-member-of-system-data-datatable/69198/2)
+```xaml
+<AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+```
 
 ## 레퍼런스 모음
 - #### [Markdown 사용법](https://gist.github.com/ihoneymon/652be052a0727ad59601)  
