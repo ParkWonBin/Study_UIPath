@@ -2,6 +2,8 @@
 1. Howto 작성 => Issues 정리중 [▶ 이슈 보기](https://github.com/ParkWonBin/UIPath_study/issues)
 2. App으로 Function 정리 [▶ wbpark Custom Functions](https://github.com/ParkWonBin/UIPath_study/blob/Master/Functions/Readme.md)  
 3. 할일 정리 [▶ wbpark TodoList ](https://github.com/ParkWonBin/UIPath_study/issues/5)
+4. linq 참고자료1 [▶MS문서 .NET Linq](https://docs.microsoft.com/ko-kr/dotnet/standard/linq/)
+6. linq 참고자료2 [▶MS문서 VB.NET Linq](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/linq/introduction-to-linq)
 
 ### 공부할거 스크랩
 열 추가와 동시에 기본값 넣기. eval 함수처럼 넣을 수 있음
