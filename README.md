@@ -5,6 +5,12 @@
 4. linq 참고자료1 [▶MS문서 .NET Linq](https://docs.microsoft.com/ko-kr/dotnet/standard/linq/)
 6. linq 참고자료2 [▶MS문서 VB.NET Linq](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/linq/introduction-to-linq)
 
+### VS code 단축키
+[vs 단축키 참고](https://engineer-mole.tistory.com/204)
+- 자동줄바꿈 적용/해제 : Alt+Z
+- 특정 행으로 이동 : Ctrl+G
+- 이전 저장본과 변경사항 표시 : [Ctrl+K]+D (종료시 Ctrl+W)
+
 ### 공부할거 스크랩
 열 추가와 동시에 기본값 넣기. eval 함수처럼 넣을 수 있음
 ```vb
