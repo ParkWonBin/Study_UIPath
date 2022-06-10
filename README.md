@@ -12,7 +12,7 @@
 - 이전 저장본과 변경사항 표시 : [Ctrl+K]+D (종료시 Ctrl+W)
 
 ### 공부할거 스크랩
-열 추가와 동시에 기본값 넣기. eval 함수처럼 넣을 수 있음
+[열 추가와 동시에 기본값 넣기. eval 함수처럼 넣을 수 있음](https://docs.microsoft.com/ko-kr/dotnet/api/system.data.datacolumn.expression?view=net-6.0)
 ```vb
  dt_tmp.columns.Add("Str_NewColName", gettype(string), string.Format("substring({0}, 1,8)", "Str_ColName1")) 
  dt_tmp.Columns("Str_ColName").SetOrdinal(1) ' 열 위치 변경
