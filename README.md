@@ -4,6 +4,8 @@
 3. 할일 정리 [▶ wbpark TodoList ](https://github.com/ParkWonBin/UIPath_study/issues/5)
 4. linq 참고자료1 [▶MS문서 .NET Linq](https://docs.microsoft.com/ko-kr/dotnet/standard/linq/)
 6. linq 참고자료2 [▶MS문서 VB.NET Linq](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/linq/introduction-to-linq)
+7. linq 참고자료3 [▶Linq 예시-상세](https://www.tutorialsteacher.com/linq/linq-lambda-expression)
+
 
 ### VS code 단축키
 [vs 단축키 참고](https://engineer-mole.tistory.com/204)
