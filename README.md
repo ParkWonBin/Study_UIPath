@@ -350,17 +350,17 @@ iEnumerable의 형태는 초급 개발자들이 공부하고 사용하기에 혼
 ##### 코드 예시
 ```vb
 '이런 자료형을 사용한다는 것 정도만 보고 넘어갑니다.
-Dim arr_groupby_BusinessNumber As System.Linq.IGrouping<System.String, System.Data.DataRow>[]
+Dim GpArr_BusinessNumber As System.Linq.IGrouping(Of String, System.Data.DataRow)()
 
 'DT 를 "사업자 등록번호"열의 값을 기준으로 Grouping 합니다.
-arr_groupby_BusinessNumber = DT_Source.AsEnumerable.GroupBy(Function(row) row("사업자 등록번호").ToString).ToArray
+GpArr_BusinessNumber = DT_Source.AsEnumerable.GroupBy(Function(row) row("사업자 등록번호").ToString).ToArray
 
 '해당 Group의 사업자 등록번호를 모두 가져옵니다.
-arr_Key_gpName_by_BSNum = arr_groupby_BusinessNumber.Select(function(gp) gp.key).ToArray
+StrArr_BSNum = GpArr_BusinessNumber.Select(function(gp) gp.key).ToArray
 
 `사업자 번호별 공급가액, 세액의 부분합계를 가져옵니다.
-arr_sum_taxBase_by_BSNum = arr_groupby_BusinessNumber.Select(function(gp) gp.sum(function(row) Cdbl(row("공급가액").tostring) )).ToArray
-arr_sum_taxAmnt_by_BSNum = arr_groupby_BusinessNumber.Select(function(gp) gp.sum(function(row) Cdbl(row("세액").tostring) )).ToArray
+arr_sum_taxBase_by_BSNum = GpArr_BusinessNumber.Select(function(gp) gp.sum(function(row) Cdbl(row("공급가액").tostring) )).ToArray
+arr_sum_taxAmnt_by_BSNum = GpArr_BusinessNumber.Select(function(gp) gp.sum(function(row) Cdbl(row("세액").tostring) )).ToArray
 
 ' DT 생성
 Dt_result = New DataTable
@@ -369,7 +369,7 @@ For Each colName As String In "사업자등록번호|공급가액_합계|세액_
 Next
 ' DT 데이터 넣기
 For Each i As Integer in enumerable.Range(0,arr_group_BSNum.Count)
-    Dt_result.Rows.Add({arr_Key_gpName_by_BSNum(i).ToString, arr_sum_taxBase_by_BSNum(i).ToString, arr_sum_taxAmnt_by_BSNum(i).ToString})
+    Dt_result.Rows.Add({StrArr_BSNum(i).ToString, arr_sum_taxBase_by_BSNum(i).ToString, arr_sum_taxAmnt_by_BSNum(i).ToString})
 Next
 ```
 
