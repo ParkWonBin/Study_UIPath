@@ -9,13 +9,13 @@
 ### Dt 열이름 추출하는 방법 3가지
 ```vb
 'Range 사용, lamda형 Linq
-System.Linq.Enumerable.Range(0,Dt_Claim.Columns.Count).Select(function(i) Dt_Claim.Columns.Item(i).ColumnName ).ToArray
+System.Linq.Enumerable.Range(0,Dt_tmp.Columns.Count).Select(function(i) Dt_tmp.Columns.Item(i).ColumnName ).ToArray
 
 'Cast 사용, lamda형 Linq
-Dt_Claim.Columns.Cast(of System.Data.DataColumn).Select(function(col) col.columnName).ToArray
+Dt_tmp.Columns.Cast(of System.Data.DataColumn).Select(function(col) col.columnName).ToArray
 
 'Cast 사용, 쿼리형 Linq
-(From col in Dt_Claim.Columns.Cast(of System.Data.DataColumn) Select col.columnName).ToArray
+(From col in Dt_tmp.Columns.Cast(of System.Data.DataColumn) Select col.columnName).ToArray
 ```
 
 ### VS code 단축키
