@@ -6,6 +6,17 @@
 6. linq 참고자료2 [▶MS문서 VB.NET Linq](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/linq/introduction-to-linq)
 7. linq 참고자료3 [▶Linq 예시-상세](https://www.tutorialsteacher.com/linq/linq-lambda-expression)
 
+### Dt 열이름 추출하는 방법 3가지
+```vb
+'Range 사용, lamda형 Linq
+System.Linq.Enumerable.Range(0,Dt_Claim.Columns.Count).Select(function(i) Dt_Claim.Columns.Item(i).ColumnName ).ToArray
+
+'Cast 사용, lamda형 Linq
+Dt_Claim.Columns.Cast(of System.Data.DataColumn).Select(function(col) col.columnName).ToArray
+
+'Cast 사용, 쿼리형 Linq
+(From col in Dt_Claim.Columns.Cast(of System.Data.DataColumn) Select col.columnName).ToArray
+```
 
 ### VS code 단축키
 [vs 단축키 참고](https://engineer-mole.tistory.com/204)
