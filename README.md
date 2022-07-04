@@ -109,6 +109,21 @@ Ws_inputWs.Cells(i, Int_Colidx_Image) = "File 찾을 수 없음"+vbnewline+Str_I
 ' (2) 해결 : Asign 좌변에 변수에 저장한 주소값을 넣는 대신, 계산의 결과로 해당 주소를 반환하는 표현식을 넣어 우회 가능
 ```
 
+### vb문법 관련
+```vb
+Select Case Str_tmp
+Case Is = "CASE1"
+	{수행할 내용}
+Case Is = "CASE2"
+	{수행할 내용}
+Case Is = "CASE3"
+	{수행할 내용}
+Case Is = "CASE4"
+	{수행할 내용}
+End Select
+
+```
+
 #### Uipath Invoke Code 사용자 정의 함수
 invoke code 안에서 함수 정의하고 재호출 하는 것도 가능하다.
 ```vb
