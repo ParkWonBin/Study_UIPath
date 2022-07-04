@@ -86,6 +86,29 @@ End Function
 - "UiPath.System.Activities": invokeCode에서 사용가능한 library 버전이 다릅니다. 
 - "UiPath.Excel.Activities": 버전에 따라 excel scope 를 인식 못할 수 있습니다.
 
+
+#### VBA -> VB.NET으로 코드 살짝 바꿔 사용시 에러 다루기 (Uipath Invoke Code 기준)
+```vb
+Dim Sp_picture As Microsoft.Office.Interop.Excel.Shape = Ws_inputWs.Shapes.AddPicture(
+    Str_IMG_FilePath, 
+    Microsoft.Office.Core.MsoTriState.msoFalse,
+    Microsoft.Office.Core.MsoTriState.msoTrue,
+    CType(Rng_cell_IMG_pos.Left, Single), 
+    CType(Rng_cell_IMG_pos.Top, Single),
+    CType(Rng_cell_IMG_pos.Width, Single), 
+    CType(Rng_cell_IMG_pos.Height, Single) 
+)
+' (1) 오류 : Core는 office의 맴버가 아닙니다. 
+' (1) 해결 :Import 패널에 Microsoft.Office.Core 추가
+```
+
+```vb
+Ws_inputWs.Cells(i, Int_Colidx_Image) = "File 찾을 수 없음"+vbnewline+Str_IMG_FilePath
+' (2) 오류1 : Rng_cell_IMG_pos = "문자열" | String을 Range로 변환할 수 없습니다.
+' (2) 오류2 : Rng_cell_IMG_pos.value = "문자열" | StrictOn 에서는 런타임 바인딩을 사용할 수 없습니다.
+' (2) 해결 : Asign 좌변에 변수에 저장한 주소값을 넣는 대신, 계산의 결과로 해당 주소를 반환하는 표현식을 넣어 우회 가능
+```
+
 #### Uipath Invoke Code 사용자 정의 함수
 invoke code 안에서 함수 정의하고 재호출 하는 것도 가능하다.
 ```vb
