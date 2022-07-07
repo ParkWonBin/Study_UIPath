@@ -92,17 +92,17 @@ End Try
 '  IF, elseif, else
 '=========================================================
 Dim Str_tmp_if As String = "Case1"
-
+'-----------------------
 'if 블럭
 If Str_tmp_if = ""  Then
 	Console.WriteLine("Null")
 Else 
 	Console.WriteLine(Str_tmp_if)
 End If
-
+'-----------------------
 'if 삼항연산자
 Console.WriteLine( If(Str_tmp_if = "", "Null", str_tmp_if) )
-
+'-----------------------
 'else if 처리
 If Str_tmp_if.equals("Case1")  Then
 	Console.WriteLine(Str_tmp_if)
@@ -125,6 +125,7 @@ Select Case Str_tmp
 	Case Is = "CASE4"
 		Console.WriteLine("CASE4 : {0}", Str_tmp)
 End Select
+'-----------------------
 ' 범위 가능
 Dim number As Integer = 1
 Select Case number
@@ -146,14 +147,17 @@ For int_i As Integer = 0 To 5
 	console.writeline(int_i.tostring)
 Next 
 ' 0 1 2 3 4 5
+'-----------------------
 For int_j As Integer = 5 To 0 Step -1
 	console.writeline(int_j.tostring)
 Next
 ' 5 4 3 2 1 0
+'-----------------------
 For Each  int_k   As Integer In  {1, 2, 3, 4, 5}
 	console.writeline(int_k.tostring)
 Next
 ' 0 1 2 3 4 5
+'-----------------------
 For Each  int_k   As Integer In  {1, 2, 3, 4, 5}
 	console.writeline(int_k.tostring)
 Next int_k
@@ -175,7 +179,7 @@ Do While int_DoWhileCnt < 3
 	int_DoWhileCnt = int_DoWhileCnt +1
  	console.writeline(int_DoWhileCnt.tostring)
 Loop
-
+'-----------------------
 Do 
 	int_DoWhileCnt = int_DoWhileCnt - 1
  	console.writeline(int_DoWhileCnt.tostring)
@@ -187,7 +191,7 @@ Do While int_UntilCnt < 5
 	int_UntilCnt = int_UntilCnt +1
  	console.writeline(int_UntilCnt.tostring)
 Loop
-
+'-----------------------
 Do 
 	int_UntilCnt = int_UntilCnt - 1
  	console.writeline(int_UntilCnt.tostring)
