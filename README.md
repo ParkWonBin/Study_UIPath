@@ -54,6 +54,18 @@ UiPath Invoke Code는 입력받은 문자열을 EVAL 해서 sub으로 실행시�
 - (7) VBA객에에서 특정 매소드/맴버가 없다는 오류문구가 UiPath에서 나는 경우. Import 패널에 최대한 가까운 어셈플리 Import 해주면 해결될 때 있음.
 ```
 
+#### 이메일 주소 전처리
+```vb
+' 이메일 서식 : [ 1. 앞뒤 공백 제거 | 2. @가 1개 존재 | 3. @뒤로 .이 하나 이상 포함 ]
+'Str_MailSendTO=
+Join( Str_MailSendTO.split(";"c) _
+	.Select(Function(x) x.trim) _
+	.where(Function(x) _
+		x.split("@"c).count=2 AndAlso _ 
+		x.split("@"c).last.contains(".") _
+).toArray, ";")
+```
+
 ### Dt 열이름 추출하는 방법 3가지
 ```vb
 'Range 사용, lamda형 Linq
