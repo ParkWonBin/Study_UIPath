@@ -35,6 +35,37 @@ Action_B("test6")
 Action_C("test7")
 Action_D("test8")
 '=========================================================
+' Imediate 패널에서 값을 산출하지 않는 식(sub) 실행하는 방법
+'=========================================================
+'[액션 사용법] 한줄 선언, 정의할 때 프로시저 등록 후 호출
+Dim Act_A As System.Action(Of String) = AddressOf console.writeLine
+Act_A("test1")
+'-------------------------------				
+'[액션 사용법] 블록 선언, 인수로 프로시저 받아서 실행
+Dim Act_B As System.Action(Of System.Action(Of String), String) = Sub( _Act As Action(Of String), _arg As String)
+	'Do Somthing
+	_Act(_arg)	
+	'Do Somthing
+End Sub
+Act_B(AddressOf console.writeLine, "test2")
+'-------------------------------
+' Imediate 패널에서 sub 사용할 수 있도록 만듬
+'[함수 사용법]  '값을 산출하지 않는 식'을 '성공유무 반환 함수'로 감싸서 값을 산출하는 식으로 만듬
+Dim Fnc_Run As System.Func(Of system.Action(Of String), String, String) = Function( _Act As Action(Of String), _arg As String ) As String
+	Try 
+		_Act(_arg)
+		Return "Succeed"
+	Catch e As System.Exception
+		Return String.format("{1}{0}{2}{0}{3}",vbnewline, e.TargetSite.tostring, e.message, e.source.tostring)
+	End Try
+End Function
+'3.1. 기존에 존재하는 함수를 등록해서 사용하는 방법 AddressOf
+console.writeLine( Fnc_Run(AddressOf console.writeLine, "test3") )
+'3.2 무명 프로시저를 등록하여 사용하는 경우
+console.writeLine( Fnc_Run(Sub(x As String) console.writeLine(x) , "test4") )
+'-------------------------------
+out_Fnc_Run = Fnc_Run
+'=========================================================
 ' VBA 와 Uipath > Invoke Code > VB.NET에 대하여
 '=========================================================
 'UiPath Invoke Code는 입력받은 문자열을 EVAL 해서 sub으로 실행시켜준다.
