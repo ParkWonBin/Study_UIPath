@@ -5,7 +5,7 @@
 4. linq 참고자료1 [▶MS문서 .NET Linq](https://docs.microsoft.com/ko-kr/dotnet/standard/linq/)
 6. linq 참고자료2 [▶MS문서 VB.NET Linq](https://docs.microsoft.com/ko-kr/dotnet/visual-basic/programming-guide/language-features/linq/introduction-to-linq)
 7. linq 참고자료3 [▶Linq 예시-상세](https://www.tutorialsteacher.com/linq/linq-lambda-expression)
-
+8. VB.NET 참고자료 [▶ VB.NET Tutorial](https://www.tutorialspoint.com/vb.net/vb.net_statements.htm)
 ### 엑셀 작업시 참고
 #### [1. VB.NET으로 엑셀 읽고쓰기](https://kdsoft-zeros.tistory.com/36)
 #### [2. C#으로 엑셀 읽고 쓰기](https://kdsoft-zeros.tistory.com/35)
