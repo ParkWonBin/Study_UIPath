@@ -35,6 +35,15 @@
   3.1. [Alt+F10] 엑셀 내에서 개체이름 확인 가능
 ```
 
+### URI 인코딩
+```vb
+Uri.EscapeDataString(" ") 
+'"%20"
+Uri.UnEscapeDataString("%20")
+'""
+```
+
+
 ### UiPath > Invoke Code > VB.NET 사용시 유의사항
 #### 경험과 추론으로 작성한 내용이므로 원인분석이 잘못된 내용이 있을 수 있음.
 ```md
