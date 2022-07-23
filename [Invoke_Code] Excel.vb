@@ -106,4 +106,3 @@ wSheet.Delete
 'Str_Wb_FilePath 비어있으면 [저장], 안비어있으면 [다른 이름으로 저장]
 Str_Wb_FilePath = System.IO.Path.Combine(System.Environment.CurrentDirectory, "Config.xlsx")
 Act_Excel_Close(Str_Wb_FilePath)
-```
