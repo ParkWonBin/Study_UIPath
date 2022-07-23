@@ -35,7 +35,31 @@
   3.1. [Alt+F10] 엑셀 내에서 개체이름 확인 가능
 ```
 
-### URI 인코딩
+### DT 다루는 요령
+조금 복잡한 조건/요건에서 or 대용량(약 48만건 이상) 테이블을 다룰 때,  
+Join연산을 손으로 구현 구현할 필요가 생길 때가 있다. 해당 경우에서 NlogN으로 연산을 만들기 요령.   
+매핑 등의 연산을 할 떄 아래 구조대로 짜면 계산 시간을 NlogN 으로 줄일 수 있다.
+```vb
+Dim Dic_DrArr_tmp As System.Collection.Generic.Dictionary(of String, System.Data.DataRow()) 
+Dic_DrArr_tmp = DT_tmp1.AsEnumerable.GroupBy(~).ToDictionary(function(gp) gp.key, function(gp) gp.ToArray)
+
+For Each row As System.Data.DataRow in Dt_tmp2.AsEnumerable
+  Dim Str_key As String = row.item("col").ToString +"|"+ row.item("col2").ToString
+  if Dic_DrArr_tmp.ContainsKey(Str_key) Then
+     '매칭됐을 때 작업내역
+  End if
+ Next row
+```
+
+### Linq 다룰때 팁
+Linq는 Enumerable에서 확장된 개체에서만 사용가능한 것 같다.  
+System.Data.DataColumn이나 기타 .item은 지원하지만 .ToArray나 Linq명령이 안듣는 자료형을 다룰 때   
+.Cast(Of 자료형) 연산을 사용하면 편리하다. 해당 함수의 반환형은 Enumerable한 객체이기 떄문에 Linq사용 가능.
+
+
+### URI 인코딩 
+사용처 1 : URL등 등에서 한글 자동변환되는 것 해독 
+사용처 2 : 오케스트레이터에 올려놓은 패키지 다운로드 받았을 때 파일명 한글깨짐 등 복구
 ```vb
 Uri.EscapeDataString(" ") 
 '"%20"
