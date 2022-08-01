@@ -138,6 +138,9 @@ End Function
 ```
 - ##### [Dt.AsEumerable 안될떄](https://forum.uipath.com/t/asenumerable-is-not-a-member-of-system-data-datatable/69198/2)
 ```xaml
+'Before
+'<AssemblyReference>System.DataSetExtensions</AssemblyReference>
+'After
 <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
 ```
 
