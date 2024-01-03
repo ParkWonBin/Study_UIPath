@@ -1,6 +1,13 @@
 ### 저장소 정리 예정.
 - 코드,설명,이슈,참고자료 등 분리하여 정리 예정.
 
+UiPath Studio 23.12 는 legacy 버전을 호환하지 않는다.
+legacy로 제작된 소스코드를 열면 System.Data.DataTable 관련해서 종속성 오류가 생긴다.
+해당 종속성 오류는 간단하게 legacy에 남아있던 에러가 포함된 dynamic... 모듈을 제거하고.
+System.Data.DataTable 을 import 해주면 해결된다.
+귀찮으면 그냥 build DataTable 액티비티 생성 후 DT객체 만들면 자동으로 추가된다.
+
+
 ### [▶언어 컴파일 코드 보기](https://godbolt.org/)
 
 
