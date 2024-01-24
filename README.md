@@ -532,7 +532,7 @@ For Each i As Integer in enumerable.Range(0,arr_group_BSNum.Count)
 Next
 ```
 
-##### BuildDataTable by Sting
+##### BuildDataTable by string
 Uipath Debug에서 Immediate로 멈춰두고 아래 코드수행하면,  
 Local에서 값이 바뀐다. (메모리에 저장된 dt 위치의 값을 직접 수정하는 명령 포함)  
 에러났을 때 끄지 않고 DT 값을 수정 후 이어서 Retry 할 수 있게 한다.
