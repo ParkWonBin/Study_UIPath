@@ -1136,7 +1136,9 @@ TypeName() // object로 케스팅된 string은 string으로 뜸
 dt_tmp.Columns.Contains("Column1") # dt에 해당 열 있는지 확인   
 dt_tmp.Columns(0).ColumnName = “newColumnName” # 열 이름 바꾸기   
 System.Drawing.Color.Gray  # 엑셀 셀 책 체우기 할 떄 사용  
-TimeSpan.FromMilliseconds(int_delayTime) # 딜레이 시간 넣을 떄 사용    
+TimeSpan.FromMilliseconds(int_delayTime) # 딜레이 시간 넣을 떄 사용
+Dim str_delayTime As String = "HH:mm:ss" # 딜레이 시간 넣는 다른 방법
+ts = TimeSpan.Parse(str_delayTime)
 Asc("A") = 65  ,  Chr(65) = "A"
 ```
 숫자 표시형식 : 1 -> 0001  
