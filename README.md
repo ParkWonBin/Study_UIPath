@@ -597,7 +597,7 @@ excel scope에서 output workbook에 변수 만들기(wb)
 DT_tmp.AsEnumerable.ToDictionary(Of String, Object)(Function (row) row("key").toString, Function (row) row("value").toString)
 
 '데이터 필터링(abc열에서 값이 bcd인 행 찾기)
-DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").TosTing = "bdc").ToArray()
+DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").ToString = "bdc").ToArray()
 
 'Convert Column in Data Table to Array
 DT_tmp.AsEnumerable().Select(Function (a) a.Field(of string)("columnname").ToString).ToArray()
@@ -606,7 +606,7 @@ DT_tmp.AsEnumerable().Select(Function (a) a.Field(of string)("columnname").ToStr
 DT_tmp = DT_tmp.AsEnumerable.Reverse().CopyToDataTable
 
 '### Filtering abc열에서 값이 bcd인 행 모두 찾기
-DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").TosTing = "bdc").ToArray
+DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").ToString = "bdc").ToArray
 
 ' Copy는 열 이름에 상관 없이 값을 복사 붙여넣기 한다.
 DT_test = DT_tmp.Copy()
@@ -749,7 +749,7 @@ Empty : 변수 생성 후 초기화 하지 않음 (string, int 생성만 했을 
 Nothing : 해당 변수가 참조하는 개체가 없음 (DataTable, Dictionary, List 등)
 null : 알 수 없는 데이터(DataTable 생성 후 값을 입력하지 않음)
 * Tostring은 에러를 배출하지 않는다.
-* Nothing인 객체에 Tosting을 하면 에러가 발생한다. (참조개체가 없으므로 Tostring 매소드 호출할 수 없기 때문)
+* Nothing인 객체에 ToString을 하면 에러가 발생한다. (참조개체가 없으므로 Tostring 매소드 호출할 수 없기 때문)
 * System.Convert.ToString(Nothing)을 하게 되면 ""가 반환된다. Conver.ToString는 이미 정의되어 있고 null, Nothing 체크를 하기 때문
 Nothing.Tostring = 에러 : 참조개체가 없어 "개체.ToString" 정의되지 않음
 Convert.ToString(Nothing) = "" : ToString 함수는 Convert에서 정의 됨, null, Nothing 체크가능
@@ -1103,7 +1103,7 @@ dt_tmp.AsEnumerable.Skip(int_n).Take(int_m).CopyToDataTable
 ```
 Assign : arr_tmp = New String(n){}
 ForEach : 속성{Value : arr_tmp , index : int_i, item : _ }
-    Assign : arr_tmp(int_i) = int_i.Tosting
+    Assign : arr_tmp(int_i) = int_i.ToString
 
 * New String(n){} = {"",""}  
 ```
@@ -1599,7 +1599,7 @@ Transaction은 큐에서 가장 먼저 들어온 New 상태의 item을 의미한
 [row reverse 하는법](https://excelcult.com/how-to-reverse-a-datatable-in-uipath/)
 ```DT_tmp = DT_tmp.AsEnumerable.Reverse().CopyToDataTable```
 데이터 필터링(abc열에서 값이 bcd인 행 찾기)
-```DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").TosTing = "bdc").ToArray ```
+```DT_tmp = DT_tmp.AsEnumerable.where(Function(x) x("abc").ToString = "bdc").ToArray ```
 
 Convert Column in Data Table to Array
 ```DT_tmp.AsEnumerable().Select(Function (a) a.Field(of string)("columnname").ToString).ToArray()```
@@ -1671,7 +1671,7 @@ DT_tmp = DT_tmp.AsEnumerable.Reverse().CopyToDataTable
 abc열에서 값이 bcd인 행 모두 찾기
 ```
 DT_tmp = DT_tmp.AsEnumerable.where(
-    Function(x) x("abc").TosTing = "bdc").ToArray
+    Function(x) x("abc").ToString = "bdc").ToArray
 ```
 
 ### DT 값 호출
